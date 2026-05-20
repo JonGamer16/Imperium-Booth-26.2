@@ -2,33 +2,35 @@
 
 #   Armor
 item replace entity @s armor.head with \
-    iron_helmet[unbreakable={},\
+    netherite_helmet[\
+        !max_damage,\
         attribute_modifiers=[\
-            {type:"armor",amount:2,operation:"add_value",slot:"head",id:"head"}],\
+            {type:"armor",amount:15,operation:"add_value",slot:"head",id:"head"}],\
+        item_model="minecraft:iron_helmet",\
         item_name={color:"white",italic:false,text:"Shieldsman Helmet"},\
         trim={material:"copper",pattern:"sentry"}\
     ] 1
 item replace entity @s armor.chest with \
-    iron_chestplate[unbreakable={},\
-        attribute_modifiers=[\
-            {type:"armor",amount:6,operation:"add_value",slot:"chest",id:"chest"}\
-        ],\
+    netherite_chestplate[\
+        !max_damage,\
+        !attribute_modifiers,\
+        item_model="minecraft:iron_chestplate",\
         custom_name={color:"white",italic:false,text:"Shieldsman Chestplate"},\
         trim={material:"copper",pattern:"coast"}\
     ] 1
 item replace entity @s armor.legs with \
-    chainmail_leggings[unbreakable={},\
-        attribute_modifiers=[\
-            {type:"armor",amount:5,operation:"add_value",slot:"legs",id:"legs"}\
-        ],\
+    netherite_leggings[\
+        !max_damage,\
+        !attribute_modifiers,\
+        item_model="minecraft:chainmail_leggings",\
         custom_name={color:"white",italic:false,text:"Shieldsman Leggings"},\
         trim={material:"iron",pattern:"snout"}\
     ] 1
 item replace entity @s armor.feet with \
-    iron_boots[unbreakable={},\
-        attribute_modifiers=[\
-            {type:"armor",amount:2,operation:"add_value",slot:"feet",id:"feet"}\
-        ],\
+    netherite_boots[\
+        !max_damage,\
+        !attribute_modifiers,\
+        item_model="minecraft:iron_boots",\
         custom_name={color:"white",italic:false,text:"Shieldsman Boots"},\
         trim={material:"iron",pattern:"snout"}\
     ] 1
@@ -36,7 +38,9 @@ item replace entity @s armor.feet with \
 #   Steel Broadsword 6|1.4, +0.1 KBR, Sweeping Edge 3
 #   Slower but sturdy main with multitarget potential
 item replace entity @s hotbar.0 with \
-    stone_sword[unbreakable={},\
+    netherite_sword[\
+        !max_damage,\
+        item_model="minecraft:stone_sword",\
         enchantments={\
             "sweeping_edge":3\
         },\
@@ -80,7 +84,9 @@ item replace entity @s weapon.offhand with \
 #   Silver Dagger: 5|2, Smite 2
 #   Anti-strafe option
 item replace entity @s hotbar.1 with \
-    iron_sword[unbreakable={},\
+    netherite_sword[\
+        !max_damage,\
+        item_model="minecraft:iron_sword",\
         enchantments={"smite":2},\
         custom_name={color:"white",italic:false,text:"Silver Dagger"},\
         attribute_modifiers=[\
@@ -91,15 +97,22 @@ item replace entity @s hotbar.1 with \
 
 #   Light Crossbow: 2 Arrows
 item replace entity @s hotbar.2 with \
-    crossbow[unbreakable={},\
+    crossbow[\
+        !max_damage,\
         custom_name={color:"white",italic:false,text:"Light Crossbow"},\
     ] 1
 
 item replace entity @s hotbar.8 with \
     arrow 2
 
-# Mushroom Soup
-give @s mushroom_stew[food={nutrition:0,saturation:0,can_always_eat:true},consumable={consume_seconds:0,on_consume_effects:[{type:"apply_effects",effects:[{id:"instant_health",amplifier:1,duration:1}]}]},use_remainder={id:"bowl",count:1}] 10
+#   Healing Item: Mushroom Stew
+give @s mushroom_stew[\
+    food={nutrition:0,saturation:0,can_always_eat:true},\
+    consumable={\
+        consume_seconds:0,\
+        on_consume_effects:[{type:"apply_effects",effects:[\
+            {id:"instant_health",amplifier:1,duration:1}]}]},\
+        use_remainder={id:"bowl",count:1}] 16
 
 scoreboard players set @s rShield 1
 scoreboard players set @s rArrow 2

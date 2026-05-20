@@ -1,3 +1,5 @@
+# Livvy's Healing Item
+
 clear @a[scores={rBeetSoup=1,onKill=1..}] beetroot_soup
 clear @a[scores={rBeetSoup=1,onKill=1..}] bowl
 give @a[scores={rBeetSoup=1,onKill=1..}] \

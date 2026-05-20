@@ -52,9 +52,11 @@ scoreboard objectives add rRabbitSoup dummy
 scoreboard objectives add rCraftSoup dummy
 
 scoreboard objectives add rCake dummy
+scoreboard objectives add rEnergyCrystal dummy
 scoreboard objectives add rGapple dummy
 scoreboard objectives add rHeal2Pot dummy
 scoreboard objectives add rRegenPot dummy
+scoreboard objectives add rSalmon dummy
 
 # Summoning Items
 scoreboard objectives add rBlazeEgg dummy
@@ -172,9 +174,6 @@ scoreboard objectives add 5000 dummy
 scoreboard players set const 5000 5000
 scoreboard objectives add 10000 dummy
 scoreboard players set const 10000 10000
-
-# Gamemodes
-execute if score #TDM im_tdm_state matches 1 run function imperium:gamemodes/team_deathmatch/tick
 
 # Player DB
 execute as @a run function pdb:new_player

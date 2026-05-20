@@ -1,3 +1,5 @@
+# Jeru's Healing Item
+
 clear @a[scores={rMushSoup=1,onKill=1..}] mushroom_stew
 clear @a[scores={rMushSoup=1,onKill=1..}] bowl
 give @a[scores={rMushSoup=1,onKill=1..}] \
