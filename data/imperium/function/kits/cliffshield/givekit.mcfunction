@@ -125,11 +125,6 @@ give @s mushroom_stew[\
             {id:"instant_health",amplifier:1,duration:1}]}]},\
         use_remainder={id:"bowl",count:1}] 16
 
-scoreboard players set @s rShield 1
-scoreboard players set @s rArrow 2
-scoreboard players set @s rMushSoup 1
-
-# Optimize:
-# - Replace @e[type=#imperium:human,scores={givekit=11}] with @s b/c givekit.mcfunction does the target selection
-# - Need a system to copy/paste a good chunk of a kits code, a baseline would help, then Ill
-#     also need to add code to it for things that could be found in most kits
+scoreboard players set @s im_abilityCdA 300
+scoreboard players set @s im_abilityCdB 300
+scoreboard players set @s im_abilityCdC 300

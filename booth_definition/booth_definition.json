@@ -1,0 +1,54 @@
+{
+    "namespace": "imperium",
+    "booth_name": "Imperium Mundi",
+    "bounding_boxes": {
+        "pagoda_center": {
+            "position": {
+                "x": {"min": -154, "max": -123},
+                "y": {"min": 75, "max": 109},
+                "z": {"min": -238, "max": -204}
+            }
+        },
+        "pagoda_top": {
+            "position": {
+                "x": {"min": -143, "max": -123},
+                "y": {"min": 100, "max": 118},
+                "z": {"min": -220, "max": -207}
+            }
+        },
+        "cave": {
+            "position": {
+                "x": {"min": -160, "max": -134},
+                "y": {"min": 59, "max": 75},
+                "z": {"min": -226, "max": -205}
+            }
+        }
+    },
+    "on_player_enter": "booth/enter_booth",
+    "on_player_exit": "",
+    "ticking_functions": {
+        "imperium:tick": "1t",
+        "imperium:5t": "5t",
+        "ipmerium:sec": "1s"
+    },
+    "sticker_book": {
+        "background_color": "#1a48c3",
+        "region": "textured_tropics",
+        "stickers": [
+            {
+                "sticker_id": "<sticker_id>",
+                "sticker_texture": "<texture_location>",
+                "sticker_name": "Welcome to Booth",
+                "unobtained_text": "Enter the Booth",
+                "obtained_text": "Rewarded for entering the Booth"
+            }
+        ]
+    },
+    "balloons": [
+        {
+            "balloon_id": "smithie",
+            "balloon_name": "Smithie",
+            "balloon_model": "summit_balloons:item/smithie"
+        }
+    ]
+}

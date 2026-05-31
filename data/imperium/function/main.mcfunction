@@ -22,7 +22,6 @@ gamerule respawn_radius 0
 gamerule spawn_mobs false
 gamerule spawn_patrols false
 gamerule spawn_phantoms false
-gamerule spectators_generate_chunks false
 gamerule spread_vines false
 gamerule tnt_explodes false
 
@@ -174,3 +173,13 @@ scoreboard players set const 10000 10000
 scoreboard objectives add im_reach dummy
 scoreboard objectives add im_sweetspot dummy
 scoreboard objectives add im_sourspot dummy
+
+# Net Damage Tracking (delta inputs for ability cooldown system)
+scoreboard objectives add im_abilityDealt custom:damage_dealt
+scoreboard objectives add im_abilityTaken custom:damage_taken
+
+# Ability Cooldowns
+scoreboard objectives add im_abilityCdA dummy
+scoreboard objectives add im_abilityCdB dummy
+scoreboard objectives add im_abilityCdC dummy
+function imperium:abilities/init_cooldowns

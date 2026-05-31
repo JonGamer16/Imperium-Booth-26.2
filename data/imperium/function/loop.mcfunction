@@ -18,8 +18,14 @@ execute as @a[scores={givekit=1..},advancements={imperium:leave_spawn=false}] ru
 #   set of tags and scores, then run the branching function for that set of items.
 
 # item reload engine
+# CONFLICT NOTE: itemreload and im_abilityDealt both use custom:damage_dealt but are separate
+#   objectives — resetting im_abilityDealt each tick does NOT affect itemreload accumulation.
+#   Remove itemreload, item_distributor_300, and rTotem checks once ability system replaces them.
 execute as @a[scores={itemreload=300..}] in overworld run function imperium:arena/item_distributor_300
 execute as @a[scores={rTotem=1..,itemreload=600..}] in overworld run function imperium:items/totem
+
+# ability cooldown engine (parallel system; does not interfere with itemreload above)
+execute as @a[advancements={imperium:leave_spawn=true}] run function imperium:update_cooldowns
 
 # soup drop engine (old)
     #execute at @e[type=item,nbt={Item:{id:"minecraft:beetroot_soup"}}] run function imperium:soup/beet_soup_drop
