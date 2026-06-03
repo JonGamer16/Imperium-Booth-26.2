@@ -1,4 +1,6 @@
-# Armor
+#   Rastus the Duelist
+
+#   [ARMOR]
 item replace entity @s armor.head with \
     netherite_helmet[\
         !max_damage,\

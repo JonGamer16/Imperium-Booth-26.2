@@ -10,7 +10,8 @@ item replace entity @s armor.head with \
         ],\
         item_model="minecraft:iron_helmet",\
         item_name={color:"white",italic:false,text:"Shieldsman Helmet"},\
-        trim={material:"copper",pattern:"sentry"}\
+        trim={material:"copper",pattern:"sentry"},\
+        custom_data={"imperium_kit":1b}\
     ] 1
 item replace entity @s armor.chest with \
     netherite_chestplate[\
@@ -18,7 +19,8 @@ item replace entity @s armor.chest with \
         !attribute_modifiers,\
         item_model="minecraft:iron_chestplate",\
         custom_name={color:"white",italic:false,text:"Shieldsman Chestplate"},\
-        trim={material:"copper",pattern:"coast"}\
+        trim={material:"copper",pattern:"coast"},\
+        custom_data={"imperium_kit":1b}\
     ] 1
 item replace entity @s armor.legs with \
     netherite_leggings[\
@@ -26,7 +28,8 @@ item replace entity @s armor.legs with \
         !attribute_modifiers,\
         item_model="minecraft:chainmail_leggings",\
         custom_name={color:"white",italic:false,text:"Shieldsman Leggings"},\
-        trim={material:"iron",pattern:"snout"}\
+        trim={material:"iron",pattern:"snout"},\
+        custom_data={"imperium_kit":1b}\
     ] 1
 item replace entity @s armor.feet with \
     netherite_boots[\
@@ -34,7 +37,8 @@ item replace entity @s armor.feet with \
         !attribute_modifiers,\
         item_model="minecraft:iron_boots",\
         custom_name={color:"white",italic:false,text:"Shieldsman Boots"},\
-        trim={material:"iron",pattern:"snout"}\
+        trim={material:"iron",pattern:"snout"},\
+        custom_data={"imperium_kit":1b}\
     ] 1
 
 #   [MELEE] Silver Glaive
@@ -50,7 +54,7 @@ item replace entity @s hotbar.1 with \
             {type:"entity_interaction_range",amount:0.3,operation:"add_value",slot:"mainhand",id:"mainhand"},\
             {type:"attack_knockback",amount:-0.5,operation:"add_value",slot:"mainhand",id:"mainhand"},\
         ],\
-        custom_data={"imperium_healing":1b}\
+        custom_data={"imperium_kit":1b}\
     ] 1
 
 #   [MELEE] Steel Broadsword
