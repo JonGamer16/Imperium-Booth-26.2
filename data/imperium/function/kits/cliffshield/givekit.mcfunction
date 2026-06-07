@@ -9,7 +9,7 @@ item replace entity @s armor.head with \
             {type:"step_height",amount:0.5,operation:"add_value",slot:"head",id:"head"},\
         ],\
         item_model="minecraft:iron_helmet",\
-        item_name={color:"white",italic:false,text:"Shieldsman Helmet"},\
+        custom_name={color:"white",italic:false,text:"Shieldsman Helmet"},\
         trim={material:"copper",pattern:"sentry"},\
         custom_data={"imperium_kit":1b}\
     ] 1
@@ -45,15 +45,15 @@ item replace entity @s armor.feet with \
 #       7 | 1.2, +0.3 Reach, -0.5 Knockback
 item replace entity @s hotbar.1 with \
     netherite_sword[\
-        !max_damage,\
-        item_model="minecraft:iron_sword",\
-        custom_name={color:"white",italic:false,text:"Silver Glaive"},\
         attribute_modifiers=[\
             {type:"attack_damage",amount:6,operation:"add_value",slot:"mainhand",id:"base_attack_damage"},\
             {type:"attack_speed",amount:-2.8,operation:"add_value",slot:"mainhand",id:"base_attack_speed"},\
-            {type:"entity_interaction_range",amount:0.3,operation:"add_value",slot:"mainhand",id:"mainhand"},\
+            {type:"entity_interaction_range",amount:0.5,operation:"add_value",slot:"mainhand",id:"mainhand"},\
             {type:"attack_knockback",amount:-0.5,operation:"add_value",slot:"mainhand",id:"mainhand"},\
         ],\
+        !max_damage,\
+        item_model="minecraft:iron_sword",\
+        custom_name={text:"Silver Glaive",color:"white",italic:false},\
         custom_data={"imperium_kit":1b}\
     ] 1
 
@@ -61,30 +61,26 @@ item replace entity @s hotbar.1 with \
 #       6 | 1.4, +0.1 KBR, Sweeping Edge 3
 item replace entity @s hotbar.0 with \
     netherite_sword[\
-        !max_damage,\
-        item_model="minecraft:stone_sword",\
         enchantments={\
             "sweeping_edge":3\
-        },\
-        custom_name={\
-            color:"white",\
-            italic:false,\
-            text:"Steel Broadsword"\
         },\
         attribute_modifiers=[\
             {type:"attack_damage",amount:5,operation:"add_value",slot:"mainhand",id:"base_attack_damage"},\
             {type:"attack_speed",amount:-2.6,operation:"add_value",slot:"mainhand",id:"base_attack_speed"},\
             {type:"knockback_resistance",amount:0.1,operation:"add_value",slot:"mainhand",id:"knockback_resistance"}\
         ],\
+        !max_damage,\
+        item_model="minecraft:stone_sword",\
+        custom_name={text:"Steel Broadsword",color:"white",italic:false},\
         custom_data={"imperium_kit":1b}\
     ] 1
 
 #   [TOOL] Light Crossbow
 item replace entity @s hotbar.2 with \
     crossbow[\
-        !max_damage,\
-        custom_name={color:"white",italic:false,text:"Light Crossbow"},\
         enchantments={"minecraft:power":1},\
+        !max_damage,\
+        custom_name={text:"Light Crossbow",color:"white",italic:false},\
         custom_data={"imperium_kit":1b},\
     ] 1
 

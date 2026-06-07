@@ -11,14 +11,6 @@
               "function": "minecraft:set_components",
               "components": {
                 "minecraft:max_damage": 30,
-                "minecraft:base_color": "black",
-                "minecraft:banner_patterns": [
-                  { "pattern": "minecraft:gradient", "color": "white" },
-                  { "pattern": "minecraft:gradient_up", "color": "light_gray" },
-                  { "pattern": "minecraft:straight_cross", "color": "gray" },
-                  { "pattern": "minecraft:border", "color": "gray" },
-                  { "pattern": "minecraft:rhombus", "color": "gray" }
-                ],
                 "minecraft:blocks_attacks": {
                   "item_damage": {
                     "base": 1,
@@ -35,6 +27,14 @@
                   ],
                   "block_delay_seconds": 0.35
                 },
+                "minecraft:base_color": "black",
+                "minecraft:banner_patterns": [
+                  { "pattern": "minecraft:gradient", "color": "white" },
+                  { "pattern": "minecraft:gradient_up", "color": "light_gray" },
+                  { "pattern": "minecraft:straight_cross", "color": "gray" },
+                  { "pattern": "minecraft:border", "color": "gray" },
+                  { "pattern": "minecraft:rhombus", "color": "gray" }
+                ],
                 "minecraft:custom_data": "{imperium_kit:1b}"
               }
             }

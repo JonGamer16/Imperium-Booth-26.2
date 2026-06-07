@@ -8,31 +8,39 @@ item replace entity @s armor.head with \
             {id:"armor",type:"armor",amount:14,operation:"add_value",slot:"head"}\
         ],\
         item_model="minecraft:leather_helmet",\
+        custom_name={text:"Bounty Hunter Helmet"},\
         dyed_color=8606770,\
-        trim={material:"copper",pattern:"dune"}\
+        trim={material:"copper",pattern:"dune"},\
+        custom_data={"imperium_kit":1b},\
     ] 1
 item replace entity @s armor.chest with \
     netherite_chestplate[\
         !max_damage,\
         !attribute_modifiers,\
         item_model="minecraft:chainmail_chestplate",\
-        trim={material:"iron",pattern:"silence"}\
+        custom_name={text:"Bounty Hunter Chestplate"},\
+        trim={material:"iron",pattern:"silence"},\
+        custom_data={"imperium_kit":1b},\
     ] 1
 item replace entity @s armor.legs with \
     netherite_leggings[\
         !max_damage,\
         !attribute_modifiers,\
         item_model="minecraft:leather_leggings",\
+        custom_name={text:"Bounty Hunter Leggings"},\
         dyed_color=14464401,\
-        trim={material:"iron",pattern:"snout"}\
+        trim={material:"iron",pattern:"snout"},\
+        custom_data={"imperium_kit":1b},\
     ] 1
 item replace entity @s armor.feet with \
     netherite_boots[\
         !max_damage,\
         !attribute_modifiers,\
         item_model="minecraft:leather_boots",\
+        custom_name={text:"Bounty Hunter Boots"},\
         dyed_color=14464401,\
-        trim={material:"copper",pattern:"bolt"}\
+        trim={material:"copper",pattern:"bolt"},\
+        custom_data={"imperium_kit":1b},\
     ] 1
 
 item replace entity @s hotbar.0 with \

@@ -7,27 +7,39 @@ item replace entity @s armor.head with \
         attribute_modifiers=[\
             {id:"head",type:"armor",amount:14,operation:"add_value",slot:"head"}],\
         item_model="minecraft:leather_helmet",\
+        custom_name={text:"Dueling Helmet"},\
         dyed_color=3949738,\
-        trim={material:"lapis",pattern:"dune"}] 1
+        trim={material:"lapis",pattern:"dune"},\
+        custom_data={"imperium_kit":1b},\
+    ] 1
 item replace entity @s armor.chest with \
     netherite_chestplate[\
         !max_damage,\
         !attribute_modifiers,\
         item_model="minecraft:chainmail_chestplate",\
-        trim={material:"lapis",pattern:"silence"}] 1
+        custom_name={text:"Dueling Chestplate"},\
+        trim={material:"lapis",pattern:"silence"},\
+        custom_data={"imperium_kit":1b},\
+    ] 1
 item replace entity @s armor.legs with \
     netherite_leggings[\
         !max_damage,\
         !attribute_modifiers,\
         item_model="minecraft:chainmail_leggings",\
-        trim={material:"lapis",pattern:"sentry"}] 1
+        custom_name={text:"Dueling Leggings"},\
+        trim={material:"lapis",pattern:"sentry"},\
+        custom_data={"imperium_kit":1b},\
+    ] 1
 item replace entity @s armor.feet with \
     netherite_boots[\
-        !max_damage,\
         !attribute_modifiers,\
+        !max_damage,\
         item_model="minecraft:leather_boots",\
+        custom_name={text:"Dueling Boots"},\
         dyed_color=3949738,\
-        trim={material:"iron",pattern:"raiser"}] 1
+        trim={material:"iron",pattern:"raiser"},\
+        custom_data={"imperium_kit":1b},\
+    ] 1
 
 #   [MELEE] Light Rapier
 #       2 | 7, +1.0 Knockback

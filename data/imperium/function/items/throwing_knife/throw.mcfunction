@@ -16,7 +16,7 @@ execute at @s anchored eyes \
                     animation:"bow",\
                     has_consume_particles:0b,sound:"block.wool.step",\
                     on_consume_effects:[{type:"play_sound",sound:"block.wool.step"}]},\
-                "minecraft:item_name":\
+                "minecraft:custom_name":\
                     {text:"Throwing Knife"},\
                 "minecraft:max_stack_size":4}}}
 

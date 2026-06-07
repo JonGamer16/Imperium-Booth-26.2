@@ -12,7 +12,8 @@ item replace entity @s armor.head with \
         item_model="minecraft:leather_helmet",\
         dyed_color=4194304,\
         trim={material:"redstone",pattern:"silence"},\
-        custom_name={italic:false,text:"[Helmet Name]"}\
+        custom_name={color:"red",italic:false,text:"Vampire Hood"},\
+        custom_data={"imperium_kit":1b},\
     ] 1
 item replace entity @s armor.chest with \
     netherite_chestplate[\
@@ -21,7 +22,8 @@ item replace entity @s armor.chest with \
         item_model="minecraft:leather_chestplate",\
         dyed_color=4194304,\
         trim={material:"redstone",pattern:"silence"},\
-        custom_name={italic:false,text:"[Chestplate Name]"}\
+        custom_name={color:"red",italic:false,text:"Vampire Chestplate"},\
+        custom_data={"imperium_kit":1b},\
     ] 1
 item replace entity @s armor.legs with \
     netherite_leggings[\
@@ -30,7 +32,8 @@ item replace entity @s armor.legs with \
         item_model="minecraft:leather_leggings",\
         dyed_color=4194304,\
         trim={material:"redstone",pattern:"silence"},\
-        custom_name={italic:false,text:"[Leggings Name]"}\
+        custom_name={color:"red",italic:false,text:"Vampire Leggings"},\
+        custom_data={"imperium_kit":1b},\
     ] 1
 item replace entity @s armor.feet with \
     netherite_boots[\
@@ -39,7 +42,8 @@ item replace entity @s armor.feet with \
         item_model="minecraft:leather_boots",\
         dyed_color=4194304,\
         trim={material:"redstone",pattern:"silence"},\
-        custom_name={italic:false,text:"[Boots Name]"}\
+        custom_name={color:"red",italic:false,text:"Vampire Boots"},\
+        custom_data={"imperium_kit":1b},\
     ] 1
 
 #   [MELEE] Fang
@@ -47,13 +51,13 @@ item replace entity @s armor.feet with \
 item replace entity @s hotbar.0 with \
     netherite_sword[\
         !max_damage,\
-        item_model="minecraft:iron_sword",\
+        item_model="minecraft:ghast_tear",\
         attribute_modifiers=[\
             {type:"attack_damage",amount:5,operation:"add_value",slot:"mainhand",id:"base_attack_damage"},\
             {type:"attack_speed",amount:-2.4,operation:"add_value",slot:"mainhand",id:"base_attack_speed"}\
         ],\
         enchantments={"imperium:crits":3,"imperium:lifesteal":5},\
-        custom_name={italic:false,text:"[Sword Name]"},\
+        custom_name={italic:false,text:"Lifesteal Fang"},\
         custom_data={"imperium_kit":1b}\
     ] 1
 

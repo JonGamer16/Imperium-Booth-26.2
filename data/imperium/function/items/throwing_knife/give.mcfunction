@@ -4,7 +4,7 @@ give @s iron_sword[\
         consume_seconds:0.5,\
         animation:"bow",\
         sound:"block.wool.break"},\
-    item_name={\
+    custom_name={\
         "text":"Throwing Knife"},\
     max_stack_size=4,\
     !max_damage,\

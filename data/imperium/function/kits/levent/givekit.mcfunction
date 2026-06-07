@@ -10,7 +10,9 @@ item replace entity @s armor.head with \
             {type:"armor_toughness",amount:8,operation:"add_value",slot:"head",id:"head_toughness"}],\
         item_model="minecraft:leather_helmet",\
         dyed_color=8073150,\
-        item_name={color:"light_purple",italic:false,text:"[Kit] Helmet"}\
+        custom_name={color:"light_purple",italic:false,text:"Shulker Lid"},\
+        trim={material:"amethyst",pattern:"spire"},\
+        custom_data={"imperium_kit":1b},\
     ] 1
 item replace entity @s armor.chest with \
     netherite_chestplate[\
@@ -18,7 +20,9 @@ item replace entity @s armor.chest with \
         !attribute_modifiers,\
         item_model="minecraft:leather_chestplate",\
         dyed_color=8073150,\
-        item_name={color:"light_purple",italic:false,text:"[Kit] Chestplate"}\
+        custom_name={color:"light_purple",italic:false,text:"Shulker Box"},\
+        trim={material:"amethyst",pattern:"spire"},\
+        custom_data={"imperium_kit":1b},\
     ] 1
 item replace entity @s armor.legs with \
     netherite_leggings[\
@@ -26,7 +30,9 @@ item replace entity @s armor.legs with \
         !attribute_modifiers,\
         item_model="minecraft:leather_leggings",\
         dyed_color=8073150,\
-        item_name={color:"light_purple",italic:false,text:"[Kit] Leggings"}\
+        custom_name={color:"light_purple",italic:false,text:"Shulker Pillar"},\
+        trim={material:"amethyst",pattern:"spire"},\
+        custom_data={"imperium_kit":1b},\
     ] 1
 item replace entity @s armor.feet with \
     netherite_boots[\
@@ -34,7 +40,9 @@ item replace entity @s armor.feet with \
         !attribute_modifiers,\
         item_model="minecraft:leather_boots",\
         dyed_color=8073150,\
-        item_name={color:"light_purple",italic:false,text:"[Kit] Boots"}\
+        custom_name={color:"light_purple",italic:false,text:"Shulker Base"},\
+        trim={material:"amethyst",pattern:"spire"},\
+        custom_data={"imperium_kit":1b},\
     ] 1
 
 #   [MELEE] End Rod
@@ -43,7 +51,7 @@ item replace entity @s hotbar.0 with \
     netherite_sword[\
         !max_damage,\
         item_model="minecraft:end_rod",\
-        custom_name={color:"light_purple",italic:false,text:"[Weapon Name]"},\
+        custom_name={color:"light_purple",italic:false,text:"End Rod"},\
         attribute_modifiers=[\
             {type:"attack_damage",amount:4,operation:"add_value",slot:"mainhand",id:"base_attack_damage"},\
             {type:"attack_speed",amount:-2,operation:"add_value",slot:"mainhand",id:"base_attack_speed"}\

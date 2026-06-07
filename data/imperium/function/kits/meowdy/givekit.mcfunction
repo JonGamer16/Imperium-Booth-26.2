@@ -9,29 +9,38 @@ item replace entity @s armor.head with \
             {type:"movement_speed",amount:0.2,operation:"add_multiplied_base",slot:"head",id:"feet"}\
         ],\
         item_model="minecraft:leather_helmet",\
-        dyed_color=16753920\
+        custom_name={color:"gold",italic:false,text:"Meowdy's Cap"},\
+        dyed_color=16753920,\
+        custom_data={"imperium_kit":1b},\
     ] 1
 item replace entity @s armor.chest with \
     netherite_chestplate[\
         !max_damage,\
         !attribute_modifiers,\
-        item_model="minecraft:chainmail_chestplate"\
+        item_model="minecraft:chainmail_chestplate",\
+        custom_name={color:"gold",italic:false,text:"Meowdy's Chestplate"},\
+        custom_data={"imperium_kit":1b},\
     ] 1
 item replace entity @s armor.legs with \
     netherite_leggings[\
         !max_damage,\
         !attribute_modifiers,\
-        item_model="minecraft:chainmail_leggings"\
+        item_model="minecraft:chainmail_leggings",\
+        custom_name={color:"gold",italic:false,text:"Meowdy's Leggings"},\
+        custom_data={"imperium_kit":1b},\
     ] 1
 item replace entity @s armor.feet with \
     netherite_boots[\
         !max_damage,\
         !attribute_modifiers,\
         item_model="minecraft:leather_boots",\
-        dyed_color=4673362\
+        custom_name={color:"gold",italic:false,text:"Meowdy's Boots"},\
+        dyed_color=4673362,\
+        custom_data={"imperium_kit":1b},\
     ] 1
 # colors: 16753920 helmet, 4673362 boots
 
+#   [MELEE]
 item replace entity @s hotbar.0 with \
     netherite_sword[\
         !max_damage,\
@@ -47,12 +56,24 @@ item replace entity @s weapon.offhand with \
     crossbow[\
         !max_damage,\
         enchantments={\
-            "quick_charge":3,"multishot":1\
+            "quick_charge":3\
         },\
         custom_data={"imperium_kit":1b}\
     ] 1
 
 item replace entity @s hotbar.1 with \
+    netherite_sword[\
+        !max_damage,\
+        item_model="minecraft:ghast_tear",\
+        attribute_modifiers=[\
+            {type:"attack_damage",amount:3,operation:"add_value",slot:"mainhand",id:"base_attack_damage"},\
+            {type:"attack_speed",amount:6,operation:"add_value",slot:"mainhand",id:"base_attack_speed"},\
+            {type:"attack_knockback",amount:-1,operation:"add_value",slot:"mainhand",id:"mainhand"}\
+        ],\
+        custom_data={"imperium_kit":1b}\
+    ] 1
+
+item replace entity @s hotbar.2 with \
     crossbow[\
         !max_damage,\
         enchantments={\
