@@ -1,1 +1,25 @@
-{}
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:feather",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:enchantments": {
+                  "imperium:wip_leap": 2
+                },
+                "custom_name": {"text":"Leap","color":"red","italic":false},
+                "minecraft:custom_data": "{imperium_kit:1b}"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

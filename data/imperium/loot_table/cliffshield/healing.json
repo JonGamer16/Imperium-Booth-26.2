@@ -1,7 +1,7 @@
 {
   "pools": [
     {
-      "rolls": 1,
+      "rolls": 16,
       "entries": [
         {
           "type": "minecraft:item",
@@ -9,7 +9,7 @@
           "functions": [
             {
               "function": "minecraft:set_count",
-              "count": 16
+              "count": 1
             },
             {
               "function": "minecraft:set_components",
@@ -38,6 +38,7 @@
                   "id": "minecraft:bowl",
                   "count": 1
                 },
+                "custom_name":{"text":"Mushroom Stew","color":"yellow","italic":false},
                 "minecraft:custom_data": "{imperium_healing:1b}"
               }
             }

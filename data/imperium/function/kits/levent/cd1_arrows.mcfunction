@@ -1,14 +1,11 @@
-clear @s arrow[custom_data={imperium_kit:1b}]
+clear @s tipped_arrow[custom_data={imperium_kit:1b}]
 
-#   If there is something in offhand just give it
 execute \
-    if items entity @s weapon.offhand * \
+    if items entity @s hotbar.8 * \
     run loot give @s loot imperium:levent/arrows
 
-#   This comes 2nd to avoid giving 2 shields because otherwise
-#   the above command sees the shield and gives another
 execute \
-    if items entity @s weapon.offhand air \
-    run loot give @s loot imperium:levent/arrows
+    unless items entity @s hotbar.8 * \
+    run loot replace entity @s hotbar.8 loot imperium:levent/arrows
 
 scoreboard players operation @s im_abilityCdA = #Levent im_abilityCdA

@@ -1,6 +1,6 @@
 {
     "description": "Rapid",
-    "supported_items": "#minecraft:enchantable/melee_weapon",
+    "supported_items": "#minecraft:enchantable/weapon",
     "slots": ["mainhand"],
     "weight": 1,
     "anvil_cost": 2,

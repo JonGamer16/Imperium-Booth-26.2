@@ -13,9 +13,9 @@
                 "minecraft:max_damage": 30,
                 "minecraft:blocks_attacks": {
                   "item_damage": {
-                    "base": 1,
+                    "base": 0,
                     "factor": 1,
-                    "threshold": 8
+                    "threshold": 1
                   },
                   "damage_reductions": [
                     {
@@ -35,6 +35,7 @@
                   { "pattern": "minecraft:border", "color": "gray" },
                   { "pattern": "minecraft:rhombus", "color": "gray" }
                 ],
+                "custom_name": {"text":"Tower Shield","color":"yellow","italic":false},
                 "minecraft:custom_data": "{imperium_kit:1b}"
               }
             }

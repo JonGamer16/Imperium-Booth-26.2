@@ -1,1 +1,26 @@
-{}
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:shield",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:enchantments": {
+                  "imperium:wip_reversal":1
+                },
+                "minecraft:max_damage": 30,
+                "minecraft:custom_name": {"text": "Reversal Shield", "color":"light_purple", "italic": false},
+                "minecraft:custom_data": "{imperium_kit:1b}"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

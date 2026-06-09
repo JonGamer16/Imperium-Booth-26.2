@@ -14,11 +14,12 @@
                   "custom_effects": [
                     {
                       "id": "minecraft:speed",
-                      "amplifier": 4,
+                      "amplifier": 14,
                       "duration": 20
                     }
                   ]
                 },
+                "custom_name": {"text":"Rook Rush","color":"yellow","italic":false},
                 "minecraft:custom_data": "{imperium_kit:1b}"
               }
             }

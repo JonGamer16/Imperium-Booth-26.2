@@ -1,5 +1,7 @@
 #   Jeru Cliffshield
 
+function imperium:util/clear_kit
+
 #   [ARMOR]
 item replace entity @s armor.head with \
     netherite_helmet[\
@@ -9,7 +11,8 @@ item replace entity @s armor.head with \
             {type:"step_height",amount:0.5,operation:"add_value",slot:"head",id:"head"},\
         ],\
         item_model="minecraft:iron_helmet",\
-        custom_name={color:"white",italic:false,text:"Shieldsman Helmet"},\
+        equippable={slot:head,asset_id:"minecraft:iron"},\
+        custom_name={color:"yellow",italic:false,text:"Shieldsman Helmet"},\
         trim={material:"copper",pattern:"sentry"},\
         custom_data={"imperium_kit":1b}\
     ] 1
@@ -18,7 +21,8 @@ item replace entity @s armor.chest with \
         !max_damage,\
         !attribute_modifiers,\
         item_model="minecraft:iron_chestplate",\
-        custom_name={color:"white",italic:false,text:"Shieldsman Chestplate"},\
+        equippable={slot:chest,asset_id:"minecraft:iron"},\
+        custom_name={color:"yellow",italic:false,text:"Shieldsman Chestplate"},\
         trim={material:"copper",pattern:"coast"},\
         custom_data={"imperium_kit":1b}\
     ] 1
@@ -27,7 +31,8 @@ item replace entity @s armor.legs with \
         !max_damage,\
         !attribute_modifiers,\
         item_model="minecraft:chainmail_leggings",\
-        custom_name={color:"white",italic:false,text:"Shieldsman Leggings"},\
+        equippable={slot:legs,asset_id:"minecraft:chainmail"},\
+        custom_name={color:"yellow",italic:false,text:"Shieldsman Leggings"},\
         trim={material:"iron",pattern:"snout"},\
         custom_data={"imperium_kit":1b}\
     ] 1
@@ -36,7 +41,8 @@ item replace entity @s armor.feet with \
         !max_damage,\
         !attribute_modifiers,\
         item_model="minecraft:iron_boots",\
-        custom_name={color:"white",italic:false,text:"Shieldsman Boots"},\
+        equippable={slot:feet,asset_id:"minecraft:iron"},\
+        custom_name={color:"yellow",italic:false,text:"Shieldsman Boots"},\
         trim={material:"iron",pattern:"snout"},\
         custom_data={"imperium_kit":1b}\
     ] 1
@@ -47,13 +53,13 @@ item replace entity @s hotbar.1 with \
     netherite_sword[\
         attribute_modifiers=[\
             {type:"attack_damage",amount:6,operation:"add_value",slot:"mainhand",id:"base_attack_damage"},\
-            {type:"attack_speed",amount:-2.8,operation:"add_value",slot:"mainhand",id:"base_attack_speed"},\
+            {type:"attack_speed",amount:-3,operation:"add_value",slot:"mainhand",id:"base_attack_speed"},\
             {type:"entity_interaction_range",amount:0.5,operation:"add_value",slot:"mainhand",id:"mainhand"},\
-            {type:"attack_knockback",amount:-0.5,operation:"add_value",slot:"mainhand",id:"mainhand"},\
+            {type:"attack_knockback",amount:-1,operation:"add_value",slot:"mainhand",id:"mainhand"},\
         ],\
         !max_damage,\
         item_model="minecraft:iron_sword",\
-        custom_name={text:"Silver Glaive",color:"white",italic:false},\
+        custom_name={text:"Silver Glaive",color:"yellow",italic:false},\
         custom_data={"imperium_kit":1b}\
     ] 1
 
@@ -71,7 +77,7 @@ item replace entity @s hotbar.0 with \
         ],\
         !max_damage,\
         item_model="minecraft:stone_sword",\
-        custom_name={text:"Steel Broadsword",color:"white",italic:false},\
+        custom_name={text:"Steel Broadsword",color:"yellow",italic:false},\
         custom_data={"imperium_kit":1b}\
     ] 1
 
@@ -80,7 +86,7 @@ item replace entity @s hotbar.2 with \
     crossbow[\
         enchantments={"minecraft:power":1},\
         !max_damage,\
-        custom_name={text:"Light Crossbow",color:"white",italic:false},\
+        custom_name={text:"Light Crossbow",color:"yellow",italic:false},\
         custom_data={"imperium_kit":1b},\
     ] 1
 
@@ -98,6 +104,7 @@ function imperium:kits/cliffshield/cd3_potion
 
 
 #   [HEAL] Mushroom Stew
+#       16x 8hp
 loot give @s loot imperium:cliffshield/healing
 
 scoreboard players operation @s im_abilityCdA = #Cliffshield im_abilityCdA

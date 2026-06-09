@@ -1,1 +1,31 @@
-{}
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:tipped_arrow",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:potion_contents": {
+                  "custom_effects": [
+                    {
+                      "id": "minecraft:levitation",
+                      "amplifier": 1,
+                      "duration": 480
+                    }
+                  ]
+                },
+                "custom_name": {"text":"Gravity Bullet","color":"light_purple","italic":false},
+                "minecraft:custom_data": "{imperium_kit:1b}"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

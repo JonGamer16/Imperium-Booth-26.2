@@ -1,6 +1,6 @@
 {
-  "description": "Reversal",
-  "supported_items": "#minecraft:enchantable/armor",
+  "description": "Grappling",
+  "supported_items": "#minecraft:enchantable/fishing",
   "weight": 1,
   "max_level": 1,
   "min_cost": { "base": 1, "per_level_above_first": 0 },

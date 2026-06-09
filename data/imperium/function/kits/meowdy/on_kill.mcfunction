@@ -1,5 +1,4 @@
-function imperium:kits/livvy/cd1_feather
-function imperium:kits/livvy/cd2_web
-function imperium:kits/livvy/cd3_potion
+function imperium:kits/meowdy/cd1_feather
+function imperium:kits/meowdy/cd2_arrows
 
-function imperium:kits/livvy/healing
+function imperium:kits/meowdy/healing

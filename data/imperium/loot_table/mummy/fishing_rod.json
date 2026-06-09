@@ -1,1 +1,26 @@
-{}
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:fishing_rod",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:max_damage": 10,
+                "minecraft:enchantments": {
+                  "imperium:wip_reeling": 1
+                },
+                "minecraft:custom_name": {"text": "Grapple Rod", "color": "gold", "italic": false},
+                "minecraft:custom_data": "{imperium_kit:1b}"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

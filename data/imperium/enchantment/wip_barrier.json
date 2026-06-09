@@ -1,5 +1,5 @@
 {
-  "description": "Reversal",
+  "description": "Barrier",
   "supported_items": "#minecraft:enchantable/armor",
   "weight": 1,
   "max_level": 1,

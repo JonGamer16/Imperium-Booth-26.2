@@ -1,33 +1,38 @@
 #   Rastus the Duelist
 
+function imperium:util/clear_kit
+
 #   [ARMOR]
 item replace entity @s armor.head with \
     netherite_helmet[\
-        !max_damage,\
         attribute_modifiers=[\
-            {id:"head",type:"armor",amount:14,operation:"add_value",slot:"head"}],\
+            {type:"armor",amount:14,operation:"add_value",slot:"head",id:"head"}],\
+        !max_damage,\
         item_model="minecraft:leather_helmet",\
-        custom_name={text:"Dueling Helmet"},\
+        equippable={slot:head,asset_id:"minecraft:leather"},\
         dyed_color=3949738,\
         trim={material:"lapis",pattern:"dune"},\
+        custom_name={text:"Dueling Helmet",color:blue,italic:false},\
         custom_data={"imperium_kit":1b},\
     ] 1
 item replace entity @s armor.chest with \
     netherite_chestplate[\
-        !max_damage,\
         !attribute_modifiers,\
+        !max_damage,\
         item_model="minecraft:chainmail_chestplate",\
-        custom_name={text:"Dueling Chestplate"},\
+        equippable={slot:chest,asset_id:"minecraft:chainmail"},\
         trim={material:"lapis",pattern:"silence"},\
+        custom_name={text:"Dueling Chestplate",color:blue,italic:false},\
         custom_data={"imperium_kit":1b},\
     ] 1
 item replace entity @s armor.legs with \
     netherite_leggings[\
-        !max_damage,\
         !attribute_modifiers,\
+        !max_damage,\
         item_model="minecraft:chainmail_leggings",\
-        custom_name={text:"Dueling Leggings"},\
+        equippable={slot:legs,asset_id:"minecraft:chainmail"},\
         trim={material:"lapis",pattern:"sentry"},\
+        custom_name={text:"Dueling Leggings",color:blue,italic:false},\
         custom_data={"imperium_kit":1b},\
     ] 1
 item replace entity @s armor.feet with \
@@ -35,9 +40,10 @@ item replace entity @s armor.feet with \
         !attribute_modifiers,\
         !max_damage,\
         item_model="minecraft:leather_boots",\
-        custom_name={text:"Dueling Boots"},\
+        equippable={slot:feet,asset_id:"minecraft:leather"},\
         dyed_color=3949738,\
         trim={material:"iron",pattern:"raiser"},\
+        custom_name={text:"Dueling Boots",color:blue,italic:false},\
         custom_data={"imperium_kit":1b},\
     ] 1
 
@@ -45,23 +51,40 @@ item replace entity @s armor.feet with \
 #       2 | 7, +1.0 Knockback
 item replace entity @s hotbar.0 with \
     netherite_sword[\
-        !max_damage,\
-        item_model="minecraft:iron_sword",\
+        attribute_modifiers=[\
+            {type:"attack_damage",amount:2,operation:"add_value",slot:"mainhand",id:"base_attack_damage"},\
+            {type:"attack_speed",amount:1,operation:"add_value",slot:"mainhand",id:"base_attack_speed"},\
+            {type:"attack_knockback",amount:-1.0,operation:"add_value",slot:"mainhand",id:"attack_knockback"}],\
         damage_type="imperium:light",\
         minimum_attack_charge=1.0,\
-        attribute_modifiers=[\
-            {id:"attack_damage",type:"attack_damage",amount:2,operation:"add_value",slot:"mainhand"},\
-            {id:"attack_speed",type:"attack_speed",amount:3,operation:"add_value",slot:"mainhand"},\
-            {id:"attack_knockback",type:"attack_knockback",amount:-1.0,operation:"add_value",slot:"mainhand"}],\
-        custom_data={"imperium_kit":1b}] 1
+        !max_damage,\
+        item_model="minecraft:iron_sword",\
+        custom_name={text:"Light Rapier",color:blue,italic:false},\
+        custom_data={"imperium_kit":1b},\
+    ] 1
+
+#   [SLOT 1] Buckler
+#item replace entity @s weapon.offhand with \
+#    shield[\
+#        !max_damage,\
+#        custom_name={text:"Buckler Shield",color:blue,italic:false},\
+#        custom_data={"imperium_kit":1b},\
+#    ]
+function imperium:kits/rastus/cd1_shield
+
+#   [SLOT 2] [Empty]
+
+#   [SLOT 3] [Empty]
 
 #   [HEALING] Splash Healing 2 Potion
 #       16 x 8 HP
-give @s potion[\
-    potion_contents={custom_effects:[\
-        {id:"instant_health",amplifier:1,duration:1}]},\
-    custom_data={"imperium_healing":1b}\
-    ] 16
+#give @s \
+#    potion[\
+#        potion_contents={custom_effects:[\
+#            {id:"instant_health",amplifier:1,duration:1}]},\
+#        custom_data={"imperium_healing":1b}\
+#    ] 16
+loot give @s loot imperium:rastus/healing
 
 #   Ability Cooldowns
 scoreboard players operation @s im_abilityCdA = #Rastus im_abilityCdA

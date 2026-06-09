@@ -1,5 +1,7 @@
 #   Quin Meowdy
 
+function imperium:util/clear_kit
+
 #   [ARMOR]
 item replace entity @s armor.head with \
     netherite_helmet[\
@@ -9,6 +11,7 @@ item replace entity @s armor.head with \
             {type:"movement_speed",amount:0.2,operation:"add_multiplied_base",slot:"head",id:"feet"}\
         ],\
         item_model="minecraft:leather_helmet",\
+        equippable={slot:head,asset_id:"minecraft:leather"},\
         custom_name={color:"gold",italic:false,text:"Meowdy's Cap"},\
         dyed_color=16753920,\
         custom_data={"imperium_kit":1b},\
@@ -18,6 +21,7 @@ item replace entity @s armor.chest with \
         !max_damage,\
         !attribute_modifiers,\
         item_model="minecraft:chainmail_chestplate",\
+        equippable={slot:chest,asset_id:"minecraft:chainmail"},\
         custom_name={color:"gold",italic:false,text:"Meowdy's Chestplate"},\
         custom_data={"imperium_kit":1b},\
     ] 1
@@ -26,6 +30,7 @@ item replace entity @s armor.legs with \
         !max_damage,\
         !attribute_modifiers,\
         item_model="minecraft:chainmail_leggings",\
+        equippable={slot:legs,asset_id:"minecraft:chainmail"},\
         custom_name={color:"gold",italic:false,text:"Meowdy's Leggings"},\
         custom_data={"imperium_kit":1b},\
     ] 1
@@ -34,66 +39,92 @@ item replace entity @s armor.feet with \
         !max_damage,\
         !attribute_modifiers,\
         item_model="minecraft:leather_boots",\
+        equippable={slot:feet,asset_id:"minecraft:leather"},\
         custom_name={color:"gold",italic:false,text:"Meowdy's Boots"},\
         dyed_color=4673362,\
         custom_data={"imperium_kit":1b},\
     ] 1
 # colors: 16753920 helmet, 4673362 boots
 
-#   [MELEE]
+#   [MELEE] Shortsword
+#       6 | 2
 item replace entity @s hotbar.0 with \
     netherite_sword[\
-        !max_damage,\
-        item_model="minecraft:iron_sword",\
         attribute_modifiers=[\
             {type:"attack_damage",amount:5,operation:"add_value",slot:"mainhand",id:"base_attack_damage"},\
-            {type:"attack_speed",amount:-2.4,operation:"add_value",slot:"mainhand",id:"base_attack_speed"}\
+            {type:"attack_speed",amount:-2,operation:"add_value",slot:"mainhand",id:"base_attack_speed"}\
         ],\
+        !max_damage,\
+        item_model="minecraft:iron_sword",\
+        custom_name={text:"Shortsword",color:gold,italic:false},\
         custom_data={"imperium_kit":1b}\
     ] 1
 
+#   [TOOL] Quickdraw Crossbow
+#       Quick Charge 3
 item replace entity @s weapon.offhand with \
     crossbow[\
-        !max_damage,\
         enchantments={\
             "quick_charge":3\
         },\
+        !max_damage,\
+        custom_name={text:"Quickdraw",color:"gold",italic:false},\
         custom_data={"imperium_kit":1b}\
     ] 1
 
+#   [MELEE] Cat Claw
+#       4 | 10, -0.5 Knockback
 item replace entity @s hotbar.1 with \
     netherite_sword[\
-        !max_damage,\
         item_model="minecraft:ghast_tear",\
         attribute_modifiers=[\
             {type:"attack_damage",amount:3,operation:"add_value",slot:"mainhand",id:"base_attack_damage"},\
             {type:"attack_speed",amount:6,operation:"add_value",slot:"mainhand",id:"base_attack_speed"},\
-            {type:"attack_knockback",amount:-1,operation:"add_value",slot:"mainhand",id:"mainhand"}\
+            {type:"attack_knockback",amount:-0.5,operation:"add_value",slot:"mainhand",id:"mainhand"}\
         ],\
+        !max_damage,\
+        custom_name={text:"Cat Claw",color:gold,italic:false},\
         custom_data={"imperium_kit":1b}\
     ] 1
 
+#   [TOOL] Birdshot Crossbow
+#       Multishot
 item replace entity @s hotbar.2 with \
     crossbow[\
         !max_damage,\
         enchantments={\
             "multishot":1\
         },\
+        custom_name={text:"Birdshot",color:gold,italic:false},\
         custom_data={"imperium_kit":1b}\
     ] 1
 
-item replace entity @s hotbar.8 with \
-    arrow[custom_data={"imperium_kit":1b}] 4
+#   [SLOT 1] Leap Feather
+#item replace entity @s weapon.offhand with \
+#    feather[\
+#        enchantments={"imperium:wip_leap":2},\
+#        custom_data={"imperium_kit":1b},\
+#    ] 1
+function imperium:kits/meowdy/cd1_feather
 
-#   Healing Item: Salmon
-give @s cooked_salmon[\
-    max_stack_size=1,\
-    food={nutrition:0,saturation:0,can_always_eat:true},\
-    consumable={\
-        consume_seconds:0,\
-        on_consume_effects:[{type:"apply_effects",effects:[\
-            {id:"instant_health",amplifier:1,duration:1}]}]},\
-    custom_data={"imperium_healing":1b}] 16
+#   [SLOT 2] Arrows
+#item replace entity @s hotbar.8 with \
+#    arrow[custom_data={"imperium_kit":1b}] 4
+function imperium:kits/meowdy/cd2_arrows
+
+#   [SLOT 3] [Empty]
+
+#   [HEALING] Salmon
+#       16x 8hp
+#give @s cooked_salmon[\
+#    max_stack_size=1,\
+#    food={nutrition:0,saturation:0,can_always_eat:true},\
+#    consumable={\
+#        consume_seconds:0,\
+#        on_consume_effects:[{type:"apply_effects",effects:[\
+#            {id:"instant_health",amplifier:1,duration:1}]}]},\
+#    custom_data={"imperium_healing":1b}] 16
+loot give @s loot imperium:meowdy/healing
 
 #   Ability Cooldowns
 scoreboard players operation @s im_abilityCdA = #Meowdy im_abilityCdA

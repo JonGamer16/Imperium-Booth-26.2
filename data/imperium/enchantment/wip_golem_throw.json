@@ -1,6 +1,6 @@
 {
-  "description": "Reversal",
-  "supported_items": "#minecraft:enchantable/armor",
+  "description": "Golem Throw",
+  "supported_items": "#minecraft:enchantable/weapon",
   "weight": 1,
   "max_level": 1,
   "min_cost": { "base": 1, "per_level_above_first": 0 },

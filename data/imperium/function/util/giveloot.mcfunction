@@ -1,0 +1,15 @@
+loot give @s loot imperium:cliffshield/arrows
+loot give @s loot imperium:cliffshield/shield
+loot give @s loot imperium:cliffshield/potion
+loot give @s loot imperium:levent/arrows
+loot give @s loot imperium:levent/shield
+loot give @s loot imperium:livvy/feather
+loot give @s loot imperium:livvy/potion
+loot give @s loot imperium:livvy/web
+loot give @s loot imperium:meowdy/arrows
+loot give @s loot imperium:meowdy/feather
+loot give @s loot imperium:mummy/fishing_rod
+loot give @s loot imperium:rastus/shield
+loot give @s loot imperium:smokey/arrow
+loot give @s loot imperium:smokey/fishing_rod
+loot give @s loot imperium:smokey/potion

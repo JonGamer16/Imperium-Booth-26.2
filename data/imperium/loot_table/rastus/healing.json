@@ -1,1 +1,29 @@
-{}
+{
+  "pools": [
+    {
+      "rolls": 16,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:splash_potion",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": 1
+            },
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:potion_contents": {
+                  "potion": "strong_healing"
+                },
+                "custom_name":{"text":"Splash Potion of Healing","color":"blue","italic":false},
+                "minecraft:custom_data": "{imperium_healing:1b}"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
