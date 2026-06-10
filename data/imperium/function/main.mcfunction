@@ -170,6 +170,9 @@ scoreboard players set const 10000 10000
 
 # Reset Temporary Player Data
 # data modify storage imperium:player_data players set value []
+scoreboard objectives add im_arrowAge dummy
+scoreboard objectives add im_secTimer dummy
+
 scoreboard objectives add im_reach dummy
 scoreboard objectives add im_sweetspot dummy
 scoreboard objectives add im_sourspot dummy

@@ -21,8 +21,8 @@ execute as @a[scores={givekit=1..},advancements={imperium:leave_spawn=false}] ru
 # CONFLICT NOTE: itemreload and im_abilityDealt both use custom:damage_dealt but are separate
 #   objectives — resetting im_abilityDealt each tick does NOT affect itemreload accumulation.
 #   Remove itemreload, item_distributor_300, and rTotem checks once ability system replaces them.
-execute as @a[scores={itemreload=300..}] in overworld run function imperium:arena/item_distributor_300
-execute as @a[scores={rTotem=1..,itemreload=600..}] in overworld run function imperium:items/totem
+# execute as @a[scores={itemreload=300..}] in overworld run function imperium:arena/item_distributor_300
+# execute as @a[scores={rTotem=1..,itemreload=600..}] in overworld run function imperium:items/totem
 
 # ability cooldown engine (parallel system; does not interfere with itemreload above)
 execute as @a[advancements={imperium:leave_spawn=true}] run function imperium:update_cooldowns
@@ -43,36 +43,39 @@ execute \
 
 # WIP TESTING
 #execute as @e[tag=im_rot_track] run function imperium:data_fetching/get_rotation
-execute as JonGamer16 run \
-    execute store result score NearestCow im_rotation run data get entity @n[type=cow,distance=0..5] Rotation[0] 1
+
+# execute as JonGamer16 run \
+#     execute store result score NearestCow im_rotation run data get entity @n[type=cow,distance=0..5] Rotation[0] 1
+
 #execute as @a[scores={carrot_on_a_stick=1..}] run function imperium:raycaster/proxy
+
 # Detect and replace the AEC
-execute \
-    as @e[type=area_effect_cloud] \
-    at @s \
-    if entity @p[\
-        nbt={\
-            SelectedItem:{\
-                id:"minecraft:lingering_potion",\
-                components:{\
-                    "minecraft:custom_data":{\
-                        CustomLingering:1b\
-                    }\
-                }\
-            }\
-        }\
-    ] \
-    run data merge entity @s {\
-        Duration:400,\
-        Radius:5.0f,\
-        RadiusOnUse:-0.2f,\
-        RadiusPerTick:-0.01f,\
-        potion_contents:{\
-            custom_effects:[\
-                {id:"speed", amplifier:4, duration:60}\
-            ]\
-        }\
-}
+# execute \
+#     as @e[type=area_effect_cloud] \
+#     at @s \
+#     if entity @p[\
+#         nbt={\
+#             SelectedItem:{\
+#                 id:"minecraft:lingering_potion",\
+#                 components:{\
+#                     "minecraft:custom_data":{\
+#                         CustomLingering:1b\
+#                     }\
+#                 }\
+#             }\
+#         }\
+#     ] \
+#     run data merge entity @s {\
+#         Duration:400,\
+#         Radius:5.0f,\
+#         RadiusOnUse:-0.2f,\
+#         RadiusPerTick:-0.01f,\
+#         potion_contents:{\
+#             custom_effects:[\
+#                 {id:"speed", amplifier:4, duration:60}\
+#             ]\
+#         }\
+# }
 
 execute \
     as @a[advancements={imperium:leave_spawn=false}] \
@@ -84,3 +87,8 @@ execute \
     run advancement revoke @s only imperium:leave_spawn
 
 scoreboard players enable @s[advancements={imperium:leave_spawn=false}] givekit
+
+# 1-second loop (for local testing; booth uses ticking_functions at "1s")
+scoreboard players add #sec im_secTimer 1
+execute if score #sec im_secTimer matches 20.. run function imperium:loop_1s
+execute if score #sec im_secTimer matches 20.. run scoreboard players set #sec im_secTimer 0

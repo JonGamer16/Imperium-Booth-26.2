@@ -7,5 +7,14 @@
   "max_cost": { "base": 1, "per_level_above_first": 0 },
   "anvil_cost": 1,
   "slots": ["mainhand"],
-  "effects": {}
+  "effects": {
+    "projectile_spawned": [
+      {
+        "effect": {
+          "type": "run_function",
+          "function": "imperium:enchantments/straight_flight"
+        }
+      }
+    ]
+  }
 }

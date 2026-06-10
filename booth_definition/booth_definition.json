@@ -29,7 +29,7 @@
     "ticking_functions": {
         "imperium:tick": "1t",
         "imperium:5t": "5t",
-        "imperium:sec": "1s"
+        "imperium:loop_1s": "1s"
     },
     "sticker_book": {
         "background_color": "#1a48c3",
