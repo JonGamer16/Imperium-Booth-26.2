@@ -29,16 +29,16 @@
     "ticking_functions": {
         "imperium:tick": "1t",
         "imperium:5t": "5t",
-        "ipmerium:sec": "1s"
+        "imperium:sec": "1s"
     },
     "sticker_book": {
         "background_color": "#1a48c3",
         "region": "textured_tropics",
         "stickers": [
             {
-                "sticker_id": "<sticker_id>",
+                "sticker_id": "enter_booth",
                 "sticker_texture": "<texture_location>",
-                "sticker_name": "Welcome to Booth",
+                "sticker_name": "World Domination",
                 "unobtained_text": "Enter the Booth",
                 "obtained_text": "Rewarded for entering the Booth"
             }
@@ -46,9 +46,9 @@
     },
     "balloons": [
         {
-            "balloon_id": "smithie",
-            "balloon_name": "Smithie",
-            "balloon_model": "summit_balloons:item/smithie"
+            "balloon_id": "imperium",
+            "balloon_name": "Imperium",
+            "balloon_model": "summit_balloons:item/imperium"
         }
     ]
 }

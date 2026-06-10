@@ -1,0 +1,100 @@
+Items to be done are marked with an 'o'
+Items that need debugging are marked with '/'
+Items that have been closely checked for bugs are marked with 'x'
+
+Kit Abilities:
+
+    Cliffshield:
+    x   Glaive: + attack reach, - attack speed, - knockback
+    x   Crossbow: + damage
+    /   Shield: - knockback resist, + delay, - angle
+    x   Arming Sword: standard iron Sword
+    /   Rush Potion: high speed for 1 second
+    x   Mushroom Stew: 16x 8hp
+
+    Meowdy:
+    x   Shortsword: faster Sword
+    /   Cat Claws: high attack speed, - kb
+    o   Leap Feather: from ground only, directional influence
+    x   Crossbows: one with quick charge, one with multishot, #bypasses_cooldown
+    x   Salmon: 8hp
+
+    Mummy:
+    /   Claymore: + attack reach, - attack speed, mace base item
+    o   Golem Throw Enchantment: sneak to charge, upward kb, + damage
+    o   Energy Barrier Enchantment: active while sneaking, absorbs damage, rechargable durability meter, + kb resist
+    o   Grapple Rod: limited durability, increased velocity, Reeling Enchantment
+    o   Energy Crystal: place on ground with shift + right click, exploding with delay
+
+    Rastus:
+    /   Rapier: + attack speed, - knockback, #bypasses_cooldown
+    /   Buckler: - slowdown, - angle, - kb resist, - defense, disabled by anything
+    o   Air Dodge Enchantment: while in air, sneak + wasd input for a small air boost
+            - plan: check for inputs while airborne, run a function that launches based on directional input
+            - it's not a consumable item, so I'll need to either tweak a cooldown slot or add a special meter for him and others
+    o   Charge Attack: 0.75 second without attacking to increase damage, knockback, and reach
+            - plan: make the rapier use a spear jab attack to detect the post_piercing_attack on left click
+            - count down a scoreboard that resets to 20 on attack, then counts down to 0 while weapon is held
+            - charge will reset, even on a miss
+    o   Parry: after charge attack, gain Resistance 5 for 1 tick
+            - plan: attach a resistance 5 effect for 1 tick to the charge attack detection
+    x   Splash Healing 2 Potions: 16x 8hp
+
+    Livvy:
+    o   Fang: lifesteal enchantment, + attack speed, + crits enchantment
+    o   Lifesteal Enchantment: dealing enough damage fills an empty bowl with beetroot soup
+    o   Venom Enchantment: main weapon deals increased damage to poisoned targets and gains more Lifesteal score
+            - note: I need to change the existing lifesteal enchantment to add to a score and give soup, like a 4th ability slot
+    /   Acid Potion: poison 3 | 3s, harming 1
+            - plan: tag poison damage as #bypasses_cooldown and whatever drowning damage uses
+    o   Web Throw: block entity, reduces movement, jump, and attack speed on contact
+            - plan: lingering potion of slowness and fatigue
+            - I'd need an attribute system to prevent jumping out
+            - loop to summon block display on new clouds and tag them as paired with a block display
+            - loop to get rid of block displays whose cloud died
+            - edit ReapplicationDelay property of cloud, check for tagged entities
+    o   Leap Feather: like Meowdy's, but also gives 1 second of strength
+            - plan: hold in offhand, consumable component -> advancement detection -> run function using player_motion
+    x   Beetroot Soup: 10x 8hp
+
+    Levent:
+    o   Charge Attack: like Rastus's charge attack
+    o   Reversal Enchantment: sneak to teleport behind the attacker
+            - plan: advancement detects blocking while sneaking -> execute function on attacker
+            - function checks ^ ^ ^-2.5, then ^ ^ ^-1.5, then ^ ^ ^-0.5 for #replaceable blocks at head and feet location
+    /   Gravity Flower: reduced gravity while held, maybe make it a weapon?
+            - note: this would be more useful as an armor Enchantment
+            - it would reduce your gravity until it detects you airborne and not holding 
+            - this inversion, as opposed to reduced gravity on condition, means only deactivation will be ping delayed
+    x   Chorus Fruit: 16x 8hp, random teleport
+    o   Straight Flying Arrows: arrows fired from the bow will not experience gravity
+            - plan: bow enchantment with projectile_spawned -> run function as nearest arrow
+                -> assign NoGravity NBT tag -> kill arrows aged 200+ ticks
+
+    Smokey:
+    o   Dual Wield: right click to deal damage with weapon in offhand
+            - plan: the spear kinetic_weapon attack was inconsistent, so I might have to add a special system
+            - said system would be a raycast for hit detection, #no_impact damage command for damage, and player_motion for knockback
+            - kind of a complex system, might take some time
+    o   Marking Dart: inflicts Glowing effect; targets take more melee damage
+            - plan: enchantment on weapons gives damage buff to players with Glowing effect
+            - for the projectile itself, I have code for a "throwing knife" I can use
+    o   Smoke Bomb: invis, speed 2, spawn dense particles around the cloud
+            - plan: like livvy's web, place a marker at the cloud that's killed when the cloud dies 
+                -> spawn campfire smoke particles around the marker
+    o   Grapple Rod: pulls self in direction of bobber
+            - plan: assign unique id to players -> rod usage scoreboard -> execute on origin
+                -> stamp bobber with player's id -> track bobber with a marker armor stand
+                -> advancement for reeling the rod on ground or on player
+                -> use player_motion with relative coordinates of the bobber
+    x   Rabbit Stew: 10x 12hp
+
+Arena Systems:
+
+    o   Damage cooldown engine: damage dealt and taken contribute to reloading abilities
+    o   Item distributor: function that distributes items based on each player's kit and cooldown scores
+    o   Item usage tracking: detect what kit items players still have via advancement
+    o   Kill system: deal at least 50 damage and then get a kill to receive healing items
+    o   Cooldown freeze: items aren't given and cooldown cannot go under a certain point if item has not been used
+    o   Battlegrounds script: controls for the Battlegrounds
+    o   Booth script: controls for booth functions and accessories
