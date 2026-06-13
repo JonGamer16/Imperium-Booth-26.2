@@ -10,5 +10,5 @@ execute \
     if score @s im_backstabflag matches 0 \
     if score @s im_backstabraycast matches ..15 \
     positioned ^ ^ ^0.33 \
-    if block ~ ~ ~ #minecraft:im.raycast_pass \
+    if block ~ ~ ~ #imperium:im.raycast_pass \
     run function imperium:enchantments/backstab_raycast

@@ -1,0 +1,50 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:beetroot_soup",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": 1
+            },
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:food": {
+                  "nutrition": 0,
+                  "saturation": 0,
+                  "can_always_eat": true
+                },
+                "minecraft:consumable": {
+                  "consume_seconds": 0,
+                  "on_consume_effects": [
+                    {
+                      "type": "minecraft:apply_effects",
+                      "effects": [
+                        {
+                          "id": "minecraft:instant_health",
+                          "amplifier": 0,
+                          "duration": 1
+                        }
+                      ]
+                    }
+                  ]
+                },
+                "minecraft:use_remainder": {
+                  "id": "minecraft:bowl",
+                  "count": 1
+                },
+                "minecraft:custom_name":{"text":"Blood Bowl","color":"red","italic":false},
+                "minecraft:custom_data": "{imperium_healing:1b}"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

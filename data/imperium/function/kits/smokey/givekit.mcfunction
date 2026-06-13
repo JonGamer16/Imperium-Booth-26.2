@@ -9,10 +9,8 @@ item replace entity @s armor.head with \
         attribute_modifiers=[\
             {id:"armor",type:"armor",amount:14,operation:"add_value",slot:"head"}\
         ],\
-        item_model="minecraft:leather_helmet",\
-        equippable={slot:head,asset_id:"minecraft:leather"},\
-        dyed_color=8606770,\
-        trim={material:"copper",pattern:"dune"},\
+        item_model="minecraft:chainmail_helmet",\
+        equippable={slot:head,asset_id:"minecraft:chainmail"},\
         custom_name={text:"Bounty Hunter Helmet",color:gold,italic:false},\
         custom_data={"imperium_kit":1b},\
     ] 1
@@ -57,6 +55,7 @@ item replace entity @s hotbar.0 with \
             {type:"attack_damage",amount:2,operation:"add_value",slot:"mainhand",id:"base_attack_damage"},\
             {type:"attack_speed",amount:0,operation:"add_value",slot:"mainhand",id:"base_attack_speed"}\
         ],\
+        enchantments={"imperium:wip_marked":1},\
         !max_damage,\
         item_model="minecraft:iron_sword",\
         custom_name={text:"Steel Dagger",color:gold,italic:false},\
@@ -71,7 +70,7 @@ item replace entity @s hotbar.1 with \
             {type:"attack_damage",amount:5,operation:"add_value",slot:"mainhand",id:"base_attack_damage"},\
             {type:"attack_speed",amount:-3,operation:"add_value",slot:"mainhand",id:"base_attack_speed"}\
         ],\
-        enchantments={"imperium:crits":3,"imperium:backstab":1},\
+        enchantments={"imperium:crits":3,"imperium:backstab":1,"imperium:wip_marked":1},\
         weapon={\
             disable_blocking_for_seconds:3,\
             item_damage_per_attack:0},\

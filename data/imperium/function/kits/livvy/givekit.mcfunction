@@ -7,10 +7,12 @@ item replace entity @s armor.head with \
     netherite_helmet[\
         !max_damage,\
         attribute_modifiers=[\
-            {type:"armor",amount:12,operation:"add_value",slot:"head",id:"head"},\
+            {type:"armor",amount:15,operation:"add_value",slot:"head",id:"head"},\
             {type:"sneaking_speed",amount:1,operation:"add_value",slot:"head",id:"head"},\
             {type:"movement_speed",amount:0.2,operation:"add_multiplied_base",slot:"head",id:"head"},\
             {type:"step_height",amount:0.5,operation:"add_value",slot:head,id:"head"},\
+            {type:"safe_fall_distance",amount:6,operation:"add_value",slot:head,id:"head"},\
+            {type:"fall_damage_multiplier",amount:-0.5,operation:"add_value",slot:head,id:"head"},\
         ],\
         item_model="minecraft:leather_helmet",\
         equippable={slot:head,asset_id:"minecraft:leather"},\
@@ -60,18 +62,18 @@ item replace entity @s hotbar.0 with \
         !max_damage,\
         item_model="minecraft:ghast_tear",\
         attribute_modifiers=[\
-            {type:"attack_damage",amount:5,operation:"add_value",slot:"mainhand",id:"base_attack_damage"},\
+            {type:"attack_damage",amount:3,operation:"add_value",slot:"mainhand",id:"base_attack_damage"},\
             {type:"attack_speed",amount:-2.4,operation:"add_value",slot:"mainhand",id:"base_attack_speed"}\
         ],\
-        enchantments={"imperium:crits":3,"imperium:lifesteal":5},\
-        custom_name={italic:false,text:"Lifesteal Fang"},\
+        enchantments={"imperium:crits":2,"imperium:wip_lifesteal":1},\
+        custom_name={text:"Lifesteal Fang",color:"red",italic:false},\
         custom_data={"imperium_kit":1b}\
     ] 1
 
 #   [SLOT 1] Leap Feather
 #item replace entity @s weapon.offhand with \
 #    feather[\
-#        enchantments={"imperium:wip_leap":2},\
+#        enchantments={"imperium:leap":2},\
 #        custom_data={"imperium_kit":1b},\
 #    ] 1
 function imperium:kits/livvy/cd1_feather
@@ -112,5 +114,9 @@ loot give @s loot imperium:livvy/healing
 scoreboard players operation @s im_abilityCdA = #Livvy im_abilityCdA
 scoreboard players operation @s im_abilityCdB = #Livvy im_abilityCdB
 scoreboard players operation @s im_abilityCdC = #Livvy im_abilityCdC
+
+#   Lifesteal: start banking from zero, sync prev so prior damage isn't counted
+scoreboard players set @s im_lifesteal 0
+scoreboard players operation @s im_lsPrev = @s im_lsDealt
 
 tag @s add im.kit_livvy

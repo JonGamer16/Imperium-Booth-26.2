@@ -1,0 +1,17 @@
+{
+  "criteria": {
+    "leap": {
+      "trigger": "minecraft:consume_item",
+      "conditions": {
+        "item": {
+          "predicates": {
+            "minecraft:custom_data": "{im_leap_feather:1b}"
+          }
+        }
+      }
+    }
+  },
+  "rewards": {
+    "function": "imperium:abilities/leap"
+  }
+}

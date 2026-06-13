@@ -10,11 +10,17 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:enchantments": {
-                  "imperium:wip_leap": 2
+                "minecraft:consumable": {
+                  "consume_seconds": 0.1,
+                  "has_consume_particles": false,
+                  "animation": "spear",
+                  "sound": "minecraft:entity.bat.takeoff"
                 },
-                "custom_name":{"text":"Leap","color":"gold","italic":false},
-                "minecraft:custom_data": "{imperium_kit:1b}"
+                "minecraft:enchantments": {
+                  "imperium:leap": 2
+                },
+                "minecraft:custom_name": {"text": "Leap", "color": "gold", "italic": false},
+                "minecraft:custom_data": "{imperium_kit:1b,im_leap_feather:1b}"
               }
             }
           ]

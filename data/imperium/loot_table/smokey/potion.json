@@ -13,16 +13,12 @@
                 "minecraft:potion_contents": {
                   "custom_effects": [
                     {
-                      "id": "minecraft:invisibility",
+                      "id": "minecraft:water_breathing",
                       "amplifier": 0,
-                      "duration": 20
-                    },
-                    {
-                      "id": "minecraft:speed",
-                      "amplifier": 1,
-                      "duration": 20
+                      "duration": 1
                     }
-                  ]
+                  ],
+                  "custom_color": 1973790
                 },
                 "minecraft:custom_name": {"text": "Smoke Bomb", "color": "gold", "italic": false},
                 "minecraft:custom_data": "{imperium_kit:1b}"

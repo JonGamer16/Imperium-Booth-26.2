@@ -15,7 +15,7 @@ Kit Abilities:
     Meowdy:
     x   Shortsword: faster Sword
     /   Cat Claws: high attack speed, - kb
-    o   Leap Feather: from ground only, directional influence
+    /   Leap Feather: from ground only
     x   Crossbows: one with quick charge, one with multishot, #bypasses_cooldown
     x   Salmon: 8hp
 
@@ -41,8 +41,8 @@ Kit Abilities:
     x   Splash Healing 2 Potions: 16x 8hp
 
     Livvy:
-    o   Fang: lifesteal enchantment, + attack speed, + crits enchantment
-    o   Lifesteal Enchantment: dealing enough damage fills an empty bowl with beetroot soup
+    /   Fang: lifesteal enchantment, + attack speed, + crits enchantment
+    /   Lifesteal Enchantment: dealing enough damage fills an empty bowl with beetroot soup
     o   Venom Enchantment: main weapon deals increased damage to poisoned targets and gains more Lifesteal score
             - note: I need to change the existing lifesteal enchantment to add to a score and give soup, like a 4th ability slot
     /   Acid Potion: poison 3 | 3s, harming 1
@@ -53,7 +53,7 @@ Kit Abilities:
             - loop to summon block display on new clouds and tag them as paired with a block display
             - loop to get rid of block displays whose cloud died
             - edit ReapplicationDelay property of cloud, check for tagged entities
-    o   Leap Feather: like Meowdy's, but also gives 1 second of strength
+    /   Leap Feather: like Meowdy's, but also gives 1 second of strength
             - plan: hold in offhand, consumable component -> advancement detection -> run function using player_motion
     x   Beetroot Soup: 10x 8hp
 
@@ -67,7 +67,7 @@ Kit Abilities:
             - it would reduce your gravity until it detects you airborne and not holding 
             - this inversion, as opposed to reduced gravity on condition, means only deactivation will be ping delayed
     x   Chorus Fruit: 16x 8hp, random teleport
-    o   Straight Flying Arrows: arrows fired from the bow will not experience gravity
+    x   Straight Flying Arrows: arrows fired from the bow will not experience gravity
             - plan: bow enchantment with projectile_spawned -> run function as nearest arrow
                 -> assign NoGravity NBT tag -> kill arrows aged 200+ ticks
 
@@ -76,10 +76,10 @@ Kit Abilities:
             - plan: the spear kinetic_weapon attack was inconsistent, so I might have to add a special system
             - said system would be a raycast for hit detection, #no_impact damage command for damage, and player_motion for knockback
             - kind of a complex system, might take some time
-    o   Marking Dart: inflicts Glowing effect; targets take more melee damage
+    /   Marking Dart: inflicts Glowing effect; targets take more melee damage
             - plan: enchantment on weapons gives damage buff to players with Glowing effect
             - for the projectile itself, I have code for a "throwing knife" I can use
-    o   Smoke Bomb: invis, speed 2, spawn dense particles around the cloud
+    /   Smoke Bomb: invis, speed 2, spawn dense particles around the cloud
             - plan: like livvy's web, place a marker at the cloud that's killed when the cloud dies 
                 -> spawn campfire smoke particles around the marker
     o   Grapple Rod: pulls self in direction of bobber
@@ -94,7 +94,8 @@ Arena Systems:
     o   Damage cooldown engine: damage dealt and taken contribute to reloading abilities
     o   Item distributor: function that distributes items based on each player's kit and cooldown scores
     o   Item usage tracking: detect what kit items players still have via advancement
-    o   Kill system: deal at least 50 damage and then get a kill to receive healing items
+    o   Kill system: deal at least 50.0 damage and then get a kill to receive healing items
     o   Cooldown freeze: items aren't given and cooldown cannot go under a certain point if item has not been used
     o   Battlegrounds script: controls for the Battlegrounds
     o   Booth script: controls for booth functions and accessories
+    o   Once I start testing on the build world, adapt loop functions to Summit systems

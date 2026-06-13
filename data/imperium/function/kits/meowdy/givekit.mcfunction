@@ -8,7 +8,9 @@ item replace entity @s armor.head with \
         !max_damage,\
         attribute_modifiers=[\
             {type:"armor",amount:12,operation:"add_value",slot:"head",id:"head"},\
-            {type:"movement_speed",amount:0.2,operation:"add_multiplied_base",slot:"head",id:"feet"}\
+            {type:"movement_speed",amount:0.2,operation:"add_multiplied_base",slot:"head",id:"head"},\
+            {type:"safe_fall_distance",amount:6,operation:"add_value",slot:head,id:"head"},\
+            {type:"fall_damage_multiplier",amount:-0.5,operation:"add_value",slot:head,id:"head"},\
         ],\
         item_model="minecraft:leather_helmet",\
         equippable={slot:head,asset_id:"minecraft:leather"},\
@@ -102,7 +104,7 @@ item replace entity @s hotbar.2 with \
 #   [SLOT 1] Leap Feather
 #item replace entity @s weapon.offhand with \
 #    feather[\
-#        enchantments={"imperium:wip_leap":2},\
+#        enchantments={"imperium:leap":2},\
 #        custom_data={"imperium_kit":1b},\
 #    ] 1
 function imperium:kits/meowdy/cd1_feather

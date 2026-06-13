@@ -1,29 +1,29 @@
 {
-    "description": "Life Steal",
+    "description": "HP Drain",
     "supported_items": "#minecraft:enchantable/weapon",
     "slots": ["mainhand"],
     "weight": 1,
     "anvil_cost": 2,
-    "min_cost": 
+    "min_cost":
     {
         "base": 2,
         "per_level_above_first": 1
     },
-    "max_cost": 
+    "max_cost":
     {
         "base": 2,
         "per_level_above_first": 1
     },
     "max_level": 3,
-    "effects": 
+    "effects":
     {
-        "tick": 
+        "tick":
         [
             {
-                "effect": 
+                "effect":
                 {
                     "type": "run_function",
-                    "function": "imperium:enchantments/lifesteal"
+                    "function": "imperium:enchantments/hp_drain"
                 }
             }
         ]

@@ -8,13 +8,13 @@
 
 #execute \
 #    if entity @e[distance=0..0.1,type=!#im.not_mob] \
-#    if block ~ ~ ~ #im.raycast_pass \
+#    if block ~ ~ ~ #imperium:im.raycast_pass \
 #    run scoreboard players add @s im_tipperraycast 25
 
 # execute \
 #     positioned ~ ~ ~ \
 #     if entity @e[distance=0..0.1,type=!#im.not_mob] \
-#     if block ~ ~ ~ #im.raycast_pass \
+#     if block ~ ~ ~ #imperium:im.raycast_pass \
 #     run say +
 
 # increment the player's raycast step first so a collision copies a non-zero value
@@ -40,7 +40,7 @@ execute \
 execute \
     if entity @s[scores={im_tipperraycast=..51}] \
     positioned ^ ^ ^0.1 \
-    if block ~ ~ ~ #minecraft:im.raycast_pass \
+    if block ~ ~ ~ #imperium:im.raycast_pass \
     run function imperium:enchantments/tipper_raycast
 # exit loop
 scoreboard players reset @s[scores={im_tipperraycast=1..}] im_tipperraycast

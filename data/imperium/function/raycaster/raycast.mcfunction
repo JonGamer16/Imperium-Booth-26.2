@@ -17,5 +17,5 @@ execute \
     if score .distance im_raycast matches ..5 \
     positioned ^ ^ ^0.1 \
     rotated ~ ~ \
-    if block ~ ~ ~ #minecraft:im.raycast_pass \
+    if block ~ ~ ~ #imperium:im.raycast_pass \
     run function imperium:raycaster/raycast

@@ -19,7 +19,7 @@
                   "imperium:single_use": 1
                 },
                 "minecraft:custom_name": {"text": "Marking Dart", "color": "gold", "italic": false},
-                "minecraft:custom_data": "{imperium_kit:1b}"
+                "minecraft:custom_data": "{imperium_kit:1b,im_marking_dart:1b}"
               }
             }
           ]

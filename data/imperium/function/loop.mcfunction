@@ -49,33 +49,16 @@ execute \
 
 #execute as @a[scores={carrot_on_a_stick=1..}] run function imperium:raycaster/proxy
 
-# Detect and replace the AEC
-# execute \
-#     as @e[type=area_effect_cloud] \
-#     at @s \
-#     if entity @p[\
-#         nbt={\
-#             SelectedItem:{\
-#                 id:"minecraft:lingering_potion",\
-#                 components:{\
-#                     "minecraft:custom_data":{\
-#                         CustomLingering:1b\
-#                     }\
-#                 }\
-#             }\
-#         }\
-#     ] \
-#     run data merge entity @s {\
-#         Duration:400,\
-#         Radius:5.0f,\
-#         RadiusOnUse:-0.2f,\
-#         RadiusPerTick:-0.01f,\
-#         potion_contents:{\
-#             custom_effects:[\
-#                 {id:"speed", amplifier:4, duration:60}\
-#             ]\
-#         }\
-# }
+# Smoke Bomb (Smokey): configure freshly-thrown clouds, then emit one puff
+execute \
+    as @e[type=area_effect_cloud,tag=!im.smoke_bomb,nbt={potion_contents:{custom_color:1973790}}] \
+    at @s \
+    run function imperium:kits/smokey/smoke_init
+# Smoke Bomb: grant invis + speed to Smokey players inside active clouds
+execute \
+    as @e[type=area_effect_cloud,tag=im.smoke_bomb] \
+    at @s \
+    run function imperium:kits/smokey/smoke_apply
 
 execute \
     as @a[advancements={imperium:leave_spawn=false}] \
