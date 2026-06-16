@@ -8,4 +8,4 @@ execute \
     unless items entity @s hotbar.1 * \
     run loot replace entity @s hotbar.1 loot imperium:livvy/web
 
-scoreboard players operation @s im_abilityCdB = #Livvy im_abilityCdB
+scoreboard players operation @s im_abilityCdB += #Livvy im_abilityCdB

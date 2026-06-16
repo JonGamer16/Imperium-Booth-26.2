@@ -91,11 +91,11 @@ Kit Abilities:
 
 Arena Systems:
 
-    o   Damage cooldown engine: damage dealt and taken contribute to reloading abilities
-    o   Item distributor: function that distributes items based on each player's kit and cooldown scores
-    o   Item usage tracking: detect what kit items players still have via advancement
+    /   Damage cooldown engine: damage dealt and taken contribute to reloading abilities
+    /   Item distributor: function that distributes items based on each player's kit and cooldown scores
+    /   Item usage tracking: detect what kit items players still have via advancement
     o   Kill system: deal at least 50.0 damage and then get a kill to receive healing items
-    o   Cooldown freeze: items aren't given and cooldown cannot go under a certain point if item has not been used
+    /   Cooldown freeze: items aren't given and cooldown cannot go under a certain point if item has not been used
     o   Battlegrounds script: controls for the Battlegrounds
     o   Booth script: controls for booth functions and accessories
     o   Once I start testing on the build world, adapt loop functions to Summit systems

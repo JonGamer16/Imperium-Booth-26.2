@@ -1,7 +1,6 @@
 {
     "values": [
         "imperium:loop",
-        "imperium:loop_enchantments",
-        "imperium:loop_events"
+        "imperium:loop_enchantments"
     ]
 }

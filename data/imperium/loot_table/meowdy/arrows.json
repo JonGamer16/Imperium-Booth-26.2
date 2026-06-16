@@ -1,24 +1,11 @@
 {
   "pools": [
     {
-      "rolls": 1,
+      "rolls": 4,
       "entries": [
         {
-          "type": "minecraft:item",
-          "name": "minecraft:arrow",
-          "functions": [
-            {
-              "function": "minecraft:set_count",
-              "count": 4
-            },
-            {
-              "function": "minecraft:set_components",
-              "components": {
-                "custom_name":{"text":"Arrow","color":"gold","italic":false},
-                "minecraft:custom_data": "{imperium_kit:1b}"
-              }
-            }
-          ]
+          "type": "minecraft:loot_table",
+          "value": "imperium:meowdy/arrow"
         }
       ]
     }

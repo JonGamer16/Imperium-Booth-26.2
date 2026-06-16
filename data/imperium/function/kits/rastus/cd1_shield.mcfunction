@@ -8,4 +8,4 @@ execute \
     unless items entity @s weapon.offhand * \
     run loot replace entity @s weapon.offhand loot imperium:rastus/shield
 
-scoreboard players operation @s im_abilityCdA = #Rastus im_abilityCdA
+scoreboard players operation @s im_abilityCdA += #Rastus im_abilityCdA

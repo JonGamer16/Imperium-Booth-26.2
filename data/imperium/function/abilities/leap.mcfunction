@@ -37,7 +37,7 @@ execute if predicate imperium:on_ground run \
     *= #constant.3 player_motion.internal.const
 scoreboard players operation \
     @s player_motion.internal.motion.y \
-    /= #constant.10 player_motion.internal.const      
+    /= #constant.10 player_motion.internal.const 
 #       On Ground Conditional
 execute unless predicate imperium:on_ground run \
     scoreboard players operation \
@@ -57,3 +57,7 @@ execute if predicate imperium:on_ground run \
 
 # Livvy: 1 second of Strength riding the leap
 effect give @s[tag=im.kit_livvy] minecraft:strength 1 0
+
+# Spend a charge so the cooldown begins once the feather is used. Leap is slot A for
+# both leap kits (Livvy, Meowdy); update_cooldowns clamps this at >= 0.
+scoreboard players remove @s im_cdUsesA 1

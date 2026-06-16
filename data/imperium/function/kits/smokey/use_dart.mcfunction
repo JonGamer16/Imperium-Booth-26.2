@@ -1,5 +1,8 @@
 advancement revoke @s only imperium:use_marking_dart
 
+# Spend a charge (Smokey slot B); update_cooldowns clamps this at >= 0.
+scoreboard players remove @s im_cdUsesB 1
+
 # Compute look direction at arrow speed (strength 30000 -> 3.0 bl/t)
 scoreboard players set $strength player_motion.api.launch 30000
 execute store result storage player_motion:math strength double 0.0001 \

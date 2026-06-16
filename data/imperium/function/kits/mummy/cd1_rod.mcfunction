@@ -8,4 +8,4 @@ execute \
     unless items entity @s weapon.offhand * \
     run loot replace entity @s weapon.offhand loot imperium:mummy/fishing_rod
 
-scoreboard players operation @s im_abilityCdA = #Mummy im_abilityCdA
+scoreboard players operation @s im_abilityCdA += #Mummy im_abilityCdA

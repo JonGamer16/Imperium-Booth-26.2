@@ -4,4 +4,4 @@ execute if items entity @s hotbar.8 * run loot give @s loot imperium:cliffshield
 
 execute unless items entity @s hotbar.8 * run loot replace entity @s hotbar.8 loot imperium:cliffshield/arrows
 
-scoreboard players operation @s im_abilityCdB = #Cliffshield im_abilityCdB
+scoreboard players operation @s im_abilityCdB += #Cliffshield im_abilityCdB

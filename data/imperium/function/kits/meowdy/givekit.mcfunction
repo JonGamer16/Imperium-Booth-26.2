@@ -109,10 +109,11 @@ item replace entity @s hotbar.2 with \
 #    ] 1
 function imperium:kits/meowdy/cd1_feather
 
-#   [SLOT 2] Arrows
-#item replace entity @s hotbar.8 with \
-#    arrow[custom_data={"imperium_kit":1b}] 4
-function imperium:kits/meowdy/cd2_arrows
+#   [SLOT 2] Arrows (multi-charge, count-based)
+#       Give the full stack now, then tie max charges to the actual count given so the
+#       loot table stays the single source of truth. cd2_arrows refills one at a time.
+loot give @s loot imperium:meowdy/arrows
+execute store result score @s im_cdMaxB run clear @s arrow[custom_data={imperium_kit:1b}] 0
 
 #   [SLOT 3] [Empty]
 

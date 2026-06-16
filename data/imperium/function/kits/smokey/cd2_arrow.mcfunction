@@ -8,4 +8,7 @@ execute \
     unless items entity @s hotbar.2 * \
     run loot replace entity @s hotbar.2 loot imperium:smokey/arrow
 
-scoreboard players operation @s im_abilityCdB = #Smokey im_abilityCdB
+scoreboard players operation @s im_abilityCdB += #Smokey im_abilityCdB
+scoreboard players operation @s im_cdUsesB = #Smokey im_cdMaxB
+scoreboard players operation @s im_cdFloorB = #Smokey im_cdFloorB
+scoreboard players operation @s im_cdMaxB = #Smokey im_cdMaxB
