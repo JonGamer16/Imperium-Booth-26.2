@@ -8,6 +8,9 @@ effect give @a[scores={hunger=0..19}] saturation 1 0
 # givekit engine
 execute as @a[scores={givekit=1..},advancements={imperium:leave_spawn=false}] run function imperium:arena/givekit
 
+# booth kit-selection stands
+function imperium:booth/check_stands
+
 # TODO: Optimize by turning all the below item reload functions into 1 function that checks for itemreload
 # How: Replace all checks of one itemreload threshold with a single function checking for the itemreload score
 #   and a tag players get for their item

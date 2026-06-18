@@ -11,7 +11,7 @@
 
 
 Imperium Mundi Kit PvP Datapack
-Ver 26.1.2 (format 101)
+Ver 26.2 (format 101)
                                                                                |
 About: This is a vanilla replica of Imperium Mundi, the free-for-all Kit PVP
 minigame created by awesomebutter234 and JonGamer16. You pick a kit out of the

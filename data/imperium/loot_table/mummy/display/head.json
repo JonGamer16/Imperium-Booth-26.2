@@ -1,0 +1,27 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:player_head",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:profile": "Mummy",
+                "minecraft:item_model": "minecraft:player_head",
+                "minecraft:custom_name": {
+                  "text": "Mummy Head",
+                  "color": "blue",
+                  "italic": false
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

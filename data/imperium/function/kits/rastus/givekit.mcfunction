@@ -6,7 +6,9 @@ function imperium:util/clear_kit
 item replace entity @s armor.head with \
     netherite_helmet[\
         attribute_modifiers=[\
-            {type:"armor",amount:14,operation:"add_value",slot:"head",id:"head"}],\
+            {type:"armor",amount:14,operation:"add_value",slot:"head",id:"head"},\
+            {type:"movement_speed",amount:0.2,operation:"add_multiplied_base",slot:"head",id:"head"},\
+        ],\
         !max_damage,\
         item_model="minecraft:leather_helmet",\
         equippable={slot:head,asset_id:"minecraft:leather"},\

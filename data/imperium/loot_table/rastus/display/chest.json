@@ -1,0 +1,34 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:netherite_chestplate",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:item_model": "minecraft:chainmail_chestplate",
+                "minecraft:equippable": {
+                  "asset_id": "minecraft:chainmail",
+                  "slot": "chest"
+                },
+                "minecraft:trim": {
+                  "material": "minecraft:lapis",
+                  "pattern": "minecraft:silence"
+                },
+                "minecraft:custom_name": {
+                  "text": "Dueling Chestplate",
+                  "color": "blue",
+                  "italic": false
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

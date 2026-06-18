@@ -1,0 +1,31 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:netherite_helmet",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:item_model": "minecraft:leather_helmet",
+                "minecraft:equippable": {
+                  "asset_id": "minecraft:leather",
+                  "slot": "head"
+                },
+                "minecraft:dyed_color": 16753920,
+                "minecraft:custom_name": {
+                  "text": "Meowdy's Cap",
+                  "color": "gold",
+                  "italic": false
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:netherite_boots",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:item_model": "minecraft:netherite_boots",
+                "minecraft:equippable": {
+                  "asset_id": "minecraft:netherite",
+                  "slot": "feet"
+                },
+                "minecraft:trim": {
+                  "material": "minecraft:quartz",
+                  "pattern": "minecraft:rib"
+                },
+                "minecraft:custom_name": {
+                  "text": "Mummy Boots",
+                  "color": "blue",
+                  "italic": false
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

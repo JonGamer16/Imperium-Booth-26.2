@@ -1,0 +1,35 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:netherite_helmet",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:item_model": "minecraft:leather_helmet",
+                "minecraft:equippable": {
+                  "asset_id": "minecraft:leather",
+                  "slot": "head"
+                },
+                "minecraft:dyed_color": 3949738,
+                "minecraft:trim": {
+                  "material": "minecraft:lapis",
+                  "pattern": "minecraft:dune"
+                },
+                "minecraft:custom_name": {
+                  "text": "Dueling Helmet",
+                  "color": "blue",
+                  "italic": false
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

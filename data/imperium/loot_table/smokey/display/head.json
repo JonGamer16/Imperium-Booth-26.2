@@ -1,0 +1,30 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:netherite_helmet",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:item_model": "minecraft:chainmail_helmet",
+                "minecraft:equippable": {
+                  "asset_id": "minecraft:chainmail",
+                  "slot": "head"
+                },
+                "minecraft:custom_name": {
+                  "text": "Bounty Hunter Helmet",
+                  "color": "gold",
+                  "italic": false
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:netherite_boots",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:item_model": "minecraft:leather_boots",
+                "minecraft:equippable": {
+                  "asset_id": "minecraft:leather",
+                  "slot": "feet"
+                },
+                "minecraft:dyed_color": 3949738,
+                "minecraft:trim": {
+                  "material": "minecraft:iron",
+                  "pattern": "minecraft:raiser"
+                },
+                "minecraft:custom_name": {
+                  "text": "Dueling Boots",
+                  "color": "blue",
+                  "italic": false
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

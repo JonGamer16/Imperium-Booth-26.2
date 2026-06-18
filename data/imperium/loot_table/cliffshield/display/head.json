@@ -1,0 +1,34 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:netherite_helmet",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:item_model": "minecraft:iron_helmet",
+                "minecraft:equippable": {
+                  "asset_id": "minecraft:iron",
+                  "slot": "head"
+                },
+                "minecraft:trim": {
+                  "material": "minecraft:copper",
+                  "pattern": "minecraft:sentry"
+                },
+                "minecraft:custom_name": {
+                  "text": "Shieldsman Helmet",
+                  "color": "yellow",
+                  "italic": false
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

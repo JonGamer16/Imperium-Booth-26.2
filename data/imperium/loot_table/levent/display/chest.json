@@ -1,0 +1,35 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:netherite_chestplate",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:item_model": "minecraft:leather_chestplate",
+                "minecraft:equippable": {
+                  "asset_id": "minecraft:leather",
+                  "slot": "chest"
+                },
+                "minecraft:dyed_color": 8073150,
+                "minecraft:trim": {
+                  "material": "minecraft:gold",
+                  "pattern": "minecraft:eye"
+                },
+                "minecraft:custom_name": {
+                  "text": "Shulker Core",
+                  "color": "light_purple",
+                  "italic": false
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

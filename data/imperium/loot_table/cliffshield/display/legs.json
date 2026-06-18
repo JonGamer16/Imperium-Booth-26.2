@@ -1,0 +1,34 @@
+{
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:netherite_leggings",
+          "functions": [
+            {
+              "function": "minecraft:set_components",
+              "components": {
+                "minecraft:item_model": "minecraft:chainmail_leggings",
+                "minecraft:equippable": {
+                  "asset_id": "minecraft:chainmail",
+                  "slot": "legs"
+                },
+                "minecraft:trim": {
+                  "material": "minecraft:iron",
+                  "pattern": "minecraft:snout"
+                },
+                "minecraft:custom_name": {
+                  "text": "Shieldsman Leggings",
+                  "color": "yellow",
+                  "italic": false
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

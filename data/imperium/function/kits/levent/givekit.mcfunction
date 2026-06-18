@@ -24,8 +24,8 @@ item replace entity @s armor.chest with \
         item_model="minecraft:leather_chestplate",\
         equippable={slot:chest,asset_id:"minecraft:leather"},\
         dyed_color=8073150,\
-        custom_name={color:"light_purple",italic:false,text:"Shulker Box"},\
-        trim={material:"amethyst",pattern:"spire"},\
+        custom_name={color:"light_purple",italic:false,text:"Shulker Core"},\
+        trim={material:"gold",pattern:"eye"},\
         custom_data={"imperium_kit":1b},\
     ] 1
 item replace entity @s armor.legs with \
