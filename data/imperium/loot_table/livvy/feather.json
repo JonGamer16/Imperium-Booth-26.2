@@ -11,7 +11,7 @@
               "function": "minecraft:set_components",
               "components": {
                 "minecraft:consumable": {
-                  "consume_seconds": 0.1,
+                  "consume_seconds": 0,
                   "has_consume_particles": false,
                   "animation": "spear",
                   "sound": "minecraft:entity.bat.takeoff"

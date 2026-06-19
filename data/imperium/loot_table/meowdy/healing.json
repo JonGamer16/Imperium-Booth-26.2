@@ -35,7 +35,7 @@
                     }
                   ]
                 },
-                "minecraft:custom_name":{"text":"Cooked Salmon","color":"gold","italic":false},
+                "minecraft:custom_name":{"text":"Cooked Salmon [Consume to Heal]","color":"gold","italic":false},
                 "minecraft:custom_data": "{imperium_healing:1b}"
               }
             }

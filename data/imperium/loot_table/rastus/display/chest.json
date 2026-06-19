@@ -17,7 +17,7 @@
                 },
                 "minecraft:trim": {
                   "material": "minecraft:lapis",
-                  "pattern": "minecraft:silence"
+                  "pattern": "minecraft:raiser"
                 },
                 "minecraft:custom_name": {
                   "text": "Dueling Chestplate",

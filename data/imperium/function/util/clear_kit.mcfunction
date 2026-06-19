@@ -1,5 +1,5 @@
-clear @s *[custom_data={imperium_kit:1b}]
-clear @s *[custom_data={imperium_healing:1b}]
+clear @s *[custom_data~{imperium_kit:1b}]
+clear @s *[custom_data~{imperium_healing:1b}]
 
 # Reset ability cooldown/charge/freeze state so the next kit starts clean (no stale
 # soft-freeze, and no leftover cd that Livvy's `+=` refill would compound).

@@ -36,9 +36,12 @@
                 },
                 "minecraft:use_remainder": {
                   "id": "minecraft:bowl",
-                  "count": 1
+                  "count": 1,
+                  "components": {
+                    "minecraft:custom_data": "{imperium_healing:1b}"
+                  }
                 },
-                "custom_name":{"text":"Mushroom Stew","color":"yellow","italic":false},
+                "custom_name":{"text":"Mushroom Stew [Consume to Heal]","color":"yellow","italic":false},
                 "minecraft:custom_data": "{imperium_healing:1b}"
               }
             }

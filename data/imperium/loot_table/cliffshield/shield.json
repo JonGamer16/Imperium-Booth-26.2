@@ -19,12 +19,12 @@
                   },
                   "damage_reductions": [
                     {
-                      "type": "minecraft:generic",
-                      "base": 1,
+                      "base": 0,
                       "factor": 1,
                       "horizontal_blocking_angle": 60
                     }
                   ],
+                  "bypassed_by": "#minecraft:bypasses_shield",
                   "block_delay_seconds": 0.35
                 },
                 "minecraft:base_color": "black",

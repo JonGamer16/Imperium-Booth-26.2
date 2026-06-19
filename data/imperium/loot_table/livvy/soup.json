@@ -27,7 +27,7 @@
                       "effects": [
                         {
                           "id": "minecraft:instant_health",
-                          "amplifier": 0,
+                          "amplifier": 1,
                           "duration": 1
                         }
                       ]
@@ -36,9 +36,12 @@
                 },
                 "minecraft:use_remainder": {
                   "id": "minecraft:bowl",
-                  "count": 1
+                  "count": 1,
+                  "components": {
+                    "minecraft:custom_data": "{imperium_healing:1b}"
+                  }
                 },
-                "minecraft:custom_name":{"text":"Blood Bowl","color":"red","italic":false},
+                "minecraft:custom_name":{"text":"Blood Bowl [Consume to Heal]","color":"red","italic":false},
                 "minecraft:custom_data": "{imperium_healing:1b}"
               }
             }

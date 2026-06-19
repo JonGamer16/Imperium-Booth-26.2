@@ -9,7 +9,7 @@ summon minecraft:armor_stand ~ ~ ~ \
     NoBasePlate:1b,\
     ShowArms:1b,\
     CustomNameVisible:1b,\
-    CustomName:{text:"Livvy the Vampire Spider",color:"red",bold:true},\
+    CustomName:{text:"Livvy",color:"red",bold:true},\
     Tags:["im.booth_stand_model","im.booth_livvy","im.booth_new"],\
     Pose:{RightArm:[-100f,0f,-10f],LeftArm:[-15f,0f,10f]}\
 }
@@ -23,6 +23,8 @@ loot replace entity @e[type=armor_stand,tag=im.booth_new,limit=1] \
     armor.feet loot imperium:livvy/display/feet
 loot replace entity @e[type=armor_stand,tag=im.booth_new,limit=1] \
     weapon.mainhand loot imperium:livvy/display/weapon
+loot replace entity @e[type=armor_stand,tag=im.booth_new,limit=1] \
+    weapon.offhand loot imperium:livvy/web
 
 tag @e[type=armor_stand,tag=im.booth_new] remove im.booth_new
 

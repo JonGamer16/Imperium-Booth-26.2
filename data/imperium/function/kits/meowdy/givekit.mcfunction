@@ -7,8 +7,10 @@ item replace entity @s armor.head with \
     netherite_helmet[\
         !max_damage,\
         attribute_modifiers=[\
-            {type:"armor",amount:12,operation:"add_value",slot:"head",id:"head"},\
+            {type:"armor",amount:16,operation:"add_value",slot:"head",id:"head"},\
+            {type:"armor_toughness",amount:8,operation:"add_value",slot:"head",id:"head"},\
             {type:"movement_speed",amount:0.2,operation:"add_multiplied_base",slot:"head",id:"head"},\
+            {type:"sneaking_speed",amount:1,operation:"add_value",slot:"head",id:"head"},\
             {type:"safe_fall_distance",amount:6,operation:"add_value",slot:head,id:"head"},\
             {type:"fall_damage_multiplier",amount:-0.5,operation:"add_value",slot:head,id:"head"},\
         ],\
@@ -113,7 +115,7 @@ function imperium:kits/meowdy/cd1_feather
 #       Give the full stack now, then tie max charges to the actual count given so the
 #       loot table stays the single source of truth. cd2_arrows refills one at a time.
 loot give @s loot imperium:meowdy/arrows
-execute store result score @s im_cdMaxB run clear @s arrow[custom_data={imperium_kit:1b}] 0
+execute store result score @s im_cdMaxB run clear @s arrow[custom_data~{imperium_kit:1b}] 0
 
 #   [SLOT 3] [Empty]
 

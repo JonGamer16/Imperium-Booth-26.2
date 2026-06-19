@@ -1,4 +1,4 @@
-clear @s fishing_rod[custom_data={imperium_kit:1b}]
+clear @s fishing_rod[custom_data~{imperium_kit:1b}]
 
 execute \
     if items entity @s weapon.offhand * \

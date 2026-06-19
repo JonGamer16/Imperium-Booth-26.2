@@ -9,7 +9,7 @@ summon minecraft:armor_stand ~ ~ ~ \
     NoBasePlate:1b,\
     ShowArms:1b,\
     CustomNameVisible:1b,\
-    CustomName:{text:"Rastus the Duelist",color:"blue",bold:true},\
+    CustomName:{text:"Rastus",color:"blue",bold:true},\
     Tags:["im.booth_stand_model","im.booth_rastus","im.booth_new"],\
     Pose:{RightArm:[-100f,0f,-10f],LeftArm:[-15f,0f,10f]}\
 }

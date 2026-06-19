@@ -103,3 +103,13 @@ Arena Systems:
 
     o   Booth script: controls for booth functions and accessories
     o   Once I start testing on the build world, adapt loop functions to Summit systems
+
+Booth Creation:
+
+    o   Building: Complete the physical build of the pagoda, its floors, and underground
+    o   Logo: Complete the logo in aseprite; I just need the background and rapier
+    o   Text: Create the intro, description, history, and lore text for display
+    o   Collectibles: Design balloons, stickers, and custom items for players to collect
+    o   Function Integration: Work my datapack into the Summit and Battlegrounds systems
+    o   Battlegrounds Structure: Modify the Battle arena in a structure
+    o   Battlegrounds Gamemode: Set up the entrance and the state engine for the active game

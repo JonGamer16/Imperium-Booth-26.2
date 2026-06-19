@@ -1,4 +1,4 @@
-clear @s shield[custom_data={imperium_kit:1b}]
+clear @s shield[custom_data~{imperium_kit:1b}]
 
 execute if items entity @s weapon.offhand * run loot give @s loot imperium:cliffshield/shield
 

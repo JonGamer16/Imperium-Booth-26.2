@@ -5,14 +5,12 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:crossbow",
+          "name": "minecraft:netherite_sword",
           "functions": [
             {
               "function": "minecraft:set_components",
               "components": {
-                "enchantments": {
-                  "quick_charge": 3
-                }
+                "minecraft:item_model": "minecraft:bow"
               }
             }
           ]

@@ -9,7 +9,7 @@ summon minecraft:armor_stand ~ ~ ~ \
     NoBasePlate:1b,\
     ShowArms:1b,\
     CustomNameVisible:1b,\
-    CustomName:{text:"Cyborg Mummy",color:"blue",bold:true},\
+    CustomName:{text:"Mummy",color:"gray",bold:true},\
     Tags:["im.booth_stand_model","im.booth_mummy","im.booth_new"],\
     Pose:{RightArm:[-100f,0f,-10f],LeftArm:[-15f,0f,10f]}\
 }
@@ -23,6 +23,8 @@ loot replace entity @e[type=armor_stand,tag=im.booth_new,limit=1] \
     armor.feet loot imperium:mummy/display/feet
 loot replace entity @e[type=armor_stand,tag=im.booth_new,limit=1] \
     weapon.mainhand loot imperium:mummy/display/weapon
+loot replace entity @e[type=armor_stand,tag=im.booth_new,limit=1] \
+    weapon.offhand loot imperium:mummy/display/offhand
 
 tag @e[type=armor_stand,tag=im.booth_new] remove im.booth_new
 

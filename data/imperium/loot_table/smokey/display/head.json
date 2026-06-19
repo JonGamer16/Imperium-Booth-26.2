@@ -15,6 +15,10 @@
                   "asset_id": "minecraft:chainmail",
                   "slot": "head"
                 },
+                "minecraft:trim":{
+                  "material": "netherite",
+                  "pattern": "wild"
+                },
                 "minecraft:custom_name": {
                   "text": "Bounty Hunter Helmet",
                   "color": "gold",

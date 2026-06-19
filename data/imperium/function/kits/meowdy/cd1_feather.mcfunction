@@ -1,4 +1,4 @@
-clear @s feather[custom_data={imperium_kit:1b}]
+clear @s feather[custom_data~{imperium_kit:1b}]
 
 execute \
     if items entity @s weapon.offhand * \

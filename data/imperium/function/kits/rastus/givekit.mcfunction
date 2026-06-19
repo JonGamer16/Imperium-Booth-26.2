@@ -6,7 +6,8 @@ function imperium:util/clear_kit
 item replace entity @s armor.head with \
     netherite_helmet[\
         attribute_modifiers=[\
-            {type:"armor",amount:14,operation:"add_value",slot:"head",id:"head"},\
+            {type:"armor",amount:17,operation:"add_value",slot:"head",id:"head"},\
+            {type:"armor_toughness",amount:4,operation:"add_value",slot:"head",id:"head"},\
             {type:"movement_speed",amount:0.2,operation:"add_multiplied_base",slot:"head",id:"head"},\
         ],\
         !max_damage,\
@@ -23,7 +24,7 @@ item replace entity @s armor.chest with \
         !max_damage,\
         item_model="minecraft:chainmail_chestplate",\
         equippable={slot:chest,asset_id:"minecraft:chainmail"},\
-        trim={material:"lapis",pattern:"silence"},\
+        trim={material:"lapis",pattern:"raiser"},\
         custom_name={text:"Dueling Chestplate",color:blue,italic:false},\
         custom_data={"imperium_kit":1b},\
     ] 1

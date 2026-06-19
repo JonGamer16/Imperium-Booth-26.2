@@ -17,7 +17,7 @@
                 },
                 "minecraft:dyed_color": 14464401,
                 "minecraft:trim": {
-                  "material": "minecraft:iron",
+                  "material": "minecraft:netherite",
                   "pattern": "minecraft:snout"
                 },
                 "minecraft:custom_name": {

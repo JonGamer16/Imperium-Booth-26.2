@@ -16,6 +16,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
+                "use_effects":{"can_sprint":true,"speed_multiplier":0.7},
                 "minecraft:custom_name": {"text": "Buckler Shield", "color": "blue", "italic": false},
                 "minecraft:custom_data": "{imperium_kit:1b}"
               }

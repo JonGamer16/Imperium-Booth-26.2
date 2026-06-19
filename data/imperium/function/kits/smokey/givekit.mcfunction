@@ -7,12 +7,14 @@ item replace entity @s armor.head with \
     netherite_helmet[\
         !max_damage,\
         attribute_modifiers=[\
-            {type:"armor",amount:14,operation:"add_value",slot:"head",id:"head"},\
+            {type:"armor",amount:16,operation:"add_value",slot:"head",id:"head"},\
+            {type:"armor_toughness",amount:8,operation:"add_value",slot:"head",id:"head"},\
             {type:"movement_speed",amount:0.2,operation:"add_multiplied_base",slot:"head",id:"head"},\
             {type:"sneaking_speed",amount:1,operation:"add_value",slot:"head",id:"head"},\
         ],\
         item_model="minecraft:chainmail_helmet",\
         equippable={slot:head,asset_id:"minecraft:chainmail"},\
+        trim={material:"netherite",pattern:"eye"},\
         custom_name={text:"Bounty Hunter Helmet",color:gold,italic:false},\
         custom_data={"imperium_kit":1b},\
     ] 1
@@ -33,7 +35,7 @@ item replace entity @s armor.legs with \
         item_model="minecraft:leather_leggings",\
         equippable={slot:legs,asset_id:"minecraft:leather"},\
         dyed_color=14464401,\
-        trim={material:"iron",pattern:"snout"},\
+        trim={material:"netherite",pattern:"snout"},\
         custom_name={text:"Bounty Hunter Leggings",color:gold,italic:false},\
         custom_data={"imperium_kit":1b},\
     ] 1
@@ -57,7 +59,8 @@ item replace entity @s hotbar.0 with \
             {type:"attack_damage",amount:2,operation:"add_value",slot:"mainhand",id:"base_attack_damage"},\
             {type:"attack_speed",amount:0,operation:"add_value",slot:"mainhand",id:"base_attack_speed"}\
         ],\
-        enchantments={"imperium:wip_marked":1},\
+        enchantments={"imperium:wip_marked":1,"imperium:crits":3,"imperium:backstab":1},\
+        use_effects={speed_multiplier:1},\
         !max_damage,\
         item_model="minecraft:iron_sword",\
         custom_name={text:"Steel Dagger",color:gold,italic:false},\
@@ -70,11 +73,12 @@ item replace entity @s hotbar.1 with \
     netherite_sword[\
         attribute_modifiers=[\
             {type:"attack_damage",amount:5,operation:"add_value",slot:"mainhand",id:"base_attack_damage"},\
-            {type:"attack_speed",amount:-3,operation:"add_value",slot:"mainhand",id:"base_attack_speed"}\
+            {type:"attack_speed",amount:-3,operation:"add_value",slot:"mainhand",id:"base_attack_speed"},\
+            {type:"attack_knockback",amount:0.5,operation:"add_value",slot:"mainhand",id:"mainhand"},\
         ],\
-        enchantments={"imperium:crits":3,"imperium:backstab":1,"imperium:wip_marked":1},\
+        enchantments={"imperium:wip_marked":1},\
         weapon={\
-            disable_blocking_for_seconds:3,\
+            disable_blocking_for_seconds:4,\
             item_damage_per_attack:0},\
         kinetic_weapon={\
             delay_ticks:0,\
@@ -86,7 +90,9 @@ item replace entity @s hotbar.1 with \
                 min_relative_speed:0\
             }\
         },\
+        use_effects={speed_multiplier:1},\
         !max_damage,\
+        item_model="minecraft:wooden_axe",\
         custom_name={text:"Bearded Hatchet",color:gold,italic:false},\
         custom_data={"imperium_kit":1b},\
     ] 1

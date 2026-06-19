@@ -1,4 +1,4 @@
-clear @s potion[custom_data={imperium_kit:1b}]
+clear @s potion[custom_data~{imperium_kit:1b}]
 
 # ALWAYS run the occupied case first; this avoids giving 2 copies of the item
 execute if items entity @s hotbar.7 * run loot give @s loot imperium:cliffshield/potion

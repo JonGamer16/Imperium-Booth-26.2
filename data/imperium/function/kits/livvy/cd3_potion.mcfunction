@@ -1,4 +1,4 @@
-clear @s splash_potion[custom_data={imperium_kit:1b}]
+clear @s splash_potion[custom_data~{imperium_kit:1b}]
 
 execute \
     if items entity @s hotbar.2 * \

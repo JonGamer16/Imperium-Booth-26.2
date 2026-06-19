@@ -8,6 +8,7 @@ item replace entity @s armor.head with \
         !max_damage,\
         attribute_modifiers=[\
             {type:"armor",amount:15,operation:"add_value",slot:"head",id:"head"},\
+            {type:"armor_toughness",amount:8,operation:"add_value",slot:"head",id:"head"},\
             {type:"sneaking_speed",amount:1,operation:"add_value",slot:"head",id:"head"},\
             {type:"movement_speed",amount:0.2,operation:"add_multiplied_base",slot:"head",id:"head"},\
             {type:"step_height",amount:0.5,operation:"add_value",slot:head,id:"head"},\

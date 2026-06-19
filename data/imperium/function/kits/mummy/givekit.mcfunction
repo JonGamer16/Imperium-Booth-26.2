@@ -6,7 +6,11 @@ function imperium:util/clear_kit
 #   Helmet - item_model="minecraft:player_head" is redundant (explicit default); swap to "minecraft:netherite_helmet" to revert appearance
 item replace entity @s armor.head with \
     player_head[\
-        attribute_modifiers=[{type:"armor",amount:17,operation:"add_value",slot:head,id:"head"}],\
+        attribute_modifiers=[\
+            {type:"armor",amount:15,operation:"add_value",slot:head,id:"head"},\
+            {type:"armor_toughness",amount:8,operation:"add_value",slot:head,id:"head"},\
+            {type:"movement_speed",amount:-0.3,operation:"add_multiplied_base",slot:"head",id:"head"},\
+            ],\
         enchantments={"imperium:wip_barrier":1,"protection":8},\
         !max_damage,\
         profile="Mummy",\

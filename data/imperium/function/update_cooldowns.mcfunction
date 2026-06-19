@@ -1,7 +1,7 @@
 # Count-based charges: sync count-tracked slots to the player's real item count, so the
 # system can never mismatch the inventory. Only Meowdy's arrows (slot B) use this today;
 # the tag gate keeps the inventory scan off every other player.
-execute if entity @s[tag=im.kit_meowdy] store result score @s im_cdUsesB run clear @s arrow[custom_data={imperium_kit:1b}] 0
+execute if entity @s[tag=im.kit_meowdy] store result score @s im_cdUsesB run clear @s arrow[custom_data~{imperium_kit:1b}] 0
 
 # Bleed every cooldown by net damage each tick.
 scoreboard players operation @s im_abilityCdA -= @s im_abilityDealt

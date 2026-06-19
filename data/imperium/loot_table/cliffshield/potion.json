@@ -19,6 +19,7 @@
                     }
                   ]
                 },
+                "consumable":{"consume_seconds":0.8},
                 "custom_name": {"text":"Rook Rush","color":"yellow","italic":false},
                 "minecraft:custom_data": "{imperium_kit:1b}"
               }
