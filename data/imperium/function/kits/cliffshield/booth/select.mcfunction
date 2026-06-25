@@ -1,5 +1,5 @@
 # Jeru Cliffshield — booth selection. Runs as the clicking player (routed from
-# imperium:booth/check_stands). Equips the kit via the arena pipeline, then describes it.
+# the kit's booth/click handler). Equips the kit via the arena pipeline, then describes it.
 scoreboard players set @s givekit 1
 function imperium:arena/givekit
 

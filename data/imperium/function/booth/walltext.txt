@@ -1,0 +1,41 @@
+Front Entrance Title/Sub/Chat:
+
+    <gold>Imperium Mundi
+    <yellow>Welcome to the Dojo
+    
+    <gold>Imperium Mundi <yellow>- by JonGamer16
+
+Side Wall Pitch:
+
+    <gold>Overview
+
+    <yellow>Imperium Mundi is a Kit PvP game where you must manage your HP and inventory
+        as you fight. To outlast your opponent, you'll need to make the most of your kit's
+        weapons, healing items, and special tools, which only regenerate from melee damage
+        dealt and taken.
+
+    <yellow>The gameplay takes advantage of the new technical features from the 
+        latest Minecraft updates while staying grounded in traditional close-quarters 
+        combat. Some mechanics also take inspiration from older versions of Minecraft!
+
+Kit Room:
+
+    <gold>Choose Your Fighter
+
+    <gold>Right Click <yellow>to equip and see kit information
+
+    <gold>Crouch + Right Click <yellow>for lore
+
+Credits:
+
+    <yellow>Datapack and booth mechanics created by <green>JonGamer16
+
+    <gold>Special Thanks:
+    <gold>awesomebutter234 <yellow> - Original server co-creator
+    <gold>theuwufurry <yellow> - Co-developer of original server and [other projects]; 
+        shared a Claude subscription to help me with the datapack
+    <gold>B1ue_Bandit <yellow> - Community member who provided funding for the original server
+    <gold>rx98 <yellow> - Told me about the Smithed Summit and invited me in
+
+    <gold>AI was used to help with the background work of this datapack,
+        but all of the gameplay design, features, building, and text is human-made.

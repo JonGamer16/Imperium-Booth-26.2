@@ -64,10 +64,11 @@ item replace entity @s hotbar.0 with \
         !max_damage,\
         item_model="minecraft:iron_sword",\
         custom_name={text:"Steel Dagger",color:gold,italic:false},\
+        swing_animation={type:"stab",duration:10},\
         custom_data={"imperium_kit":1b},\
     ] 1
 
-#   [MELEE] Bearded Hatchet
+#   [MELEE] Sweeping Hatchet
 #       6 | 1, Breaks Shields
 item replace entity @s hotbar.1 with \
     netherite_sword[\
@@ -85,15 +86,16 @@ item replace entity @s hotbar.1 with \
             contact_cooldown_ticks:10,\
             damage_multiplier:0.0f,\
             damage_conditions:{\
-                max_duration_ticks:1,\
+                max_duration_ticks:6,\
                 min_speed:0,\
                 min_relative_speed:0\
-            }\
+            },\
         },\
         use_effects={speed_multiplier:1},\
         !max_damage,\
         item_model="minecraft:stone_axe",\
-        custom_name={text:"Bearded Hatchet",color:gold,italic:false},\
+        custom_name={text:"Sweeping Hatchet",color:gold,italic:false},\
+        swing_animation={type:"whack",duration:6},\
         custom_data={"imperium_kit":1b},\
     ] 1
 

@@ -117,6 +117,9 @@ function imperium:kits/meowdy/cd1_feather
 #       loot table stays the single source of truth. cd2_arrows refills one at a time.
 loot give @s loot imperium:meowdy/arrows
 execute store result score @s im_cdMaxB run clear @s arrow[custom_data~{imperium_kit:1b}] 0
+# Seed the charge count to the full stack so the slot starts frozen (full). After this it's kept
+# in sync purely by events: imperium:internal/arrow_recount on each shot, and cd2_arrows on refill.
+scoreboard players operation @s im_cdUsesB = @s im_cdMaxB
 
 #   [SLOT 3] [Empty]
 

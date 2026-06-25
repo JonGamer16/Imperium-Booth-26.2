@@ -17,6 +17,24 @@
               "function": "minecraft:set_components",
               "components": {
                 "use_effects":{"can_sprint":true,"speed_multiplier":0.7},
+                "blocks_attacks":{
+                  "damage_reductions": [
+                    { "type": "#is_player_attack",
+                      "base": 0,
+                      "factor": 0.5,
+                      "horizontal_blocking_angle": 15},
+                    { "type": "mob_attack",
+                      "base": 0,
+                      "factor": 0.5,
+                      "horizontal_blocking_angle": 15},
+                    {
+                      "type": "#is_projectile",
+                      "base": 0,
+                      "factor": 0.5,
+                      "horizontal_blocking_angle": 15}
+                  ],
+                  "block_delay_seconds": 0
+                },
                 "minecraft:custom_name": {"text": "Buckler Shield", "color": "blue", "italic": false},
                 "minecraft:custom_data": "{imperium_kit:1b}"
               }

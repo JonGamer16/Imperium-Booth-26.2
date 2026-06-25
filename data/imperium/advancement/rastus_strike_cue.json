@@ -1,0 +1,19 @@
+{
+    "criteria": {
+        "focus_hit": {
+            "trigger": "player_hurt_entity",
+            "conditions": {
+                "player": {
+                    "entity_tags": {
+                        "all_of": [
+                            "im.rastus_focused"
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "rewards": {
+        "function": "imperium:kits/rastus/strike_cue"
+    }
+}

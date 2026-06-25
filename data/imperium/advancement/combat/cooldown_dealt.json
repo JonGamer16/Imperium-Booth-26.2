@@ -1,0 +1,10 @@
+{
+    "criteria": {
+        "dealt": {
+            "trigger": "minecraft:player_hurt_entity"
+        }
+    },
+    "rewards": {
+        "function": "imperium:internal/cooldown_dealt"
+    }
+}

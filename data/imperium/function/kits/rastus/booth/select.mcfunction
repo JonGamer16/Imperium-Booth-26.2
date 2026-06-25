@@ -1,5 +1,5 @@
 # Rastus the Duelist — booth selection. Runs as the clicking player (routed from
-# imperium:booth/check_stands). Equips the kit via the arena pipeline, then describes it.
+# the kit's booth/click handler). Equips the kit via the arena pipeline, then describes it.
 scoreboard players set @s givekit 6
 function imperium:arena/givekit
 
@@ -11,7 +11,7 @@ tellraw @s \
     {color:"gold",\
                 text:"  • [Melee] "},\
     {color:"aqua",\
-                text:"Lightspeed Rapier"},\
+                text:"Lightning Rapier"},\
     {color:"gray",\
                 text:" — Bypasses invulnerability to deal more hits per second; Reduced Knockback\n",},\
     {color:"gold",\
@@ -43,4 +43,4 @@ tellraw @s \
 ]
 
 playsound minecraft:block.note_block.pling master @s ~ ~ ~ 0.7 1.4
-title @s actionbar {text:"Rastus the Duelist selected",color:"blue"}
+title @s actionbar {text:"Rastus selected",color:"blue"}

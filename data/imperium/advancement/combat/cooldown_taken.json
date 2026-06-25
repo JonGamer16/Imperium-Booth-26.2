@@ -1,0 +1,10 @@
+{
+    "criteria": {
+        "taken": {
+            "trigger": "minecraft:entity_hurt_player"
+        }
+    },
+    "rewards": {
+        "function": "imperium:internal/cooldown_taken"
+    }
+}

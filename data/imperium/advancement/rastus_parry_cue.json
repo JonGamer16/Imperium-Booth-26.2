@@ -1,0 +1,19 @@
+{
+    "criteria": {
+        "parry_hit": {
+            "trigger": "entity_hurt_player",
+            "conditions": {
+                "player": {
+                    "entity_tags": {
+                        "all_of": [
+                            "im.rastus_parrying"
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "rewards": {
+        "function": "imperium:kits/rastus/parry_cue"
+    }
+}

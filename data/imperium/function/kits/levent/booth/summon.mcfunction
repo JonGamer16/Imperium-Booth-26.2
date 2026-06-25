@@ -11,7 +11,7 @@ summon minecraft:armor_stand ~ ~ ~ \
     CustomNameVisible:1b,\
     CustomName:{text:"Levent",color:"light_purple",bold:true},\
     Tags:["im.booth_stand_model","im.booth_levent","im.booth_new"],\
-    Rotation:[38f,0f],\
+    Rotation:[308f,0f],\
     Pose:{Body:[7f,2f,0f],Head:[8f,321f,0f],LeftLeg:[346f,325f,353f],RightLeg:[360f,14f,13f],LeftArm:[335f,354f,335f],RightArm:[329f,0f,132f]}\
 }
 loot replace entity @e[type=armor_stand,tag=im.booth_new,limit=1] \

@@ -1,0 +1,16 @@
+{
+    "criteria": {
+        "click": {
+            "trigger": "minecraft:player_interacted_with_entity",
+            "conditions": {
+                "entity": {
+                    "entity_type": "minecraft:interaction",
+                    "nbt": "{Tags:[\"im.booth_mummy\"]}"
+                }
+            }
+        }
+    },
+    "rewards": {
+        "function": "imperium:kits/mummy/booth/click"
+    }
+}

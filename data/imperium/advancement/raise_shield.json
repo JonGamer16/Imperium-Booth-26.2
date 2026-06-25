@@ -1,0 +1,25 @@
+{
+    "criteria": {
+        "using_item": {
+            "trigger": "using_item",
+            "conditions": {
+                "item": {
+                    "items": [
+                        "shield"
+                    ]
+                },
+                "player": {
+                    "entity_tags": {
+                        "all_of": [
+                            "im.kit_rastus"
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "rewards":
+    {
+        "function": "imperium:kits/rastus/parry"
+    }
+}

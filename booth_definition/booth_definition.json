@@ -28,7 +28,7 @@
     "on_player_exit": "",
     "ticking_functions": {
         "imperium:tick": "1t",
-        "imperium:5t": "5t",
+        "imperium:loop_5t": "5t",
         "imperium:loop_1s": "1s"
     },
     "sticker_book": {

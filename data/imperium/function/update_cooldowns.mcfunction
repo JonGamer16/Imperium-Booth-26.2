@@ -1,7 +1,10 @@
-# Count-based charges: sync count-tracked slots to the player's real item count, so the
-# system can never mismatch the inventory. Only Meowdy's arrows (slot B) use this today;
-# the tag gate keeps the inventory scan off every other player.
-execute if entity @s[tag=im.kit_meowdy] store result score @s im_cdUsesB run clear @s arrow[custom_data~{imperium_kit:1b}] 0
+# Count-based charges: the slot-B arrow count (im_cdUsesB) is now kept in sync by events, not a
+# per-tick scan here — imperium:internal/arrow_recount on each crossbow shot, the refill itself
+# (cd2_arrows), and givekit. This function only reads im_cdUsesB; it never recounts.
+
+# This whole engine is now advancement-driven (imperium:internal/cooldown_dealt + cooldown_taken),
+# so it only runs on a tick where the player dealt or took damage — the only events that move a
+# cooldown. The "each tick" comments below are historical; read them as "per damage event".
 
 # Bleed every cooldown by net damage each tick.
 scoreboard players operation @s im_abilityCdA -= @s im_abilityDealt

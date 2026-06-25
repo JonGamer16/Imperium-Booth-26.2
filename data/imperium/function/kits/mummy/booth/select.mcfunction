@@ -1,5 +1,5 @@
 # Warforged Mummy — booth selection. Runs as the clicking player (routed from
-# imperium:booth/check_stands). Equips the kit via the arena pipeline, then describes it.
+# the kit's booth/click handler). Equips the kit via the arena pipeline, then describes it.
 scoreboard players set @s givekit 4
 function imperium:arena/givekit
 
@@ -46,4 +46,4 @@ tellraw @s \
 ]
 
 playsound minecraft:block.note_block.pling master @s ~ ~ ~ 0.7 1.4
-title @s actionbar {text:"Warforged Mummy selected",color:"blue"}
+title @s actionbar {text:"Mummy selected",color:"blue"}

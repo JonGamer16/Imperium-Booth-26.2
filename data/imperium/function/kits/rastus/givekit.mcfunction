@@ -50,7 +50,7 @@ item replace entity @s armor.feet with \
         custom_data={"imperium_kit":1b},\
     ] 1
 
-#   [MELEE] Light Rapier
+#   [MELEE] Lightning Rapier
 #       2 | 7, +1.0 Knockback
 item replace entity @s hotbar.0 with \
     netherite_sword[\
@@ -60,9 +60,11 @@ item replace entity @s hotbar.0 with \
             {type:"attack_knockback",amount:-1.0,operation:"add_value",slot:"mainhand",id:"attack_knockback"}],\
         damage_type="imperium:light",\
         minimum_attack_charge=1.0,\
+        piercing_weapon={"deals_knockback":true},\
+        enchantments={"imperium:wip_focus_attack":1},\
         !max_damage,\
         item_model="minecraft:iron_sword",\
-        custom_name={text:"Light Rapier",color:blue,italic:false},\
+        custom_name={text:"Lightning Rapier",color:blue,italic:false},\
         custom_data={"imperium_kit":1b},\
     ] 1
 

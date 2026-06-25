@@ -1,5 +1,5 @@
 # Smokey Bat — booth selection. Runs as the clicking player (routed from
-# imperium:booth/check_stands). Equips the kit via the arena pipeline, then describes it.
+# the kit's booth/click handler). Equips the kit via the arena pipeline, then describes it.
 scoreboard players set @s givekit 7
 function imperium:arena/givekit
 
@@ -17,9 +17,9 @@ tellraw @s \
     {color:"gold",\
                 text:"  • [Melee] ",},\
     {color:"gold",\
-                text:"Bearded Hatchet",},\
+                text:"Sweeping Hatchet",},\
     {color:"gray",\
-                text:" — + Damage; - Attack Speed; Can be used in the offhand slot\n",},\
+                text:" — Can be used in the offhand; Right-click and drag to attack enemies in an arc\n",},\
     {color:"gold",\
                 text:"  • [Special] ",},\
     {color:"gold",\

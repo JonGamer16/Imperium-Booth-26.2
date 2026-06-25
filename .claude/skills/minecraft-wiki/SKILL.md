@@ -45,6 +45,15 @@ from any working directory.
 - Content is **wikitext** — recipes appear as `{{Crafting|A1=...|B2=...}}` templates;
   parse the grid by slot (A/B/C = columns, 1/2/3 = rows).
 
+## Debugging gotchas
+
+- **Enchantment changes need a full world restart, not just `/reload`.** When debugging an
+  enchantment (its JSON, its effects, or anything that fires through it) and no clear cause
+  turns up in the code, **remind the user to quit to the title screen and rejoin the world**
+  before concluding the change is broken. Enchantment definitions are loaded/cached such that
+  `/reload` alone does not reliably apply edits — re-applying the item or re-selecting a kit
+  is also not enough. A quit-and-rejoin is the reliable test.
+
 ## Updating the data
 
 The snapshot lives in `.claude/MinecraftWikiScrape/data/pages.json` (metadata in the sibling

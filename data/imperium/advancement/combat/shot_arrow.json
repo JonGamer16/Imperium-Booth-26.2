@@ -1,0 +1,10 @@
+{
+    "criteria": {
+        "shot": {
+            "trigger": "minecraft:shot_crossbow"
+        }
+    },
+    "rewards": {
+        "function": "imperium:internal/arrow_recount"
+    }
+}

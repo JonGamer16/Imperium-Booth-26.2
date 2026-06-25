@@ -11,6 +11,9 @@ scoreboard objectives add im_booth_uuid dummy
 scoreboard objectives add im_markTimer dummy
 # Livvy Venom: per-player 3s DoT timer + the shared #venomClock damage clock
 scoreboard objectives add im_venomTimer dummy
+# Rastus Parry: per-player countdown for the full-deflect bubble (Strike & Parry share the
+# charge stored in im_melee_drought). -1 = inactive.
+scoreboard objectives add im_parryWindow dummy
 # Centralized ability tuning constants (see main/ability_parameters)
 scoreboard objectives add im.param dummy
 
@@ -18,8 +21,9 @@ scoreboard objectives add im.param dummy
 #   constants must exist before ability_cooldowns (init_cooldowns macro reads them);
 #   the setdisplay lines below need HP (game_triggers) and totalKills (old_objectives).
 
-#function imperium:main/gamerules
-#   Gamerules can't be changed in the summit
+# Gamerules can't be changed in the summit
+#   function imperium:main/gamerules
+
 function imperium:main/enchantments
 function imperium:main/game_triggers
 function imperium:main/constants

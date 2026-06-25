@@ -2,6 +2,7 @@
 scoreboard objectives add tempDamage custom:damage_dealt
 scoreboard objectives add im_rotation dummy
 scoreboard objectives add im_rotationdiff dummy
+
 #   Brittle
     scoreboard objectives add im_brittleArmorDura dummy
     scoreboard objectives add im_brittleDamage custom:damage_taken

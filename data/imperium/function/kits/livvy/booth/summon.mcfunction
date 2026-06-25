@@ -13,6 +13,7 @@ summon minecraft:armor_stand ~ ~ ~ \
     CustomNameVisible:1b,\
     CustomName:{text:"Livvy",color:"red",bold:true},\
     Tags:["im.booth_stand_model","im.booth_livvy","im.booth_new"],\
+    Rotation:[-90,0],\
     Pose:{Body:[5f,0f,0f],Head:[10f,0f,0f],LeftLeg:[345f,360f,345f],RightLeg:[13f,0f,16f],LeftArm:[288f,349f,335f],RightArm:[304f,12f,52f]}\
 }
 loot replace entity @e[type=armor_stand,tag=im.booth_new,limit=1] \
@@ -38,6 +39,7 @@ summon minecraft:armor_stand ~ ~-0.25 ~ \
     NoBasePlate:1b,\
     ShowArms:1b,\
     Tags:["im.booth_stand_model","im.booth_livvy","im.booth_new"],\
+    Rotation:[-90,0],\
     Pose:{Body:[0f,2f,0f],Head:[180f,0f,0f],LeftLeg:[180f,0f,0f],RightLeg:[175f,0f,0f],LeftArm:[273f,68f,209f],RightArm:[260f,290f,170f]}\
 }
 
@@ -52,6 +54,7 @@ summon minecraft:armor_stand ~ ~-0.5 ~ \
     NoBasePlate:1b,\
     ShowArms:1b,\
     Tags:["im.booth_stand_model","im.booth_livvy","im.booth_new"],\
+    Rotation:[-90,0],\
     Pose:{Body:[0f,2f,0f],Head:[180f,0f,0f],LeftLeg:[180f,0f,0f],RightLeg:[175f,0f,0f],LeftArm:[265f,7f,250f],RightArm:[296f,7f,340f]}\
 }
 loot replace entity @e[type=armor_stand,tag=im.booth_new,limit=1] \

@@ -1,92 +1,143 @@
 #### LOOP FILE ####
 
-# hunger proofing
-effect give @a[scores={hunger=0..19}] saturation 1 0
+# booth kit-selection stands -> moved to the 5-tick loop (imperium:5t); see the #t5 clock below
+
+# ability cooldown engine -> now advancement-driven (imperium:combat/cooldown_dealt + cooldown_taken
+#   -> imperium:internal/cooldown_{dealt,taken} -> update_cooldowns). Runs only on damage events,
+#   so it's off the per-tick loop entirely.
+
+# Smokey's Abilities
+
+    # Smoke Bomb (Smokey): configure freshly-thrown clouds, then emit one puff
+    execute \
+        as @e[type=area_effect_cloud,tag=!im.smoke_bomb,nbt={potion_contents:{custom_color:1973790}}] \
+        at @s \
+        run function imperium:kits/smokey/smoke_init
+    # Smoke Bomb: grant invis + speed to Smokey players inside active clouds
+    execute \
+        as @e[type=area_effect_cloud,tag=im.smoke_bomb] \
+        at @s \
+        run function imperium:kits/smokey/smoke_apply
+
+    # Marking Dart (Smokey): the dart applies Bad Omen purely as an on-hit signal; convert any
+    # hit player to the tracked im.marked tag (Summit wants a tag, not a status effect), then
+    # tick the tag's 10s timer, expiry, and red marker particle.
+    execute \
+        as @a \
+        if predicate imperium:has_bad_omen \
+        run function imperium:kits/smokey/mark_apply
+    function imperium:kits/smokey/mark_tick
+
+# Livvy's Abilities
+
+    # Venom (Livvy): the Venom Spray's Poison III is just the delivery signal; convert it to the
+    # tracked im.venom tag and tick it as no-impact imperium:venom damage — keeps the smooth
+    # no-impact poison without globally tagging vanilla magic damage.
+    execute as @a if predicate imperium:has_venom run function imperium:kits/livvy/venom_apply
+    function imperium:kits/livvy/venom_tick
+
+# Rastus's Abilities
+
+    # Superior Agility (Rastus): air dodge is advancement-driven. imperium:rastus_air_dodge earns
+    # while a Rastus player holds sneak airborne and runs the launch; the earned advancement is
+    # the once-per-airtime lock. Re-arm it on the ground so each airtime gets exactly one dodge.
+    execute \
+        as @a[tag=im.kit_rastus] \
+        at @s \
+        if predicate imperium:on_ground \
+        run advancement revoke @s only imperium:rastus_air_dodge
+
+    # Strike & Parry (Rastus): shared charge = idle ticks since the last melee. attack_player's
+    # reset_drought zeroes it on a landed hit; the parry reward zeroes it on a shield raise. At
+    # >= #StrikeCharge (0.6s) the rapier Strike and the shield Parry are armed.
+    scoreboard players add @a[tag=im.kit_rastus] im_melee_drought 1
+
+    # Parry full-deflect bubble: tick the window down; when it closes, strip Resistance/KB resist.
+    execute \
+        as @a[tag=im.kit_rastus,scores={im_parryWindow=1..}] \
+        run scoreboard players remove @s im_parryWindow 1
+    execute \
+        as @a[tag=im.kit_rastus,scores={im_parryWindow=0}] \
+        run function imperium:kits/rastus/parry_close
+
+    # Strike (Rastus): arm the rapier boost the tick the shared charge completes; strip it once
+    # the charge is gone (a landed hit via reset_focus, a parry, or any other drought reset).
+    execute \
+        as @a[tag=im.kit_rastus,tag=!im.rastus_focused] \
+        if score @s im_melee_drought >= #StrikeCharge im.param \
+        run function imperium:kits/rastus/focus_on
+    execute \
+        as @a[tag=im.kit_rastus,tag=im.rastus_focused] \
+        unless score @s im_melee_drought >= #StrikeCharge im.param \
+        run function imperium:kits/rastus/focus_off
+
+
+# 5-tick loop (for local testing; booth uses ticking_functions at "5t")
+    scoreboard players add #t5 im_5tTimer 1
+    execute if score #t5 im_5tTimer matches 5.. run function imperium:loop_5t
+    execute if score #t5 im_5tTimer matches 5.. run scoreboard players set #t5 im_5tTimer 0
+
+# 1-second loop (for local testing; booth uses ticking_functions at "1s")
+    scoreboard players add #sec im_secTimer 1
+    execute if score #sec im_secTimer matches 20.. run function imperium:loop_1s
+    execute if score #sec im_secTimer matches 20.. run scoreboard players set #sec im_secTimer 0
+
+
+# ===== OLD SYSTEMS =====
+
+# Leaving Spawn and Givekit
+    # execute \
+    #     as @a[advancements={imperium:leave_spawn=false}] \
+    #     unless predicate imperium:at_spawn \
+    #     run advancement grant @s only imperium:leave_spawn
+    # execute \
+    #     as @a[advancements={imperium:leave_spawn=true}] \
+    #     if predicate imperium:at_spawn \
+    #     run advancement revoke @s only imperium:leave_spawn
+
+    # scoreboard players enable @s[advancements={imperium:leave_spawn=false}] givekit
+
 # item drop proofing (for old soup dropping)
     #execute at @e[type=item] run tp @e[limit=1,type=item,distance=..1] @p
     #execute at @e[type=item] run data merge entity @e[limit=1,type=item,distance=..1] {PickupDelay:0}
-# givekit engine
-execute as @a[scores={givekit=1..},advancements={imperium:leave_spawn=false}] run function imperium:arena/givekit
 
-# booth kit-selection stands
-function imperium:booth/check_stands
+# givekit engine
+    # execute as @a[scores={givekit=1..},advancements={imperium:leave_spawn=false}] run function imperium:arena/givekit
 
 # TODO: Optimize by turning all the below item reload functions into 1 function that checks for itemreload
-# How: Replace all checks of one itemreload threshold with a single function checking for the itemreload score
-#   and a tag players get for their item
-# What: This will limit item refill bars to 30 damage but also save lines on the loop
-# Pro Fix: To add variation in item refill, there will be 2 layers of branching functions controlling refills.
-#   Here it'll have to check for a refillMeterA, refillMeterB, or refillMeterC player tag, then the
-#   proper itemreload score minimum to go with it. Instead of 1 new check per new item, it'll check a limited
-#   set of tags and scores, then run the branching function for that set of items.
+    # How: Replace all checks of one itemreload threshold with a single function checking for the itemreload score
+    #   and a tag players get for their item
+    # What: This will limit item refill bars to 30 damage but also save lines on the loop
+    # Pro Fix: To add variation in item refill, there will be 2 layers of branching functions controlling refills.
+    #   Here it'll have to check for a refillMeterA, refillMeterB, or refillMeterC player tag, then the
+    #   proper itemreload score minimum to go with it. Instead of 1 new check per new item, it'll check a limited
+    #   set of tags and scores, then run the branching function for that set of items.
 
 # item reload engine
-# CONFLICT NOTE: itemreload and im_abilityDealt both use custom:damage_dealt but are separate
-#   objectives — resetting im_abilityDealt each tick does NOT affect itemreload accumulation.
-#   Remove itemreload, item_distributor_300, and rTotem checks once ability system replaces them.
-# execute as @a[scores={itemreload=300..}] in overworld run function imperium:arena/item_distributor_300
-# execute as @a[scores={rTotem=1..,itemreload=600..}] in overworld run function imperium:items/totem
+    # CONFLICT NOTE: itemreload and im_abilityDealt both use custom:damage_dealt but are separate
+    #   objectives — resetting im_abilityDealt each tick does NOT affect itemreload accumulation.
+    #   Remove itemreload, item_distributor_300, and rTotem checks once ability system replaces them.
+    # execute as @a[scores={itemreload=300..}] in overworld run function imperium:arena/item_distributor_300
+    # execute as @a[scores={rTotem=1..,itemreload=600..}] in overworld run function imperium:items/totem
 
-# ability cooldown engine (parallel system; does not interfere with itemreload above)
-execute as @a[advancements={imperium:leave_spawn=true}] run function imperium:update_cooldowns
+    # soup drop engine (old)
+        #execute at @e[type=item,nbt={Item:{id:"minecraft:beetroot_soup"}}] run function imperium:soup/beet_soup_drop
+        #execute at @e[type=item,nbt={Item:{id:"minecraft:mushroom_stew"}}] run function imperium:soup/mush_soup_drop
+        #execute at @e[type=item,nbt={Item:{id:"minecraft:rabbit_stew"}}] run function imperium:soup/rabbit_soup_drop
 
-# soup drop engine (old)
-    #execute at @e[type=item,nbt={Item:{id:"minecraft:beetroot_soup"}}] run function imperium:soup/beet_soup_drop
-    #execute at @e[type=item,nbt={Item:{id:"minecraft:mushroom_stew"}}] run function imperium:soup/mush_soup_drop
-    #execute at @e[type=item,nbt={Item:{id:"minecraft:rabbit_stew"}}] run function imperium:soup/rabbit_soup_drop
-
-# arena mechanics
-execute as @a[scores={killFlag=1..}] run function imperium:arena/kill
-execute as @a[scores={onDeath=1..}] run function imperium:arena/death
-execute as @a[scores={onLeave=1..}] run function imperium:arena/death
-execute \
-    store result score @s im_hp \
-    run data get entity @s \
-        Health 1000
+# arena mechanics (old)
+    # execute as @a[scores={killFlag=1..}] run function imperium:arena/kill
+    # execute as @a[scores={onDeath=1..}] run function imperium:arena/death
+    # execute as @a[scores={onLeave=1..}] run function imperium:arena/death
+    # execute \
+    #     store result score @s im_hp \
+    #     run data get entity @s \
+    #         Health 1000
 
 # WIP TESTING
-#execute as @e[tag=im_rot_track] run function imperium:data_fetching/get_rotation
+    #execute as @e[tag=im_rot_track] run function imperium:data_fetching/get_rotation
 
-# execute as JonGamer16 run \
-#     execute store result score NearestCow im_rotation run data get entity @n[type=cow,distance=0..5] Rotation[0] 1
+    # execute as JonGamer16 run \
+    #     execute store result score NearestCow im_rotation run data get entity @n[type=cow,distance=0..5] Rotation[0] 1
 
-#execute as @a[scores={carrot_on_a_stick=1..}] run function imperium:raycaster/proxy
-
-# Smoke Bomb (Smokey): configure freshly-thrown clouds, then emit one puff
-execute \
-    as @e[type=area_effect_cloud,tag=!im.smoke_bomb,nbt={potion_contents:{custom_color:1973790}}] \
-    at @s \
-    run function imperium:kits/smokey/smoke_init
-# Smoke Bomb: grant invis + speed to Smokey players inside active clouds
-execute \
-    as @e[type=area_effect_cloud,tag=im.smoke_bomb] \
-    at @s \
-    run function imperium:kits/smokey/smoke_apply
-
-# Marking Dart (Smokey): the dart applies Bad Omen purely as an on-hit signal; convert any
-# hit player to the tracked im.marked tag (Summit wants a tag, not a status effect), then
-# tick the tag's 10s timer, expiry, and red marker particle.
-execute as @a if predicate imperium:has_bad_omen run function imperium:kits/smokey/mark_apply
-function imperium:kits/smokey/mark_tick
-
-# Venom (Livvy): the Venom Spray's Poison III is just the delivery signal; convert it to the
-# tracked im.venom tag and tick it as no-impact imperium:venom damage — keeps the smooth
-# no-impact poison without globally tagging vanilla magic damage.
-execute as @a if predicate imperium:has_venom run function imperium:kits/livvy/venom_apply
-function imperium:kits/livvy/venom_tick
-
-execute \
-    as @a[advancements={imperium:leave_spawn=false}] \
-    unless predicate imperium:at_spawn \
-    run advancement grant @s only imperium:leave_spawn
-execute \
-    as @a[advancements={imperium:leave_spawn=true}] \
-    if predicate imperium:at_spawn \
-    run advancement revoke @s only imperium:leave_spawn
-
-scoreboard players enable @s[advancements={imperium:leave_spawn=false}] givekit
-
-# 1-second loop (for local testing; booth uses ticking_functions at "1s")
-scoreboard players add #sec im_secTimer 1
-execute if score #sec im_secTimer matches 20.. run function imperium:loop_1s
-execute if score #sec im_secTimer matches 20.. run scoreboard players set #sec im_secTimer 0
+    #execute as @a[scores={carrot_on_a_stick=1..}] run function imperium:raycaster/proxy

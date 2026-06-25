@@ -43,7 +43,7 @@ Kit Abilities:
     Livvy:
     /   Fang: lifesteal enchantment, + attack speed, + crits enchantment
     /   Lifesteal Enchantment: dealing enough damage fills an empty bowl with beetroot soup
-    o   Venom Enchantment: main weapon deals increased damage to poisoned targets and gains more Lifesteal score
+    /   Venom Enchantment: main weapon deals increased damage to poisoned targets and gains more Lifesteal score
             - note: I need to change the existing lifesteal enchantment to add to a score and give soup, like a 4th ability slot
     /   Acid Potion: poison 3 | 3s, harming 1
             - plan: tag poison damage as #bypasses_cooldown and whatever drowning damage uses
@@ -72,7 +72,7 @@ Kit Abilities:
                 -> assign NoGravity NBT tag -> kill arrows aged 200+ ticks
 
     Smokey:
-    o   Dual Wield: right click to deal damage with weapon in offhand
+    /   Dual Wield: right click to deal damage with weapon in offhand
             - plan: the spear kinetic_weapon attack was inconsistent, so I might have to add a special system
             - said system would be a raycast for hit detection, #no_impact damage command for damage, and player_motion for knockback
             - kind of a complex system, might take some time
@@ -108,7 +108,7 @@ Booth Creation:
 
     o   Building: Complete the physical build of the pagoda, its floors, and underground
     o   Logo: Complete the logo in aseprite; I just need the background and rapier
-    o   Text: Create the intro, description, history, and lore text for display
+    /   Text: Create the intro, description, history, and lore text for display
     o   Collectibles: Design balloons, stickers, and custom items for players to collect
     o   Function Integration: Work my datapack into the Summit and Battlegrounds systems
     o   Battlegrounds Structure: Modify the Battle arena in a structure
@@ -135,11 +135,11 @@ Booth Integration:
     Booth Interior:
     /   Entrances: expand enter_booth (currently just a title) with welcome + wall text
     o   Cave reward: per-box on_player_enter on "cave" grants a one-time climb sticker/item
-    o   Kit stands -> Summit Interactions API: summon with Tags [summit.interactable, summit.static]
+    /   Kit stands -> Summit Interactions API: summon with Tags [summit.interactable, summit.static]
             and data.summit_interactable.on_right_click = "execute on target run .../select"
             - Summit handles the click and on target resolves there (why local on target failed)
             - keep the custom UUID handler (handle_click) for local testing only
-    o   Reposition stand summons for the side kit-room (current setup_stands is a test row)
+    /   Reposition stand summons for the side kit-room (current setup_stands is a test row)
     o   Training dummy: choose sulfur cube vs mummy mannequin, ability-damageable, auto-reset
     o   Hidden kit items: placement + detection for the "find stray items" sticker
 

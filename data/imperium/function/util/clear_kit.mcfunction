@@ -24,3 +24,23 @@ tag @s remove im.kit_meowdy
 tag @s remove im.kit_mummy
 tag @s remove im.kit_rastus
 tag @s remove im.kit_smokey
+
+# Rastus air-dodge (Superior Agility) — revoke so an earned (locked) dodge can't linger on a swap.
+advancement revoke @s only imperium:rastus_air_dodge
+
+# Rastus Strike & Parry — strip any open full-deflect bubble and reset the shared charge so a
+# swap mid-parry can't leave Resistance/knockback immunity stuck on the new kit.
+advancement revoke @s only imperium:raise_shield
+attribute @s minecraft:knockback_resistance modifier remove imperium:parry
+effect clear @s minecraft:resistance
+scoreboard players set @s im_parryWindow -1
+scoreboard players set @s im_melee_drought 0
+# Strip the Strike (Focus Attack) boost so it can't carry its attack modifiers onto a new kit.
+tag @s remove im.rastus_focused
+attribute @s minecraft:attack_damage    modifier remove imperium:focus
+attribute @s minecraft:attack_speed     modifier remove imperium:focus
+attribute @s minecraft:attack_knockback modifier remove imperium:focus
+# AV-cue state: clear the parry-window marker and re-arm both cue advancements for a clean kit.
+tag @s remove im.rastus_parrying
+advancement revoke @s only imperium:rastus_strike_cue
+advancement revoke @s only imperium:rastus_parry_cue
