@@ -1,2 +1,0 @@
-clear @a[scores={rRegenPot=1,onKill=1..}] splash_potion[potion_contents={custom_color:16711901,custom_effects:[{id:"regeneration",amplifier:4,duration:48,show_particles:1b,show_icon:1b}]}]
-give @a[scores={rRegenPot=1,onKill=1..}] splash_potion[potion_contents={custom_color:16711901,custom_effects:[{id:"regeneration",amplifier:4,duration:48,show_particles:1b,show_icon:1b}]}] 8

@@ -1,1 +1,0 @@
-execute store result score @s im_rotation run data get entity @s Rotation[0] 1
