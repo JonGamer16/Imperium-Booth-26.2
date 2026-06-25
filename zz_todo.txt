@@ -29,14 +29,14 @@ Kit Abilities:
     Rastus:
     /   Rapier: + attack speed, - knockback, #bypasses_cooldown
     /   Buckler: - slowdown, - angle, - kb resist, - defense, disabled by anything
-    o   Air Dodge Enchantment: while in air, sneak + wasd input for a small air boost
+    /   Air Dodge Enchantment: while in air, sneak + wasd input for a small air boost
             - plan: check for inputs while airborne, run a function that launches based on directional input
             - it's not a consumable item, so I'll need to either tweak a cooldown slot or add a special meter for him and others
-    o   Charge Attack: 0.75 second without attacking to increase damage, knockback, and reach
+    /   Charge Attack: 0.6 seconds without attacking to increase damage, knockback, and reach
             - plan: make the rapier use a spear jab attack to detect the post_piercing_attack on left click
             - count down a scoreboard that resets to 20 on attack, then counts down to 0 while weapon is held
             - charge will reset, even on a miss
-    o   Parry: after charge attack, gain Resistance 5 for 1 tick
+    /   Parry: after charge attack, gain Resistance 5 for 1 tick
             - plan: attach a resistance 5 effect for 1 tick to the charge attack detection
     x   Splash Healing 2 Potions: 16x 8hp
 

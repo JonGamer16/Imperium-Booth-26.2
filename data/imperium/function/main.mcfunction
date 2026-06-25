@@ -5,8 +5,6 @@ scoreboard objectives add onKill dummy
 scoreboard objectives add summonerID dummy
 # Shared scratch objective (set_cd macro, lifesteal_soup, etc.) — needed before the setup calls
 scoreboard objectives add im.temp dummy
-# Booth click routing: holds clicker/candidate UUID ints for imperium:booth/handle_click
-scoreboard objectives add im_booth_uuid dummy
 # Smokey Mark: per-player 10s tag timer + the shared #markClock particle clock
 scoreboard objectives add im_markTimer dummy
 # Livvy Venom: per-player 3s DoT timer + the shared #venomClock damage clock

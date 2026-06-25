@@ -81,7 +81,7 @@ External libraries (vendored, do not edit): **`player_motion`** (knockback/launc
     │   │     combat/shot_arrow       crossbow shot → arrow_recount
     │   ├── loot_table/<kit>/         Kit gear, display gear, heal stacks
     │   ├── predicate/                on_ground, sneaking, at_spawn, has_venom, has_bad_omen
-    │   ├── recipe/                   craftsoup + diamond weapon recipes
+    │   ├── recipe/                   diamond weapon recipes (craftsoup removed)
     │   ├── damage_type/              light, venom, shield_pierce
     │   ├── item_modifier/            apply_shield_pierce
     │   ├── dialog/                   kitselect dialog
@@ -134,10 +134,7 @@ function/
 │       ├── select.mcfunction        Equip kit + print ability list (plain click)
 │       └── lore.mcfunction          Print fighter lore (sneak + click)
 │
-├── booth/                           ⚠ check_stands/handle_click/match_clicker now DEAD (see §7)
-│   ├── check_stands.mcfunction      (dead) old per-tick click poll
-│   ├── handle_click.mcfunction      (dead) old UUID-exact click router
-│   ├── match_clicker.mcfunction     (dead) old UUID identity match helper
+├── booth/                           (check_stands/handle_click/match_clicker DELETED — tag legacy-full)
 │   ├── setup_stands.mcfunction      One-shot: build a test row of all 7 stands
 │   ├── enter_booth.mcfunction       on_player_enter: title card
 │   └── walltext.txt                 Draft booth wall text
@@ -145,10 +142,10 @@ function/
 ├── arena/
 │   ├── givekit.mcfunction           KIT ROUTER: givekit score → kit tag + givekit fn
 │   ├── lastkit.mcfunction           Re-give last kit (givekit=0 path)
-│   ├── death.mcfunction             Reset scores on death (mostly LEGACY resets)
-│   ├── kill.mcfunction              On-kill: damage gate → heals + per-kit on_kill
-│   ├── kill.mcfunction / arena_teleport / item_distributor_300 / lastkit
-│   └── (item_distributor_300 = LEGACY refill)
+│   ├── arena_teleport.mcfunction    (arena spawn teleport)
+│   ├── death.mcfunction             Reset scores on death (mostly LEGACY resets; disabled in loop)
+│   └── kill.mcfunction              On-kill: damage gate → per-kit on_kill (disabled in loop)
+│                                    (legacy global heals + item_distributor_300 DELETED — tag legacy-full)
 │
 ├── abilities/                       Shared ability helpers
 │   ├── leap.mcfunction              Shared Leap Feather (Livvy + Meowdy) via player_motion
@@ -156,12 +153,9 @@ function/
 │   └── set_cd.mcfunction            Macro: set a kit/slot cooldown base+floor
 │
 ├── enchantments/                    Custom-enchant logic (called from enchant defs/advancements)
-├── healing_items/                   LEGACY heal item scripts
-├── items/                           LEGACY kit-item scripts (arrow, trident, totem…)
-├── internal/                        reset_drought, damage_light helpers
-├── data_fetching/                   get_rotation, get_hurt_time
-├── raycaster/                       Raycast hit-detection (mostly disabled/WIP)
+├── internal/                        cooldown_dealt/taken, arrow_recount, reset_drought, damage_light
 └── util/                            clear_kit, copy_gear, giveheals, giveloot
+   (DELETED legacy folders: healing_items/, items/, raycaster/, data_fetching/ — tag legacy-full)
 ```
 
 ---
@@ -324,11 +318,10 @@ crossbow kit whose arrows carry `custom_data {imperium_kit:1b}` — Meowdy today
 On dealing a hit → advancement imperium:attack_player → reward internal/reset_drought
                     (zeroes Rastus's im_melee_drought charge)
 
-Per tick in loop:
+Per tick in loop (NOTE: arena/kill + arena/death are currently disabled/commented in loop — WIP):
   @a[killFlag=1..] → arena/kill
     ├── killDamage>=200 (20 HP) → onKill=1 ; else clear killFlag (no reward)
-    ├── LEGACY global refills: items/trident, items/goldarmor, healing_items/*
-    ├── @e[onKill=1, im.kit_<kit>] → kits/<kit>/on_kill   (CURRENT: per-kit heal top-up)
+    ├── @e[onKill=1, im.kit_<kit>] → kits/<kit>/on_kill   (per-kit heal top-up; legacy globals removed)
     └── reset killDamage/killFlag/onKill
 
   @a[onDeath=1..] OR @a[onLeave=1..] → arena/death
@@ -354,15 +347,12 @@ Chinks Curse, Livvy Lifesteal banking). `wip_*` enchantments are unfinished — 
 |---|---|---|---|
 | **Ability cooldown engine** | `update_cooldowns`, `kit_dispatch`, `main/{ability_cooldowns,init_cooldowns,ability_parameters}`, `abilities/set_cd` | **Current** | Core of the kit system. |
 | **Kits** | `kits/<kit>/` | **Current** | Self-contained; tag-driven. See §5. |
-| **Booth** | `booth/`, `booth_definition.json`, `kits/<kit>/booth/` | **Current/WIP** | Two click routers; Summit wiring pending. |
-| **Arena** | `arena/{givekit,lastkit,kill,death}` | Mixed | givekit/kill/death current core; lots of legacy resets inside. |
+| **Booth** | `booth/`, `booth_definition.json`, `kits/<kit>/booth/` | **Current/WIP** | Advancement-driven kit givers; Summit wiring pending. |
+| **Arena** | `arena/{givekit,lastkit,kill,death}` | Mixed | givekit current core; kill/death disabled in loop (WIP), legacy resets to prune. |
 | **Enchantments** | `enchantment/`, `enchantments/`, `loop_enchantments`, related `advancement/` | Mixed | Active set + `wip_*`. |
 | **Shared abilities** | `abilities/{leap,leap_refund,set_cd}` | Current | Leap shared by Livvy + Meowdy. |
 | **Predicates** | `predicate/` | Current | `on_ground`, `sneaking`, `at_spawn`, `has_venom`, `has_bad_omen`. |
-| **Raycaster** | `raycaster/` | WIP/disabled | `start_raycast` currently just `say` debug. |
-| **Data fetching** | `data_fetching/{get_rotation,get_hurt_time}` | Helper/WIP | Referenced by commented loop lines. |
-| **Legacy items** | `items/` | **Legacy** | Pre-kit item scripts. |
-| **Legacy heals** | `healing_items/` | **Legacy** | Replaced by per-kit heal loot tables. |
+| **Legacy items/heals/raycaster/data_fetching** | — | **REMOVED** | Deleted; recover from tag `legacy-full`. |
 | **player_motion** | `data/player_motion/` | External lib | Launch/knockback math. Don't edit. |
 | **player_input** | `data/player_input/` | External lib | Key/WASD capture. Don't edit. |
 
@@ -418,33 +408,36 @@ kit's `loot_table/<kit>/*` (gear stats).
 
 ## 7. Strip-down candidates (legacy / dead code)
 
-The repo is mid-migration. These are safe to remove **after confirming the current system covers
-their kit/item** (and stripping their resets from `arena/death`):
+> Full pre-strip snapshot preserved at git tag **`legacy-full`** — recover anything from there.
 
-**Whole legacy subsystems:**
-- `function/items/*` — old per-item scripts (arrow, blazepowder, boat, customlingertest,
-  damagepot, enderpearl, goldarmor, gravityarrow, jumppot, lightrapier, manualarmor, poisonarrow,
-  sapling, shield, slowpot, totem, trident, trident2, windcharge, throwing_knife*). Superseded by
-  `kits/<kit>/`.
-- `function/healing_items/*` — old heal scripts. Superseded by per-kit `loot_table/<kit>/healing`.
-- `arena/item_distributor_300.mcfunction` + the `itemreload`/`rTotem` calls (already commented out
-  in `loop`). Superseded by the cooldown engine.
-- `main/old_objectives.mcfunction` and the bulk of `arena/death.mcfunction` resets (`r*` heal/item
-  scores, `itemreload`, zombie/blaze teams, summon-egg scores).
-- `old_systems.txt` documents the **legacy** add-a-kit workflow — outdated vs the current
-  tag/folder pattern.
+**✅ REMOVED — Tier 1 (provably dead):**
+- `booth/check_stands`, `booth/handle_click`, `booth/match_clicker` + the `im_booth_uuid` objective
+  — replaced by the advancement-driven kit givers.
+- `arena/item_distributor_300` + the 17 `items/*` scripts only it (or nothing) referenced.
 
-**Newly dead (after the advancement-driven conversion):**
-- `booth/check_stands.mcfunction`, `booth/handle_click.mcfunction`, `booth/match_clicker.mcfunction`
-  — kit-stand clicks are now `imperium:booth/select_<kit>` → `kits/<kit>/booth/click`. No callers
-  left; keep one as a local fallback or delete. The `im_booth_uuid` objective (in `main`) is unused.
+**✅ REMOVED — Tier 2 (legacy, were wired; cut with their callers):**
+- Whole `function/healing_items/` folder + the legacy global-heal calls in `arena/kill`
+  (+ `items/trident`, `items/goldarmor`). Superseded by per-kit `loot_table/<kit>/healing`.
+- **craftsoup system:** `recipe/craftsoup` + `healing_items/{craftsoup,givecraftsoup}` +
+  advancements `craftsoup_adv`, `click_player`.
+- **throwing_knife:** `function/items/throwing_knife/*` (+ `.zip`) + advancement `consume_knife`.
+- Whole `function/items/` folder is now gone; `function/raycaster/` and `function/data_fetching/`
+  removed (debug/WIP, no active callers).
+
+**⚠ STILL PRESENT — entangled, deferred to the arena rewrite:**
+- `arena/{kill, death}` — disabled in `loop` (WIP). `death` is mostly legacy `r*`/team resets;
+  `kill` now holds just the damage gate + per-kit `on_kill` dispatch. Prune when re-wiring arena.
+- `main/old_objectives.mcfunction` — **still called on load**; declares `totalKills` (used by the
+  `setdisplay` line). Prune individual dead objectives, don't delete wholesale.
+- `main` "Testing" block — `im_raycast`/`im_hurt_time` objectives are now orphaned (their users were
+  deleted); safe to prune from that scratch block.
+- `loop` "OLD SYSTEMS" comment block — contains stale commented refs to now-deleted files; cosmetic.
+- `old_systems.txt` — documents the legacy add-a-kit workflow (outdated vs the tag/folder pattern).
 
 **Empty / placeholder / debug:**
 - `loop_events.mcfunction` (empty stub)
 - `function/test.mcfunction`
-- `raycaster/*` — `start_raycast` is a `say` debug stub; raycast path commented out.
 - `booth/walltext.txt`, `doc.txt` (stubs; `doc.txt` now superseded by this wiki).
-- `data_fetching/*` — only referenced by commented-out loop lines.
 
 **WIP (decide: finish or cut):**
 - `enchantment/wip_*` (air_dodge, barrier, focus_attack, golem_throw, grappling, hp_drain,
@@ -452,9 +445,9 @@ their kit/item** (and stripping their resets from `arena/death`):
   `enchantments/hp_drain`. Some back unfinished kit abilities (Mummy Golem Throw/Barrier/Grapple,
   Levent Reversal) — see `todo.txt`.
 
-> ⚠️ Before deleting, grep for the name — several legacy items are still *called* from
-> `arena/kill` (`items/trident`, `items/goldarmor`, `healing_items/*`) even though they look dead.
-> Remove the call site in `arena/kill` / `arena/death` in the same change.
+> ⚠️ General rule when deleting: grep the name first and remove call sites in the same change. The
+> "dead" lists above were verified this way (e.g. `arena/kill`'s legacy calls were stripped before
+> the files were deleted). Everything removable is recoverable from tag `legacy-full`.
 
 ---
 
