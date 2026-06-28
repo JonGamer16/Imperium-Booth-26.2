@@ -9,9 +9,17 @@ scoreboard objectives add im.temp dummy
 scoreboard objectives add im_markTimer dummy
 # Livvy Venom: per-player 3s DoT timer + the shared #venomClock damage clock
 scoreboard objectives add im_venomTimer dummy
+# Smokey Grappling Rod: #next id counter + per-entity link (bobber<->caster), and the per-player
+# stored launch offset (also scratch for bobber/owner positions; see kits/smokey/grapple_*).
+scoreboard objectives add im_grappleId dummy
+scoreboard objectives add im_grappleX dummy
+scoreboard objectives add im_grappleY dummy
+scoreboard objectives add im_grappleZ dummy
 # Rastus Parry: per-player countdown for the full-deflect bubble (Strike & Parry share the
 # charge stored in im_melee_drought). -1 = inactive.
 scoreboard objectives add im_parryWindow dummy
+# Levent Charge Attack
+scoreboard objectives add im_leventCharge dummy
 # Centralized ability tuning constants (see main/ability_parameters)
 scoreboard objectives add im.param dummy
 

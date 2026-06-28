@@ -6,10 +6,14 @@ function imperium:util/clear_kit
 item replace entity @s armor.head with \
     netherite_helmet[\
         !max_damage,\
-        enchantments={"protection":12},\
+        enchantments={"protection":12,"imperium:wip_high_jump":1},\
         attribute_modifiers=[\
             {type:"armor",amount:8,operation:"add_value",slot:"head",id:"head"},\
-            {type:"armor_toughness",amount:8,operation:"add_value",slot:"head",id:"head_toughness"}],\
+            {type:"armor_toughness",amount:8,operation:"add_value",slot:"head",id:"head"},\
+            {type:"air_drag_modifier",amount:-0.2,operation:"add_multiplied_base",slot:"head",id:"head"},\
+            {type:"safe_fall_distance",amount:2,operation:"add_multiplied_base",slot:"head",id:"head"},\
+            {type:"fall_damage_multiplier",amount:-0.5,operation:"add_multiplied_base",slot:"head",id:"head"},\
+        ],\
         item_model="minecraft:leather_helmet",\
         equippable={slot:head,asset_id:"minecraft:leather"},\
         dyed_color=8073150,\
@@ -62,6 +66,9 @@ item replace entity @s hotbar.0 with \
             {type:"attack_damage",amount:4,operation:"add_value",slot:"mainhand",id:"base_attack_damage"},\
             {type:"attack_speed",amount:-2,operation:"add_value",slot:"mainhand",id:"base_attack_speed"}\
         ],\
+        piercing_weapon={deals_knockback:true},\
+        minimum_attack_charge=0,\
+        enchantments={"imperium:wip_charge_attack":1},\
         custom_data={"imperium_kit":1b},\
     ] 1
 
@@ -69,6 +76,7 @@ item replace entity @s hotbar.0 with \
 item replace entity @s hotbar.1 with \
     bow[\
         !max_damage,\
+        enchantments={"imperium:wip_straight_flight":1},\
         custom_name={color:"white",italic:false,text:"Aero Shot"},\
         custom_data={"imperium_kit":1b},\
     ] 1

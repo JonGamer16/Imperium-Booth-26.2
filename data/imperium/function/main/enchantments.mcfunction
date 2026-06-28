@@ -17,6 +17,9 @@ scoreboard objectives add im_rotationdiff dummy
     scoreboard objectives add im_backstabflag dummy
     scoreboard objectives add im_backstabraycast dummy
     scoreboard objectives add im_backstabtracking dummy
+#   High Jump
+    scoreboard objectives add im_high_jump dummy
+    scoreboard objectives add im_high_jump_eq dummy
 #   Temper
     scoreboard objectives add im_temperlevel dummy
     scoreboard objectives add im_temperinitialdmg dummy

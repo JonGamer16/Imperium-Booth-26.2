@@ -14,10 +14,9 @@ function imperium:abilities/set_cd {kit:"Cliffshield",slot:"A",base:0,stock:-1}
 function imperium:abilities/set_cd {kit:"Cliffshield",slot:"B",base:250,stock:-1}
 function imperium:abilities/set_cd {kit:"Cliffshield",slot:"C",base:250,stock:-1}
 
-# Levent: A Levitation Arrows, B Shield, C Reversal
+# Levent: A Levitation Arrows, B Shield  (C empty)
 function imperium:abilities/set_cd {kit:"Levent",slot:"A",base:150,stock:-1}
 function imperium:abilities/set_cd {kit:"Levent",slot:"B",base:300,stock:-1}
-function imperium:abilities/set_cd {kit:"Levent",slot:"C",base:150,stock:-1}
 
 # Livvy: A Leap, B Web, C Acid Potion
 function imperium:abilities/set_cd {kit:"Livvy",slot:"A",base:150,stock:-1}
@@ -32,12 +31,12 @@ function imperium:abilities/set_cd {kit:"Meowdy",slot:"B",base:100,stock:90}
 function imperium:abilities/set_cd {kit:"Mummy",slot:"A",base:100,stock:-1}
 function imperium:abilities/set_cd {kit:"Mummy",slot:"B",base:100,stock:-1}
 
-# Rastus: A Buckler Shield, B Parry (100)  (C empty)
+# Rastus: A Buckler Shield, B Strike/Parry  (C empty)
 function imperium:abilities/set_cd {kit:"Rastus",slot:"A",base:400,stock:-1}
-function imperium:abilities/set_cd {kit:"Rastus",slot:"B",base:100,stock:-1}
+function imperium:abilities/set_cd {kit:"Rastus",slot:"B",base:50,stock:-1}
 
 # Smokey: A Boost Rod, B Marking Dart, C Smoke Bomb
-function imperium:abilities/set_cd {kit:"Smokey",slot:"A",base:400,stock:-1}
+function imperium:abilities/set_cd {kit:"Smokey",slot:"A",base:400,stock:80}
 function imperium:abilities/set_cd {kit:"Smokey",slot:"B",base:200,stock:-1}
 function imperium:abilities/set_cd {kit:"Smokey",slot:"C",base:200,stock:-1}
 

@@ -8,6 +8,19 @@
 
 # Smokey's Abilities
 
+    # Grappling Rod (Smokey): track cast bobbers and launch the angler on reel-in. Gated so the
+    # @e[fishing_bobber] scan only runs while a Smokey is online.
+    execute if entity @a[tag=im.kit_smokey] run function imperium:kits/smokey/grapple_track
+
+# Use-remainder placeholder cleanup
+    # The Recoil Rod and Reversal Shield carry a use_remainder that drops a same-type stand-in
+    # (custom_data imperium_clearme:1b) when the item breaks, so a breaking use is still detected
+    # for one moment (the rod still reads as a kit fishing_rod, the shield still has the enchant)
+    # and the ability fires on that final use. Strip the stand-ins afterward so a "broken" rod or
+    # shield can't be re-cast/re-blocked while it waits for its cooldown re-give.
+    # ORDER: must run AFTER grapple_track above, which relies on the rod stand-in to fire the launch.
+    clear @a *[custom_data~{imperium_clearme:1b}]
+
     # Smoke Bomb (Smokey): configure freshly-thrown clouds, then emit one puff
     execute \
         as @e[type=area_effect_cloud,tag=!im.smoke_bomb,nbt={potion_contents:{custom_color:1973790}}] \
@@ -71,6 +84,32 @@
         unless score @s im_melee_drought >= #StrikeCharge im.param \
         run function imperium:kits/rastus/focus_off
 
+# Levent's Abilities
+
+    # Charge Attack (Levent): charge = idle ticks since the last rod jab OR shield raise. A jab
+    # (Charge Attack enchant's post_piercing_attack -> charge_spend, fires on hit AND whiff) and a
+    # shield raise (levent_shield -> charge_block) both zero it. At >= #LeventCharge the boost arms;
+    # the next jab spends it and charge_off strips the bonus the following tick — so a whiff wastes
+    # the charge. Mirrors Rastus's Strike.
+    scoreboard players add @a[tag=im.kit_levent] im_leventCharge 1
+    execute \
+        as @a[tag=im.kit_levent,tag=!im.levent_charged] \
+        if score @s im_leventCharge >= #LeventCharge im.param \
+        run function imperium:kits/levent/charge_on
+    execute \
+        as @a[tag=im.kit_levent,tag=im.levent_charged] \
+        unless score @s im_leventCharge >= #LeventCharge im.param \
+        run function imperium:kits/levent/charge_off
+
+
+# Enchantments
+
+    # High Jump: strip the orphaned low-gravity modifier when the armor is unequipped mid-jump.
+    #   The enchant's tick refreshes im_high_jump_eq to 2 every tick it's worn. Here we tick that
+    #   down ONLY for players currently in high-jump gravity (im_high_jump=1) — a tiny set — and
+    #   when it reaches 0 (no enchant tick for 2 ticks = unequipped) we remove the leftover modifier.
+    scoreboard players remove @a[scores={im_high_jump=1,im_high_jump_eq=1..}] im_high_jump_eq 1
+    execute as @a[scores={im_high_jump=1,im_high_jump_eq=0}] run function imperium:enchantments/high_jump_off
 
 # 5-tick loop (for local testing; booth uses ticking_functions at "5t")
     scoreboard players add #t5 im_5tTimer 1

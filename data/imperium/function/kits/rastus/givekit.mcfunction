@@ -55,8 +55,8 @@ item replace entity @s armor.feet with \
 item replace entity @s hotbar.0 with \
     netherite_sword[\
         attribute_modifiers=[\
-            {type:"attack_damage",amount:2,operation:"add_value",slot:"mainhand",id:"base_attack_damage"},\
-            {type:"attack_speed",amount:1,operation:"add_value",slot:"mainhand",id:"base_attack_speed"},\
+            {type:"attack_damage",amount:1.5,operation:"add_value",slot:"mainhand",id:"base_attack_damage"},\
+            {type:"attack_speed",amount:4,operation:"add_value",slot:"mainhand",id:"base_attack_speed"},\
             {type:"attack_knockback",amount:-1.0,operation:"add_value",slot:"mainhand",id:"attack_knockback"}],\
         damage_type="imperium:light",\
         minimum_attack_charge=1.0,\

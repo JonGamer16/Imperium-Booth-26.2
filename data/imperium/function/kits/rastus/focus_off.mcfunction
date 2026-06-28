@@ -5,4 +5,4 @@ attribute @s minecraft:attack_speed modifier remove imperium:focus
 attribute @s minecraft:attack_knockback modifier remove imperium:focus
 
 # Unarmed feedback — this charge powers BOTH the Strike (next hit) and the Parry (shield raise).
-title @s actionbar {text:"⦿ Focus ready",color:"red"}
+title @s actionbar {text:"⦿ Focus ready",color:"dark_gray"}

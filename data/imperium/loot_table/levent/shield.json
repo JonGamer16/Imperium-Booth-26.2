@@ -22,6 +22,15 @@
                   {"pattern":"minecraft:triangles_bottom","color":"black"},
                   {"pattern":"minecraft:flow","color":"white"}
                 ],
+                "use_remainder":{
+                  "id":"shield",
+                  "components": {
+                    "custom_data": "{imperium_kit:1b,imperium_clearme:1b}",
+                    "enchantments":{
+                      "imperium:wip_reversal":1
+                    }
+                  }
+                },
                 "minecraft:custom_data": "{imperium_kit:1b}"
               }
             }

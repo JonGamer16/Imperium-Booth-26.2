@@ -58,10 +58,16 @@ Kit Abilities:
     x   Beetroot Soup: 10x 8hp
 
     Levent:
-    o   Charge Attack: like Rastus's charge attack
-    o   Reversal Enchantment: sneak to teleport behind the attacker
+    /   Charge Attack: like Rastus's charge attack
+    /   Reversal Enchantment: sneak to teleport behind the attacker
             - plan: advancement detects blocking while sneaking -> execute function on attacker
-            - function checks ^ ^ ^-2.5, then ^ ^ ^-1.5, then ^ ^ ^-0.5 for #replaceable blocks at head and feet location
+            - DONE (enchantments/wip_reversal + reversal_step1/2/3): advancement reversal_block
+                fires the reward as the blocker; it checks the offhand is the Reversal shield,
+                then on the attacker (their yaw, flat pitch) walks the spots behind them at
+                -0.5, -1.5, -2.5, each needing feet+head to be #minecraft:replaceable
+            - lands on the FARTHEST clear step (deeper = keeps a gap), facing the attacker's
+                back; if even -0.5 is blocked nothing happens. costs 10/30 shield durability
+                (item_modifier consume_10_durability), only charged when a warp lands
     /   Gravity Flower: reduced gravity while held, maybe make it a weapon?
             - note: this would be more useful as an armor Enchantment
             - it would reduce your gravity until it detects you airborne and not holding 
@@ -82,11 +88,27 @@ Kit Abilities:
     /   Smoke Bomb: invis, speed 2, spawn dense particles around the cloud
             - plan: like livvy's web, place a marker at the cloud that's killed when the cloud dies 
                 -> spawn campfire smoke particles around the marker
-    o   Grapple Rod: pulls self in direction of bobber
-            - plan: assign unique id to players -> rod usage scoreboard -> execute on origin
-                -> stamp bobber with player's id -> track bobber with a marker armor stand
-                -> advancement for reeling the rod on ground or on player
-                -> use player_motion with relative coordinates of the bobber
+    /   Grapple Rod: reel in to launch toward the bobber (offset/divisor per axis + static vertical)
+            - DONE (kits/smokey/grapple_*): per-tick tracker links each cast bobber to its caster via
+                a shared im_grappleId; while the bobber is anchored it stores the bobber->player
+                offset on the owner and arms them; reel-in fires the launch via player_motion launch_xyz
+            - anchored = tangible block just below the bobber (unless #imperium:im.raycast_pass at ~-0.3)
+                OR a hookable entity within 1.5 (OnGround on bobbers was unreliable)
+            - reel vs cancel: only launches if the rod is still in the offhand (im.grapple_user) when
+                the bobber vanishes; a slot-change cancel removes the rod so it just disarms
+            - tuning (main/ability_parameters): #GrappleLateral, #GrappleVertPull (divisors, lower =
+                stronger), #GrappleVertical (static up-pop), #GrappleMax (per-axis speed cap, -1 = off)
+            - multi-use: rod has durability; each grapple spends a point, refills via cd1_rod on cd
+            - break-on-reel FIXED: rod loot has a use_remainder fishing_rod (custom_data
+                imperium_kit + imperium_clearme). When the rod breaks on the launching reel, the
+                stand-in keeps imperium_kit, so grapple_track's offhand check still reads a kit rod
+                that tick and the launch fires. loop.mcfunction then strips imperium_clearme items
+                (after grapple_track) so the "broken" rod can't be re-cast before its cd re-give.
+            - KNOWN EDGE CASES (acceptable for now):
+                > bobber auto-retract (>33 blocks / line-of-sight lost) counts as a reel -> grapples
+                > a cancel that somehow keeps the rod in the offhand wouldn't be caught (fishing_rod_hooked
+                    advancement is unreliable for ground reels, so we use the rod-in-hand check instead)
+                > ground check at ~-0.3 assumes full-block floors; slabs/stairs may need depth tuning
     x   Rabbit Stew: 10x 12hp
 
 Arena Systems:
@@ -150,20 +172,56 @@ Booth Integration:
             - enter booth, read all lore, use all abilities on dummy, find hidden items, win a match
             - grant by granting advancement summit.sticker_book:imperium/<sticker_id>
 
-    Battlegrounds Match:
-    o   Register booth on load: summit.battlegrounds:api/register_booth
-            - needs return_pos/return_rot, struct_function, compatibility id (shared lobby), kit_function
-    o   Arena structure: build it, save as a structure, wire set_structure via struct_function
-    o   Kit carry-in: assign_kit / unassign_kit so the chosen kit enters the match (FFA deathmatch)
-    o   Hook function tags: player_enter, player_died, booth_active, booth_inactive
-            - guard each: unless data storage summit.battlegrounds:database session{booth_id:"imperium"} run return 0
-    o   Combat ticking during matches: booth ticking won't reach summit.battlegrounds.player
-            - decide: persistent tick (needs approval) vs self-scheduled clock started on
-              booth_active, stopped on booth_inactive  --  CONFIRM WITH COORDINATOR
-    o   Migrate Arena Systems (above) to gate on summit.battlegrounds.player + active booth,
-            off the global loop
+    Battlegrounds Match:   [DESIGN LOCKED 2026-06-26 -- deferred to finish kit abilities first]
+
+        Format: STOCK (lives). Each player gets N respawns, then they're out (im.out).
+            Win a "set" (= one activation cycle of the booth) = last player not out; if the cycle
+            timer ends with >1 alive, highest im_matchKills wins.
+        Kill credit: LAST ATTACKER = the killing blow. Use advancement minecraft:player_killed_entity
+            (entity = #imperium:human) -- its reward runs AS the killer, so NO UUID storage needed.
+            (Misses environmental deaths; acceptable for last-attacker. Verify trigger name in-game.)
+
+        State (objectives / tags):
+            im_lives        dummy   remaining stock; set on enter, -- on death
+            im_matchKills   dummy   kills this set; ++ on credited kill
+            im.out          tag     eliminated (lives hit 0) -> spectate / booth
+            im.fighting     tag     LOCAL stand-in for summit.battlegrounds.player (test off-Summit)
+
+        Hook -> function (guard each with:
+                unless data storage summit.battlegrounds:database session{booth_id:"imperium"} run return 0):
+            register_booth (load)   booth_id imperium, return_pos=booth kit room, kit_function=equip,
+                                    struct_function=place arena, compatibility=<shared lobby id>
+            player_enter            im_lives=N, im_matchKills=0, remove im.out, spawnpoint -> arena entry
+            player_killed_entity    (as killer) kits/<kit>/on_kill heal + im_matchKills++ + sticker first_blood
+            player_died             (as victim) im_lives--; >0 respawn at arena entry; =0 add im.out + to booth
+            booth_inactive          set ends: winner = last not im.out, else top im_matchKills -> sticker champion
+            player_leave            + #summit:api/reset_player: clear_kit + undo givekit attr mods,
+                                    reset im_lives / im_matchKills / im.out
+
+        Gate swap: the cooldown engine (internal/cooldown_dealt + cooldown_taken) currently gates on
+            leave_spawn=true (impossible trigger, never granted -> engine never fires). Replace with
+            tag=summit.battlegrounds.player. For local testing use im.fighting (one find/replace to
+            swap in the real tag later). This is what finally lets the engine run off-Summit.
+
+        Build order:
+            Slice 1 (LOCAL, testable now, gate on im.fighting):
+                o   gate swap: cooldown rewards -> im.fighting
+                o   kill credit: advancement combat/kill_player + handler (on_kill + im_matchKills++)
+                o   lives logic: im_lives-- -> respawn-vs-out branch (drive with a local death hook)
+            Slice 2 (Summit wiring -- skeletons + TODOs):
+                o   register_booth on load
+                o   hook function tags (player_enter/died/leave, booth_active/inactive), all guarded
+                o   assign_kit / unassign_kit from armor-room select; kit_function = equip
+                o   #summit:api/reset_player undo
+            Slice 3 (assets / needs build):
+                o   arena structure file + struct_function
+                o   armor-room layout + enter-queue button (Interactions API)
+                o   stickers first_blood + champion defined in booth_definition
+            CONFIRM WITH STAFF: does player_died auto-respawn or do I tp + set spawnpoint? where do
+                players spawn in the arena? respawn invuln/grace handling?
 
     Open Decisions:
+    x   Match format: STOCK (lives) + last-attacker kill credit  [decided 2026-06-26]
     o   Dummy entity: sulfur cube (Summit asset) vs custom mummy mannequin
     o   Combat ticking method: persistent tick vs scheduled clock
     o   Balloon model namespace: own RP vs summit_balloons

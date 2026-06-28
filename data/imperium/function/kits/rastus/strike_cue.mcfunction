@@ -7,7 +7,9 @@ advancement revoke @s only imperium:rastus_strike_cue
 # particle minecraft:electric_spark ~ ~1 ~0.6 0.4 0.4 0.4 0.25 24
 # particle minecraft:crit            ~ ~1 ~0.6 0.4 0.4 0.4 0.30 14
 
-playsound block.amethyst_block.place player @s ~ ~ ~ 1 1
 execute \
-    at target \
-    run particle enchanted_hit ~ ~1 ~ 0.2 0.4 0.2 0.2 20
+    at @s \
+    run playsound entity.blaze.hurt player @a ~ ~ ~ 0.8 1.5
+execute \
+    at @s \
+    run playsound block.amethyst_block.place player @a ~ ~ ~ 1 1
