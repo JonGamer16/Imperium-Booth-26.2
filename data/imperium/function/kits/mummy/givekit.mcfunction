@@ -9,8 +9,7 @@ item replace entity @s armor.head with \
         attribute_modifiers=[\
             {type:"armor",amount:15,operation:"add_value",slot:head,id:"head"},\
             {type:"armor_toughness",amount:8,operation:"add_value",slot:head,id:"head"},\
-            {type:"movement_speed",amount:-0.3,operation:"add_multiplied_base",slot:"head",id:"head"},\
-            ],\
+        ],\
         enchantments={"imperium:wip_barrier":1,"protection":8},\
         !max_damage,\
         profile="Mummy",\
@@ -98,5 +97,8 @@ loot give @s loot imperium:mummy/healing
 scoreboard players operation @s im_abilityCdA = #Mummy im_abilityCdA
 scoreboard players operation @s im_abilityCdB = #Mummy im_abilityCdB
 scoreboard players operation @s im_abilityCdC = #Mummy im_abilityCdC
+
+#   Energy meter (see kits/mummy/energy_*) — start full, capped at #MummyEnergyMax.
+scoreboard players operation @s im_energy = #MummyEnergyStart im.param
 
 tag @s add im.kit_mummy

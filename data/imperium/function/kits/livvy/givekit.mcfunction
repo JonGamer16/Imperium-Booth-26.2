@@ -79,14 +79,13 @@ item replace entity @s hotbar.0 with \
 #    ] 1
 function imperium:kits/livvy/cd1_feather
 
-#   [SLOT 2] Throwable Web
-#item replace entity @s hotbar.1 with \
-#    cobweb[\
-#        max_stack_size=1,\
-#        consumable={consume_seconds:0.05,sound:"entity.spider.ambient"},\
-#        custom_data={"imperium_kit":1b},\
-#    ] 1
-function imperium:kits/livvy/cd2_web
+#   [SLOT 2] Throwable Web (multi-charge, count-based — mirrors Meowdy's arrows)
+#       Give the full 3-web stack now and seed the count-based stock from #Livvy constants. The
+#       loop recounts im_cdUsesB on each throw; cd2_web refills one web at a time.
+loot give @s loot imperium:livvy/webs
+scoreboard players operation @s im_cdMaxB = #Livvy im_cdMaxB
+scoreboard players operation @s im_cdUsesB = #Livvy im_cdMaxB
+scoreboard players operation @s im_cdFloorB = #Livvy im_cdFloorB
 
 #   [SLOT 3] Acid Potion
 #item replace entity @s hotbar.2 with \

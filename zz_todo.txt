@@ -15,16 +15,16 @@ Kit Abilities:
     Meowdy:
     x   Shortsword: faster Sword
     /   Cat Claws: high attack speed, - kb
-    /   Leap Feather: from ground only
+    x   Leap Feather: from ground only
     x   Crossbows: one with quick charge, one with multishot, #bypasses_cooldown
     x   Salmon: 8hp
 
     Mummy:
     /   Claymore: + attack reach, - attack speed, mace base item
-    o   Golem Throw Enchantment: sneak to charge, upward kb, + damage
-    o   Energy Barrier Enchantment: active while sneaking, absorbs damage, rechargable durability meter, + kb resist
-    o   Grapple Rod: limited durability, increased velocity, Reeling Enchantment
-    o   Energy Crystal: place on ground with shift + right click, exploding with delay
+    /   Golem Throw Enchantment: sneak to charge, upward kb, + damage
+    /   Energy Barrier Enchantment: active while sneaking, absorbs damage, rechargable durability meter, + kb resist
+    /   Grapple Rod: limited durability, increased velocity, Reeling Enchantment
+    /   Energy Crystal: place on ground with shift + right click, exploding with delay
 
     Rastus:
     /   Rapier: + attack speed, - knockback, #bypasses_cooldown
@@ -47,13 +47,13 @@ Kit Abilities:
             - note: I need to change the existing lifesteal enchantment to add to a score and give soup, like a 4th ability slot
     /   Acid Potion: poison 3 | 3s, harming 1
             - plan: tag poison damage as #bypasses_cooldown and whatever drowning damage uses
-    o   Web Throw: block entity, reduces movement, jump, and attack speed on contact
+    /   Web Throw: block entity, reduces movement, jump, and attack speed on contact
             - plan: lingering potion of slowness and fatigue
             - I'd need an attribute system to prevent jumping out
             - loop to summon block display on new clouds and tag them as paired with a block display
             - loop to get rid of block displays whose cloud died
             - edit ReapplicationDelay property of cloud, check for tagged entities
-    /   Leap Feather: like Meowdy's, but also gives 1 second of strength
+    x   Leap Feather: like Meowdy's, but also gives 1 second of strength
             - plan: hold in offhand, consumable component -> advancement detection -> run function using player_motion
     x   Beetroot Soup: 10x 8hp
 

@@ -11,7 +11,7 @@ summon minecraft:armor_stand ~ ~ ~ \
     CustomNameVisible:1b,\
     CustomName:{text:"Mummy",color:"gray",bold:true},\
     Tags:["im.booth_stand_model","im.booth_mummy","im.booth_new"],\
-    Rotation:[20f,0f],\
+    Rotation:[-70f,0f],\
     Pose:{Head:[7f,343f,0f],LeftLeg:[337f,343f,0f],RightLeg:[17f,360f,5f],LeftArm:[244f,346f,10f],RightArm:[335f,360f,18f]}\
 }
 loot replace entity @e[type=armor_stand,tag=im.booth_new,limit=1] \

@@ -14,6 +14,7 @@
                 "minecraft:enchantments": {
                   "imperium:wip_reeling": 1
                 },
+                "minecraft:use_cooldown":{"seconds": 0.5},
                 "minecraft:custom_name": {"text": "Grapple Rod", "color": "gold", "italic": false},
                 "minecraft:custom_data": "{imperium_kit:1b}"
               }

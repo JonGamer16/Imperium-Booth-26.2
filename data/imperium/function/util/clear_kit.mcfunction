@@ -65,3 +65,35 @@ scoreboard players set @s im_cdMaxC 0
     attribute @s minecraft:attack_knockback modifier remove imperium:charge
     scoreboard players set @s im_leventCharge 0
     advancement revoke @s only imperium:levent_shield
+
+# Livvy
+
+    # Web Throw — drop the cobweb clamp if this player was webbed, so a swap can't leave the
+    # movement/air-drag modifiers stuck on the new kit. (Webs already in the world expire on their own.)
+    tag @s remove im.webbed
+    attribute @s minecraft:movement_speed modifier remove imperium:web
+    attribute @s minecraft:air_drag_modifier modifier remove imperium:web
+    scoreboard players set @s im_webbed 0
+
+# Mummy
+
+    # Grappling Rod — drop any in-flight grapple state so a kit swap mid-cast can't carry a stale
+    # armed reel onto the next kit (mirrors the Smokey grapple cleanup above).
+    tag @s remove im.mgrapple_user
+    tag @s remove im.mgrapple_live
+    tag @s remove im.mgrapple_armed
+
+    # Energy meter — empty the pool so a swap can't carry banked energy onto the next kit (the new
+    # kit's givekit re-seeds it for its own wired slots; Mummy's resets it to #MummyEnergyStart).
+    scoreboard players set @s im_energy 0
+
+    # Energy Barrier — drop any raised barrier so a swap can't leave absorption hearts / the cap stuck.
+    tag @s remove im.barrier_up
+    attribute @s minecraft:max_absorption modifier remove imperium:barrier
+    data modify entity @s AbsorptionAmount set value 0f
+
+    # Golem Throw — clear the wind-up/armed state so a swap can't carry a charged heavy hit onto the
+    # next kit (the enchant leaves with the mace; only the scores/tag need wiping here).
+    scoreboard players set @s im_golemCharge 0
+    scoreboard players set @s im_golemReady 0
+    tag @s remove im.golem_armed

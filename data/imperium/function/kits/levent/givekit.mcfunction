@@ -81,16 +81,6 @@ item replace entity @s hotbar.1 with \
         custom_data={"imperium_kit":1b},\
     ] 1
 
-#   [TOOL] Gravity Flower
-item replace entity @s hotbar.2 with \
-    chorus_flower[\
-        custom_name={color:"white",italic:false,text:"Gravity Flower"},\
-        attribute_modifiers=[\
-            {type:"gravity",amount:-0.75,operation:"add_multiplied_base",slot:"hand",id:"hand"}\
-        ],\
-        custom_data={"imperium_kit":1b}\
-    ] 1
-
 #   [SLOT 1] Levitation Arrow
 #item replace entity @s hotbar.8 with \
 #    tipped_arrow[\

@@ -1,0 +1,17 @@
+{
+  "values": [
+    "minecraft:block_display",
+    "minecraft:item_display",
+    "minecraft:text_display",
+    "minecraft:interaction",
+    "minecraft:marker",
+    "minecraft:armor_stand",
+    "minecraft:area_effect_cloud",
+    "minecraft:item",
+    "minecraft:experience_orb",
+    "minecraft:arrow",
+    "minecraft:spider",
+    "minecraft:cave_spider",
+    "minecraft:vex"
+  ]
+}

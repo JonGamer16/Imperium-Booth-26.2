@@ -12,6 +12,42 @@
     # @e[fishing_bobber] scan only runs while a Smokey is online.
     execute if entity @a[tag=im.kit_smokey] run function imperium:kits/smokey/grapple_track
 
+# Mummy's Abilities
+
+    # Grappling Rod (Mummy): "get over here" — track cast bobbers and, on reel-in, yank the hooked
+    # entity to the Mummy (reverse of Smokey, who pulls himself in). Gated on a Mummy online.
+    execute if entity @a[tag=im.kit_mummy] run function imperium:kits/mummy/mgrapple_track
+
+    # Energy meter (Mummy): bank crystals, run the Energy Barrier (sneak), repaint the action bar.
+    # The pool is spent by Golem Throw / Energy Barrier / Mace Smash (see kits/mummy/energy_spend).
+    # `at @s` gives a position so the barrier/refill ~ ~ ~ sounds play at the player.
+    execute as @a[tag=im.kit_mummy] at @s run function imperium:kits/mummy/energy_tick
+
+    # Golem Throw (Mummy): a charged heavy hit, wound up ONLY while sneaking — the same hold as the
+    # Energy Barrier, so you charge from behind your shield. Releasing sneak resets the wind-up. The
+    # charge counter drives a cycle: [#GolemChargeTime, #GolemChargeEnd) is the ARMED window (uptime);
+    # miss it and the charge resets, re-winding (downtime). Armed (im_golemReady=1) also needs enough
+    # energy. The wip_golem_throw enchant reads that flag on hit (bonus damage + fling the victim),
+    # then golem_after spends the energy (re-projecting the barrier so the hold-sync can't refund it).
+    # While armed, particles + a clink telegraph the wind-up to nearby enemies. Runs after energy_tick
+    # so it reads the barrier-synced energy.
+    execute as @a[tag=im.kit_mummy,predicate=imperium:sneaking] run scoreboard players add @s im_golemCharge 1
+    execute as @a[tag=im.kit_mummy] unless entity @s[predicate=imperium:sneaking] run scoreboard players set @s im_golemCharge 0
+    execute as @a[tag=im.kit_mummy] if score @s im_golemCharge >= #GolemChargeEnd im.param run scoreboard players set @s im_golemCharge 0
+    scoreboard players set @a[tag=im.kit_mummy] im_golemReady 0
+    execute as @a[tag=im.kit_mummy,predicate=imperium:sneaking] if score @s im_golemCharge >= #GolemChargeTime im.param if score @s im_energy >= #MummyGolemThrowCost im.param run scoreboard players set @s im_golemReady 1
+    execute as @a[tag=im.kit_mummy,tag=!im.golem_armed,scores={im_golemReady=1}] at @s run function imperium:kits/mummy/golem_arm
+    execute as @a[tag=im.kit_mummy,tag=im.golem_armed,scores={im_golemReady=0}] at @s run function imperium:kits/mummy/golem_disarm
+    execute as @a[tag=im.kit_mummy,tag=im.golem_armed] at @s run particle minecraft:crit ~ ~1 ~ 0.4 0.7 0.4 0.1 6
+    execute as @a[tag=im.kit_mummy,tag=im.golem_armed] at @s run particle minecraft:electric_spark ~ ~1 ~ 0.4 0.8 0.4 0.02 6
+
+    # Crystal Bomb (Mummy): a sneak-placed Energy Crystal (crystal_bomb summons it). Start the fuse on
+    # freshly placed bombs, tick it down, and remove the crystal on expiry (detonation AoE added next
+    # step). Operates on the bomb entities, so it keeps ticking even if the placer leaves.
+    execute as @e[type=end_crystal,tag=im.crystal_bomb,tag=!im.bomb_live] run function imperium:kits/mummy/bomb_init
+    scoreboard players remove @e[type=end_crystal,tag=im.bomb_live] im_bombFuse 1
+    execute as @e[type=end_crystal,tag=im.bomb_live,scores={im_bombFuse=..0}] at @s run function imperium:kits/mummy/bomb_detonate
+
 # Use-remainder placeholder cleanup
     # The Recoil Rod and Reversal Shield carry a use_remainder that drops a same-type stand-in
     # (custom_data imperium_clearme:1b) when the item breaks, so a breaking use is still detected
@@ -48,6 +84,23 @@
     # no-impact poison without globally tagging vanilla magic damage.
     execute as @a if predicate imperium:has_venom run function imperium:kits/livvy/venom_apply
     function imperium:kits/livvy/venom_tick
+
+    # Web Throw (Livvy): a thrown web potion lands as an area_effect_cloud (custom_color 14737632);
+    # convert each fresh one into a cobweb block display (the real, blockless web). Then tick each
+    # web's 3s life, hold any non-Livvy victim inside it, and despawn it when expired.
+    execute \
+        as @e[type=area_effect_cloud,nbt={potion_contents:{custom_color:14737632}}] \
+        at @s \
+        run function imperium:kits/livvy/web_init
+    scoreboard players remove @e[type=block_display,tag=im.web,scores={im_webLife=1..}] im_webLife 1
+    execute as @e[type=block_display,tag=im.web] at @s run function imperium:kits/livvy/web_apply
+    kill @e[type=block_display,tag=im.web,scores={im_webLife=..0}]
+    # Release victims (mobs or players) who have left every web (heartbeat watchdog, mirrors
+    # high_jump's cleanup). Must be @e so webbed mobs get freed too, not just players.
+    scoreboard players remove @e[tag=im.webbed,scores={im_webbed=1..}] im_webbed 1
+    execute as @e[tag=im.webbed,scores={im_webbed=0}] run function imperium:kits/livvy/web_release
+    # Keep Livvy's web charge count synced to her real remaining web potions (count-based stock).
+    execute as @a[tag=im.kit_livvy] store result score @s im_cdUsesB run clear @s lingering_potion[custom_data~{imperium_kit:1b}] 0
 
 # Rastus's Abilities
 

@@ -1,53 +1,29 @@
-# ===== Global defaults =====
-#   Default item cooldown length (damage units). Abilities pass base:0 to inherit this.
-scoreboard players set #GlobalDefault im.dmg 500
-#   Default stockpile %: how much of a cooldown may pre-charge while frozen.
-#   Abilities pass stock:-1 to inherit this. floor = base*(100-stock)/100.
-scoreboard players set #GlobalStock im.dmg 50
+# Net Damage Tracking (delta inputs that bleed the cooldowns)
+scoreboard objectives add im_abilityDealt custom:damage_dealt
+scoreboard objectives add im_abilityTaken custom:damage_taken
 
-# ===== Per-ability cooldowns =====
-#   set_cd {kit, slot, base, stock}:  base 0 = global default, stock -1 = global default.
-#   Slot letters follow the cd*_* functions, not any stale labels.
+# Ability Cooldowns
+scoreboard objectives add im_abilityCdA dummy
+scoreboard objectives add im_abilityCdB dummy
+scoreboard objectives add im_abilityCdC dummy
+#   Remaining charges per slot. 0 = fully spent (cooldown counts down); >0 = frozen.
+#   Unwired slots stay 0 and keep the old always-counting behavior.
+scoreboard objectives add im_cdUsesA dummy
+scoreboard objectives add im_cdUsesB dummy
+scoreboard objectives add im_cdUsesC dummy
+#   Max Ability Charges
+scoreboard objectives add im_cdMaxA dummy
+scoreboard objectives add im_cdMaxB dummy
+scoreboard objectives add im_cdMaxC dummy
+#   Stockpile %: how much of a cooldown may pre-charge while still frozen (per kit/slot).
+#   Floor = base*(100-stock)/100: the value a frozen slot can bleed down to (banking residual).
+scoreboard objectives add im_cdStockA dummy
+scoreboard objectives add im_cdStockB dummy
+scoreboard objectives add im_cdStockC dummy
+scoreboard objectives add im_cdFloorA dummy
+scoreboard objectives add im_cdFloorB dummy
+scoreboard objectives add im_cdFloorC dummy
 
-# Cliffshield: A Shield, B Arrows, C Rush Potion
-function imperium:abilities/set_cd {kit:"Cliffshield",slot:"A",base:0,stock:-1}
-function imperium:abilities/set_cd {kit:"Cliffshield",slot:"B",base:250,stock:-1}
-function imperium:abilities/set_cd {kit:"Cliffshield",slot:"C",base:250,stock:-1}
-
-# Levent: A Levitation Arrows, B Shield  (C empty)
-function imperium:abilities/set_cd {kit:"Levent",slot:"A",base:150,stock:-1}
-function imperium:abilities/set_cd {kit:"Levent",slot:"B",base:300,stock:-1}
-
-# Livvy: A Leap, B Web, C Acid Potion
-function imperium:abilities/set_cd {kit:"Livvy",slot:"A",base:150,stock:-1}
-function imperium:abilities/set_cd {kit:"Livvy",slot:"B",base:150,stock:-1}
-function imperium:abilities/set_cd {kit:"Livvy",slot:"C",base:150,stock:-1}
-
-# Meowdy: A Leap, B Arrows  (C empty)
-function imperium:abilities/set_cd {kit:"Meowdy",slot:"A",base:100,stock:-1}
-function imperium:abilities/set_cd {kit:"Meowdy",slot:"B",base:100,stock:90}
-
-# Mummy: A Golem Throw, B Grapple Rod  (C empty)
-function imperium:abilities/set_cd {kit:"Mummy",slot:"A",base:100,stock:-1}
-function imperium:abilities/set_cd {kit:"Mummy",slot:"B",base:100,stock:-1}
-
-# Rastus: A Buckler Shield, B Strike/Parry  (C empty)
-function imperium:abilities/set_cd {kit:"Rastus",slot:"A",base:400,stock:-1}
-function imperium:abilities/set_cd {kit:"Rastus",slot:"B",base:50,stock:-1}
-
-# Smokey: A Boost Rod, B Marking Dart, C Smoke Bomb
-function imperium:abilities/set_cd {kit:"Smokey",slot:"A",base:400,stock:80}
-function imperium:abilities/set_cd {kit:"Smokey",slot:"B",base:200,stock:-1}
-function imperium:abilities/set_cd {kit:"Smokey",slot:"C",base:200,stock:-1}
-
-# ===== Charges per refill cycle (im_cdMax*) =====
-# A slot listed here freezes its cooldown until all its charges are spent.
-# Slots with no max keep 0 charges and fall back to the old always-counting cooldown.
-# Livvy slot A = Leap feather
-scoreboard players set #Livvy im_cdMaxA 1
-# Meowdy slot A = Leap feather
-scoreboard players set #Meowdy im_cdMaxA 1
-# Smokey slot B = Marking Dart
-scoreboard players set #Smokey im_cdMaxB 1
-# Meowdy slot B = Arrows: count-based & multi-charge -> max is derived from the actual
-# arrow stack at givekit (see meowdy/givekit), so no #Kit constant is set here.
+# Populate per-kit cooldown bases, stockpile %s, floors, and charges.
+# (Requires the constants from main/constants to already be declared.)
+function imperium:main/ability_cooldowns
