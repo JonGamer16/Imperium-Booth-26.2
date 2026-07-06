@@ -1,0 +1,100 @@
+{
+    "description": "Tipper",
+    "supported_items": "#minecraft:enchantable/melee_weapon",
+    "slots": ["mainhand"],
+    "weight": 1,
+    "anvil_cost": 2,
+    "min_cost": 
+    {
+        "base": 2,
+        "per_level_above_first": 1
+    },
+    "max_cost": 
+    {
+        "base": 2,
+        "per_level_above_first": 1
+    },
+    "max_level": 3,
+    "effects": 
+    {
+        "damage":
+        [
+            {
+                "effect":
+                {
+                    "type": "multiply",
+                    "factor":
+                    {
+                        "type": "linear",
+                        "base": 1.17,
+                        "per_level_above_first": 0.16
+                    }
+                },
+                "requirements": 
+                [
+                    {   
+                        "condition": "value_check",
+                        "value": 
+                        {
+                            "type": "score",
+                            "target":
+                            {
+                                "type": "context",
+                                "target": "attacker"
+                            },
+                            "score": "im_tipper"
+                        },
+                        "range": 
+                        {
+                            "min": 2,
+                            "max": 2
+                        }
+                    }
+                ]
+            },
+            {
+                "effect": 
+                {
+                    "type": "multiply",
+                    "factor":
+                    {
+                        "type": "linear",
+                        "base": 0.9,
+                        "per_level_above_first": -0.1
+                    }
+                },
+                "requirements": 
+                [
+                    {   
+                        "condition": "value_check",
+                        "value": 
+                        {
+                            "type": "score",
+                            "target": 
+                            {
+                                "type": "context",
+                                "target": "attacker"
+                            },
+                            "score": "im_tipper"
+                        },
+                        "range": 
+                        {
+                            "min": 0,
+                            "max": 0
+                        }
+                    }
+                ]
+            }
+        ],
+        "tick": 
+        [
+            {
+                "effect":
+                {
+                    "type": "run_function",
+                    "function": "imperium:enchantments/tipper_context"
+                }
+            }
+        ]
+    }
+}

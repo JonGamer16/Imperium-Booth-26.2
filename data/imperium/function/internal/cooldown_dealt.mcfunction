@@ -4,4 +4,5 @@
 # im_abilityDealt / im_abilityTaken, so running the engine only on damage events is exact and
 # costs nothing on quiet ticks. Re-arm, then run the engine if the player is in the arena.
 advancement revoke @s only imperium:combat/cooldown_dealt
-execute if entity @s[advancements={imperium:leave_spawn=true}] run function imperium:update_cooldowns
+execute if entity @s[tag=im.fighting] run function imperium:update_cooldowns
+execute if entity @s[tag=im.fighting] run function imperium:arena/gold_dmg_bonus

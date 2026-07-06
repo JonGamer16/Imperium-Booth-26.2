@@ -55,6 +55,7 @@ function imperium:main/enchantments
 function imperium:main/game_triggers
 function imperium:main/constants
 function imperium:main/init_cooldowns
+function imperium:main/init_stats
 function imperium:main/old_objectives
 
 # Ability tuning constants (durations, intervals, thresholds). After old_objectives so every
@@ -62,8 +63,9 @@ function imperium:main/old_objectives
 function imperium:main/ability_parameters
 
 # HUD displays
-scoreboard objectives setdisplay below_name HP
-scoreboard objectives setdisplay list totalKills
+    # No global scoreboard displays allowed
+    # scoreboard objectives setdisplay below_name im.hp
+    # scoreboard objectives setdisplay list totalKills
 
 # Testing (kept inline for quick reference)
 team add w

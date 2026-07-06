@@ -17,6 +17,16 @@
           "function": "imperium:kits/levent/charge_spend"
         }
       }
+    ],
+    "tick":
+    [
+      {
+        "effect": 
+        {
+          "type": "run_function",
+          "function": "imperium:kits/levent/charge_timer"
+        }
+      }
     ]
   }
 }

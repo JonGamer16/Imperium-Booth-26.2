@@ -86,6 +86,9 @@ loot give @s loot imperium:livvy/webs
 scoreboard players operation @s im_cdMaxB = #Livvy im_cdMaxB
 scoreboard players operation @s im_cdUsesB = #Livvy im_cdMaxB
 scoreboard players operation @s im_cdFloorB = #Livvy im_cdFloorB
+#       Seed the web throw-sampler to the current used-stat so loop_kit's first tick sees a zero
+#       delta (no stale recount) — the count starts authoritative from the full stack given above.
+scoreboard players operation @s im_webUsedPrev = @s im_webUsedStat
 
 #   [SLOT 3] Acid Potion
 #item replace entity @s hotbar.2 with \

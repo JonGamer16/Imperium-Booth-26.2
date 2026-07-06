@@ -1,0 +1,79 @@
+Released BSL systems and where your project hooks in
+
+    1. Booth Definition — the one required file
+        Confirms your wiring items exactly:
+
+        ticking_functions is a map like {"imperium:tick":"1t","imperium:5t":"5t"}; timings are strings, and these only run while a player is inside a bounding box. This validates your two-worlds split (check_stands → imperium:tick), and confirms your "Ticking targets: create imperium:tick and imperium:5t" item.
+        on_player_enter must be a full function location (imperium:booth/enter_booth) — confirms that todo item. Global enter fires only on not-in-any-box → in-a-box; per-box enter/exit also supported (backs your cave per-box reward). (Minor: the doc's on_player_exit blurb has a copy-paste typo saying "enter" — it does mean exit.)
+    2. Ticking Your Booth — [L243-269](.claude/Smithed API/Summit Handbook.md#L243-L269)
+        Answers your "Combat ticking method" open decision:
+
+        Booth ticking_functions won't reach arena players (they're outside your bounds) — you were right.
+        Two sanctioned escapes: Schedule Clocks for short bursts (schedule function … 5t replace), and a Persistent Booth Tick that runs every tick regardless of presence — but it's approved case-by-case and must be gated behind one cheap score/flag check. Since your cooldown engine is event-driven (damage advancements), you may need very little persistent ticking. Flag this one for your coordinator.
+    3. Entity Tags — [L271-290](.claude/Smithed API/Summit Handbook.md#L271-L290)
+        summit.booth_entity.imperium on all entities (schematic ones auto-tagged) — confirms your tagging item.
+        summit.static = won't tick / won't send client updates; schematic entities get it automatically. Override with summit.dynamic for anything that animates or moves (your kit-select stands if they repose, an animated dummy).
+        BSL gives you summit.in_booth.imperium on any player inside a box — you don't need to build your own "in booth" tracker.
+        summit.enable_block_interactivity marker → new todo: if your build has doors/levers/GUI blocks that must stay usable, they'll be blocked by their worldguard system unless you place these markers.
+    4. Function Tags — [L292-307](.claude/Smithed API/Summit Handbook.md#L292-L307)
+        #summit:api/reset_player — confirms your "Reset hook." Add your givekit attribute-undo + clear_kit here. Note: it does not reset sticker/persistent progress, so don't wipe those.
+        #summit.booth:imperium/entities/summon + /kill — new: any entity that carries scores (your auto-reset dummy, any Animated Java rig) must be summoned/killed through these tags and kept out of the schematic (schematic transfer drops scores).
+    5. Predicates — [L309-320](.claude/Smithed API/Summit Handbook.md#L309-L320)
+        BSL auto-generates summit.booth:imperium/in_booth and summit.booth:imperium/in_bounding_box/<name>. Reference these in advancements instead of hand-rolling region checks — e.g. your cave sticker can gate on in_bounding_box/cave.
+
+    6. Interactions API — [L799-817](.claude/Smithed API/Summit Handbook.md#L799-L817)
+        Your kit-stand plan is verbatim correct: {Tags:["summit.interactable","summit.static"], data:{summit_interactable:{on_right_click:"execute on target run function …/select"}}}. Additions you can use: on_left_click (with execute on attacker), special:"sit", and special:"balloon_vendor".
+
+    7. Balloons — [L491-536](.claude/Smithed API/Summit Handbook.md#L491-L536) + vendor interaction
+        Registered in booth_definition; give function is summit.balloon:give/imperium/<balloon_id>.
+        Balloon vendor = an interaction with special:"balloon_vendor", namespace:"imperium", balloon_id:"…", 20-min cooldown built in — matches your todo exactly, no cooldown logic needed on your end.
+        Your model-namespace open decision is a free choice: summit_balloons:item/smithie (theirs) or your own imperium:balloon/… both work. Style rules: max 1.5³ blocks, origin at 0,0,0, scaled to 25% in Blockbench, tint index 0 on all faces, white string. They ask for 1–2 balloons per booth.
+    8. Sticker Book — [L393-425](.claude/Smithed API/Summit Handbook.md#L393-L425)
+        Grant via advancement summit.sticker_book:imperium/<id> — confirmed. Up to 5 — confirmed.
+        New required fields your todo doesn't list: background_color (tape hex), region (must be patched_plateaus, textured_tropics, or welded_woodlands — pick one), plus per-sticker sticker_name/unobtained_text/obtained_text.
+        Style guide: square canvas, ≥20×20, white border. Free helpers: score summit.total_unlocked_stickers (per player) and $global summit.total_unlocked_stickers (total available).
+    9. Battlegrounds API — [L819-931](.claude/Smithed API/Summit Handbook.md#L819-L931)
+        Your locked design is largely right. Corrections/confirmations:
+
+        register_booth macros: booth_id, booth_name, return_pos, return_rot, struct_function, compatibility, kit_function. You were missing booth_name and return_rot; struct_function must be a valid function even if blank. Your guessed compatibility=<shared lobby id> is exactly right (booths sharing a compatibility play simultaneously).
+        Your guard string is correct: execute unless data storage summit.battlegrounds:database session{booth_id:"imperium"} run return 0.
+        Hooks: booth_active, booth_inactive, player_enter_attempt, player_enter, player_leave, player_died. You have all except the new player_enter_attempt — pair it with the #block_player_enter summit.battlegrounds score to reject entry mid-set.
+        No player_killed_entity hook — correct call to use the vanilla advancement for last-attacker kill credit; the API only gives you player_died (as victim), so respawn/out logic is yours.
+        assign_kit/unassign_kit (macros booth_id, kit_id, kit_function) is precisely the mechanism for your armor-room select → per-player kit. Default kit rides on register_booth's kit_function.
+        set_structure + the example arena structure file "in the BSL distribution" — that's your arena structure item.
+        Scoreboards you get for free: $players summit.battlegrounds, $time_left summit.battlegrounds (seconds to next booth in the cycle — this is the 3-min cycling; your "set ends" = booth_inactive).
+        Your "CONFIRM WITH STAFF: respawn behavior" question stands — the API just hands you player_died; tp/spawnpoint/grace is your implementation.
+    10. Regen API — [L1067-1085](.claude/Smithed API/Summit Handbook.md#L1067-L1085) — NEW, not in your todo
+        Every player gets Resistance V + Saturation by default. Consequences:
+
+        Players standing in your booth are effectively immune to ability damage — fine for the arena, but if you ever want in-booth sparring you'd need to tag summit.no_regen + effect clear.
+        Battlegrounds players are auto-exempt from resistance (hunger untouched), so arena combat works — but you must design around no natural regen there, which fits your STOCK format.
+        The training dummy is a mob, not a player, so this doesn't block damaging it — but it does mean players can't be hurt by the dummy demo in-booth.
+    11. Custom Items — [L427-467](.claude/Smithed API/Summit Handbook.md#L427-L467) — NEW, big implications
+        By default, every item given in your booth is deleted when the player leaves the bounds. Your kit distributor hands out items in the booth; those vanish on exit. Kit items for the arena come via kit_function instead — but any hidden-item pickups or gifts you want players to keep need {summit:{persist:{}}}.
+        Any summoned/dropped item is auto-processed by their item manager unless you add summit custom_data. This hits every thrown projectile you have — Smokey's throwing knife/dart, Livvy's web, Mummy's energy crystal — they'll need summit:{droppable:{ignore:true}} or a callback. Add an audit item for this.
+        Items aren't droppable by default (trash cans provided); mark untrashable only with permission. Add a pack-mark lore line (booth name) to given items.
+    12. Queue API — [L932-1065](.claude/Smithed API/Summit Handbook.md#L932-L1065) — clarifies a misconception
+        Explicitly "SEPARATE FROM THE BATTLEGROUNDS. DO NOT USE THIS FOR THE BATTLEGROUNDS." Your "players TP in and queue a match" idea is handled by the Battlegrounds activation cycle itself, not this. Only touch Queue API if you add a non-combat queued activity.
+
+Gaps to add to your Booth Integration section
+
+    - Regen handling — decide dummy/in-booth combat behavior; note arena players are auto-exempt.
+    - Item audit — persistence (persist), droppable ignore/callback for all thrown projectiles + summoned items, pack-mark lore, untrashable exceptions.
+    - Entity summon/kill tags for score-bearing dynamic entities (dummy, any AJ), keep them out of the schematic.
+    - summit.dynamic override for animated/repositioned stands.
+    - summit.enable_block_interactivity markers for any interactive build blocks.
+    - Reserved/overwritten block states — build must avoid reserved copper, cherry-leaf/sugar-cane overrides, etc. ([L326-356](.claude/Smithed API/Summit Handbook.md#L326-L356)); no vanilla block-state overrides — use item displays.
+    - Advancements — ensure kit-usage detection advancements are technical/non-visual; visual ones only granted in-booth and revoked on leave.
+    - New UUIDs only for hardcoded entities (your handle_click stand handler); prefer the Interactions API for production.
+    - return_rot + booth_name into your register_booth notes; add player_enter_attempt.
+    - Region + tape color + hover text for stickers.
+    - Dialogs: allowed, but #minecraft:pause_screen_additions and #minecraft:quick_actions tags are banned.
+
+Suggested migration order
+
+    Phase 0 — housekeeping (blocking, do first): fix SKILL.md, which still points at the 11 deleted split docs; repoint it at this single handbook. Confirm content-freeze scope with your coordinator.
+    Phase 1 — booth_definition.json: namespace, boxes covering both entrances, on_player_enter full paths, ticking_functions (imperium:tick, imperium:5t), stickers (region/color/text), balloons. This unlocks the free predicates + summit.in_booth tag.
+    Phase 2 — loop split + reset: check_stands → imperium:tick; register #summit:api/reset_player; tag entities; move score-bearing entities to summon/kill tags.
+    Phase 3 — interactions & collectibles: kit stands via Interactions API, balloon vendor, cave/sticker grants, item persistence/droppable audit.
+    Phase 4 — Battlegrounds wiring: register_booth on load, guard + implement the six hook tags, assign_kit/unassign_kit from the armor room, set_structure, gate swap to summit.battlegrounds.player, Regen-aware respawn logic (pending the staff respawn answer).

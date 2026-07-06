@@ -1,0 +1,35 @@
+{
+    "description": "Spring",
+    "supported_items": "#enchantable/foot_armor",
+    "slots": ["any"],
+    "weight": 1,
+    "anvil_cost": 2,
+    "min_cost": 
+    {
+        "base": 2,
+        "per_level_above_first": 1
+    },
+    "max_cost": 
+    {
+        "base": 2,
+        "per_level_above_first": 1
+    },
+    "max_level": 2,
+    "effects": 
+    {
+        "attributes":
+        [
+            {
+                "attribute": "jump_strength",
+                "amount":
+                {
+                    "type": "linear",
+                    "base": 0.5,
+                    "per_level_above_first": 0.5
+                },
+                "operation": "add_multiplied_base",
+                "id": "jump_strength"
+            }
+        ]
+    }
+}

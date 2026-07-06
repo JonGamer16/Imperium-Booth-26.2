@@ -1,0 +1,72 @@
+{
+    "description": "Sneak Guard",
+    "supported_items": "#minecraft:enchantable/armor",
+    "slots": ["any"],
+    "weight": 1,
+    "anvil_cost": 2,
+    "min_cost": 
+    {
+        "base": 2,
+        "per_level_above_first": 1
+    },
+    "max_cost": 
+    {
+        "base": 2,
+        "per_level_above_first": 1
+    },
+    "max_level": 5,
+    "effects": 
+    {
+        "minecraft:damage_protection":
+        [
+            {
+                "effect":
+                {
+                    "type": "add",
+                    "value":
+                    {
+                        "type": "linear",
+                        "base": 1.0,
+                        "per_level_above_first": 1.0
+                    }
+                },
+                "requirements": 
+                {   
+                    "condition": "entity_properties",
+                    "entity": "this",
+                    "predicate":
+                    {
+                        "flags": 
+                        {
+                            "is_sneaking": true,
+                            "is_on_ground": true
+                        }
+                    }
+                }
+            }
+        ],
+        "minecraft:tick":
+        [
+            {
+                "effect": 
+                {
+                    "type": "run_function",
+                    "function": "imperium:enchantments/sneak_guard"
+                },
+                "requirements": 
+                {
+                    "condition": "entity_properties",
+                    "entity": "this",
+                    "predicate": 
+                    {
+                        "flags": 
+                        {
+                            "is_sneaking": true,
+                            "is_on_ground": true
+                        }
+                    }
+                }
+            }
+        ]
+    }
+}

@@ -8,9 +8,8 @@
 
 # Smokey's Abilities
 
-    # Grappling Rod (Smokey): track cast bobbers and launch the angler on reel-in. Gated so the
-    # @e[fishing_bobber] scan only runs while a Smokey is online.
-    execute if entity @a[tag=im.kit_smokey] run function imperium:kits/smokey/grapple_track
+    # Smokey (per-tick, kit online): grapple + smoke clouds + convert dart Bad Omen -> im.marked
+    execute if entity @a[tag=im.kit_smokey] run function imperium:kits/smokey/loop_kit
 
 # Mummy's Abilities
 
@@ -18,28 +17,8 @@
     # entity to the Mummy (reverse of Smokey, who pulls himself in). Gated on a Mummy online.
     execute if entity @a[tag=im.kit_mummy] run function imperium:kits/mummy/mgrapple_track
 
-    # Energy meter (Mummy): bank crystals, run the Energy Barrier (sneak), repaint the action bar.
-    # The pool is spent by Golem Throw / Energy Barrier / Mace Smash (see kits/mummy/energy_spend).
-    # `at @s` gives a position so the barrier/refill ~ ~ ~ sounds play at the player.
-    execute as @a[tag=im.kit_mummy] at @s run function imperium:kits/mummy/energy_tick
-
-    # Golem Throw (Mummy): a charged heavy hit, wound up ONLY while sneaking — the same hold as the
-    # Energy Barrier, so you charge from behind your shield. Releasing sneak resets the wind-up. The
-    # charge counter drives a cycle: [#GolemChargeTime, #GolemChargeEnd) is the ARMED window (uptime);
-    # miss it and the charge resets, re-winding (downtime). Armed (im_golemReady=1) also needs enough
-    # energy. The wip_golem_throw enchant reads that flag on hit (bonus damage + fling the victim),
-    # then golem_after spends the energy (re-projecting the barrier so the hold-sync can't refund it).
-    # While armed, particles + a clink telegraph the wind-up to nearby enemies. Runs after energy_tick
-    # so it reads the barrier-synced energy.
-    execute as @a[tag=im.kit_mummy,predicate=imperium:sneaking] run scoreboard players add @s im_golemCharge 1
-    execute as @a[tag=im.kit_mummy] unless entity @s[predicate=imperium:sneaking] run scoreboard players set @s im_golemCharge 0
-    execute as @a[tag=im.kit_mummy] if score @s im_golemCharge >= #GolemChargeEnd im.param run scoreboard players set @s im_golemCharge 0
-    scoreboard players set @a[tag=im.kit_mummy] im_golemReady 0
-    execute as @a[tag=im.kit_mummy,predicate=imperium:sneaking] if score @s im_golemCharge >= #GolemChargeTime im.param if score @s im_energy >= #MummyGolemThrowCost im.param run scoreboard players set @s im_golemReady 1
-    execute as @a[tag=im.kit_mummy,tag=!im.golem_armed,scores={im_golemReady=1}] at @s run function imperium:kits/mummy/golem_arm
-    execute as @a[tag=im.kit_mummy,tag=im.golem_armed,scores={im_golemReady=0}] at @s run function imperium:kits/mummy/golem_disarm
-    execute as @a[tag=im.kit_mummy,tag=im.golem_armed] at @s run particle minecraft:crit ~ ~1 ~ 0.4 0.7 0.4 0.1 6
-    execute as @a[tag=im.kit_mummy,tag=im.golem_armed] at @s run particle minecraft:electric_spark ~ ~1 ~ 0.4 0.8 0.4 0.02 6
+    # Energy meter + Golem Throw wind-up (per-player) -> kits/mummy/loop_kit
+    execute as @a[tag=im.kit_mummy] at @s run function imperium:kits/mummy/loop_kit
 
     # Crystal Bomb (Mummy): a sneak-placed Energy Crystal (crystal_bomb summons it). Start the fuse on
     # freshly placed bombs, tick it down, and remove the crystal on expiry (detonation AoE added next
@@ -55,26 +34,15 @@
     # and the ability fires on that final use. Strip the stand-ins afterward so a "broken" rod or
     # shield can't be re-cast/re-blocked while it waits for its cooldown re-give.
     # ORDER: must run AFTER grapple_track above, which relies on the rod stand-in to fire the launch.
-    clear @a *[custom_data~{imperium_clearme:1b}]
+    # Only the Recoil Rod (fishing_rod) and Reversal Shield (shield) ever carry imperium_clearme,
+    # so match those two types explicitly. A wildcard `*[custom_data~{...}]` forces the game to
+    # encode the custom_data component of EVERY item in EVERY inventory each tick (a kit loadout is
+    # ~9 custom_data items) — that was a large chunk of the per-tick serialization cost.
+    clear @a fishing_rod[custom_data~{imperium_clearme:1b}]
+    clear @a shield[custom_data~{imperium_clearme:1b}]
 
-    # Smoke Bomb (Smokey): configure freshly-thrown clouds, then emit one puff
-    execute \
-        as @e[type=area_effect_cloud,tag=!im.smoke_bomb,nbt={potion_contents:{custom_color:1973790}}] \
-        at @s \
-        run function imperium:kits/smokey/smoke_init
-    # Smoke Bomb: grant invis + speed to Smokey players inside active clouds
-    execute \
-        as @e[type=area_effect_cloud,tag=im.smoke_bomb] \
-        at @s \
-        run function imperium:kits/smokey/smoke_apply
-
-    # Marking Dart (Smokey): the dart applies Bad Omen purely as an on-hit signal; convert any
-    # hit player to the tracked im.marked tag (Summit wants a tag, not a status effect), then
-    # tick the tag's 10s timer, expiry, and red marker particle.
-    execute \
-        as @a \
-        if predicate imperium:has_bad_omen \
-        run function imperium:kits/smokey/mark_apply
+    # Smokey Mark timer — mark_apply + smoke clouds moved into smokey/loop_kit (kit-online gated);
+    # the timer persists on victims after Smokey leaves, so it stays ungated here.
     function imperium:kits/smokey/mark_tick
 
 # Livvy's Abilities
@@ -82,7 +50,7 @@
     # Venom (Livvy): the Venom Spray's Poison III is just the delivery signal; convert it to the
     # tracked im.venom tag and tick it as no-impact imperium:venom damage — keeps the smooth
     # no-impact poison without globally tagging vanilla magic damage.
-    execute as @a if predicate imperium:has_venom run function imperium:kits/livvy/venom_apply
+    execute if entity @a[tag=im.kit_livvy] as @a if predicate imperium:has_venom run function imperium:kits/livvy/venom_apply
     function imperium:kits/livvy/venom_tick
 
     # Web Throw (Livvy): a thrown web potion lands as an area_effect_cloud (custom_color 14737632);
@@ -92,67 +60,26 @@
         as @e[type=area_effect_cloud,nbt={potion_contents:{custom_color:14737632}}] \
         at @s \
         run function imperium:kits/livvy/web_init
+
     scoreboard players remove @e[type=block_display,tag=im.web,scores={im_webLife=1..}] im_webLife 1
+    
     execute as @e[type=block_display,tag=im.web] at @s run function imperium:kits/livvy/web_apply
+    
     kill @e[type=block_display,tag=im.web,scores={im_webLife=..0}]
     # Release victims (mobs or players) who have left every web (heartbeat watchdog, mirrors
     # high_jump's cleanup). Must be @e so webbed mobs get freed too, not just players.
-    scoreboard players remove @e[tag=im.webbed,scores={im_webbed=1..}] im_webbed 1
-    execute as @e[tag=im.webbed,scores={im_webbed=0}] run function imperium:kits/livvy/web_release
+    scoreboard players remove @e[type=!#im.not_mob,tag=im.webbed,scores={im_webbed=1..}] im_webbed 1
+    
+    execute as @e[type=!#im.not_mob,tag=im.webbed,scores={im_webbed=0}] run function imperium:kits/livvy/web_release
     # Keep Livvy's web charge count synced to her real remaining web potions (count-based stock).
-    execute as @a[tag=im.kit_livvy] store result score @s im_cdUsesB run clear @s lingering_potion[custom_data~{imperium_kit:1b}] 0
+    
+    execute as @a[tag=im.kit_livvy] at @s run function imperium:kits/livvy/loop_kit
 
-# Rastus's Abilities
-
-    # Superior Agility (Rastus): air dodge is advancement-driven. imperium:rastus_air_dodge earns
-    # while a Rastus player holds sneak airborne and runs the launch; the earned advancement is
-    # the once-per-airtime lock. Re-arm it on the ground so each airtime gets exactly one dodge.
-    execute \
-        as @a[tag=im.kit_rastus] \
-        at @s \
-        if predicate imperium:on_ground \
-        run advancement revoke @s only imperium:rastus_air_dodge
-
-    # Strike & Parry (Rastus): shared charge = idle ticks since the last melee. attack_player's
-    # reset_drought zeroes it on a landed hit; the parry reward zeroes it on a shield raise. At
-    # >= #StrikeCharge (0.6s) the rapier Strike and the shield Parry are armed.
-    scoreboard players add @a[tag=im.kit_rastus] im_melee_drought 1
-
-    # Parry full-deflect bubble: tick the window down; when it closes, strip Resistance/KB resist.
-    execute \
-        as @a[tag=im.kit_rastus,scores={im_parryWindow=1..}] \
-        run scoreboard players remove @s im_parryWindow 1
-    execute \
-        as @a[tag=im.kit_rastus,scores={im_parryWindow=0}] \
-        run function imperium:kits/rastus/parry_close
-
-    # Strike (Rastus): arm the rapier boost the tick the shared charge completes; strip it once
-    # the charge is gone (a landed hit via reset_focus, a parry, or any other drought reset).
-    execute \
-        as @a[tag=im.kit_rastus,tag=!im.rastus_focused] \
-        if score @s im_melee_drought >= #StrikeCharge im.param \
-        run function imperium:kits/rastus/focus_on
-    execute \
-        as @a[tag=im.kit_rastus,tag=im.rastus_focused] \
-        unless score @s im_melee_drought >= #StrikeCharge im.param \
-        run function imperium:kits/rastus/focus_off
+# Rastus's Abilities (per-player) -> kits/rastus/loop_kit
+    execute as @a[tag=im.kit_rastus] at @s run function imperium:kits/rastus/loop_kit
 
 # Levent's Abilities
-
-    # Charge Attack (Levent): charge = idle ticks since the last rod jab OR shield raise. A jab
-    # (Charge Attack enchant's post_piercing_attack -> charge_spend, fires on hit AND whiff) and a
-    # shield raise (levent_shield -> charge_block) both zero it. At >= #LeventCharge the boost arms;
-    # the next jab spends it and charge_off strips the bonus the following tick — so a whiff wastes
-    # the charge. Mirrors Rastus's Strike.
-    scoreboard players add @a[tag=im.kit_levent] im_leventCharge 1
-    execute \
-        as @a[tag=im.kit_levent,tag=!im.levent_charged] \
-        if score @s im_leventCharge >= #LeventCharge im.param \
-        run function imperium:kits/levent/charge_on
-    execute \
-        as @a[tag=im.kit_levent,tag=im.levent_charged] \
-        unless score @s im_leventCharge >= #LeventCharge im.param \
-        run function imperium:kits/levent/charge_off
+    # Charge functions moved to enchantment/charge_attack.json and function/levent/charge_timer.mcfunction
 
 
 # Enchantments
@@ -216,6 +143,12 @@
         #execute at @e[type=item,nbt={Item:{id:"minecraft:beetroot_soup"}}] run function imperium:soup/beet_soup_drop
         #execute at @e[type=item,nbt={Item:{id:"minecraft:mushroom_stew"}}] run function imperium:soup/mush_soup_drop
         #execute at @e[type=item,nbt={Item:{id:"minecraft:rabbit_stew"}}] run function imperium:soup/rabbit_soup_drop
+
+# combat round stats: bank regained health for the "damage healed" stat. Gated on im.fighting
+# (local stand-in for summit.battlegrounds.player). Move to arena ticking once that's decided.
+    execute as @a[tag=im.fighting] run function imperium:arena/track_healed
+    # gold rush death penalty: deathCount ticked up -> forfeit half gold (once, then re-arm)
+    execute as @a[tag=im.fighting,scores={im_deaths=1..}] run function imperium:arena/on_death
 
 # arena mechanics (old)
     # execute as @a[scores={killFlag=1..}] run function imperium:arena/kill

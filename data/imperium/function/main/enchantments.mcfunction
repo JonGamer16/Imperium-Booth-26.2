@@ -13,9 +13,8 @@ scoreboard objectives add im_rotationdiff dummy
     scoreboard objectives add im_brittleHealthPrev dummy
     scoreboard objectives add im_brittleNetDamage dummy
     scoreboard objectives add im_brittleNetDamageAccum dummy
-#   Backstab
+#   Backstab (im_backstabraycast removed — the step-counter raycast is gone, replaced by sphere checks)
     scoreboard objectives add im_backstabflag dummy
-    scoreboard objectives add im_backstabraycast dummy
     scoreboard objectives add im_backstabtracking dummy
 #   High Jump
     scoreboard objectives add im_high_jump dummy

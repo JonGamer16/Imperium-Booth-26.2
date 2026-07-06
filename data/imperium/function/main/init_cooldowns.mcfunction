@@ -11,6 +11,11 @@ scoreboard objectives add im_abilityCdC dummy
 scoreboard objectives add im_cdUsesA dummy
 scoreboard objectives add im_cdUsesB dummy
 scoreboard objectives add im_cdUsesC dummy
+#   Livvy web stock: a used-stat (increments each lingering potion thrown) + a previous-tick
+#   sampler, so kits/livvy/loop_kit only re-counts her real webs on a throw instead of every tick
+#   (the per-tick recount encoded the potion's custom_data component every tick).
+scoreboard objectives add im_webUsedStat minecraft.used:lingering_potion
+scoreboard objectives add im_webUsedPrev dummy
 #   Max Ability Charges
 scoreboard objectives add im_cdMaxA dummy
 scoreboard objectives add im_cdMaxB dummy

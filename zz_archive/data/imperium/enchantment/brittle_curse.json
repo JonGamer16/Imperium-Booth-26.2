@@ -1,0 +1,41 @@
+{
+    "description": "Curse of Embrittlement",
+    "supported_items": "#minecraft:enchantable/armor",
+    "slots": ["head","chest","legs","feet"],
+    "weight": 1,
+    "anvil_cost": 2,
+    "min_cost": 
+    {
+        "base": 2,
+        "per_level_above_first": 1
+    },
+    "max_cost": 
+    {
+        "base": 2,
+        "per_level_above_first": 1
+    },
+    "max_level": 2,
+    "effects": 
+    {
+        "minecraft:item_damage": 
+        [
+            {
+                "effect":
+                {
+                    "type": "multiply",
+                    "factor": 0
+                }
+            }
+        ],
+        "minecraft:tick":
+        [
+            {
+                "effect":
+                {
+                    "type": "run_function",
+                    "function": "imperium:enchantments/brittle"
+                }
+            }
+        ]
+    }
+}

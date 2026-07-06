@@ -1,0 +1,55 @@
+{
+    "description": "Aerial Ace",
+    "supported_items":"#minecraft:enchantable/weapon",
+    "slots": ["any"],
+    "weight": 1,
+    "anvil_cost": 2,
+    "min_cost": 
+    {
+        "base": 2,
+        "per_level_above_first": 1
+    },
+    "max_cost": 
+    {
+        "base": 2,
+        "per_level_above_first": 1
+    },
+    "max_level": 2,
+    "effects": 
+    {
+        "damage":
+        [
+            {
+                "effect":
+                {
+                    "type": "multiply",
+                    "factor":
+                    {
+                        "type": "linear",
+                        "base": 1.5,
+                        "per_level_above_first": 0.5
+                    }
+                },
+                "requirements": 
+                {   
+                    "condition": "entity_properties",
+                    "entity": "attacker",
+                    "predicate":
+                    {
+                        "flags": 
+                        {
+                            "is_flying": true
+                        },
+                        "movement": 
+                        {
+                            "speed": 
+                            {
+                                "min": 1
+                            }
+                        }
+                    }
+                }
+            }
+        ]
+    }
+}

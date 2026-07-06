@@ -12,3 +12,7 @@ execute unless entity @s[type=#imperium:human] run data merge entity @s {OnGroun
 execute unless entity @s[type=#imperium:human] store result entity @s Motion[1] double 0.0001 run scoreboard players get $y player_motion.api.launch
 
 playsound minecraft:entity.iron_golem.repair player @a[distance=..32] ~ ~ ~ 1 0.7
+
+# Recoil combo: if this victim is currently hooked by a Mummy's grapple, fling that Mummy skyward too
+# ("throw them and ride the recoil"). The victim and its grappler share im_grappleId (mgrapple_link/hook).
+execute if entity @s[tag=im.mgrapple_hooked] run function imperium:kits/mummy/golem_hook_recoil

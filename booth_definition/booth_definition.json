@@ -38,7 +38,7 @@
             {
                 "sticker_id": "enter_booth",
                 "sticker_texture": "<texture_location>",
-                "sticker_name": "World Domination",
+                "sticker_name": "New Challenger Approaching",
                 "unobtained_text": "Enter the Booth",
                 "obtained_text": "Rewarded for entering the Booth"
             }

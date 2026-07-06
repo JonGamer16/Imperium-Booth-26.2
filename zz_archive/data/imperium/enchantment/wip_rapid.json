@@ -1,0 +1,45 @@
+{
+    "description": "Rapid",
+    "supported_items": "#minecraft:enchantable/weapon",
+    "slots": ["mainhand"],
+    "weight": 1,
+    "anvil_cost": 2,
+    "min_cost": 
+    {
+        "base": 2,
+        "per_level_above_first": 1
+    },
+    "max_cost": 
+    {
+        "base": 2,
+        "per_level_above_first": 1
+    },
+    "max_level": 2,
+    "effects": 
+    {
+        "damage":
+        [
+            {
+                "effect":
+                {
+                    "type": "minecraft:set",
+                    "value": 0
+                }
+            }
+        ],
+        "post_attack":
+        [
+            {
+                "effect":
+                {
+                    "type": "damage_entity",
+                    "damage_type": "arrow",
+                    "min_damage": 2,
+                    "max_damage": 2
+                },
+                "affected": "victim",
+                "enchanted": "attacker"
+            }
+        ]
+    }
+}

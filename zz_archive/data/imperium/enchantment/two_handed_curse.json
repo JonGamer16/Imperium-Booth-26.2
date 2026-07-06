@@ -1,0 +1,74 @@
+{
+    "description": "Two-Handed",
+    "supported_items": "#minecraft:enchantable/weapon",
+    "slots": ["mainhand"],
+    "weight": 1,
+    "anvil_cost": 2,
+    "min_cost": 
+    {
+        "base": 2,
+        "per_level_above_first": 1
+    },
+    "max_cost": 
+    {
+        "base": 2,
+        "per_level_above_first": 1
+    },
+    "max_level": 2,
+    "effects": 
+    {
+        "tick":
+        [
+            {
+                "effect":
+                {
+                    "type": "apply_mob_effect",
+                    "to_apply": "mining_fatigue",
+                    "min_amplifier":
+                    {
+                        "type": "linear",
+                        "base": 2,
+                        "per_level_above_first": 2
+                    },
+                    "max_amplifier":
+                    {
+                        "type": "linear",
+                        "base": 2,
+                        "per_level_above_first": 2
+                    },
+                    "min_duration":
+                    {
+                        "type": "linear",
+                        "base": 0.25,
+                        "per_level_above_first": 1.75
+                    },
+                    "max_duration": 
+                    {
+                        "type": "linear",
+                        "base": 0.25,
+                        "per_level_above_first": 1.75
+                    }
+                },
+                "requirements":
+                {
+                    "condition": "entity_properties",
+                    "entity": "this",
+                    "predicate":
+                    {
+                        "slots": 
+                        {
+                            "weapon.offhand":
+                            {
+                                "count":
+                                {
+                                    "min": 1,
+                                    "max": 99
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        ]
+    }
+}

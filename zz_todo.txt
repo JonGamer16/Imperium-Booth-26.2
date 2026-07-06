@@ -116,8 +116,10 @@ Arena Systems:
     /   Damage cooldown engine: damage dealt and taken contribute to reloading abilities
     /   Item distributor: function that distributes items based on each player's kit and cooldown scores
     /   Item usage tracking: detect what kit items players still have via advancement
-    o   Kill system: deal at least 50.0 damage and then get a kill to receive healing items
     /   Cooldown freeze: items aren't given and cooldown cannot go under a certain point if item has not been used
+    /   Gold Rush scoring: 1 gold / 25 dmg dealt + 3 / kill; most gold wins the interval
+            - also tracks dealt/taken/kills/healed per round for a post-game summary
+            - replaces the old "deal 50 dmg then kill for heals" system (dropped)
     o   Battlegrounds controls: functions and triggers for the Battlegrounds arena
 
         o   On Join / On Leave functions
@@ -126,10 +128,58 @@ Arena Systems:
     o   Booth script: controls for booth functions and accessories
     o   Once I start testing on the build world, adapt loop functions to Summit systems
 
+Optimization:   [tick time ~50ms -- profile before/after with /spark]
+
+    Repeated kit selectors -> per-kit loop_kit (DONE):
+    x   Mummy energy+golem -> kits/mummy/loop_kit (as @s)
+    x   Rastus -> kits/rastus/loop_kit (as @s)
+    x   Livvy web-count-sync -> kits/livvy/loop_kit (as @s)
+    x   Smokey grapple+smoke+mark_apply -> kits/smokey/loop_kit (gated on kit online)
+    x   Levent -> moved to enchantment/charge_attack + levent/charge_timer (no loop entry)
+
+    @a predicate scans now gated (DONE):
+    x   mark_apply -> inside smokey/loop_kit (kit-online gated)
+    x   has_venom scan -> gated on `if entity @a[tag=im.kit_livvy]`
+    x   webbed typeless scan -> type=!#im.not_mob filter added (living entities only)
+
+    Per-tick enchantment `tick` effects (fire every tick while equipped) -- profiled 2026-07-02:
+    x   backstab (Smokey dagger, was +22ms): 15-step raycast/tick -> sphere sweep + early-out
+            - early-out unless a mob is within 5 blocks; then 3 r=1 spheres along the look vector
+            - dropped block-occlusion (crude but fine for melee); backstab_raycast.mcfunction deleted
+    o   sneak_guard: tick SUMMONS an area_effect_cloud EVERY tick -- LATENT BOMB (no kit equips it
+            yet). summon on a clock/once or remove before it ever ships on armor.
+    o   high_jump (Levent armor): ungated tick runs the `floating` predicate + gravity modifier
+            every tick (the on-ground cost; ~+9ms). gate or throttle.
+    o   shield_pierce: ungated tick does an item-component check every tick (minor).
+    o   Mummy per-tick (energy_tick): crystal_consume inventory-count + energy_hud actionbar every
+            tick -- throttle energy_hud, gate the crystal count-scan.
+
+    Still open:
+    o   smoke_init/web_init still scan area_effect_clouds each tick (web_init ungated; smoke now kit-gated)
+    o   crystal_bomb / im.web display scans always-on (fine to keep -- must survive owner leaving)
+    o   clear @a *[imperium_clearme] every tick (cross-kit: Mummy rod / Levent shield)
+    o   track_healed: move per-tick -> loop_1s (post-game stat; 20x fewer `data get`)
+    o   audit any other per-tick `data get entity`
+
+    How to fix (notes):
+        - profile FIRST (/spark profiler, or F3 tick chart) to confirm the real hot spots;
+          don't optimize blind
+        - biggest wins, in order:
+            1. gate whole kit/effect blocks on presence -- `execute if entity @a[tag=im.kit_X]
+               run function <block>` -- like grapple_track already does (loop ~13, ~19). No
+               Smokey online = smoke/mark code never runs, etc.
+            2. kill the typeless @e[tag=im.webbed] scan: gate the web block on
+               `if entity @e[type=block_display,tag=im.web]`, and add type= to any @e tag scan
+            3. consolidate each kit's many @a[tag=im.kit_X] lines into ONE
+               `as @a[tag=im.kit_X] at @s run function kits/X/tick` (walk the set once)
+        - Summit only ticks the booth while players are in bounds AND multi-threads booths, so
+          booth chrome eases on-server -- but the ARENA/combat tick still must be lean (it runs
+          on battlegrounds players outside the booth bounds)
+
 Booth Creation:
 
     o   Building: Complete the physical build of the pagoda, its floors, and underground
-    o   Logo: Complete the logo in aseprite; I just need the background and rapier
+    /   Logo: Complete the logo in aseprite; I just need the background and rapier
     /   Text: Create the intro, description, history, and lore text for display
     o   Collectibles: Design balloons, stickers, and custom items for players to collect
     o   Function Integration: Work my datapack into the Summit and Battlegrounds systems
@@ -172,76 +222,86 @@ Booth Integration:
             - enter booth, read all lore, use all abilities on dummy, find hidden items, win a match
             - grant by granting advancement summit.sticker_book:imperium/<sticker_id>
 
-    Battlegrounds Match:   [DESIGN LOCKED 2026-06-26 -- deferred to finish kit abilities first]
+    Battlegrounds Wiring:   [design subject to change -- confirm hooks vs handbook]
 
-        Format: STOCK (lives). Each player gets N respawns, then they're out (im.out).
-            Win a "set" (= one activation cycle of the booth) = last player not out; if the cycle
-            timer ends with >1 alive, highest im_matchKills wins.
-        Kill credit: LAST ATTACKER = the killing blow. Use advancement minecraft:player_killed_entity
-            (entity = #imperium:human) -- its reward runs AS the killer, so NO UUID storage needed.
-            (Misses environmental deaths; acceptable for last-attacker. Verify trigger name in-game.)
+        Slice 1 -- local combat loop (gate on im.fighting, testable now):
+        /   gate swap: cooldown engine rewards -> im.fighting
+        /   round stats: dealt + taken + kills + healed, zeroed per round
+        /   gold scoring: 1 gold / 25 dmg dealt + 3 / kill (arena/calc_gold)
+        /   death penalty: forfeit half your gold on death (arena/on_death)
+        /   interval resolve: highest gold wins (arena/resolve_match)
+        /   gold feedback (chat): [Damage Bonus] +N / [Kill Score] +3 (personal)
+        /   standings billboard: marker + text_display, top 3, refresh 1s (arena/board_*)
+        /   kill feed (broadcast): "victim slain by killer (X Gold)" (last-attacker via im_combatId)
+        o   verify in-game: billboard text_display resolves selector/score; `on attacker` for projectiles
+        o   vanilla death msgs may duplicate feed (gamerules locked on Summit) -- confirm w/ staff
 
-        State (objectives / tags):
-            im_lives        dummy   remaining stock; set on enter, -- on death
-            im_matchKills   dummy   kills this set; ++ on credited kill
-            im.out          tag     eliminated (lives hit 0) -> spectate / booth
-            im.fighting     tag     LOCAL stand-in for summit.battlegrounds.player (test off-Summit)
+        Slice 2 -- Summit hooks (guard each -- see notes):
+        o   register_booth on load
+        o   player_enter: arena/start_round (reset stats/gold) + spawn -> arena
+        o   player_died: respawn (no elimination in gold rush)
+        o   player_leave: reset state + #summit:api/reset_player
+        o   booth_inactive: arena/resolve_match -> champion sticker
+        o   player_enter_attempt: block mid-set entry via #block_player_enter
+        o   assign_kit / unassign_kit from armor-room select
+        o   gate swap: im.fighting -> summit.battlegrounds.player
 
-        Hook -> function (guard each with:
-                unless data storage summit.battlegrounds:database session{booth_id:"imperium"} run return 0):
-            register_booth (load)   booth_id imperium, return_pos=booth kit room, kit_function=equip,
-                                    struct_function=place arena, compatibility=<shared lobby id>
-            player_enter            im_lives=N, im_matchKills=0, remove im.out, spawnpoint -> arena entry
-            player_killed_entity    (as killer) kits/<kit>/on_kill heal + im_matchKills++ + sticker first_blood
-            player_died             (as victim) im_lives--; >0 respawn at arena entry; =0 add im.out + to booth
-            booth_inactive          set ends: winner = last not im.out, else top im_matchKills -> sticker champion
-            player_leave            + #summit:api/reset_player: clear_kit + undo givekit attr mods,
-                                    reset im_lives / im_matchKills / im.out
+        Slice 3 -- assets (needs build):
+        o   arena structure file + set_structure
+        o   armor-room layout + enter button (Interactions API)
+        o   first_blood + champion stickers in booth_definition
 
-        Gate swap: the cooldown engine (internal/cooldown_dealt + cooldown_taken) currently gates on
-            leave_spawn=true (impossible trigger, never granted -> engine never fires). Replace with
-            tag=summit.battlegrounds.player. For local testing use im.fighting (one find/replace to
-            swap in the real tag later). This is what finally lets the engine run off-Summit.
-
-        Build order:
-            Slice 1 (LOCAL, testable now, gate on im.fighting):
-                o   gate swap: cooldown rewards -> im.fighting
-                o   kill credit: advancement combat/kill_player + handler (on_kill + im_matchKills++)
-                o   lives logic: im_lives-- -> respawn-vs-out branch (drive with a local death hook)
-            Slice 2 (Summit wiring -- skeletons + TODOs):
-                o   register_booth on load
-                o   hook function tags (player_enter/died/leave, booth_active/inactive), all guarded
-                o   assign_kit / unassign_kit from armor-room select; kit_function = equip
-                o   #summit:api/reset_player undo
-            Slice 3 (assets / needs build):
-                o   arena structure file + struct_function
-                o   armor-room layout + enter-queue button (Interactions API)
-                o   stickers first_blood + champion defined in booth_definition
-            CONFIRM WITH STAFF: does player_died auto-respawn or do I tp + set spawnpoint? where do
-                players spawn in the arena? respawn invuln/grace handling?
+        Notes:
+            format: GOLD RUSH. 1 gold / 25 dmg dealt + 3 / kill; interval winner = most gold.
+                    3-min intervals, one booth's game per interval (Summit cycles booth_active).
+                    deaths just respawn -- no elimination/lives.
+            state:  im_gold (score) | im_matchKills (kills) | im_statDealt/Taken/Healed (stats)
+                    | im.fighting (local stand-in for summit.battlegrounds.player)
+            guard:  prefix each hook fn with --
+                    execute unless data storage summit.battlegrounds:database session{booth_id:"imperium"} run return 0
+            register_booth macros: booth_id, booth_name, return_pos, return_rot,
+                    struct_function (must be valid even if blank), compatibility (shared-lobby id),
+                    kit_function (default kit)
+            assign_kit macros: booth_id, kit_id, kit_function   (unassign_kit takes none)
+            set_structure macros: booth_id, structure
+            round stats (DONE, per round): arena/start_round zeroes + adds im.fighting;
+                    arena/end_round calc_gold + tellraws summary + removes it. im_matchKills=playerKillCount,
+                    im_statDealt/Taken=custom (tenths HP), im_statHealed=arena/track_healed sampling
+                    (no vanilla heal criterion, so per-tick health delta while im.fighting).
+            gold (DONE): arena/calc_gold sets im_gold = im_statDealt/250 + im_matchKills*3 - im_goldLost.
+                    death penalty (arena/on_death): floor(gold/2) banked into im_goldLost (permanent
+                    offset). loop_1s recomputes im_gold for fighters so a live display stays current.
+                    arena/resolve_match ranks fighters -> top im_gold.
+            gold display (DONE, needs in-game verify): chose display entities (below_name/sidebar are
+                    GLOBAL -> not Summit-safe). arena/board_spawn drops a marker + text_display billboard;
+                    arena/board_update (loop_1s) ranks top 3 by im_gold and rewrites the text w/
+                    selector+score components. spec colors: 1st yellow, 2nd gray, 3rd gold.
+                    UNVERIFIED: text NBT component form (1.21.5+) + whether text_display resolves
+                    selector/score components. per-player overhead dropped in favor of the board.
+            gold chat (DONE): arena/gold_dmg_bonus ([Damage Bonus] +N, on damage event) +
+                    arena/gold_kill_bonus ([Kill Score] +3, per second). im_goldDmgSeen/im_killsSeen
+                    guard so only the delta is announced.
+            kill feed (DONE): adv combat/hurt_by_player -> internal/record_attacker stores the
+                    attacker's im_combatId on the victim (im_lastAtkId) w/ a 10s window (im_lastAtkTime,
+                    decayed in loop_1s), via `execute on attacker`. arena/on_death resolves the id back
+                    to the killer among im.fighting and runs arena/kill_feed. self-damage excluded.
+                    "(X Gold)" = the victim's forfeited half. CAVEATS: `on attacker` for projectiles
+                    may resolve the arrow, not the shooter; and vanilla death messages can't be disabled
+                    on Summit (gamerules locked) so the feed may duplicate them -- confirm w/ staff.
+            DROPPED: resources-back-on-kill (arena/kill + per-kit on_kill heal) -- stays retired;
+                    on_kill fns left in place, unused. kills are now just a stat, no reward.
+            gate swap: engine gated on leave_spawn=true (never granted -> never fired); now im.fighting,
+                    one find/replace to the real tag for Summit. cooldown_dealt + cooldown_taken.
+            regen:  battlegrounds players auto-exempt from Resistance V (hunger untouched) --
+                    no summit.no_regen needed in the arena
+            CONFIRM w/ staff: player_died auto-respawn or manual tp + spawnpoint? arena spawn
+                    point(s)? respawn invuln/grace?
 
     Open Decisions:
-    x   Match format: STOCK (lives) + last-attacker kill credit  [decided 2026-06-26]
-    o   Dummy entity: sulfur cube (Summit asset) vs custom mummy mannequin
+    x   Match format: GOLD RUSH -- 1 gold/25 dmg + 3/kill, most gold wins  [changed 2026-07-01]
+    x   Death penalty in gold rush: forfeit half your gold on death  [decided 2026-07-01]
+    x   Gold display approach: spectator standings billboard (text_display) + chat feedback  [decided 2026-07-02]
+    x   Dummy entity: custom mummy mannequin
     o   Combat ticking method: persistent tick vs scheduled clock
     o   Balloon model namespace: own RP vs summit_balloons
 
-Plan: Players can enter the booth from 2 places: the front entrance and the basement from a
-cave climb underneath. on_player_enter triggers on entering the bounds defined by me, so I 
-can set the floor to the top of the cave level with my entrance. From either way, they'll be 
-met with a welcome, some wall text, and maybe an item or sticker for getting through the 
-little cave climb I made. At the front, there will be an open dojo area with a training dummy, 
-either a sulfur cube or a mummy mannequin. I'll have a balloon giver set out for free not far 
-from the entrance. Kits will be obtainable from another room off to the side; I'll have to 
-adjust the armor stand summoning positions for it. Maybe players will be able to find stray 
-kit items hidden throughout the pagoda, earning a sticker for it if they do. Then, there's the 
-kits. Reading all their lore and figuring out how is worth a 3rd sticker. Within the booth, 
-they can attack the dummy with the abilities, which might be worth another sticker if they use 
-them all. Joining a Battlegrounds match and winning is definitely worth a sticker, making 5,
-which is the total allowed per booth. The staff mentioned cycling each booth's combat game in
-3-minute intervals. Others might have a certain arrangement of teams, but for Imperium, I 
-imagine a free-for-all deathmatch for however many players will be present. I'll share a 
-lobby with another booth for the Battlegrounds, and I imagine we'll both have our own sizable
-kit rosters, so I might have my armor stands shrunken down in there with the Scale attribute.
-I think players will be able to TP into the respective Battlegrounds lobby and queue a match
-for one of the PvP booths, more info needed.

@@ -5,15 +5,24 @@
       "conditions": {
         "player": [
           {
-            "condition": "minecraft:reference",
-            "name": "player_input:sneak"
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+              "flags": {
+                "is_on_ground": false
+              }
+            }
           },
           {
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "nbt": "{OnGround:0b,Tags:[\"im.kit_rastus\"]}"
+              "nbt": "{Tags:[\"im.kit_rastus\"]}"
             }
+          },
+          {
+            "condition": "minecraft:reference",
+            "name": "player_input:sneak"
           }
         ]
       }

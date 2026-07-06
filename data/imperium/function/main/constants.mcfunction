@@ -19,6 +19,8 @@ scoreboard objectives add 100 dummy
 scoreboard players set const 100 100
 scoreboard objectives add 200 dummy
 scoreboard players set const 200 200
+scoreboard objectives add 250 dummy
+scoreboard players set const 250 250
 scoreboard objectives add 500 dummy
 scoreboard players set const 500 500
 scoreboard objectives add 1000 dummy

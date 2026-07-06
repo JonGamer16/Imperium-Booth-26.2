@@ -1,0 +1,36 @@
+{
+  "description": {
+    "translate": "enchantment.imperium.chinks_curse",
+    "fallback": "Curse of Chinks",
+    "color": "red"
+  },
+  "supported_items": "#minecraft:enchantable/durability",
+  "weight": 1,
+  "max_level": 1,
+  "min_cost": {
+    "base": 25,
+    "per_level_above_first": 0
+  },
+  "max_cost": {
+    "base": 50,
+    "per_level_above_first": 0
+  },
+  "anvil_cost": 8,
+  "slots": [
+    "mainhand",
+    "head",
+    "chest",
+    "legs",
+    "feet"
+  ],
+  "effects": {
+    "minecraft:tick": [
+      {
+        "effect": {
+          "type": "minecraft:run_function",
+          "function": "imperium:enchantments/chinks_curse"
+        }
+      }
+    ]
+  }
+}

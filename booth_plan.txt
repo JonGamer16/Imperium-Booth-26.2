@@ -1,0 +1,19 @@
+Players can enter the booth from 2 places: the front entrance and the basement from a
+cave climb underneath. on_player_enter triggers on entering the bounds defined by me, so I 
+can set the floor to the top of the cave level with my entrance. From either way, they'll be 
+met with a welcome, some wall text, and maybe an item or sticker for getting through the 
+little cave climb I made. At the front, there will be an open dojo area with a training dummy, 
+either a sulfur cube or a mummy mannequin. I'll have a balloon giver set out for free not far 
+from the entrance. Kits will be obtainable from another room off to the side; I'll have to 
+adjust the armor stand summoning positions for it. Maybe players will be able to find stray 
+kit items hidden throughout the pagoda, earning a sticker for it if they do. Then, there's the 
+kits. Reading all their lore and figuring out how is worth a 3rd sticker. Within the booth, 
+they can attack the dummy with the abilities, which might be worth another sticker if they use 
+them all. Joining a Battlegrounds match and winning is definitely worth a sticker, making 5,
+which is the total allowed per booth. The staff mentioned cycling each booth's combat game in
+3-minute intervals. Others might have a certain arrangement of teams, but for Imperium, I 
+imagine a free-for-all deathmatch for however many players will be present. I'll share a 
+lobby with another booth for the Battlegrounds, and I imagine we'll both have our own sizable
+kit rosters, so I might have my armor stands shrunken down in there with the Scale attribute.
+I think players will be able to TP into the respective Battlegrounds lobby and queue a match
+for one of the PvP booths, more info needed.
