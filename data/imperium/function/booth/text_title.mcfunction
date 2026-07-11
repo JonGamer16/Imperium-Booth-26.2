@@ -1,0 +1,2 @@
+# Front entrance branding. Stand where the display should appear, then run.
+execute at @s run summon text_display ~ ~ ~ {Tags:["im_walltext","im_title"],billboard:"center",alignment:"center",line_width:250,text:[{text:"Imperium Mundi",color:"gold",bold:true},{text:"\n",bold:false},{text:"Welcome to the Dojo",color:"yellow"},{text:"\n\n"},{text:"Imperium Mundi ",color:"gold"},{text:"- by JonGamer16",color:"yellow"}]}

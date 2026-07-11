@@ -82,8 +82,8 @@ External libraries (vendored, do not edit): **`player_motion`** (knockback/launc
     │   ├── loot_table/<kit>/         Kit gear, display gear, heal stacks
     │   ├── predicate/                on_ground, sneaking, at_spawn, has_venom, has_bad_omen
     │   ├── recipe/                   diamond weapon recipes (craftsoup removed)
-    │   ├── damage_type/              light, venom, shield_pierce
-    │   ├── item_modifier/            apply_shield_pierce
+    │   ├── damage_type/              light, venom, bomb
+    │   ├── item_modifier/            consume_10_durability
     │   ├── dialog/                   kitselect dialog
     │   └── tags/                     block/damage_type/entity_type tags (im.*)
     │
@@ -109,7 +109,7 @@ function/
 ├── loop.mcfunction                  MAIN TICK — drives combat per-tick + the 5t/1s clocks (see §3.2)
 ├── loop_5t.mcfunction               5-tick loop — booth UI scaffold (empty; stands are now event-driven)
 ├── loop_1s.mcfunction               1-second loop (arrow aging/cleanup)
-├── loop_enchantments.mcfunction     TICK — brittle/chinks/lifesteal upkeep
+├── loop_enchantments.mcfunction     TICK — Livvy lifesteal upkeep
 ├── loop_events.mcfunction           EMPTY stub
 │
 ├── update_cooldowns.mcfunction      Bleeds cooldowns by net damage, dispatches abilities (event-driven)
@@ -207,7 +207,8 @@ loop.mcfunction
 │                        @e[area_effect_cloud, im.smoke_bomb] → smokey/smoke_apply
 ├── Smokey Marking Dart: @a if has_bad_omen → smokey/mark_apply ; then smokey/mark_tick
 ├── Livvy Venom:         @a if has_venom → livvy/venom_apply ; then livvy/venom_tick
-├── Rastus Air Dodge:    @a[im.kit_rastus] if on_ground → revoke rastus_air_dodge (re-arm)
+├── Rastus Air Dodge:    @a[im.kit_rastus] if on_ground → revoke rastus_air_dodge (re-arm);
+│                        each dodge spends 1 of 5 slot-C charges (cd3_dodge refills)
 ├── Rastus Strike&Parry: add im_melee_drought ; tick parryWindow ; arm/strip focus_on/off
 ├── leave_spawn advancement grant/revoke (spawn-zone bookkeeping)
 ├── enable givekit trigger for spawn players
@@ -333,11 +334,11 @@ Per tick in loop (NOTE: arena/kill + arena/death are currently disabled/commente
 Custom enchantments in `enchantment/*.json` fire logic two ways:
 - **Enchantment effect components** — `damage` (conditional multipliers gated on a score, e.g.
   Backstab `im_backstabflag`) and `tick`/post-attack `run_function` into `enchantments/*`.
-- **Advancements** in `advancement/` (e.g. `enchantments/combat_hit`, `barbs_hook`,
-  `reversal_block`) whose reward functions run the matching `enchantments/*` logic.
+- **Advancements** in `advancement/` (e.g. `enchantments/reversal_block`) whose reward
+  functions run the matching `enchantments/*` logic.
 
-Multi-tick enchantments keep their bookkeeping in `loop_enchantments` (Brittle armor net-damage,
-Chinks Curse, Livvy Lifesteal banking). `wip_*` enchantments are unfinished — see strip list.
+Multi-tick enchantments keep their bookkeeping in `loop_enchantments` (Livvy Lifesteal
+banking). `wip_*` enchantments are unfinished — see strip list.
 
 ---
 
@@ -371,7 +372,7 @@ All seven kits follow the same folder pattern (`givekit`, `abilities`, `cd*_*`, 
 | **Livvy** | 3 | Leap (shared) | Web | Acid Potion | Venom DoT, Lifesteal→soup |
 | **Mummy** | 4 | Golem Throw | Grapple Rod | — | — |
 | **Levent** | 5 | Levitation Arrows | Shield | Reversal | Straight-flight arrow cleanup |
-| **Rastus** | 6 | Buckler Shield | Parry | — | Air Dodge, Strike & Parry (Focus), advancement-driven |
+| **Rastus** | 6 | Buckler Shield | Parry | Air Dodge charges (5 max, +1 per 5 HP net damage) | Air Dodge, Strike & Parry (Focus), advancement-driven |
 | **Smokey** | 7 | Boost Rod | Marking Dart | Smoke Bomb | Smoke cloud apply, Mark DoT/timer |
 
 **Most complex kits** (most moving parts → most to test / most to break): **Rastus** (advancement-
@@ -440,10 +441,11 @@ kit's `loot_table/<kit>/*` (gear stats).
 - `booth/walltext.txt`, `doc.txt` (stubs; `doc.txt` now superseded by this wiki).
 
 **WIP (decide: finish or cut):**
-- `enchantment/wip_*` (air_dodge, barrier, focus_attack, golem_throw, grappling, hp_drain,
-  lifesteal, marked, rapid, reeling, reversal, straight_flight) and `enchantments/wip_reversal`,
-  `enchantments/hp_drain`. Some back unfinished kit abilities (Mummy Golem Throw/Barrier/Grapple,
-  Levent Reversal) — see `todo.txt`.
+- `enchantment/wip_*` (barrier, charge_attack, focus_attack, golem_throw, grappling, high_jump,
+  lifesteal, marked, reeling, reversal, straight_flight) and `enchantments/wip_reversal`.
+  Some back unfinished kit abilities (Mummy Golem Throw/Barrier/Grapple, Levent Reversal) —
+  see `todo.txt`. (Unused enchantments air_dodge/hp_drain/rapid and the finished-but-cut set —
+  brittle, chinks, tipper, temper, power_smash, etc. — were moved to `zz_archive/`.)
 
 > ⚠️ General rule when deleting: grep the name first and remove call sites in the same change. The
 > "dead" lists above were verified this way (e.g. `arena/kill`'s legacy calls were stripped before

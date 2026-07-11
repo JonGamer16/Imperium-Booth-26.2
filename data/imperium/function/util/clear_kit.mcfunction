@@ -33,6 +33,10 @@ scoreboard players set @s im_cdMaxC 0
     tag @s remove im.kit_rastus
     tag @s remove im.kit_smokey
 
+    # Crosshair tracker (Rastus Focus / Levent Charge) — kill this player's paired interaction so
+    # a kit swap can't strand it; the enchant's tick re-binds if the new kit also carries one.
+    function imperium:enchantments/aim_free
+
 # Rastus
 
     # Air-dodge (Superior Agility) — revoke so an earned (locked) dodge can't linger on a swap.

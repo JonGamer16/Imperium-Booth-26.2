@@ -35,6 +35,16 @@
                   ],
                   "block_delay_seconds": 0
                 },
+                "base_color":"light_blue",
+                "banner_patterns":
+                [
+                  {"pattern":"minecraft:cross","color":"blue"},
+                  {"pattern":"minecraft:border","color":"black"},
+                  {"pattern":"minecraft:triangles_top","color":"black"},
+                  {"pattern":"minecraft:triangles_bottom","color":"black"},
+                  {"pattern":"minecraft:rhombus","color":"blue"},
+                  {"pattern":"minecraft:flower","color":"light_blue"}
+                ],
                 "minecraft:custom_name": {"text": "Buckler Shield", "color": "blue", "italic": false},
                 "minecraft:custom_data": "{imperium_kit:1b}"
               }

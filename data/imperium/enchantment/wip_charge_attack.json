@@ -21,7 +21,7 @@
     "tick":
     [
       {
-        "effect": 
+        "effect":
         {
           "type": "run_function",
           "function": "imperium:kits/levent/charge_timer"

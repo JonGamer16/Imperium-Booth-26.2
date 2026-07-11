@@ -39,3 +39,8 @@ Credits:
 
     <gold>AI was used to help with the background work of this datapack,
         but all of the gameplay design, features, building, and text is human-made.
+
+Other Standard Booth Stuff:
+    <gold> Discord
+    <gold> Download
+    

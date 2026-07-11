@@ -4,8 +4,6 @@
 scoreboard players add @e[type=#minecraft:arrows] im_arrowAge 1
 kill @e[type=#minecraft:arrows,scores={im_arrowAge=10..}]
 
-# hunger proofing
-effect give @a[scores={hunger=0..19}] saturation 1 0
 
 # gold rush: keep each fighter's im_gold current (for the live display / standings)
 execute as @a[tag=im.fighting] run function imperium:arena/calc_gold

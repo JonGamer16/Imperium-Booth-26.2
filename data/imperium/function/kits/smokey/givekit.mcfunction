@@ -74,18 +74,20 @@ item replace entity @s hotbar.0 with \
 item replace entity @s hotbar.1 with \
     netherite_sword[\
         attribute_modifiers=[\
-            {type:"attack_damage",amount:5,operation:"add_value",slot:"mainhand",id:"base_attack_damage"},\
-            {type:"attack_speed",amount:-3,operation:"add_value",slot:"mainhand",id:"base_attack_speed"},\
-            {type:"attack_knockback",amount:0.5,operation:"add_value",slot:"mainhand",id:"mainhand"},\
+            {type:"attack_damage",amount:0,operation:"add_value",slot:"hand",id:"base_attack_damage"},\
+            {type:"attack_speed",amount:-3,operation:"add_value",slot:"hand",id:"base_attack_speed"},\
+            {type:"attack_knockback",amount:1.5,operation:"add_value",slot:"hand",id:"hand"},\
         ],\
-        enchantments={"imperium:wip_marked":1},\
+        enchantments={"imperium:wip_marked":1,"imperium:offhand_attack":1},\
         weapon={\
             disable_blocking_for_seconds:4,\
-            item_damage_per_attack:0},\
+            item_damage_per_attack:0,\
+        },\
+        minimum_attack_charge=1,\
         kinetic_weapon={\
             delay_ticks:0,\
             contact_cooldown_ticks:10,\
-            damage_multiplier:0.0f,\
+            damage_multiplier:0.2f,\
             damage_conditions:{\
                 max_duration_ticks:6,\
                 min_speed:0,\

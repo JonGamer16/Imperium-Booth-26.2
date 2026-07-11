@@ -53,13 +53,13 @@ item replace entity @s armor.feet with \
 item replace entity @s hotbar.1 with \
     netherite_sword[\
         attribute_modifiers=[\
-            {type:"attack_damage",amount:6,operation:"add_value",slot:"mainhand",id:"base_attack_damage"},\
+            {type:"attack_damage",amount:8,operation:"add_value",slot:"mainhand",id:"base_attack_damage"},\
             {type:"attack_speed",amount:-3,operation:"add_value",slot:"mainhand",id:"base_attack_speed"},\
-            {type:"entity_interaction_range",amount:0.5,operation:"add_value",slot:"mainhand",id:"mainhand"},\
+            {type:"entity_interaction_range",amount:1,operation:"add_value",slot:"mainhand",id:"mainhand"},\
             {type:"attack_knockback",amount:-1,operation:"add_value",slot:"mainhand",id:"mainhand"},\
         ],\
         !max_damage,\
-        item_model="minecraft:iron_sword",\
+        item_model="minecraft:iron_spear",\
         custom_name={text:"Silver Glaive",color:"yellow",italic:false},\
         custom_data={"imperium_kit":1b}\
     ] 1

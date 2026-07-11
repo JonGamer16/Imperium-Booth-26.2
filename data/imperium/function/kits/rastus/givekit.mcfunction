@@ -59,8 +59,8 @@ item replace entity @s hotbar.0 with \
             {type:"attack_speed",amount:4,operation:"add_value",slot:"mainhand",id:"base_attack_speed"},\
             {type:"attack_knockback",amount:-1.0,operation:"add_value",slot:"mainhand",id:"attack_knockback"}],\
         damage_type="imperium:light",\
+        piercing_weapon={deals_knockback:true},\
         minimum_attack_charge=1.0,\
-        piercing_weapon={"deals_knockback":true},\
         enchantments={"imperium:wip_focus_attack":1},\
         !max_damage,\
         item_model="minecraft:iron_sword",\
@@ -95,5 +95,11 @@ loot give @s loot imperium:rastus/healing
 scoreboard players operation @s im_abilityCdA = #Rastus im_abilityCdA
 scoreboard players operation @s im_abilityCdB = #Rastus im_abilityCdB
 scoreboard players operation @s im_abilityCdC = #Rastus im_abilityCdC
+
+#   Air Dodge charges (slot C): start with the full 5-dash stock. The player copy of
+#   im_cdMaxC is what arms the engine's freeze (update_cooldowns reads @s, not #Rastus) —
+#   without it the slot never freezes and cd3_dodge refills past the cap.
+scoreboard players operation @s im_cdMaxC = #Rastus im_cdMaxC
+scoreboard players operation @s im_cdUsesC = #Rastus im_cdMaxC
 
 tag @s add im.kit_rastus

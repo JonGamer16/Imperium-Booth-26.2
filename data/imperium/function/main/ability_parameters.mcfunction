@@ -50,13 +50,13 @@
     #   Crystal Bomb (kits/mummy/crystal_bomb): placing a crystal as a bomb (sneak-consume) refunds
     #   reduced resources vs eating it — this much energy instead of the full #MummyEnergyCrystal, and
     #   only the instant heal (the regen the consumable applies is stripped). See crystal_bomb.
-        scoreboard players set #MummyCrystalBombEnergy im.param 40
+        scoreboard players set #MummyCrystalBombEnergy im.param 50
         #   Crystal Bomb fuse: ticks from placement to detonation (20t = 1s).
         scoreboard players set #BombFuse im.param 20
         #   Crystal Bomb blast: damage = #BombMaxDamage at the center, falling #BombDropoff per block out to
         #   #BombRange blocks (whole damage units, dealt in 1-block rings via execute-as + /damage @s).
         #   imperium:bomb type — no knockback (won't fight the launch); still reduced by the target's armor.
-        scoreboard players set #BombMaxDamage im.param 10
+        scoreboard players set #BombMaxDamage im.param 16
         scoreboard players set #BombRange im.param 8
         scoreboard players set #BombDropoff im.param 1
         #   Blast launch: upward impulse on everything the blast hits — INCLUDING the placer (a built-in
@@ -64,7 +64,7 @@
         scoreboard players set #BombLaunch im.param 10000
     #   Per-ability costs. An ability calls kits/mummy/energy_spend {cost:<n>} and only fires when it
     #   reports success (enough banked). Wire each WIP enchant to read its cost here.
-        scoreboard players set #MummyGolemThrowCost im.param 40
+        scoreboard players set #MummyGolemThrowCost im.param 30
         scoreboard players set #MummySmashCost im.param 25
     #   Energy Barrier (kits/mummy/barrier_*): hold sneak to spend energy as absorption hearts; hits
     #   drain the hearts (and the meter), releasing sneak refunds the leftover.

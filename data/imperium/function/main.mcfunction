@@ -15,6 +15,7 @@ scoreboard objectives add im.temp dummy
     scoreboard objectives add im_grappleZ dummy
     # Mark: per-player 10s tag timer + the shared #markClock particle clock
     scoreboard objectives add im_markTimer dummy
+    scoreboard objectives add im_offhandCd dummy
 # Rastus
     # Parry: per-player countdown for the full-deflect bubble (Strike & Parry share the
     # charge stored in im_melee_drought). -1 = inactive.
@@ -41,6 +42,10 @@ scoreboard objectives add im.temp dummy
     # Crystal Bomb owner pairing: a shared id stamped on both the bomb and its placer so the blast can
     # spare the owner (#next holds the global counter). See kits/mummy/crystal_bomb + bomb_hurt.
     scoreboard objectives add im_bombId dummy
+# Crosshair tracker (Rastus Focus Attack + Levent Charge Attack): a shared id stamped on both the
+# player and their personal interaction entity so each tracker follows exactly one crosshair
+# (#next holds the global counter). See enchantments/aim_tick + aim_bind + aim_free.
+    scoreboard objectives add im_aimId dummy
     # Centralized ability tuning constants (see main/ability_parameters)
     scoreboard objectives add im.param dummy
 
@@ -68,19 +73,22 @@ function imperium:main/ability_parameters
     # scoreboard objectives setdisplay list totalKills
 
 # Testing (kept inline for quick reference)
-team add w
-scoreboard objectives add m_x dummy
-scoreboard objectives add m_y dummy
-scoreboard objectives add m_z dummy
-scoreboard objectives add im_hp dummy
-scoreboard objectives add im_maxhp dummy
-scoreboard objectives add im_missinghp dummy
-scoreboard objectives add im_raycast dummy
-scoreboard objectives add im_hurt_time dummy
-scoreboard objectives add carrot_on_a_stick dummy
-scoreboard objectives add loops dummy
-scoreboard objectives add im_lastKit dummy
-scoreboard objectives add im_melee_drought dummy
+    team add w
+    scoreboard objectives add m_x dummy
+    scoreboard objectives add m_y dummy
+    scoreboard objectives add m_z dummy
+    scoreboard objectives add im_hp dummy
+    scoreboard objectives add im_maxhp dummy
+    scoreboard objectives add im_missinghp dummy
+    scoreboard objectives add im_raycast dummy
+    scoreboard objectives add im_hurt_time dummy
+    scoreboard objectives add carrot_on_a_stick dummy
+    scoreboard objectives add loops dummy
+    scoreboard objectives add im_lastKit dummy
+    scoreboard objectives add im_melee_drought dummy
+    # hunger proofing
+    effect give @a saturation infinite 0
+
 #scoreboard objectives add carrot_on_a_stick minecraft.used:carrot_on_a_stick
 
 # Reset Temporary Player Data

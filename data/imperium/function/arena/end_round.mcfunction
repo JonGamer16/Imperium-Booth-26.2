@@ -3,6 +3,9 @@
 tag @s remove im.fighting
 function imperium:arena/calc_gold
 
+# Crosshair tracker (Rastus/Levent): the leaver's interaction has no owner to follow — kill it.
+function imperium:enchantments/aim_free
+
 # Split each tenths-of-HP total into whole HP (im.temp) and remaining tenths (im.temp2) for display.
 # Distinct fake-player names share the two scratch objectives, so all stats resolve in one tellraw.
 scoreboard players operation #dW im.temp = @s im_statDealt

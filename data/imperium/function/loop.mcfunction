@@ -80,16 +80,8 @@
 
 # Levent's Abilities
     # Charge functions moved to enchantment/charge_attack.json and function/levent/charge_timer.mcfunction
+    execute as @s[tag=im.kit_levent] at @s run function imperium:kits/levent/loop_kit
 
-
-# Enchantments
-
-    # High Jump: strip the orphaned low-gravity modifier when the armor is unequipped mid-jump.
-    #   The enchant's tick refreshes im_high_jump_eq to 2 every tick it's worn. Here we tick that
-    #   down ONLY for players currently in high-jump gravity (im_high_jump=1) — a tiny set — and
-    #   when it reaches 0 (no enchant tick for 2 ticks = unequipped) we remove the leftover modifier.
-    scoreboard players remove @a[scores={im_high_jump=1,im_high_jump_eq=1..}] im_high_jump_eq 1
-    execute as @a[scores={im_high_jump=1,im_high_jump_eq=0}] run function imperium:enchantments/high_jump_off
 
 # 5-tick loop (for local testing; booth uses ticking_functions at "5t")
     scoreboard players add #t5 im_5tTimer 1

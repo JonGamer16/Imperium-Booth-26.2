@@ -2,3 +2,6 @@
 execute \
     if score @s im_abilityCdA matches ..0 \
     run function imperium:kits/rastus/cd1_shield
+execute \
+    if score @s im_abilityCdC matches ..0 \
+    run function imperium:kits/rastus/cd3_dodge

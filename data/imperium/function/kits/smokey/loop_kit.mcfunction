@@ -11,3 +11,10 @@ execute as @e[type=area_effect_cloud,tag=im.smoke_bomb] at @s run function imper
 
 # Marking Dart: convert any player carrying the dart's Bad Omen signal to the tracked im.marked tag.
 execute as @a if predicate imperium:has_bad_omen run function imperium:kits/smokey/mark_apply
+
+# Offhand Attack timer: tick down each online Smokey's per-player cooldown.
+# loop_kit runs once (server context, no @s), so we must iterate the players explicitly.
+execute \
+    as @a[tag=im.kit_smokey] \
+    if score @s im_offhandCd matches 1.. \
+    run scoreboard players remove @s im_offhandCd 1

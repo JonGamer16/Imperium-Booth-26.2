@@ -66,7 +66,6 @@ item replace entity @s hotbar.0 with \
             {type:"attack_damage",amount:4,operation:"add_value",slot:"mainhand",id:"base_attack_damage"},\
             {type:"attack_speed",amount:-2,operation:"add_value",slot:"mainhand",id:"base_attack_speed"}\
         ],\
-        piercing_weapon={deals_knockback:true},\
         minimum_attack_charge=0,\
         enchantments={"imperium:wip_charge_attack":1},\
         custom_data={"imperium_kit":1b},\

@@ -1,0 +1,22 @@
+{
+  "criteria": {
+    "kinetic_hit": {
+      "trigger": "minecraft:player_hurt_entity",
+      "conditions": {
+        "damage": {
+          "type": {
+            "tags": [
+              {
+                "id": "imperium:kinetic",
+                "expected": true
+              }
+            ]
+          }
+        }
+      }
+    }
+  },
+  "rewards": {
+    "function": "imperium:kits/smokey/kinetic_charge"
+  }
+}

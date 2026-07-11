@@ -4,6 +4,10 @@
 scoreboard players set @s im_deaths 0
 function imperium:arena/calc_gold
 
+# Crosshair tracker (Rastus/Levent): kill the dead player's interaction; aim_tick re-summons a
+# fresh one once they're back holding the enchanted weapon.
+function imperium:enchantments/aim_free
+
 # lost = floor(current gold / 2); add it to the running deduction, then recompute.
 scoreboard players operation @s im.temp2 = @s im_gold
 scoreboard players operation @s im.temp2 /= const 2
@@ -21,3 +25,4 @@ execute if score @s im_lastAtkTime matches 1.. as @a[tag=im.fighting] if score @
 tag @s remove im.feed_victim
 scoreboard players set @s im_lastAtkId 0
 scoreboard players set @s im_lastAtkTime 0
+effect give @a saturation infinite

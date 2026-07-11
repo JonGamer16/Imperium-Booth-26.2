@@ -31,9 +31,11 @@ function imperium:abilities/set_cd {kit:"Meowdy",slot:"B",base:100,stock:90}
 function imperium:abilities/set_cd {kit:"Mummy",slot:"A",base:100,stock:-1}
 function imperium:abilities/set_cd {kit:"Mummy",slot:"B",base:100,stock:-1}
 
-# Rastus: A Buckler Shield, B Strike/Parry  (C empty)
+# Rastus: A Buckler Shield, B Strike/Parry, C Air Dodge charges
+#   base 50 = one dash back per 5.0 HP of net damage (dealt + taken, engine standard).
 function imperium:abilities/set_cd {kit:"Rastus",slot:"A",base:400,stock:-1}
 function imperium:abilities/set_cd {kit:"Rastus",slot:"B",base:50,stock:-1}
+function imperium:abilities/set_cd {kit:"Rastus",slot:"C",base:50,stock:-1}
 
 # Smokey: A Boost Rod, B Marking Dart, C Smoke Bomb
 function imperium:abilities/set_cd {kit:"Smokey",slot:"A",base:400,stock:80}
@@ -51,5 +53,7 @@ scoreboard players set #Livvy im_cdMaxB 3
 scoreboard players set #Meowdy im_cdMaxA 1
 # Smokey slot B = Marking Dart
 scoreboard players set #Smokey im_cdMaxB 1
+# Rastus slot C = Air Dodge: 5 stored dashes; air_dodge consumes, cd3_dodge refills one at a time.
+scoreboard players set #Rastus im_cdMaxC 5
 # Meowdy slot B = Arrows: count-based & multi-charge -> max is derived from the actual
 # arrow stack at givekit (see meowdy/givekit), so no #Kit constant is set here.
