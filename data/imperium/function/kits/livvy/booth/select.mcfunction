@@ -2,6 +2,7 @@
 # the kit's booth/click handler). Equips the kit via the arena pipeline, then describes it.
 scoreboard players set @s givekit 3
 function imperium:arena/givekit
+function imperium:kits/livvy/booth/assign
 
 tellraw @s \
 [   "",\
@@ -32,6 +33,10 @@ tellraw @s \
                 text:"Acid Potion",},\
     {color:"gray",\
                 text:" — Inflicts Harming 1 and rapid Poison that also powers up your melee attacks\n",},\
+    {color:"gold",\
+                text:"  • [Passive] ",},\
+    {color:"gray",\
+                text:" + Movement Speed; + Step Height; + Safe Fall Distance; + Sneaking Speed\n",},\
     {color:"gold",\
                 text:"  • [Healing] ",},\
     {color:"red",\

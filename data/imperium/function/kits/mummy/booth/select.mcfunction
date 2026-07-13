@@ -2,6 +2,7 @@
 # the kit's booth/click handler). Equips the kit via the arena pipeline, then describes it.
 scoreboard players set @s givekit 4
 function imperium:arena/givekit
+function imperium:kits/mummy/booth/assign
 
 tellraw @s \
 [   "",\
@@ -18,7 +19,7 @@ tellraw @s \
     {color:"aqua",\
                                 text:"Dark Claymore"},\
     {color:"gray",\
-                                text:" — + Reach; - Attack Speed; Can perform vertical smash attacks\n"},\
+                                text:" — + Reach; - Attack Speed; Can perform mace smash attacks\n"},\
     {color:"gold",\
                                 text:"  • [Consumable] "},\
     {color:"aqua",\

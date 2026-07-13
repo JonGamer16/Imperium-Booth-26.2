@@ -2,6 +2,7 @@
 # the kit's booth/click handler). Equips the kit via the arena pipeline, then describes it.
 scoreboard players set @s givekit 1
 function imperium:arena/givekit
+function imperium:kits/cliffshield/booth/assign
 
 tellraw @s \
 [   "",\
@@ -41,6 +42,10 @@ tellraw @s \
                             text:"Rook Rush"},\
     {color:"gray",\
                             text:" — Extreme Speed for 1 second\n"},\
+    {color:"gold",\
+                text:"  • [Passive] ",},\
+    {color:"gray",\
+                text:" + Step Height\n",},\
     {color:"gold",\
                             text:"  • [Healing] "},\
     {color:"yellow",\

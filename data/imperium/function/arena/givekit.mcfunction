@@ -1,6 +1,3 @@
-execute as @s[scores={givekit=1..}] run attribute @s knockback_resistance base set 0.44
-execute as @s[scores={givekit=1..}] run attribute @s attack_knockback base set 1
-
 # Clear all kit tags before assigning the new one
 execute as @s[scores={givekit=1..}] run tag @s remove im.kit_cliffshield
 execute as @s[scores={givekit=1..}] run tag @s remove im.kit_meowdy

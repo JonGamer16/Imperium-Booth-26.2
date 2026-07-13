@@ -27,22 +27,23 @@ execute if predicate imperium:on_ground run \
 function player_motion:api/launch_looking
 
 #   Vertical Dampening
-#       Keep a fraction (numerator/10) of the look-driven y. Grounded keeps more since it
-#       has no jump velocity; airborne keeps less because the jump already supplied lift.
-#       Numerator may be 2, 3, 4, or 5; the /10 divide is shared.
-#       >> TUNING KNOBS: grounded / airborne numerator. <<
+#       Keep a fraction (numerator/#LeapDampDiv) of the look-driven y. Grounded keeps more since
+#       it has no jump velocity; airborne keeps less because the jump already supplied lift.
+#       Constants live in im.param (main/ability_parameters) — the summit-core player_motion lib
+#       only defines a handful of #constant.* values, so we no longer borrow its objective.
+#       >> TUNING KNOBS: #LeapDampGround / #LeapDampAir numerators. <<
 execute if predicate imperium:on_ground run \
     scoreboard players operation \
     @s player_motion.internal.motion.y \
-    *= #constant.3 player_motion.internal.const
+    *= #LeapDampGround im.param
 scoreboard players operation \
     @s player_motion.internal.motion.y \
-    /= #constant.10 player_motion.internal.const 
+    /= #LeapDampDiv im.param
 #       On Ground Conditional
 execute unless predicate imperium:on_ground run \
     scoreboard players operation \
     @s player_motion.internal.motion.y \
-    *= #constant.2 player_motion.internal.const
+    *= #LeapDampAir im.param
 
 #   Constant Vector
 #       Flat upward floor (0.0001 b/t units). Grounded gets a real pop; airborne gets

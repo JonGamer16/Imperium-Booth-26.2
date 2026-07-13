@@ -2,6 +2,16 @@
 # Keep gameplay numbers here instead of scattering them through the ability functions.
 
 
+# Shared abilities
+    # Leap Feather (abilities/leap, Livvy + Meowdy): vertical dampening of the look-driven launch.
+    #   Kept fraction of look-Y = numerator / #LeapDampDiv. Grounded keeps more (no jump lift);
+    #   airborne keeps less (the jump already supplied lift). Formerly borrowed #constant.* from
+    #   the vendored player_motion lib; the summit-core lib doesn't define #constant.3, so these
+    #   now live here.
+    scoreboard players set #LeapDampGround im.param 3
+    scoreboard players set #LeapDampAir im.param 2
+    scoreboard players set #LeapDampDiv im.param 10
+
 # Livvy
     # Lifesteal: damage score (1/10 HP) needed for 1 soup; excludes damage taken.
     scoreboard players set #lsThreshold im_lifesteal 160

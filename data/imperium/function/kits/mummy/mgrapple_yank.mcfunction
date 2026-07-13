@@ -22,12 +22,13 @@ scoreboard players operation $y player_motion.api.launch += #MummyGrappleVertica
 # Done with the hook regardless of which launch path runs, so untag before the early-return below.
 tag @s remove im.mgrapple_hooked
 
-# Players/mannequins ignore raw Motion NBT, so use the motion lib (and stop here).
-execute if entity @s[type=#imperium:human] run function player_motion:api/launch_xyz
+# Players ignore raw Motion NBT, so use the summit-core motion lib (player-only; the raw Motion
+# lines below silently no-op on players since /data can't modify them).
+execute if entity @s[type=player] run function player_motion:api/launch_xyz
 
-# Any other mob honors Motion directly. Clear OnGround first: a grounded mob keeps horizontal
-# Motion but the ground contact swallows the upward component, so it has to be treated as airborne
-# for the vertical pop to land. (The double scale 0.0001 converts the 1/10000-b/t scores to b/t.)
+# Any other entity (mannequins included) honors Motion directly. Clear OnGround first: a grounded
+# mob keeps horizontal Motion but the ground contact swallows the upward component, so it has to be
+# treated as airborne for the vertical pop to land. (The 0.0001 scale converts 1/10000-b/t to b/t.)
 data merge entity @s {OnGround:0b}
 execute store result entity @s Motion[0] double 0.0001 run scoreboard players get $x player_motion.api.launch
 execute store result entity @s Motion[1] double 0.0001 run scoreboard players get $y player_motion.api.launch

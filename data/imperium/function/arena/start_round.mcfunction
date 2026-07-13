@@ -17,6 +17,14 @@ scoreboard players set @s im_lastAtkId 0
 scoreboard players set @s im_lastAtkTime 0
 
 # Seed the health sample so the first healed-delta isn't measured from 0.
-execute store result score @s im_hpSample run data get entity @s Health 10
+# execute store result score @s im_hpSample run data get entity @s Health 10
+scoreboard players set @s im_hp 0
 
 tag @s add im.fighting
+
+# Arena regen policy: BG players already lose Resistance V automatically, but BSL leaves
+# their hunger alone — summit.no_regen additionally holds food at 8 (sprint yes, natural
+# regen no). effect clear per the handbook so pre-applied Resistance/Saturation don't
+# linger into the fight. end_round removes the tag.
+tag @s add summit.no_regen
+effect clear @s

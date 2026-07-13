@@ -2,6 +2,8 @@
 # the kit's booth/click handler). Equips the kit via the arena pipeline, then describes it.
 scoreboard players set @s givekit 7
 function imperium:arena/givekit
+function imperium:kits/smokey/booth/assign
+
 
 tellraw @s \
 [   "",\

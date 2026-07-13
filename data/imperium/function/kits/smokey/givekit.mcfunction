@@ -12,6 +12,8 @@ item replace entity @s armor.head with \
             {type:"movement_speed",amount:0.2,operation:"add_multiplied_base",slot:"head",id:"head"},\
             {type:"sneaking_speed",amount:1,operation:"add_value",slot:"head",id:"head"},\
             {type:"fall_damage_multiplier",amount:-0.5,operation:"add_multiplied_base",slot:"head",id:"head"},\
+            {type:"attack_knockback",amount:1,operation:"add_value",slot:"head",id:"head"},\
+            {type:"knockback_resistance",amount:0.44,operation:"add_value",slot:"head",id:"head"},\
         ],\
         item_model="minecraft:chainmail_helmet",\
         equippable={slot:head,asset_id:"minecraft:chainmail"},\

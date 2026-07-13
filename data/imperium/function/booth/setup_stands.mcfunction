@@ -11,3 +11,7 @@ execute positioned ~ ~ ~-9 run function imperium:kits/mummy/booth/summon
 execute positioned ~2 ~ ~-11 run function imperium:kits/levent/booth/summon
 execute positioned ~5 ~ ~-11 run function imperium:kits/smokey/booth/summon
 execute positioned ~8 ~ ~-11 run function imperium:kits/meowdy/booth/summon
+
+# Utility stands: random kit + clear kit (interactions only, no display model)
+execute positioned ~11 ~ ~-11 run function imperium:booth/random/summon
+execute positioned ~14 ~ ~-11 run function imperium:booth/clear/summon

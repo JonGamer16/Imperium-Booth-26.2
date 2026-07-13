@@ -17,14 +17,6 @@ scoreboard players set @s im_cdMaxA 0
 scoreboard players set @s im_cdMaxB 0
 scoreboard players set @s im_cdMaxC 0
 
-# Smokey
-
-    # Smokey Grappling Rod — drop any in-flight grapple state so a kit swap mid-cast can't carry a
-    # stale armed launch onto the next kit (the bobber retracts when clear_kit removes the rod above).
-    tag @s remove im.grapple_user
-    tag @s remove im.grapple_armed
-    tag @s remove im.grapple_live
-
     tag @s remove im.kit_cliffshield
     tag @s remove im.kit_levent
     tag @s remove im.kit_livvy
@@ -32,6 +24,14 @@ scoreboard players set @s im_cdMaxC 0
     tag @s remove im.kit_mummy
     tag @s remove im.kit_rastus
     tag @s remove im.kit_smokey
+
+# Smokey
+
+    # Smokey Grappling Rod — drop any in-flight grapple state so a kit swap mid-cast can't carry a
+    # stale armed launch onto the next kit (the bobber retracts when clear_kit removes the rod above).
+    tag @s remove im.grapple_user
+    tag @s remove im.grapple_armed
+    tag @s remove im.grapple_live
 
     # Crosshair tracker (Rastus Focus / Levent Charge) — kill this player's paired interaction so
     # a kit swap can't strand it; the enchant's tick re-binds if the new kit also carries one.
@@ -69,6 +69,11 @@ scoreboard players set @s im_cdMaxC 0
     attribute @s minecraft:attack_knockback modifier remove imperium:charge
     scoreboard players set @s im_leventCharge 0
     advancement revoke @s only imperium:levent_shield
+
+    # High Jump — strip the low-gravity modifier via the canonical off function (its remove is
+    # guaranteed to match the id high_jump_on added) and clear the equip heartbeat.
+    function imperium:enchantments/high_jump_off
+    scoreboard players reset @s im_high_jump_eq
 
 # Livvy
 

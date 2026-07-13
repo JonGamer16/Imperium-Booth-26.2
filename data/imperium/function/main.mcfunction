@@ -86,10 +86,12 @@ function imperium:main/ability_parameters
     scoreboard objectives add loops dummy
     scoreboard objectives add im_lastKit dummy
     scoreboard objectives add im_melee_drought dummy
-    # hunger proofing
-    effect give @a saturation infinite 0
 
 #scoreboard objectives add carrot_on_a_stick minecraft.used:carrot_on_a_stick
 
 # Reset Temporary Player Data
 # data modify storage imperium:player_data players set value []
+
+# Baobab Battlegrounds registration. In the local world this logs one "unknown function"
+# error and does nothing — expected (the API only exists on the Summit server).
+function imperium:summit/register_booth

@@ -44,8 +44,10 @@ The current design: **one tag per kit** (`im.kit_cliffshield`, …) drives every
 on-kill heals, booth routing. Each kit is a self-contained folder under `function/kits/`. Gameplay
 numbers are centralized in `main/ability_parameters` and `main/init_cooldowns`.
 
-External libraries (vendored, do not edit): **`player_motion`** (knockback/launch math) and
-**`player_input`** (WASD/sneak/jump key capture).
+External libraries: **`player_motion`** (knockback/launch math) is provided by **summit-dp-core**
+(NOT vendored here — imperium calls its legacy `api/launch_xyz` / `api/launch_looking`, which
+summit-core keeps alongside the newer `api/launch_global_xyz` / `api/launch_local_xyz`).
+**`player_input`** (WASD/sneak/jump key capture) is still vendored, do not edit.
 
 ---
 
@@ -87,8 +89,8 @@ External libraries (vendored, do not edit): **`player_motion`** (knockback/launc
     │   ├── dialog/                   kitselect dialog
     │   └── tags/                     block/damage_type/entity_type tags (im.*)
     │
-    ├── player_motion/                EXTERNAL LIB — launch/knockback vector math
     └── player_input/                 EXTERNAL LIB — key/movement capture
+        (player_motion is NOT bundled — provided by summit-dp-core)
 ```
 
 ### `imperium/function/` breakdown
@@ -178,8 +180,8 @@ imperium:main
 └── main/ability_parameters  set tuning constants (venom/smoke/dodge/strike)
    # (main/gamerules is commented out — gamerules locked in Summit)
 
-player_motion:internal/technical/load    external lib init
 player_input:zz_internal/init             external lib init
+   # (player_motion init is summit-dp-core's job: player_motion:internal/init in its load tag)
 ```
 
 **Order dependency:** `constants` before `ability_cooldowns` (the `set_cd` macro reads the const
@@ -354,7 +356,7 @@ banking). `wip_*` enchantments are unfinished — see strip list.
 | **Shared abilities** | `abilities/{leap,leap_refund,set_cd}` | Current | Leap shared by Livvy + Meowdy. |
 | **Predicates** | `predicate/` | Current | `on_ground`, `sneaking`, `at_spawn`, `has_venom`, `has_bad_omen`. |
 | **Legacy items/heals/raycaster/data_fetching** | — | **REMOVED** | Deleted; recover from tag `legacy-full`. |
-| **player_motion** | `data/player_motion/` | External lib | Launch/knockback math. Don't edit. |
+| **player_motion** | summit-dp-core (not bundled) | External lib | Launch/knockback math via legacy `api/launch_xyz` / `api/launch_looking`. |
 | **player_input** | `data/player_input/` | External lib | Key/WASD capture. Don't edit. |
 
 ---
@@ -396,7 +398,7 @@ The minimum set that actually drives a match (everything else is booth chrome or
 - predicates `on_ground`, `sneaking`, `has_venom`, `has_bad_omen`
 - active `enchantment/*` + `enchantments/*` + their advancements
 - `util/clear_kit`
-- `player_motion`, `player_input` libs
+- `player_input` lib (`player_motion` comes from summit-dp-core)
 
 **Booth-only (ticks only while a player is in booth bounds):**
 - `booth/*`, `kits/<kit>/booth/*`, `booth_definition.json`

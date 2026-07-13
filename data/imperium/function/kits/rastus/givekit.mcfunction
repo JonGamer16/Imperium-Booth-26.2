@@ -9,6 +9,8 @@ item replace entity @s armor.head with \
             {type:"armor",amount:17,operation:"add_value",slot:"head",id:"head"},\
             {type:"armor_toughness",amount:4,operation:"add_value",slot:"head",id:"head"},\
             {type:"movement_speed",amount:0.2,operation:"add_multiplied_base",slot:"head",id:"head"},\
+            {type:"attack_knockback",amount:1,operation:"add_value",slot:"head",id:"head"},\
+            {type:"knockback_resistance",amount:0.44,operation:"add_value",slot:"head",id:"head"},\
         ],\
         !max_damage,\
         item_model="minecraft:leather_helmet",\

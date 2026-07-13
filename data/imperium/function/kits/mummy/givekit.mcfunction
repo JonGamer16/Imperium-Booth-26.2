@@ -9,6 +9,8 @@ item replace entity @s armor.head with \
         attribute_modifiers=[\
             {type:"armor",amount:15,operation:"add_value",slot:head,id:"head"},\
             {type:"armor_toughness",amount:8,operation:"add_value",slot:head,id:"head"},\
+            {type:"attack_knockback",amount:1,operation:"add_value",slot:"head",id:"head"},\
+            {type:"knockback_resistance",amount:0.44,operation:"add_value",slot:"head",id:"head"},\
         ],\
         enchantments={"imperium:wip_barrier":1,"protection":8},\
         !max_damage,\

@@ -25,4 +25,3 @@ execute if score @s im_lastAtkTime matches 1.. as @a[tag=im.fighting] if score @
 tag @s remove im.feed_victim
 scoreboard players set @s im_lastAtkId 0
 scoreboard players set @s im_lastAtkTime 0
-effect give @a saturation infinite

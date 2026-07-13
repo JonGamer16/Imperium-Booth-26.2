@@ -24,10 +24,11 @@
             }
         }
     },
-    "on_player_enter": "booth/enter_booth",
-    "on_player_exit": "",
+    "on_player_enter": "imperium:booth/enter_booth",
+    "on_player_exit": "imperium:booth/exit_booth",
     "ticking_functions": {
-        "imperium:tick": "1t",
+        "imperium:loop_tick": "1t",
+        "imperium:loop_enchantments": "1t",
         "imperium:loop_5t": "5t",
         "imperium:loop_1s": "1s"
     },
@@ -39,16 +40,25 @@
                 "sticker_id": "enter_booth",
                 "sticker_texture": "<texture_location>",
                 "sticker_name": "New Challenger Approaching",
-                "unobtained_text": "Enter the Booth",
-                "obtained_text": "Rewarded for entering the Booth"
+                "unobtained_text": "Enter the Pagoda near the lift cars",
+                "obtained_text": "A KitPvP like no other."
+            },
+            {
+                "sticker_id": "read_lore",
+                "sticker_texture": "<texture_location>",
+                "sticker_name": "Historian",
+                "unobtained_text": "Read the lore of the fighters",
+                "obtained_text": "Meowdy!"
+            },
+            {
+                "sticker_id": "win_fight",
+                "sticker_texture": "<texture_location>",
+                "sticker_name": "Champion of the Arena",
+                "unobtained_text": "Win a match in the Baobab Battlegrounds",
+                "obtained_text": "You are ready."
             }
         ]
     },
     "balloons": [
-        {
-            "balloon_id": "imperium",
-            "balloon_name": "Imperium",
-            "balloon_model": "summit_balloons:item/imperium"
-        }
     ]
 }

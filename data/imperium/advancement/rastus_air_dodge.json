@@ -17,7 +17,8 @@
             "condition": "minecraft:entity_properties",
             "entity": "this",
             "predicate": {
-              "nbt": "{Tags:[\"im.kit_rastus\"]}"
+              "entity_tags": 
+              {"any_of": ["im.kit_rastus"]}
             }
           },
           {

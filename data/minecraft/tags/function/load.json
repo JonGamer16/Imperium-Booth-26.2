@@ -1,7 +1,6 @@
 {
     "values": [
         "imperium:main",
-        "player_motion:internal/technical/load",
         "player_input:zz_internal/init"
     ]
 }

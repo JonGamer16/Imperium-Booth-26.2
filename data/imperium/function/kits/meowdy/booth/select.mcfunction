@@ -2,6 +2,7 @@
 # the kit's booth/click handler). Equips the kit via the arena pipeline, then describes it.
 scoreboard players set @s givekit 2
 function imperium:arena/givekit
+function imperium:kits/meowdy/booth/assign
 
 tellraw @s \
 [   "",\
@@ -32,6 +33,10 @@ tellraw @s \
                             text:"Leap Feather"},\
     {color:"yellow",\
                             text:" — Leap about 15 blocks and briefly gain Speed 2\n"},\
+    {color:"gold",\
+                text:"  • [Passive] ",},\
+    {color:"gray",\
+                text:" + Movement Speed; + Safe Fall Distance; + Sneaking Speed\n",},\
     {color:"gold",\
                             text:"  • [Healing] "},\
     {color:"white",\ 

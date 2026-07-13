@@ -236,15 +236,16 @@ Booth Integration:
         o   verify in-game: billboard text_display resolves selector/score; `on attacker` for projectiles
         o   vanilla death msgs may duplicate feed (gamerules locked on Summit) -- confirm w/ staff
 
-        Slice 2 -- Summit hooks (guard each -- see notes):
-        o   register_booth on load
-        o   player_enter: arena/start_round (reset stats/gold) + spawn -> arena
-        o   player_died: respawn (no elimination in gold rush)
-        o   player_leave: reset state + #summit:api/reset_player
-        o   booth_inactive: arena/resolve_match -> champion sticker
+        Slice 2 -- Summit hooks (WIRED 2026-07-13; functions in imperium:summit/*, tags in
+                   data/summit.battlegrounds + data/summit):
+        /   register_booth on load (default kit = cliffshield; return_pos/rot PLACEHOLDER)
+        /   player_enter: assign_lastkit (re-asserts saved kit) + arena/start_round
+        /   player_died: arena/respawn -- infinite respawns, re-gives last kit (tp TODO)
+        /   player_leave: summit/end_fighter (end_round + clear_kit); #summit:api/reset_player registered
+        /   booth_inactive: resolve_match + end_fighter for all fighters (champion sticker grant still TODO)
         o   player_enter_attempt: block mid-set entry via #block_player_enter
-        o   assign_kit / unassign_kit from armor-room select
-        o   gate swap: im.fighting -> summit.battlegrounds.player
+        /   assign_kit v2 / unassign_kit: kits/<kit>/booth/assign from every select + clear stand
+        /   gate swap: im.fighting is now added/removed by the hooks themselves
 
         Slice 3 -- assets (needs build):
         o   arena structure file + set_structure
@@ -292,8 +293,11 @@ Booth Integration:
                     on_kill fns left in place, unused. kills are now just a stat, no reward.
             gate swap: engine gated on leave_spawn=true (never granted -> never fired); now im.fighting,
                     one find/replace to the real tag for Summit. cooldown_dealt + cooldown_taken.
-            regen:  battlegrounds players auto-exempt from Resistance V (hunger untouched) --
-                    no summit.no_regen needed in the arena
+            regen:  DECIDED 2026-07-13 -- summit.no_regen wherever we fight: added on booth
+                    enter (dummy sparring) + arena/start_round (BSL holds hunger at 8: sprint
+                    yes, natural regen no), removed on booth exit / end_round / reset_player.
+                    Old blanket saturation lines (main.mcfunction + on_death) DELETED -- local
+                    test worlds now rely on the world's naturalRegeneration gamerule + food.
             CONFIRM w/ staff: player_died auto-respawn or manual tp + spawnpoint? arena spawn
                     point(s)? respawn invuln/grace?
 
@@ -301,7 +305,21 @@ Booth Integration:
     x   Match format: GOLD RUSH -- 1 gold/25 dmg + 3/kill, most gold wins  [changed 2026-07-01]
     x   Death penalty in gold rush: forfeit half your gold on death  [decided 2026-07-01]
     x   Gold display approach: spectator standings billboard (text_display) + chat feedback  [decided 2026-07-02]
-    x   Dummy entity: custom mummy mannequin
-    o   Combat ticking method: persistent tick vs scheduled clock
-    o   Balloon model namespace: own RP vs summit_balloons
+    x   Dummy entity: mummy-armored husk w/ Regeneration 10, tethered to im.dummy_home markers
+            in loop_5t (snap back at 10+ blocks, killed within 3 of booth bounds, auto-respawns)
+            [built 2026-07-13; booth/dummy/*, registered in entities/summon + /kill tags]
+    x   Combat ticking method: no persistent tick -- abilities are event/booth-tick driven and
+            stop when the booth is vacant  [decided 2026-07-13]
+    x   Balloon: DROPPED, out of time before booth freeze  [decided 2026-07-13]
+    x   Regen/hunger: summit.no_regen policy (see regen note above)  [decided 2026-07-13]
+    x   Kits: assign_kit v2 w/ kit_id = imperium:<folder name>, default = cliffshield, random +
+            clear stands (booth/random, booth/clear), im_lastKit synced via sync_setting/kit.json
+            [decided 2026-07-13]
+
+    CONFIRM w/ staff (blocking placeholders left in code):
+    o   register_booth return_pos/return_rot (summit/register_booth.mcfunction)
+    o   arena respawn point + whether player_died fires pre/post respawn (arena/respawn.mcfunction,
+            tp commented out) -- also respawn invuln/grace, still undecided
+    o   dummy home coordinates (booth/dummy/summon.mcfunction, currently pagoda_center center)
+    o   sanity-check: summit.no_regen hunger-hold also applies to battlegrounds-tagged players
 

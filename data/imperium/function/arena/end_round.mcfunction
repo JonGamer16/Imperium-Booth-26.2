@@ -1,6 +1,7 @@
 # End @s's combat round: compute final score, show the post-game summary, stop tracking.
 # Reusable by the Summit booth_inactive / player_leave hooks.
 tag @s remove im.fighting
+tag @s remove summit.no_regen
 function imperium:arena/calc_gold
 
 # Crosshair tracker (Rastus/Levent): the leaver's interaction has no owner to follow — kill it.

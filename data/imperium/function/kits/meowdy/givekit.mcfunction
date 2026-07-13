@@ -13,6 +13,8 @@ item replace entity @s armor.head with \
             {type:"sneaking_speed",amount:1,operation:"add_value",slot:"head",id:"head"},\
             {type:"safe_fall_distance",amount:6,operation:"add_value",slot:head,id:"head"},\
             {type:"fall_damage_multiplier",amount:-0.5,operation:"add_value",slot:head,id:"head"},\
+            {type:"attack_knockback",amount:1,operation:"add_value",slot:"head",id:"head"},\
+            {type:"knockback_resistance",amount:0.44,operation:"add_value",slot:"head",id:"head"},\
         ],\
         item_model="minecraft:leather_helmet",\
         equippable={slot:head,asset_id:"minecraft:leather"},\

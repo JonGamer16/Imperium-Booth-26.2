@@ -2,6 +2,7 @@
 # the kit's booth/click handler). Equips the kit via the arena pipeline, then describes it.
 scoreboard players set @s givekit 5
 function imperium:arena/givekit
+function imperium:kits/levent/booth/assign
 
 tellraw @s \
 [   "",\
@@ -26,13 +27,17 @@ tellraw @s \
     {color:"light_purple",\
                             text:"Gravity Control",},\
     {color:"gray",\
-                            text:" — Hold Jump to float upwards\n",},\
+                            text:" — Hold Jump to float in the air\n",},\
     {color:"gold",\
                             text:"  • [Consumable] ",},\
     {color:"light_purple",\
                             text:"Reversal Shield",},\
     {color:"gray",\
                             text:" — Sneak while blocking to teleport behind attackers\n",},\
+    {color:"gold",\
+                text:"  • [Passive] ",},\
+    {color:"gray",\
+                text:" + Air Speed; + Safe Fall Distance\n",},\
     {color:"gold",\
                             text:"  • [Healing] ",},\
     {color:"light_purple",\
