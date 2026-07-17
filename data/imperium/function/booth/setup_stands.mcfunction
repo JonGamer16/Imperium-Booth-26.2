@@ -1,8 +1,8 @@
 # One-shot: (re)build a test row of all seven kit-selection stands.
 # Clears any existing booth stands first so re-running never duplicates them, then
 # places the seven kits spaced 3 blocks apart along +X starting at your feet.
-kill @e[type=interaction,tag=im.booth_stand]
-kill @e[type=armor_stand,tag=im.booth_stand_model]
+kill @e[type=interaction,tag=im.booth_stand,limit=7]
+kill @e[type=armor_stand,tag=im.booth_stand_model,limit=7]
 
 execute positioned ~ ~ ~ run function imperium:kits/cliffshield/booth/summon
 execute positioned ~ ~ ~-3 run function imperium:kits/rastus/booth/summon

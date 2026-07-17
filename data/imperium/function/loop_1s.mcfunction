@@ -1,5 +1,10 @@
 #### 1-SECOND LOOP ####
 
+# Kit-equip rate limit: booth stand clicks set im.equip_cd and refuse to equip while it's
+# present (see kits/*/booth/click + booth/random/click), so clearing it here allows at most
+# one full givekit pipeline per player per second.
+tag @a remove im.equip_cd
+
 # Straight Flight: despawn no-gravity arrows that have exceeded flight time
 scoreboard players add @e[type=#minecraft:arrows] im_arrowAge 1
 kill @e[type=#minecraft:arrows,scores={im_arrowAge=10..}]

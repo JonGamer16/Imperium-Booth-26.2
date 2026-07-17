@@ -9,11 +9,20 @@ summon minecraft:armor_stand ~ ~ ~ \
     Invulnerable:1b,\
     NoBasePlate:1b,\
     ShowArms:1b,\
-    CustomNameVisible:1b,\
+    CustomNameVisible:0b,\
     CustomName:{text:"Smokey Bat",color:"gold",bold:true},\
     Tags:["im.booth_stand_model","im.booth_smokey","im.booth_new"],\
     Pose:{Body:[15f,0f,0f],Head:[69f,0f,0f],LeftLeg:[316f,0f,0f],RightLeg:[45f,0f,5f],LeftArm:[12f,0f,291f],RightArm:[15f,0f,72f]}\
 }
+
+execute at @e[type=armor_stand,tag=im.booth_new,limit=1] \
+    rotated ~ ~ \
+    run summon text_display ^ ^-0.5 ^0.7 \
+    {   text:{text:"Smokey Bat",color:"gold",bold:true},\
+        billboard:"fixed",\
+        see_through:1b,\
+        Tags:["im.booth_stand_model","im.booth_smokey"]\
+    }
 
 loot replace entity @e[type=armor_stand,tag=im.booth_new,limit=1] \
     armor.head loot imperium:smokey/display/head

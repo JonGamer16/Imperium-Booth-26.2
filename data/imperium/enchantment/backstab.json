@@ -47,7 +47,7 @@
                 "effect":
                 {
                     "type": "run_function",
-                    "function": "imperium:enchantments/backstab_context"
+                    "function": "imperium:enchantments/backstab"
                 }
             }
         ]

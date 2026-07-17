@@ -1,0 +1,35 @@
+URL: https://minecraft.wiki/w/Enchantment_definition
+Categories: []
+
+{{Exclusive|java}}
+
+[[Enchantment]]s are stored as [[JSON]] files within a [[data pack]] in the path {{cd|data/<namespace>/enchantment}}.
+{{TOC|right}}
+
+== JSON format ==
+<div class="treeview">
+* {{nbt|compound}}: The root object.
+** {{nbt|compound|description}}: A [[text component]] that is used to display the enchantment on items.
+** {{nbt|string}}{{nbt|list|exclusive_set}}: {{json_ref/enchantment|tag=1}} &mdash; Enchantments that are incompatible with this enchantment. &mdash; Defaults to an empty list.
+** {{nbt|string}}{{nbt|list|supported_items}}: {{json_ref/item|tag=1}} &mdash; Items on which this enchantment can be applied using an anvil or using the [[Commands/enchant|{{cd|/enchant}}]] command.
+** {{nbt|string}}{{nbt|list|primary_items}}: (Optional) {{json_ref/item|tag=1}}; has to be a subset of {{nbt|string}}{{nbt|list|supported_items}} &mdash; Items for which this enchantment (if present in {{tag link|enchantment|in_enchanting_table}}) appears in an [[enchanting table]]. If unspecified, defaults to being the same as {{nbt|string}}{{nbt|list|supported_items}}.
+** {{nbt|int|weight}}: Value between 1 and 1024 (inclusive) &mdash; Controls the probability of this enchantment when enchanting. The probability is determined {{cd|weight/total_weight * 100%}}, where {{cd|total_weight}} is the sum of the weights of all available enchantments.
+** {{nbt|int|max_level}}: Value between 1 and 255 (inclusive) &mdash; The maximum level of this enchantment.
+** {{nbt|compound|min_cost}}: The minimum base cost of this enchantment in levels. The base cost range will be [[Enchanting mechanics#How enchantments are chosen|modified]] before use.
+*** {{nbt|int|base}}: The minimum cost for a level I enchantment.
+*** {{nbt|int|per_level_above_first}}: The amount of levels added to the minimum for each level above level I.
+** {{nbt|compound|max_cost}}: The maximum base cost of this enchantment in levels. The base cost range will be [[Enchanting mechanics#How enchantments are chosen|modified]] before use.
+*** same fields as above
+** {{nbt|int|anvil_cost}}: The base cost when applying this enchantment to another item using an [[anvil]]. Halved when adding using a book, multiplied by the level of the enchantment.
+** {{nbt|list|slots}}: List of equipment slots that this enchantment works in.
+*** {{nbt|string}}: one of {{cd|any}}, {{cd|hand}}, {{cd|mainhand}}, {{cd|offhand}}, {{cd|armor}}, {{cd|feet}}, {{cd|legs}}, {{cd|chest}}, {{cd|head}}, {{cd|body}}, {{cd|saddle}} &mdash; a slot 
+** {{nbt|compound|effects}}: Effect components &mdash; Controls the effect of the enchantment.
+*** {{nbt|list}}{{nbt|compound|<component ID>}}: An [[#Effect components|effect component]]
+**** Fields depending on the component
+</div>
+
+== Effect components ==
+=== Components with value effects ===
+These components use a [[#Value effects|value effect]] to change a value and an optional condition to check beforehand. The general format for them is:
+<div class="treeview">
+* {{nbt|list|<component I

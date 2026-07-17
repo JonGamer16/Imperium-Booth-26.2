@@ -114,4 +114,4 @@
     # Charge Attack: idle ticks of not attacking OR raising the shield before the next hit gets
     # the boost (bonus damage, reach, knockback). 20 ticks = 1s; the slow Light Rod wants a touch
     # longer wind-up than Rastus's Strike.
-    scoreboard players set #LeventCharge im.param 25
+    scoreboard players set #LeventCharge im.param 14

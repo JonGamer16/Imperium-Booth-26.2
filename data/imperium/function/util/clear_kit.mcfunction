@@ -67,6 +67,7 @@ scoreboard players set @s im_cdMaxC 0
     attribute @s minecraft:attack_damage modifier remove imperium:charge
     attribute @s minecraft:entity_interaction_range modifier remove imperium:charge
     attribute @s minecraft:attack_knockback modifier remove imperium:charge
+    attribute @s minecraft:gravity modifier remove im_high_jump
     scoreboard players set @s im_leventCharge 0
     advancement revoke @s only imperium:levent_shield
 

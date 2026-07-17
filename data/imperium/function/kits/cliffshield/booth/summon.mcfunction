@@ -8,12 +8,22 @@ summon minecraft:armor_stand ~ ~ ~ \
     Invulnerable:1b,\
     NoBasePlate:1b,\
     ShowArms:1b,\
-    CustomNameVisible:1b,\
+    CustomNameVisible:0b,\
     CustomName:{text:"Jeru Cliffshield",color:"yellow",bold:true},\
     Tags:["im.booth_stand_model","im.booth_cliffshield","im.booth_new"],\
     Rotation:[-90,0],\
     Pose:{Body:[7f,14f,0f],Head:[5f,335f,0f],LeftLeg:[346f,325f,0f],RightLeg:[360f,14f,13f],LeftArm:[277f,23f,0f],RightArm:[337f,341f,50f]}\
 }
+
+execute at @e[type=armor_stand,tag=im.booth_new,limit=1] \
+    rotated ~ ~ \
+    run summon text_display ^ ^-0.5 ^0.7 \
+    {   text:{text:"Jeru Cliffshield",color:"yellow",bold:true},\
+        billboard:"fixed",\
+        see_through:1b,\
+        Tags:["im.booth_stand_model","im.booth_cliffshield"]\
+    }
+
 loot replace entity @e[type=armor_stand,tag=im.booth_new,limit=1] \
     armor.head loot imperium:cliffshield/display/head
 loot replace entity @e[type=armor_stand,tag=im.booth_new,limit=1] \

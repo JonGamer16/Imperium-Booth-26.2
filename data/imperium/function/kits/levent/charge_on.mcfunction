@@ -4,8 +4,8 @@
 #   >> TUNING KNOBS (kept inline — `attribute … add` needs a literal value, not a score):
 #      attack_damage burst, reach in blocks (3.0 base -> 4.5), knockback on top of the rod. <<
 tag @s add im.levent_charged
-attribute @s minecraft:attack_damage modifier add imperium:charge 5 add_value
-attribute @s minecraft:entity_interaction_range modifier add imperium:charge 1.5 add_value
-attribute @s minecraft:attack_knockback modifier add imperium:charge 3 add_value
+attribute @s minecraft:attack_damage modifier add imperium:charge 2 add_value
+attribute @s minecraft:entity_interaction_range modifier add imperium:charge 1 add_value
+attribute @s minecraft:attack_knockback modifier add imperium:charge 0.5 add_value
 
 title @s actionbar {text:"⦿ Focus ready",color:"light_purple"}

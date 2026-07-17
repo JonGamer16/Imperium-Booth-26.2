@@ -8,12 +8,22 @@ summon minecraft:armor_stand ~ ~ ~ \
     Invulnerable:1b,\
     NoBasePlate:1b,\
     ShowArms:1b,\
-    CustomNameVisible:1b,\
+    CustomNameVisible:0b,\
     CustomName:{text:"Mummy",color:"gray",bold:true},\
     Tags:["im.booth_stand_model","im.booth_mummy","im.booth_new"],\
     Rotation:[-70f,0f],\
     Pose:{Head:[7f,343f,0f],LeftLeg:[337f,343f,0f],RightLeg:[17f,360f,5f],LeftArm:[244f,346f,10f],RightArm:[335f,360f,18f]}\
 }
+
+execute at @e[type=armor_stand,tag=im.booth_new,limit=1] \
+    rotated ~ ~ \
+    run summon text_display ^ ^-0.5 ^0.7 \
+    {   text:{text:"Mummy",color:"gray",bold:true},\
+        billboard:"fixed",\
+        see_through:1b,\
+        Tags:["im.booth_stand_model","im.booth_mummy"]\
+    }
+
 loot replace entity @e[type=armor_stand,tag=im.booth_new,limit=1] \
     armor.head loot imperium:mummy/display/head
 loot replace entity @e[type=armor_stand,tag=im.booth_new,limit=1] \

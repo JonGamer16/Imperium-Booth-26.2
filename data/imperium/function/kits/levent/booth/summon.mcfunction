@@ -8,12 +8,22 @@ summon minecraft:armor_stand ~ ~ ~ \
     Invulnerable:1b,\
     NoBasePlate:1b,\
     ShowArms:1b,\
-    CustomNameVisible:1b,\
+    CustomNameVisible:0b,\
     CustomName:{text:"Levent",color:"light_purple",bold:true},\
     Tags:["im.booth_stand_model","im.booth_levent","im.booth_new"],\
     Rotation:[42f,0f],\
     Pose:{Body:[7f,2f,0f],Head:[8f,321f,0f],LeftLeg:[346f,325f,353f],RightLeg:[360f,14f,13f],LeftArm:[335f,354f,335f],RightArm:[329f,0f,132f]}\
 }
+
+execute at @e[type=armor_stand,tag=im.booth_new,limit=1] \
+    rotated ~ ~ \
+    run summon text_display ^ ^-0.5 ^0.7 \
+    {   text:{text:"Levent",color:"light_purple",bold:true},\
+        billboard:"fixed",\
+        see_through:1b,\
+        Tags:["im.booth_stand_model","im.booth_levent"]\
+    }
+
 loot replace entity @e[type=armor_stand,tag=im.booth_new,limit=1] \
     armor.head loot imperium:levent/display/head
 loot replace entity @e[type=armor_stand,tag=im.booth_new,limit=1] \

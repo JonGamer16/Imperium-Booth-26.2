@@ -33,8 +33,19 @@
                     "entity": "attacker",
                     "scores": 
                     {
-                        "im_offhandCd":0
+                        "im_offhandCd":{
+                            "max": 0
+                        }
                     }
+                }
+            },
+            {
+                "affected": "attacker",
+                "enchanted": "attacker",
+                "effect": 
+                {
+                    "type": "minecraft:run_function",
+                    "function": "imperium:enchantments/offhand_cd"
                 }
             }
         ]

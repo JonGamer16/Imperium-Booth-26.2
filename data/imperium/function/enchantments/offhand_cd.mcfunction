@@ -1,0 +1,1 @@
+scoreboard players set @s im_offhandCd 20

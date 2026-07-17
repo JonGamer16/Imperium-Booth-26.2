@@ -8,11 +8,21 @@ summon minecraft:armor_stand ~ ~ ~ \
     Invulnerable:1b,\
     NoBasePlate:1b,\
     ShowArms:1b,\
-    CustomNameVisible:1b,\
+    CustomNameVisible:0b,\
     CustomName:{text:"Quin Meowdy",color:"gold",bold:true},\
     Tags:["im.booth_stand_model","im.booth_meowdy","im.booth_new"],\
     Pose:{Body:[0f,10f,7f],LeftLeg:[0f,0f,12f],RightLeg:[0f,0f,40f],LeftArm:[277f,20f,9f],RightArm:[284f,343f,360f]}\
 }
+
+execute at @e[type=armor_stand,tag=im.booth_new,limit=1] \
+    rotated ~ ~ \
+    run summon text_display ^ ^-0.5 ^0.7 \
+    {   text:{text:"Quin Meowdy",color:"gold",bold:true},\
+        billboard:"fixed",\
+        see_through:1b,\
+        Tags:["im.booth_stand_model","im.booth_meowdy"]\
+    }
+
 loot replace entity @e[type=armor_stand,tag=im.booth_new,limit=1] \
     armor.head loot imperium:meowdy/display/head
 loot replace entity @e[type=armor_stand,tag=im.booth_new,limit=1] \

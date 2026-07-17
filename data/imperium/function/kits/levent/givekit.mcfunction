@@ -3,84 +3,92 @@
 function imperium:util/clear_kit
 
 #   [ARMOR]
-item replace entity @s armor.head with \
-    netherite_helmet[\
-        !max_damage,\
-        enchantments={"protection":12,"imperium:wip_high_jump":1},\
-        attribute_modifiers=[\
-            {type:"armor",amount:8,operation:"add_value",slot:"head",id:"head"},\
-            {type:"armor_toughness",amount:8,operation:"add_value",slot:"head",id:"head"},\
-            {type:"air_drag_modifier",amount:-0.2,operation:"add_multiplied_base",slot:"head",id:"head"},\
-            {type:"safe_fall_distance",amount:2,operation:"add_multiplied_base",slot:"head",id:"head"},\
-            {type:"fall_damage_multiplier",amount:-0.5,operation:"add_multiplied_base",slot:"head",id:"head"},\
-            {type:"attack_knockback",amount:1,operation:"add_value",slot:"head",id:"head"},\
-            {type:"knockback_resistance",amount:0.44,operation:"add_value",slot:"head",id:"head"},\
-        ],\
-        item_model="minecraft:leather_helmet",\
-        equippable={slot:head,asset_id:"minecraft:leather"},\
-        dyed_color=8073150,\
-        custom_name={color:"light_purple",italic:false,text:"Shulker Lid"},\
-        trim={material:"amethyst",pattern:"spire"},\
-        custom_data={"imperium_kit":1b},\
-    ] 1
-item replace entity @s armor.chest with \
-    netherite_chestplate[\
-        !max_damage,\
-        !attribute_modifiers,\
-        item_model="minecraft:leather_chestplate",\
-        equippable={slot:chest,asset_id:"minecraft:leather"},\
-        dyed_color=8073150,\
-        custom_name={color:"light_purple",italic:false,text:"Shulker Core"},\
-        trim={material:"gold",pattern:"eye"},\
-        custom_data={"imperium_kit":1b},\
-    ] 1
-item replace entity @s armor.legs with \
-    netherite_leggings[\
-        !max_damage,\
-        !attribute_modifiers,\
-        item_model="minecraft:leather_leggings",\
-        equippable={slot:legs,asset_id:"minecraft:leather"},\
-        dyed_color=8073150,\
-        custom_name={color:"light_purple",italic:false,text:"Shulker Pillar"},\
-        trim={material:"amethyst",pattern:"spire"},\
-        custom_data={"imperium_kit":1b},\
-    ] 1
-item replace entity @s armor.feet with \
-    netherite_boots[\
-        !max_damage,\
-        !attribute_modifiers,\
-        item_model="minecraft:leather_boots",\
-        equippable={slot:feet,asset_id:"minecraft:leather"},\
-        dyed_color=8073150,\
-        custom_name={color:"light_purple",italic:false,text:"Shulker Base"},\
-        trim={material:"amethyst",pattern:"spire"},\
-        custom_data={"imperium_kit":1b},\
-    ] 1
+execute unless items entity @s armor.head * run \
+    item replace entity @s armor.head with \
+        netherite_helmet[\
+            !max_damage,\
+            enchantments={"protection":12,"imperium:wip_high_jump":1},\
+            attribute_modifiers=[\
+                {type:"armor",amount:8,operation:"add_value",slot:"head",id:"head"},\
+                {type:"armor_toughness",amount:8,operation:"add_value",slot:"head",id:"head"},\
+                {type:"air_drag_modifier",amount:-0.2,operation:"add_multiplied_base",slot:"head",id:"head"},\
+                {type:"safe_fall_distance",amount:2,operation:"add_multiplied_base",slot:"head",id:"head"},\
+                {type:"fall_damage_multiplier",amount:-0.5,operation:"add_multiplied_base",slot:"head",id:"head"},\
+                {type:"attack_knockback",amount:1,operation:"add_value",slot:"head",id:"head"},\
+                {type:"knockback_resistance",amount:0.44,operation:"add_value",slot:"head",id:"head"},\
+            ],\
+            item_model="minecraft:leather_helmet",\
+            equippable={slot:head,asset_id:"minecraft:leather"},\
+            dyed_color=8073150,\
+            custom_name={color:"light_purple",italic:false,text:"Shulker Lid"},\
+            trim={material:"amethyst",pattern:"spire"},\
+            custom_data={"imperium_kit":1b},\
+        ] 1
+execute unless items entity @s armor.chest * run \
+    item replace entity @s armor.chest with \
+        netherite_chestplate[\
+            !max_damage,\
+            !attribute_modifiers,\
+            item_model="minecraft:leather_chestplate",\
+            equippable={slot:chest,asset_id:"minecraft:leather"},\
+            dyed_color=8073150,\
+            custom_name={color:"light_purple",italic:false,text:"Shulker Core"},\
+            trim={material:"gold",pattern:"eye"},\
+            custom_data={"imperium_kit":1b},\
+        ] 1
+execute unless items entity @s armor.legs * run \
+    item replace entity @s armor.legs with \
+        netherite_leggings[\
+            !max_damage,\
+            !attribute_modifiers,\
+            item_model="minecraft:leather_leggings",\
+            equippable={slot:legs,asset_id:"minecraft:leather"},\
+            dyed_color=8073150,\
+            custom_name={color:"light_purple",italic:false,text:"Shulker Pillar"},\
+            trim={material:"amethyst",pattern:"spire"},\
+            custom_data={"imperium_kit":1b},\
+        ] 1
+execute unless items entity @s armor.feet * run \
+    item replace entity @s armor.feet with \
+        netherite_boots[\
+            !max_damage,\
+            !attribute_modifiers,\
+            item_model="minecraft:leather_boots",\
+            equippable={slot:feet,asset_id:"minecraft:leather"},\
+            dyed_color=8073150,\
+            custom_name={color:"light_purple",italic:false,text:"Shulker Base"},\
+            trim={material:"amethyst",pattern:"spire"},\
+            custom_data={"imperium_kit":1b},\
+        ] 1
 
 #   [MELEE] End Rod
 #       5 | 2
-item replace entity @s hotbar.0 with \
-    netherite_sword[\
-        !max_damage,\
-        item_model="minecraft:breeze_rod",\
-        custom_name={color:"light_purple",italic:false,text:"Light Rod"},\
-        attribute_modifiers=[\
-            {type:"attack_damage",amount:4,operation:"add_value",slot:"mainhand",id:"base_attack_damage"},\
-            {type:"attack_speed",amount:-2,operation:"add_value",slot:"mainhand",id:"base_attack_speed"}\
-        ],\
-        minimum_attack_charge=0,\
-        enchantments={"imperium:wip_charge_attack":1},\
-        custom_data={"imperium_kit":1b},\
-    ] 1
+execute unless items entity @s hotbar.0 * run \
+    item replace entity @s hotbar.0 with \
+        netherite_sword[\
+            !max_damage,\
+            item_model="minecraft:breeze_rod",\
+            custom_name={color:"light_purple",italic:false,text:"Light Rod"},\
+            attribute_modifiers=[\
+                {type:"attack_damage",amount:4,operation:"add_value",slot:"mainhand",id:"base_attack_damage"},\
+                {type:"attack_speed",amount:-1,operation:"add_value",slot:"mainhand",id:"base_attack_speed"},\
+                {type:"attack_knockback",amount:-1,operation:"add_value",slot:"mainhand",id:"mainhand"},\
+            ],\
+            minimum_attack_charge=1,\
+            damage_type="imperium:light",\
+            enchantments={"imperium:wip_charge_attack":1},\
+            custom_data={"imperium_kit":1b},\
+        ] 1
 
 #   [TOOL] Bow
-item replace entity @s hotbar.1 with \
-    bow[\
-        !max_damage,\
-        enchantments={"imperium:wip_straight_flight":1},\
-        custom_name={color:"white",italic:false,text:"Aero Shot"},\
-        custom_data={"imperium_kit":1b},\
-    ] 1
+execute unless items entity @s hotbar.1 * run \
+    item replace entity @s hotbar.1 with \
+        bow[\
+            !max_damage,\
+            enchantments={"imperium:wip_straight_flight":1},\
+            custom_name={color:"white",italic:false,text:"Aero Shot"},\
+            custom_data={"imperium_kit":1b},\
+        ] 1
 
 #   [SLOT 1] Levitation Arrow
 #item replace entity @s hotbar.8 with \
