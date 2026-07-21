@@ -54,7 +54,7 @@ execute unless items entity @s armor.feet * run \
             custom_data={"imperium_kit":1b}\
         ] 1
 
-#   [MELEE] Netherite Claymore
+#   [MELEE] Dark Claymore
 #       7 | 1.2
 execute unless items entity @s hotbar.0 * run \
     item replace entity @s hotbar.0 with \
@@ -63,10 +63,10 @@ execute unless items entity @s hotbar.0 * run \
                 {type:"attack_damage",amount:6,operation:add_value,slot:mainhand,id:"base_attack_damage"},\
                 {type:"attack_speed",amount:-2.8,operation:add_value,slot:mainhand,id:"base_attack_speed"}\
             ],\
-            enchantments={"imperium:wip_golem_throw":1},\
+            enchantments={"imperium:wip_golem_throw":1,"imperium:mace_smash":1},\
             !max_damage,\
             item_model="minecraft:netherite_sword",\
-            custom_name={text:"Dark Claymore",color:gray,italic:false},\
+            custom_name={text:"Dark Claymore",color:dark_gray,italic:false},\
             custom_data={"imperium_kit":1b},\
         ] 1
 

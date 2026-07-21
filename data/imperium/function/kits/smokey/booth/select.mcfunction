@@ -47,5 +47,5 @@ tellraw @s \
     {color:"gray",\
                 text:" — Heals 12 HP\n",}]
 
-playsound minecraft:block.note_block.pling master @s ~ ~ ~ 0.7 1.4
+playsound minecraft:entity.bat.takeoff neutral @s ~ ~ ~ 0.7 0.5
 title @s actionbar {text:"Smokey Bat selected",color:"gold"}

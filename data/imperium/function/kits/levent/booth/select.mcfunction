@@ -15,7 +15,7 @@ tellraw @s \
     {color:"light_purple",\
                             text:"Light Rod",},\
     {color:"gray",\
-                            text:" — Extreme attack speed; decreased knockback\n",},\
+                            text:" — ⬆️ Attack Speed | ⬇️ Knockback\n",},\
     {color:"gold",\
                             text:"  • [Ranged] ",},\
     {color:"light_purple",\
@@ -35,9 +35,9 @@ tellraw @s \
     {color:"gray",\
                             text:" — Sneak while blocking to teleport behind attackers\n",},\
     {color:"gold",\
-                text:"  • [Passive] ",},\
+                            text:"  • [Passive] ",},\
     {color:"gray",\
-                text:" + Air Speed; + Safe Fall Distance\n",},\
+                            text:" ⬆️ Air Speed | ⬆️ Safe Fall Distance\n",},\
     {color:"gold",\
                             text:"  • [Healing] ",},\
     {color:"light_purple",\
@@ -45,5 +45,5 @@ tellraw @s \
     {color:"gray",\
                             text:" — Heals 8 HP and teleports you randomly\n",}]
 
-playsound minecraft:block.note_block.pling master @s ~ ~ ~ 0.7 1.4
+playsound minecraft:entity.shulker.ambient neutral @s ~ ~ ~ 0.7 0.9
 title @s actionbar {text:"Levent selected",color:"light_purple"}

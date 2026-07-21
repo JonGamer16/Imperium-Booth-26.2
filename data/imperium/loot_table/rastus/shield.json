@@ -16,7 +16,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "use_effects":{"can_sprint":true,"speed_multiplier":0.7},
+                "use_effects":{"can_sprint":true,"speed_multiplier":0.5},
                 "blocks_attacks":{
                   "damage_reductions": [
                     { "type": "#is_player_attack",

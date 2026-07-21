@@ -14,7 +14,7 @@ tellraw @s \
     {color:"red",\
                 text:"Lifesteal Fang",},\
     {color:"gray",\
-                text:" — + Critical Damage; Attack to refill bowls with healing soup\n",},\
+                text:" — ⬆️ Critical Damage | Attack to refill bowls with healing soup\n",},\
     {color:"gold",\
                 text:"  • [Consumable] ",},\
     {color:"red",\
@@ -26,7 +26,7 @@ tellraw @s \
     {color:"red",\
                 text:"Throwable Web",},\
     {color:"gray",\
-                text:" — Briefly traps enemies\n",},\
+                text:" — Briefly traps enemies on contact\n",},\
     {color:"gold",\
                 text:"  • [Consumable] ",},\
     {color:"red",\
@@ -36,7 +36,7 @@ tellraw @s \
     {color:"gold",\
                 text:"  • [Passive] ",},\
     {color:"gray",\
-                text:" + Movement Speed; + Step Height; + Safe Fall Distance; + Sneaking Speed\n",},\
+                text:" ⬆️ Movement Speed | ⬆️ Step Height | ⬆️ Safe Fall Distance | ⬆️ Sneaking Speed\n",},\
     {color:"gold",\
                 text:"  • [Healing] ",},\
     {color:"red",\
@@ -44,5 +44,5 @@ tellraw @s \
     {color:"gray",\
                 text:" — Heals 8 HP, and leaves a bowl that can be refilled\n",}]
 
-playsound minecraft:block.note_block.pling master @s ~ ~ ~ 0.7 1.4
+playsound minecraft:entity.spider.ambient neutral @s ~ ~ ~ 0.7 1.4
 title @s actionbar {text:"Livvy selected",color:"red"}

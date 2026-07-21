@@ -17,25 +17,25 @@ tellraw @s \
     {color:"yellow",\
                             text:"Silver Glaive"},\
     {color:"gray",\
-                            text:" — Increased Reach and Damage; - Attack Speed; - Knockback (KB) Resist\n"},\
+                            text:" - ⬆️ Reach | ⬆️ Damage | ⬇️ Attack Speed | ⬇️ Knockback\n"},\
     {color:"gold",\
                             text:"  • [Melee] "},\
     {color:"yellow",\
                             text:"Steel Broadsword"},\
     {color:"gray",\
-                            text:" — Sweeping Edge; KB Resist\n"},\
+                            text:" — ⬆️ Sweeping Damage; ⬆️ KB Resist\n"},\
     {color:"gold",\
                             text:"  • [Ranged] "},\
     {color:"yellow",\
                             text:"Heavy Crossbow"},\
     {color:"gray",\
-                            text:" — Power 1 bolts\n"},\
+                            text:" — ⬆️ Arrow Damage\n"},\
     {color:"gold",\
                             text:"  • [Consumable] "},\
     {color:"yellow",\
                             text:"Tower Shield"},\
     {color:"gray",\
-                            text:" — + Delay, - Blocking Angle, - KB Blocked\n"},\
+                            text:" — Blocks 100% KB | 0.35sec Blocking Delay | 60° Blocking Angle\n"},\
     {color:"gold",\
                             text:"  • [Consumable] "},\
     {color:"yellow",\
@@ -43,9 +43,9 @@ tellraw @s \
     {color:"gray",\
                             text:" — Extreme Speed for 1 second\n"},\
     {color:"gold",\
-                text:"  • [Passive] ",},\
+                            text:"  • [Passive] ",},\
     {color:"gray",\
-                text:" + Step Height\n",},\
+                            text:"— ⬆️ Step Height\n",},\
     {color:"gold",\
                             text:"  • [Healing] "},\
     {color:"yellow",\
@@ -54,5 +54,5 @@ tellraw @s \
                             text:" — Heals 8 HP\n"}\
 ]
 
-playsound minecraft:block.note_block.pling master @s ~ ~ ~ 0.7 1.4
+playsound minecraft:entity.zombie.attack_iron_door neutral @s ~ ~ ~ 0.7 1
 title @s actionbar {text:"Jeru Cliffshield selected",color:"yellow"}

@@ -14,13 +14,13 @@ tellraw @s \
     {color:"white",\
                             text:"Shortsword"},\
     {color:"yellow",\
-                            text:" — Slightly increased attack speed\n"},\
+                            text:" — ⬆️ Attack speed\n"},\
     {color:"gold",\
                             text:"  • [Melee] "},\
     {color:"white",\
                             text:"Cat Claw"},\
     {color:"yellow",\
-                            text:" — Extreme Attack Speed; Reduced Knockback\n"},\
+                            text:" — ⬆️ Attack Speed | ⬇️ Knockback\n"},\
     {color:"gold",\
                             text:"  • [Ranged] "},\
     {color:"white",\
@@ -36,7 +36,7 @@ tellraw @s \
     {color:"gold",\
                 text:"  • [Passive] ",},\
     {color:"gray",\
-                text:" + Movement Speed; + Safe Fall Distance; + Sneaking Speed\n",},\
+                text:" ⬆️ Movement Speed | ⬆️ Safe Fall Distance |  ⬆️ Sneaking Speed\n",},\
     {color:"gold",\
                             text:"  • [Healing] "},\
     {color:"white",\ 
@@ -45,5 +45,5 @@ tellraw @s \
                             text:" — Heals 8 HP\n"}\
 ]
 
-playsound minecraft:block.note_block.pling master @s ~ ~ ~ 0.7 1.4
+playsound minecraft:entity.cat_royal.ambient neutral @s ~ ~ ~ 1 0.8
 title @s actionbar {text:"Quin Meowdy selected",color:"gold"}

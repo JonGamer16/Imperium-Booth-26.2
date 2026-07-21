@@ -13,13 +13,13 @@ tellraw @s \
     {color:"gold",\
                                 text:"  • Attributes: "},\
     {color:"gray",\
-                                text:"+ Knockback Resist; - Speed; + Scale\n"},\
+                                text:"⬆️ Knockback Resist\n"},\
     {color:"gold",\
                                 text:"  • [Melee] "},\
     {color:"aqua",\
                                 text:"Dark Claymore"},\
     {color:"gray",\
-                                text:" — + Reach; - Attack Speed; Can perform mace smash attacks\n"},\
+                                text:" — ⬆️ Reach | ⬇️ Attack Speed | Can perform mace smash attacks\n"},\
     {color:"gold",\
                                 text:"  • [Consumable] "},\
     {color:"aqua",\
@@ -46,5 +46,5 @@ tellraw @s \
                                 text:" — Crouching also blocks incoming damage from all angles; consumes Energy\n"},\
 ]
 
-playsound minecraft:block.note_block.pling master @s ~ ~ ~ 0.7 1.4
+playsound minecraft:block.enchantment_table.use neutral @s ~ ~ ~ 0.7 0.5
 title @s actionbar {text:"Mummy selected",color:"blue"}
