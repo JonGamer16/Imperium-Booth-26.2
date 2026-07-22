@@ -1,6 +1,6 @@
 # Count-based charges: the slot-B arrow count (im_cdUsesB) is now kept in sync by events, not a
 # per-tick scan here — imperium:internal/arrow_recount on each crossbow shot, the refill itself
-# (cd2_arrows), and givekit. This function only reads im_cdUsesB; it never recounts.
+# (cd2_arrows), and im_givekit. This function only reads im_cdUsesB; it never recounts.
 
 # This whole engine is now advancement-driven (imperium:internal/cooldown_dealt + cooldown_taken),
 # so it only runs on a tick where the player dealt or took damage — the only events that move a

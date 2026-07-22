@@ -24,7 +24,3 @@ scoreboard objectives add im_killsSeen dummy
 scoreboard objectives add im_combatId dummy
 scoreboard objectives add im_lastAtkId dummy
 scoreboard objectives add im_lastAtkTime dummy
-
-# Last-seen health in tenths of HP (the healed-delta baseline) + a display scratch (whole/tenths
-# split for end_round, and the per-tick delta for track_healed).
-scoreboard objectives add im_hpSample dummy

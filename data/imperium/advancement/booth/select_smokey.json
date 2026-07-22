@@ -5,7 +5,9 @@
             "conditions": {
                 "entity": {
                     "entity_type": "minecraft:interaction",
-                    "nbt": "{Tags:[\"im.booth_smokey\"]}"
+                    "entity_tags": {
+                        "all_of": ["im.booth_smokey"]
+                    }                
                 }
             }
         }

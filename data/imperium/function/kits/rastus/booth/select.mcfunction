@@ -1,6 +1,6 @@
 # Rastus the Duelist — booth selection. Runs as the clicking player (routed from
 # the kit's booth/click handler). Equips the kit via the arena pipeline, then describes it.
-scoreboard players set @s givekit 6
+scoreboard players set @s im_givekit 6
 function imperium:arena/givekit
 function imperium:kits/rastus/booth/assign
 
@@ -14,13 +14,13 @@ tellraw @s \
     {color:"aqua",\
                     text:"Lightning Rapier"},\
     {color:"gray",\
-                    text:" — Bypasses invulnerability to deal more hits per second | ⬆️ Attack Speed | ⬇️ Knockback\n",},\
+                    text:" — Bypasses invulnerability to deal more hits per second | ⬆ Attack Speed | ⬇ Knockback\n",},\
     {color:"gold",\
                     text:"  • [Consumable] "},\
     {color:"aqua",\
                     text:"Buckler"},\
     {color:"gray",\
-                    text:" — Blocks attacks while sprinting | ⬇️ Blocking Angle | ⬇️ Damage Blocked | ⬇️ KB Resist\n",},\
+                    text:" — Blocks attacks while sprinting | ⬇ Blocking Angle | ⬇ Damage Blocked | ⬇ KB Resist\n",},\
     {color:"gold",\
                     text:"  • [Special] "},\
     {color:"aqua",\

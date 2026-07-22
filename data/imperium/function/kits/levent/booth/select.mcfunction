@@ -1,6 +1,6 @@
 # Levent the Shulker Knight — booth selection. Runs as the clicking player (routed from
 # the kit's booth/click handler). Equips the kit via the arena pipeline, then describes it.
-scoreboard players set @s givekit 5
+scoreboard players set @s im_givekit 5
 function imperium:arena/givekit
 function imperium:kits/levent/booth/assign
 
@@ -15,7 +15,7 @@ tellraw @s \
     {color:"light_purple",\
                             text:"Light Rod",},\
     {color:"gray",\
-                            text:" — ⬆️ Attack Speed | ⬇️ Knockback\n",},\
+                            text:" — ⬆ Attack Speed | ⬇ Knockback\n",},\
     {color:"gold",\
                             text:"  • [Ranged] ",},\
     {color:"light_purple",\
@@ -37,7 +37,7 @@ tellraw @s \
     {color:"gold",\
                             text:"  • [Passive] ",},\
     {color:"gray",\
-                            text:" ⬆️ Air Speed | ⬆️ Safe Fall Distance\n",},\
+                            text:" ⬆ Air Speed | ⬆ Safe Fall Distance\n",},\
     {color:"gold",\
                             text:"  • [Healing] ",},\
     {color:"light_purple",\

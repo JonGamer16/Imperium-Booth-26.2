@@ -13,7 +13,7 @@ execute unless score @s im_backstabtracking matches 0 run return 0
 scoreboard players set @s im_backstabflag 0
 
 # Cheap early-out: no mob anywhere near -> skip the yaw read and the whole sweep.
-execute unless entity @e[type=!player,type=!#minecraft:im.not_mob,distance=..5,limit=1] run return 0
+execute if entity @e[type=player,distance=..5,limit=1] run return 0
 
 # Attacker yaw (compared against the target's yaw in backstab_calc).
 execute store result score @s im_rotation run data get entity @s Rotation[0] 1

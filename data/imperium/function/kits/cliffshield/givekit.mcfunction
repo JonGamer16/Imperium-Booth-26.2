@@ -85,6 +85,7 @@ execute unless items entity @s hotbar.1 * run \
                 {type:"attack_knockback",amount:-1,operation:"add_value",slot:"mainhand",id:"mainhand"},\
             ],\
             !max_damage,\
+            kinetic_weapon={damage_multiplier:0.5},\
             item_model="minecraft:iron_spear",\
             custom_name={text:"Silver Glaive",color:"yellow",italic:false},\
             custom_data={"imperium_kit":1b}\

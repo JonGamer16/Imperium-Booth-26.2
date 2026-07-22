@@ -1,6 +1,6 @@
 # Warforged Mummy — booth selection. Runs as the clicking player (routed from
 # the kit's booth/click handler). Equips the kit via the arena pipeline, then describes it.
-scoreboard players set @s givekit 4
+scoreboard players set @s im_givekit 4
 function imperium:arena/givekit
 function imperium:kits/mummy/booth/assign
 
@@ -13,13 +13,13 @@ tellraw @s \
     {color:"gold",\
                                 text:"  • Attributes: "},\
     {color:"gray",\
-                                text:"⬆️ Knockback Resist\n"},\
+                                text:"⬆ Knockback Resist\n"},\
     {color:"gold",\
                                 text:"  • [Melee] "},\
     {color:"aqua",\
                                 text:"Dark Claymore"},\
     {color:"gray",\
-                                text:" — ⬆️ Reach | ⬇️ Attack Speed | Can perform mace smash attacks\n"},\
+                                text:" — ⬆ Reach | ⬇ Attack Speed | Can perform mace smash attacks\n"},\
     {color:"gold",\
                                 text:"  • [Consumable] "},\
     {color:"aqua",\

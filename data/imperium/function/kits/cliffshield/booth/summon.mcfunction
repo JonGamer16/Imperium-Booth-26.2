@@ -1,6 +1,6 @@
 # Summon the Jeru Cliffshield selection stand: a bare display stand, then equip its
 # show-only gear from the booth display loot tables (imperium:cliffshield/display/*).
-# Edit those tables to restyle the stand — the givekit function stays separate.
+# Edit those tables to restyle the stand — the im_givekit function stays separate.
 # Run once where you want the stand (or use imperium:booth/setup_stands for a test row).
 summon minecraft:armor_stand ~ ~ ~ \
 {   Marker:1b,\
@@ -39,7 +39,11 @@ loot replace entity @e[type=armor_stand,tag=im.booth_new,limit=1] \
 
 tag @e[type=armor_stand,tag=im.booth_new] remove im.booth_new
 
+# The interaction is the clickable hitbox. Summit's interaction handler only scans
+# type=interaction entities tagged summit.interactable, and reads interaction.timestamp
+# (needs response:1b), so on_right_click must live here — not on the text_display.
 summon minecraft:interaction ~ ~ ~ \
 {   width:1.0f,height:2.1f,response:1b,\
-    Tags:["im.booth_stand","im.booth_cliffshield"]\
+    Tags:["summit.interactable","summit.static","im.booth_stand","im.booth_cliffshield"],\
+    data:{summit_interactable:{on_right_click:"execute on target run function imperium:kits/cliffshield/booth/click"}}\
 }

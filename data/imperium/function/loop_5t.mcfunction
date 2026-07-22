@@ -20,3 +20,9 @@
     # Edge guard: kill it within 3 blocks of the booth bounds (dummy_zone = pagoda_center
     # shrunk by 3 on x/z); the auto-reset above brings it back next cycle.
     execute as @e[type=husk,tag=im.dummy] at @s unless predicate imperium:booth/dummy_zone run kill @s
+
+# Battlegrounds teleport pad: any player within 2 blocks of an im.warp_from_kitroom marker
+# gets sent to the destination below. TODO: replace 0 100 0 with the real coords.
+    execute as @e[type=marker,tag=im.warp_from_kitroom,limit=1] at @s as @a[distance=..2] run tp @s -119 71 99 -90 0
+
+    execute as @e[type=marker,tag=im.warp_from_shulkerbox,limit=1] at @s as @a[distance=..2] run tp @s -68.5 87 -7.5 90 0

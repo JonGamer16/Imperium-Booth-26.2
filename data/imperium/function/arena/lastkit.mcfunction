@@ -1,2 +1,2 @@
-scoreboard players operation @s givekit = @s im_lastKit
+scoreboard players operation @s im_givekit = @s im_lastKit
 function imperium:arena/givekit

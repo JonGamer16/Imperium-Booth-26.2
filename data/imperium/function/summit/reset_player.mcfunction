@@ -4,4 +4,4 @@
 function imperium:util/clear_kit
 tag @s remove im.fighting
 tag @s remove summit.no_regen
-scoreboard players reset @s givekit
+scoreboard players reset @s im_givekit

@@ -1,6 +1,6 @@
 # Summon the Rastus the Duelist selection stand: a bare display stand, then equip its
 # show-only gear from the booth display loot tables (imperium:rastus/display/*).
-# Edit those tables to restyle the stand — the givekit function stays separate.
+# Edit those tables to restyle the stand — the im_givekit function stays separate.
 # Run once where you want the stand (or use imperium:booth/setup_stands for a test row).
 summon minecraft:armor_stand ~ ~ ~ \
 {   Marker:1b,\
@@ -39,5 +39,6 @@ tag @e[type=armor_stand,tag=im.booth_new] remove im.booth_new
 
 summon minecraft:interaction ~ ~ ~ \
 {   width:1.0f,height:2.1f,response:1b,\
-    Tags:["im.booth_stand","im.booth_rastus"]\
+    Tags:["summit.interactable","summit.static","im.booth_stand","im.booth_rastus"],\
+    data:{summit_interactable:{on_right_click:"execute on target run function imperium:kits/rastus/booth/click"}}\
 }

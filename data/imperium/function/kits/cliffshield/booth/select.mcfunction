@@ -1,6 +1,6 @@
 # Jeru Cliffshield — booth selection. Runs as the clicking player (routed from
 # the kit's booth/click handler). Equips the kit via the arena pipeline, then describes it.
-scoreboard players set @s givekit 1
+scoreboard players set @s im_givekit 1
 function imperium:arena/givekit
 function imperium:kits/cliffshield/booth/assign
 
@@ -17,19 +17,19 @@ tellraw @s \
     {color:"yellow",\
                             text:"Silver Glaive"},\
     {color:"gray",\
-                            text:" - ⬆️ Reach | ⬆️ Damage | ⬇️ Attack Speed | ⬇️ Knockback\n"},\
+                            text:" - ⬆ Reach | ⬆ Damage | ⬇ Attack Speed | ⬇ Knockback\n"},\
     {color:"gold",\
                             text:"  • [Melee] "},\
     {color:"yellow",\
                             text:"Steel Broadsword"},\
     {color:"gray",\
-                            text:" — ⬆️ Sweeping Damage; ⬆️ KB Resist\n"},\
+                            text:" — ⬆ Sweeping Damage; ⬆ KB Resist\n"},\
     {color:"gold",\
                             text:"  • [Ranged] "},\
     {color:"yellow",\
                             text:"Heavy Crossbow"},\
     {color:"gray",\
-                            text:" — ⬆️ Arrow Damage\n"},\
+                            text:" — ⬆ Arrow Damage\n"},\
     {color:"gold",\
                             text:"  • [Consumable] "},\
     {color:"yellow",\
@@ -45,7 +45,7 @@ tellraw @s \
     {color:"gold",\
                             text:"  • [Passive] ",},\
     {color:"gray",\
-                            text:"— ⬆️ Step Height\n",},\
+                            text:"— ⬆ Step Height\n",},\
     {color:"gold",\
                             text:"  • [Healing] "},\
     {color:"yellow",\

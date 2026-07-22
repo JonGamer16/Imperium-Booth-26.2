@@ -56,4 +56,4 @@ scoreboard players set #Smokey im_cdMaxB 1
 # Rastus slot C = Air Dodge: 5 stored dashes; air_dodge consumes, cd3_dodge refills one at a time.
 scoreboard players set #Rastus im_cdMaxC 5
 # Meowdy slot B = Arrows: count-based & multi-charge -> max is derived from the actual
-# arrow stack at givekit (see meowdy/givekit), so no #Kit constant is set here.
+# arrow stack at im_givekit (see meowdy/givekit), so no #Kit constant is set here.

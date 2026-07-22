@@ -1,6 +1,6 @@
 # Livvy the Vampire Spider — booth selection. Runs as the clicking player (routed from
 # the kit's booth/click handler). Equips the kit via the arena pipeline, then describes it.
-scoreboard players set @s givekit 3
+scoreboard players set @s im_givekit 3
 function imperium:arena/givekit
 function imperium:kits/livvy/booth/assign
 
@@ -14,7 +14,7 @@ tellraw @s \
     {color:"red",\
                 text:"Lifesteal Fang",},\
     {color:"gray",\
-                text:" — ⬆️ Critical Damage | Attack to refill bowls with healing soup\n",},\
+                text:" — ⬆ Critical Damage | Attack to refill bowls with healing soup\n",},\
     {color:"gold",\
                 text:"  • [Consumable] ",},\
     {color:"red",\
@@ -36,7 +36,7 @@ tellraw @s \
     {color:"gold",\
                 text:"  • [Passive] ",},\
     {color:"gray",\
-                text:" ⬆️ Movement Speed | ⬆️ Step Height | ⬆️ Safe Fall Distance | ⬆️ Sneaking Speed\n",},\
+                text:" ⬆ Movement Speed | ⬆ Step Height | ⬆ Safe Fall Distance | ⬆ Sneaking Speed\n",},\
     {color:"gold",\
                 text:"  • [Healing] ",},\
     {color:"red",\

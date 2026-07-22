@@ -94,7 +94,7 @@ scoreboard players set @s im_cdMaxC 0
     tag @s remove im.mgrapple_armed
 
     # Energy meter — empty the pool so a swap can't carry banked energy onto the next kit (the new
-    # kit's givekit re-seeds it for its own wired slots; Mummy's resets it to #MummyEnergyStart).
+    # kit's im_givekit re-seeds it for its own wired slots; Mummy's resets it to #MummyEnergyStart).
     scoreboard players set @s im_energy 0
 
     # Energy Barrier — drop any raised barrier so a swap can't leave absorption hearts / the cap stuck.

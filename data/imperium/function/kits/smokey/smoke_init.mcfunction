@@ -13,3 +13,5 @@ execute \
 execute \
     as @a[tag=im.kit_smokey] \
     run particle minecraft:campfire_signal_smoke ~ ~0.2 ~ 1.5 0 1.5 0.002 100 normal @s
+    
+tag @e[type=area_effect_cloud,tag=!im.processed_aec] add im.processed_aec

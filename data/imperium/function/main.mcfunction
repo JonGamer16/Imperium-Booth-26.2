@@ -1,8 +1,13 @@
-tellraw @a [{"color":"#FFCC00","text":"[Imperium] "},{"color":"#00ff00","text":"Successfully Loaded!"}]
+# Debug message toggle: set to 1 to activate load success feedback
+scoreboard objectives add im_debug_mode dummy
+scoreboard players set #Debug im_debug_mode 1
+execute if score #Debug im_debug_mode matches 1 \
+    run function imperium:util/debug
 
-scoreboard objectives add givekit trigger
+scoreboard objectives add im_givekit trigger
 scoreboard objectives add onKill dummy
 scoreboard objectives add summonerID dummy
+
 # Shared scratch objective (set_cd macro, lifesteal_soup, etc.) — needed before the setup calls
 scoreboard objectives add im.temp dummy
 
@@ -20,6 +25,8 @@ scoreboard objectives add im.temp dummy
     # Parry: per-player countdown for the full-deflect bubble (Strike & Parry share the
     # charge stored in im_melee_drought). -1 = inactive.
     scoreboard objectives add im_parryWindow dummy
+    # Melee Drought Counter: ticks up while you haven't attacked
+    scoreboard objectives add im_melee_drought dummy
 # Levent
     # Charge Attack
     scoreboard objectives add im_leventCharge dummy
@@ -74,23 +81,8 @@ function imperium:main/ability_parameters
 
 # Testing (kept inline for quick reference)
     team add w
-    scoreboard objectives add m_x dummy
-    scoreboard objectives add m_y dummy
-    scoreboard objectives add m_z dummy
-    scoreboard objectives add im_hp dummy
-    scoreboard objectives add im_maxhp dummy
-    scoreboard objectives add im_missinghp dummy
-    scoreboard objectives add im_raycast dummy
-    scoreboard objectives add im_hurt_time dummy
-    scoreboard objectives add carrot_on_a_stick dummy
     scoreboard objectives add loops dummy
     scoreboard objectives add im_lastKit dummy
-    scoreboard objectives add im_melee_drought dummy
-
-#scoreboard objectives add carrot_on_a_stick minecraft.used:carrot_on_a_stick
-
-# Reset Temporary Player Data
-# data modify storage imperium:player_data players set value []
 
 # Baobab Battlegrounds registration. In the local world this logs one "unknown function"
 # error and does nothing — expected (the API only exists on the Summit server).
