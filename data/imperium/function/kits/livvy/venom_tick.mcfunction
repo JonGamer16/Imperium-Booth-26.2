@@ -7,5 +7,13 @@ execute as @a[tag=im.venom] run scoreboard players remove @s im_venomTimer 1
 execute as @a[tag=im.venom,scores={im_venomTimer=..0}] run tag @s remove im.venom
 
 scoreboard players add #venomClock im_venomTimer 1
-execute if score #venomClock im_venomTimer >= #VenomInterval im.param as @a[tag=im.venom] run damage @s 1.0 imperium:venom
+# Deal the venom tick. Attribute it to the nearest Livvy (by @p) so a venom kill gives HER the kill
+# credit + death message (imperium.venom). `at @s` makes @p resolve from the victim's position.
+# (Lifesteal is NOT driven by venom itself — that comes from venom-amplified melee, see
+# imperium:combat/venom_bite. Attribution does add venom to her damage_dealt stat, a negligible
+# incidental trickle into the bank while she holds the Fang.)
+execute if score #venomClock im_venomTimer >= #VenomInterval im.param if entity @a[tag=im.kit_livvy] as @a[tag=im.venom] at @s run damage @s 1.0 imperium:venom by @p[tag=im.kit_livvy]
+# Fallback: venom outlives its caster (this loop is ungated), so with no Livvy online deal it
+# unattributed rather than let the `by` selector match nothing and drop the damage entirely.
+execute if score #venomClock im_venomTimer >= #VenomInterval im.param unless entity @a[tag=im.kit_livvy] as @a[tag=im.venom] run damage @s 1.0 imperium:venom
 execute if score #venomClock im_venomTimer >= #VenomInterval im.param run scoreboard players set #venomClock im_venomTimer 0

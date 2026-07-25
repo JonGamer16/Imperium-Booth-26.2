@@ -15,3 +15,7 @@ tellraw @s \
         half-spider abomination with fangs, 8 eyes, and a killer instinct, yet she \
         still remembers who she was.\n"}\
 ]
+
+# Sticker 2 (Historian): record this fighter's lore as read, then check for all seven.
+tag @s add im.lore_livvy
+function imperium:booth/check_lore

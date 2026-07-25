@@ -1,21 +1,28 @@
-# Summon the training dummy itself: a mummy-armored husk guests can spar with (booth
-# players carry summit.no_regen, so its hits land and healing items get real practice).
-# Regeneration 10 (hidden) keeps it topped up between visitors; the 5t loop tethers it to its
-# im.dummy_home marker and kills it near the booth edge (then auto-respawns it at home).
-# follow_range 4 keeps it from wandering off after players — it only bites what's right on it.
-# summit.dynamic: it moves and takes damage, so it must never ride the schematic.
-summon minecraft:husk ~ ~ ~ \
-{   Tags:["im.dummy","im.dummy_new","summit.booth_entity.imperium","summit.dynamic"],\
-    PersistenceRequired:1b,\
-    CanPickUpLoot:0b,\
-    CustomName:{text:"Training Dummy",color:"gold",italic:false},\
-    CustomNameVisible:1b,\
-    drop_chances:{mainhand:0.0f,head:0.0f,chest:0.0f,legs:0.0f,feet:0.0f},\
-    attributes:[{id:"minecraft:spawn_reinforcements",base:0.0},{id:"minecraft:follow_range",base:4.0}]\
-}
+# Ensure exactly ONE training dummy: a mummy-armored husk guests can spar with (booth players carry
+# summit.no_regen, so its hits land and healing items get real practice). Regeneration 10 (hidden)
+# tops it up between visitors; the 5t loop tethers it to its im.dummy_home marker. follow_range 4
+# keeps it from wandering after players. summit.dynamic: it moves and takes damage, so it's summoned
+# via #entities/summon and must never ride the schematic.
+#
+# Spawns on the im.dummy_home marker NEAREST the canonical spot (-138.5 75 -221) — the ONE place
+# that coord lives — so a stray extra marker never pulls it off-station. Kills any existing dummy
+# husk first, so this is idempotent: the manual "spawn" command, the #entities/summon hook, and the
+# interaction toggle all converge on a single husk. No marker within reach -> nothing spawns.
+kill @e[type=husk,tag=im.dummy]
 
-# Real Mummy sword + armor (same defs as kits/mummy/givekit) but with the imperium_kit
-# custom_data stripped and no im.kit_mummy tag, so the booth never scans/ticks it for abilities.
+execute positioned -138.5 75.0 -221.0 as @n[type=marker,tag=im.dummy_home] run summon minecraft:husk ~ ~ ~ \
+    {   Tags:["im.dummy","im.dummy_new","summit.booth_entity.imperium","summit.dynamic"],\
+        PersistenceRequired:1b,\
+        CanPickUpLoot:0b,\
+        CustomName:{text:"Training Dummy",color:"gold",italic:false},\
+        CustomNameVisible:1b,\
+        drop_chances:{mainhand:0.0f,head:0.0f,chest:0.0f,legs:0.0f,feet:0.0f},\
+        attributes:[{id:"minecraft:spawn_reinforcements",base:0.0},{id:"minecraft:follow_range",base:4.0}]\
+    }
+
+# Real Mummy sword + armor (same defs as kits/mummy/givekit) but with the imperium_kit custom_data
+# stripped and no im.kit_mummy tag, so the booth never scans/ticks it for abilities. All targeted by
+# the im.dummy_new tag, so no per-piece positioning is needed.
 item replace entity @e[type=husk,tag=im.dummy_new,limit=1] armor.head with \
     player_head[\
         attribute_modifiers=[\

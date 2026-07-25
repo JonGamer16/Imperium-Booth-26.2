@@ -13,3 +13,7 @@ tellraw @s \
         capable with his agility and reflexes, even picking up new skills quickly...\
         but that's mostly because the local saloon always had snacks to sneak.\n"}\
 ]
+
+# Sticker 2 (Historian): record this fighter's lore as read, then check for all seven.
+tag @s add im.lore_meowdy
+function imperium:booth/check_lore

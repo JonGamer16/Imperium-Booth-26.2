@@ -1,9 +1,7 @@
 # ENCHANTMENTS
 scoreboard objectives add tempDamage custom:damage_dealt
-scoreboard objectives add im_rotation dummy
-scoreboard objectives add im_rotationdiff dummy
 
-#   Backstab (im_backstabraycast removed — the step-counter raycast is gone, replaced by sphere checks)
+#   Backstab (rotation reads gone — arming is now a `rotated as <target>` behind-zone check, no NBT)
     scoreboard objectives add im_backstabflag dummy
     scoreboard objectives add im_backstabtracking dummy
 #   High Jump

@@ -77,15 +77,22 @@ execute unless items entity @s hotbar.0 * run \
 #       7 | 1.2, +0.3 Reach, -0.5 Knockback
 execute unless items entity @s hotbar.1 * run \
     item replace entity @s hotbar.1 with \
-        netherite_sword[\
+        iron_spear[\
             attribute_modifiers=[\
-                {type:"attack_damage",amount:8,operation:"add_value",slot:"mainhand",id:"base_attack_damage"},\
+                {type:"attack_damage",amount:7,operation:"add_value",slot:"mainhand",id:"base_attack_damage"},\
                 {type:"attack_speed",amount:-3,operation:"add_value",slot:"mainhand",id:"base_attack_speed"},\
                 {type:"entity_interaction_range",amount:1,operation:"add_value",slot:"mainhand",id:"mainhand"},\
                 {type:"attack_knockback",amount:-1,operation:"add_value",slot:"mainhand",id:"mainhand"},\
             ],\
             !max_damage,\
-            kinetic_weapon={damage_multiplier:0.5},\
+            !piercing_weapon,\
+            kinetic_weapon={\
+                damage_multiplier:0.6,\
+                delay_ticks:4,\
+                contact_cooldown_ticks:0,\
+                knockback_conditions:{max_duration_ticks:200},\
+                damage_conditions:{max_duration_ticks:200}},\
+            use_effects={speed_multiplier:1,can_sprint:true},\
             item_model="minecraft:iron_spear",\
             custom_name={text:"Silver Glaive",color:"yellow",italic:false},\
             custom_data={"imperium_kit":1b}\

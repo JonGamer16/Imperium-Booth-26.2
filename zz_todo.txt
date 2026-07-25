@@ -320,6 +320,6 @@ Booth Integration:
     o   register_booth return_pos/return_rot (summit/register_booth.mcfunction)
     o   arena respawn point + whether player_died fires pre/post respawn (arena/respawn.mcfunction,
             tp commented out) -- also respawn invuln/grace, still undecided
-    o   dummy home coordinates (booth/dummy/summon.mcfunction, currently pagoda_center center)
+    o   dummy home coordinates (booth/dummy/respawn.mcfunction, single source now; currently pagoda_center center)
     o   sanity-check: summit.no_regen hunger-hold also applies to battlegrounds-tagged players
 

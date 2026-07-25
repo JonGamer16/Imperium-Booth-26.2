@@ -4,3 +4,4 @@ summon marker -64.5 87 -7.5 {\
 
 summon marker -122.5 71 99.5 {\
     Tags:["summit_static","summit.booth_entity.imperium","im.warp_from_shulkerbox"]}
+

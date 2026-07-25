@@ -1,5 +1,7 @@
 {
   "message_id": "imperium.bomb",
   "exhaustion": 0.0,
-  "scaling": "never"
+  "scaling": "never",
+  "death_message_type": "default",
+  "effects": "hurt"
 }

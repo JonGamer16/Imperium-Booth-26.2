@@ -1,5 +1,6 @@
 {
     "values": [
-        "imperium:booth/dummy/summon"
+        "imperium:booth/dummy/respawn",
+        "imperium:booth/summon_tp_marker"
     ]
 }

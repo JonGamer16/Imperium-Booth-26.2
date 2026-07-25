@@ -1,0 +1,25 @@
+{
+    "criteria": {
+        "bite": {
+            "trigger": "minecraft:player_hurt_entity",
+            "conditions": {
+                "player": {
+                    "entity_tags": { "all_of": ["im.kit_livvy"] }
+                },
+                "entity": {
+                    "entity_tags": { "all_of": ["im.venom"] }
+                },
+                "damage": {
+                    "type": {
+                        "tags": [
+                            { "id": "minecraft:no_impact", "expected": false }
+                        ]
+                    }
+                }
+            }
+        }
+    },
+    "rewards": {
+        "function": "imperium:internal/venom_bite"
+    }
+}

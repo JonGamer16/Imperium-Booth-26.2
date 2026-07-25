@@ -14,3 +14,7 @@ tellraw @s \
         Divinica...which was also raided. Yet he survived, and now he seeks to \
         rebuild a kingdom that his surviving family can finally be safe in.\n"}\
 ]
+
+# Sticker 2 (Historian): record this fighter's lore as read, then check for all seven.
+tag @s add im.lore_cliffshield
+function imperium:booth/check_lore

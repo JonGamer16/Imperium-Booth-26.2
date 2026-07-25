@@ -1,6 +1,6 @@
 {
     "exhaustion": 0,
-    "message_id": "",
+    "message_id": "imperium.venom",
     "scaling": "never",
     "death_message_type": "default",
     "effects": "hurt"

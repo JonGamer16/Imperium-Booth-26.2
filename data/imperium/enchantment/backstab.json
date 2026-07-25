@@ -34,7 +34,7 @@
                 {   
                     "condition": "entity_scores",
                     "entity": "attacker",
-                    "scores": 
+                    "scores":
                     {
                         "im_backstabflag": 1
                     }

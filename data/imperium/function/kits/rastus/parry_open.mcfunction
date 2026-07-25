@@ -10,4 +10,3 @@ tag @s add im.rastus_parrying
 
 playsound minecraft:block.shulker_box.open player @s ~ ~ ~ 1 2
 particle minecraft:enchanted_hit ~ ~1 ~ 0.3 0.3 0.3 1 20
-particle block_marker{block_state:"redstone_block"}

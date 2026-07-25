@@ -1,4 +1,7 @@
-# Respawn an active fighter mid-round (player_died hook — infinite respawns in Gold Rush).
+# Respawn an active fighter mid-round (player_died hook — respawns while they still have lives;
+# arena/on_death eliminates them once im_lives hits 0). Bail if they're no longer a fighter so an
+# already-eliminated player can't get re-kitted in the kit room.
+execute unless entity @s[tag=im.fighting] run return 0
 # TODO(CONFIRM w/ staff): whether player_died fires before or after the vanilla respawn,
 # and the arena respawn point(s) — then uncomment/set the tp below.
 # tp @s 0.0 100.0 0.0

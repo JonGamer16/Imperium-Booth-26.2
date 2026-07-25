@@ -1,0 +1,20 @@
+{
+    "criteria": {
+        "eat_chorus": {
+            "trigger": "minecraft:consume_item",
+            "conditions": {
+                "item": {
+                    "items": [
+                        "minecraft:chorus_fruit"
+                    ],
+                    "predicates": {
+                        "minecraft:custom_data": "{imperium_healing:1b}"
+                    }
+                }
+            }
+        }
+    },
+    "rewards": {
+        "function": "imperium:kits/levent/chorus_tp"
+    }
+}

@@ -10,6 +10,9 @@ scoreboard players set @s im_deaths 0
 scoreboard players set @s im_goldDmgSeen 0
 scoreboard players set @s im_killsSeen 0
 
+# Lives for the round. Each death spends one (arena/on_death); at 0 the fighter is eliminated.
+scoreboard players set @s im_lives 3
+
 # Fresh per-round combat id (for kill-feed attacker resolution) + clear any last-attacker record.
 scoreboard players add #idCounter im_combatId 1
 scoreboard players operation @s im_combatId = #idCounter im_combatId
@@ -18,9 +21,13 @@ scoreboard players set @s im_lastAtkTime 0
 
 # Seed the health sample so the first healed-delta isn't measured from 0.
 # execute store result score @s im_hpSample run data get entity @s Health 10
-scoreboard players set @s im_hp 0
+# scoreboard players set @s im_hp 0
 
+# im.fighting = actively in the fight (abilities + death watcher gate). im.round = took part in this
+# round; it OUTLIVES elimination so the end-of-round leaderboard (arena/resolve_match) can still rank
+# players who ran out of lives. Cleared together in arena/round_over.
 tag @s add im.fighting
+tag @s add im.round
 
 # Arena regen policy: BG players already lose Resistance V automatically, but BSL leaves
 # their hunger alone — summit.no_regen additionally holds food at 8 (sprint yes, natural
@@ -28,3 +35,8 @@ tag @s add im.fighting
 # linger into the fight. end_round removes the tag.
 tag @s add summit.no_regen
 effect clear @s
+
+function summit.battlegrounds:api/set_structure { \
+    booth_id: "imperium", \
+    structure: "imperium_arena", \
+}

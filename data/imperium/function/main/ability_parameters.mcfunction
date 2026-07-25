@@ -15,6 +15,10 @@
 # Livvy
     # Lifesteal: damage score (1/10 HP) needed for 1 soup; excludes damage taken.
     scoreboard players set #lsThreshold im_lifesteal 160
+    # Venom Bite: flat lifesteal score added per melee hit Livvy lands on a venom-affected target
+    #   (imperium:combat/venom_bite -> internal/venom_bite). Stacks on top of the hit's normal score.
+    #   Reference: #lsThreshold is 160, so 40 ~= a quarter-soup of extra credit per venomed hit.
+    scoreboard players set #VenomLsBonus im_lifesteal 40
 
     # Venom DoT (imperium:venom, kits/livvy/venom_apply + venom_tick):
     #   Duration = total tag lifetime (ticks); Interval = ticks between damage hits.
@@ -56,7 +60,7 @@
         #   Energy a Mummy spawns / re-kits with.
         scoreboard players set #MummyEnergyStart im.param 100
         #   Energy gained per Energy Crystal consumed.
-        scoreboard players set #MummyEnergyCrystal im.param 100
+        scoreboard players set #MummyEnergyCrystal im.param 80
     #   Crystal Bomb (kits/mummy/crystal_bomb): placing a crystal as a bomb (sneak-consume) refunds
     #   reduced resources vs eating it — this much energy instead of the full #MummyEnergyCrystal, and
     #   only the instant heal (the regen the consumable applies is stripped). See crystal_bomb.
@@ -95,10 +99,10 @@
         scoreboard players operation #GolemChargeEnd im.param = #GolemChargeTime im.param
         scoreboard players operation #GolemChargeEnd im.param += #GolemWindow im.param
         #   Launch = upward impulse applied to the victim, in 1/10000 blocks/tick (12000 = 1.2 b/t pop).
-        scoreboard players set #GolemLaunch im.param 12000
+        scoreboard players set #GolemLaunch im.param 8000
         #   HookLaunch = upward impulse on the Mummy ITSELF when it Golem-Throws an enemy it's currently
         #   grappling (the "throw + ride the recoil" combo), same 1/10000 b/t units. See golem_hook_recoil.
-        scoreboard players set #GolemHookLaunch im.param 12000
+        scoreboard players set #GolemHookLaunch im.param 8000
 
 # Rastus
     # Air Dodge: Launch power (10000 * blocks/tick)

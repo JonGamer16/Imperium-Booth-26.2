@@ -10,6 +10,7 @@ scoreboard objectives add summonerID dummy
 
 # Shared scratch objective (set_cd macro, lifesteal_soup, etc.) — needed before the setup calls
 scoreboard objectives add im.temp dummy
+scoreboard objectives add im.temp2 dummy
 
 # Smokey
     # Grappling Rod: #next id counter + per-entity link (bobber<->caster), and the per-player

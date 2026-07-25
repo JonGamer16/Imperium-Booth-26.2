@@ -14,3 +14,7 @@ tellraw @s \
         that he has 4 ears. He can detect your concealed weapons. He can hear your \
         bones move. He can map your pulse points as if by sight.\n"}\
 ]
+
+# Sticker 2 (Historian): record this fighter's lore as read, then check for all seven.
+tag @s add im.lore_smokey
+function imperium:booth/check_lore

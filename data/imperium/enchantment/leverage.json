@@ -1,7 +1,8 @@
 {
   "anvil_cost": 1,
   "description": {
-    "text": "Leverage"
+    "text": "Crossbow Power",
+    "color":"gold"
   },
   "effects": {
     "minecraft:damage": [

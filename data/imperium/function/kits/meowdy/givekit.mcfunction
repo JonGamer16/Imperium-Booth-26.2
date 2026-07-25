@@ -130,6 +130,9 @@ execute store result score @s im_cdMaxB run clear @s arrow[custom_data~{imperium
 # Seed the charge count to the full stack so the slot starts frozen (full). After this it's kept
 # in sync purely by events: imperium:internal/arrow_recount on each shot, and cd2_arrows on refill.
 scoreboard players operation @s im_cdUsesB = @s im_cdMaxB
+# Seed the freeze floor from the #Meowdy constant (clear_kit zeroed @s im_cdFloorB). Without this a
+# full slot would bleed to 0 and spuriously re-fire cd2_arrows every damage event. Mirrors Livvy.
+scoreboard players operation @s im_cdFloorB = #Meowdy im_cdFloorB
 
 #   [SLOT 3] [Empty]
 

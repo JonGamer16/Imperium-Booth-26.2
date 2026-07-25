@@ -14,6 +14,9 @@
             {
               "function": "minecraft:set_components",
               "components": {
+                "minecraft:attribute_modifiers": [
+                  {"type":"block_interaction_range","amount":-1,"operation":"add_multiplied_base","slot":"hand","id":"mainhand"}
+                ],
                 "minecraft:max_stack_size": 1,
                 "minecraft:food": {
                   "nutrition": 0,

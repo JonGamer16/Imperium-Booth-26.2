@@ -13,6 +13,11 @@ scoreboard objectives add im_gold dummy
 scoreboard objectives add im_goldLost dummy
 scoreboard objectives add im_deaths deathCount
 
+# Lives remaining this round (set to 3 at start_round). A death spends one; hitting 0 eliminates
+# the fighter (arena/eliminate: TP to the kit room + end their round). When only one fighter with
+# lives is left, arena/round_over crowns them.
+scoreboard objectives add im_lives dummy
+
 # "Seen" counters for the personal gold-gain chat feedback (announce only the delta since last check).
 # im_goldDmgSeen = damage-derived gold already announced; im_killsSeen = kills already announced.
 scoreboard objectives add im_goldDmgSeen dummy

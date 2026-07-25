@@ -14,3 +14,7 @@ tellraw @s \
         threatening the integrity of multidimensional space...someone's been building \
         portals.\n"}\
 ]
+
+# Sticker 2 (Historian): record this fighter's lore as read, then check for all seven.
+tag @s add im.lore_levent
+function imperium:booth/check_lore

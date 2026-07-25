@@ -15,3 +15,7 @@ tellraw @s \
         which it uses to grab and pull in a target from a distance and then attack \
         with the precision of a fully trained knight.\n"}\
 ]
+
+# Sticker 2 (Historian): record this fighter's lore as read, then check for all seven.
+tag @s add im.lore_mummy
+function imperium:booth/check_lore

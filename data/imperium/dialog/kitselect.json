@@ -162,7 +162,7 @@
       "action":
       {
         "type": "run_command",
-        "command": "trigger givekit set 11"
+        "command": "trigger im_givekit set 11"
       },
       "tooltip": 
       [
@@ -231,7 +231,7 @@
       "action":
       {
         "type": "run_command",
-        "command": "trigger givekit set 21"
+        "command": "trigger im_givekit set 21"
       }
     },
     {
@@ -244,7 +244,7 @@
       "action":
       {
         "type": "run_command",
-        "command": "trigger givekit set 41"
+        "command": "trigger im_givekit set 41"
       }
     }
   ],

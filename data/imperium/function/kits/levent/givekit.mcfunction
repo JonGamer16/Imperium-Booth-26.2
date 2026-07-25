@@ -111,7 +111,8 @@ function imperium:kits/levent/cd2_shield
 #   [SLOT 3] [Empty]
 
 #   [HEALING] Chorus Fruit
-#       16x 8hp, 16 block random teleport
+#       16x 8hp, then a block-safe 5-block forward blink (imperium:levent_chorus advancement
+#       -> kits/levent/chorus_tp). No longer the vanilla 16-block random teleport (out of bounds).
 #give @s \
 #    chorus_fruit[\
 #        max_stack_size=1,\

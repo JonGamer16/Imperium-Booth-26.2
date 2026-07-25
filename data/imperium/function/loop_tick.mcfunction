@@ -70,7 +70,7 @@
     # high_jump's cleanup). Must be @e so webbed mobs get freed too, not just players.
     scoreboard players remove @e[type=!#im.not_mob,tag=im.webbed,scores={im_webbed=1..}] im_webbed 1
     
-    execute as @e[type=!#im.not_mob,tag=im.webbed,scores={im_webbed=0}] run function imperium:kits/livvy/web_release
+    execute as @e[type=#imperium:human,tag=im.webbed,scores={im_webbed=0}] run function imperium:kits/livvy/web_release
     # Keep Livvy's web charge count synced to her real remaining web potions (count-based stock).
     
     execute as @a[tag=im.kit_livvy] at @s run function imperium:kits/livvy/loop_kit

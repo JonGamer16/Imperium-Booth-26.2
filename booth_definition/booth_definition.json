@@ -38,24 +38,24 @@
         "stickers": [
             {
                 "sticker_id": "enter_booth",
-                "sticker_texture": "<texture_location>",
+                "sticker_texture": "imperium:items/sticker1",
                 "sticker_name": "New Challenger Approaching",
                 "unobtained_text": "Enter the Pagoda near the lift cars",
-                "obtained_text": "A KitPvP like no other."
+                "obtained_text": "A KitPvP like no other. (Entered booth)"
             },
             {
                 "sticker_id": "read_lore",
-                "sticker_texture": "<texture_location>",
+                "sticker_texture": "imperium:items/sticker2",
                 "sticker_name": "Historian",
                 "unobtained_text": "Read the lore of the fighters",
-                "obtained_text": "Meowdy!"
+                "obtained_text": "Meowdy! (Saw each fighter's lore)"
             },
             {
                 "sticker_id": "win_fight",
-                "sticker_texture": "<texture_location>",
+                "sticker_texture": "imperium:items/sticker3",
                 "sticker_name": "Champion of the Arena",
                 "unobtained_text": "Win a match in the Baobab Battlegrounds",
-                "obtained_text": "You are ready."
+                "obtained_text": "You are ready. (Won a battlegrounds match)"
             }
         ]
     },
