@@ -7,4 +7,4 @@ scoreboard players operation #free im_aimId = @s im_aimId
 execute as @e[type=interaction,tag=im.aim] if score @s im_aimId = #free im_aimId run kill @s
 
 tag @s remove im.aim_bound
-say aim_free
+execute if score #Debug im_debug_mode matches 1 run say aim_free

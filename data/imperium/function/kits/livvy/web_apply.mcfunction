@@ -3,5 +3,5 @@
 # etc. pass through — see #imperium:web_passthrough): refresh their hold heartbeat so it survives
 # the loop's watchdog, and clamp any first-time victim via web_grab.
 #   >> TUNING KNOB: the ..1 radius is the web's catch range (a ~1-block sphere from its center). <<
-scoreboard players set @e[distance=..1,tag=!im.kit_livvy,type=!#imperium:web_passthrough] im_webbed 2
-execute as @e[distance=..1,tag=!im.kit_livvy,tag=!im.webbed,type=!#imperium:web_passthrough] run function imperium:kits/livvy/web_grab
+scoreboard players set @e[type=#imperium:human,distance=..1,tag=!im.kit_livvy] im_webbed 2
+execute as @e[type=#imperium:human,distance=..1,tag=!im.kit_livvy,tag=!im.webbed] run function imperium:kits/livvy/web_grab

@@ -1,5 +1,7 @@
 # Runs once, as a freshly-thrown Smoke Bomb cloud, at its position
 tag @s add im.smoke_bomb
+# Booth-owned (Summit rule: tag all our entities so the server / other booths can target ours exclusively).
+tag @s add summit.booth_entity.imperium
 
 # Constant 3-block radius, no shrink on use or over time; lifetime from #SmokeDuration
 # (main/ability_parameters).

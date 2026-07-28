@@ -10,7 +10,7 @@ summon minecraft:armor_stand ~ ~ ~ \
     ShowArms:1b,\
     CustomNameVisible:0b,\
     CustomName:{text:"Mummy",color:"gray",bold:true},\
-    Tags:["im.booth_stand_model","im.booth_mummy","im.booth_new"],\
+    Tags:["summit.booth_entity.imperium", "im.booth_stand_model","im.booth_mummy","im.booth_new"],\
     Rotation:[-70f,0f],\
     Pose:{Head:[7f,343f,0f],LeftLeg:[337f,343f,0f],RightLeg:[17f,360f,5f],LeftArm:[244f,346f,10f],RightArm:[335f,360f,18f]}\
 }
@@ -21,7 +21,7 @@ execute at @e[type=armor_stand,tag=im.booth_new,limit=1] \
     {   text:{text:"Mummy",color:"gray",bold:true},\
         billboard:"fixed",\
         see_through:1b,\
-        Tags:["im.booth_stand_model","im.booth_mummy"]\
+        Tags:["summit.booth_entity.imperium", "im.booth_stand_model","im.booth_mummy"]\
     }
 
 loot replace entity @e[type=armor_stand,tag=im.booth_new,limit=1] \
@@ -41,6 +41,6 @@ tag @e[type=armor_stand,tag=im.booth_new] remove im.booth_new
 
 summon minecraft:interaction ~ ~ ~ \
 {   width:1.0f,height:2.1f,response:1b,\
-    Tags:["summit.interactable","summit.static","im.booth_stand","im.booth_mummy"],\
+    Tags:["summit.booth_entity.imperium", "summit.interactable","summit.static","im.booth_stand","im.booth_mummy"],\
     data:{summit_interactable:{on_right_click:"execute on target run function imperium:kits/mummy/booth/click"}}\
 }

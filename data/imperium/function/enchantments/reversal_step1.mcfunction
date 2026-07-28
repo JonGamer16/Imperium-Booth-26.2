@@ -7,7 +7,7 @@ execute positioned ^ ^ ^-0.5 unless block ~ ~ ~ #minecraft:replaceable run retur
 execute positioned ^ ^ ^-0.5 unless block ~ ~1 ~ #minecraft:replaceable run return fail
 
 execute positioned ^ ^ ^-0.5 \
-    run tp @n[tag=im.reversal_target] ~ ~ ~ facing entity @s feet
+    run tp @n[type=#imperium:human,tag=im.reversal_target] ~ ~ ~ facing entity @s feet
 # Mark that a warp landed (step 1 is required for any landing) so the cost is paid back home.
-tag @n[tag=im.reversal_target] add im.reversal_done
+tag @n[type=#imperium:human,tag=im.reversal_target] add im.reversal_done
 execute positioned ^ ^ ^-0.5 run function imperium:enchantments/reversal_step2

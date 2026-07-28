@@ -12,18 +12,21 @@
 #   - an entity reel that breaks the rod (durability) removes it, so that launch is missed
 
 # 1. Who is holding the grappling rod (offhand fishing rod with the kit's custom_data).
-tag @a remove im.grapple_user
+tag @a[tag=im.grapple_user] remove im.grapple_user
 execute as @a[tag=im.kit_smokey] \
     if items entity @s weapon.offhand fishing_rod[custom_data~{imperium_kit:1b}] \
     run tag @s add im.grapple_user
 
-# 2. Link any freshly-cast bobber to its caster (bobbers spawn on the caster), then mark it seen
-#    so it's only linked once.
-execute as @e[type=fishing_bobber,tag=!im.grapple_seen] at @s run function imperium:kits/smokey/grapple_link
-tag @e[type=fishing_bobber,tag=!im.grapple_seen] add im.grapple_seen
+# 2. Claim any freshly-cast bobber that spawned on one of OUR rod holders (bobbers spawn on the
+#    caster), linking it to that caster via a shared id. The @p[tag=im.grapple_user,distance=..5]
+#    gate is what makes this ours-only: a foreign booth's bobber is never beside one of our rod
+#    holders, so grapple_link never runs on it and no tag of ours is ever written to it. grapple_link
+#    stamps im.grapple_bobber, so tag=!im.grapple_bobber is the once-only guard — it replaces the old
+#    im.grapple_seen marker, which used to get stamped onto every bobber in the world (foreign ones too).
+execute as @e[type=fishing_bobber,tag=!im.grapple_bobber] at @s if entity @p[tag=im.grapple_user,distance=..5] run function imperium:kits/smokey/grapple_link
 
 # 3. Per linked bobber: refresh its owner's "bobber still live" flag + anchored offset.
-tag @a remove im.grapple_live
+tag @a[tag=im.grapple_live] remove im.grapple_live
 execute as @e[type=fishing_bobber,tag=im.grapple_bobber] at @s run function imperium:kits/smokey/grapple_scan
 
 # 4. Bobber gone while armed: a real reel keeps the rod in the offhand (still im.grapple_user) and

@@ -13,7 +13,7 @@ scoreboard players set #top im.temp -2147483648
 execute as @a[tag=im.board_pool] run scoreboard players operation #top im.temp > @s im_gold
 execute as @a[tag=im.board_pool] if score @s im_gold = #top im.temp run tag @s add im.istop
 tag @a[tag=im.istop,limit=1] add im.rank1
-tag @a remove im.istop
+tag @a[tag=im.istop] remove im.istop
 tag @a[tag=im.rank1] remove im.board_pool
 
 # rank 2
@@ -21,7 +21,7 @@ scoreboard players set #top im.temp -2147483648
 execute as @a[tag=im.board_pool] run scoreboard players operation #top im.temp > @s im_gold
 execute as @a[tag=im.board_pool] if score @s im_gold = #top im.temp run tag @s add im.istop
 tag @a[tag=im.istop,limit=1] add im.rank2
-tag @a remove im.istop
+tag @a[tag=im.istop] remove im.istop
 tag @a[tag=im.rank2] remove im.board_pool
 
 # rank 3
@@ -29,8 +29,8 @@ scoreboard players set #top im.temp -2147483648
 execute as @a[tag=im.board_pool] run scoreboard players operation #top im.temp > @s im_gold
 execute as @a[tag=im.board_pool] if score @s im_gold = #top im.temp run tag @s add im.istop
 tag @a[tag=im.istop,limit=1] add im.rank3
-tag @a remove im.istop
-tag @a remove im.board_pool
+tag @a[tag=im.istop] remove im.istop
+tag @a[tag=im.board_pool] remove im.board_pool
 
 data modify entity @e[type=text_display,tag=im.gold_board_text,limit=1] text set value \
     [{text:"⚔ Gold Rush ⚔\n",color:"gold",bold:true},\

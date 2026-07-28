@@ -3,6 +3,9 @@
         "eat_chorus": {
             "trigger": "minecraft:consume_item",
             "conditions": {
+                "player": [
+                    { "condition": "minecraft:reference", "name": "imperium:ability_zone" }
+                ],
                 "item": {
                     "items": [
                         "minecraft:chorus_fruit"

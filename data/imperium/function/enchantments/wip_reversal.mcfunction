@@ -36,7 +36,7 @@ execute on attacker at @s rotated ~ 0 run function imperium:enchantments/reversa
     # departure and arrival effects. Swap these examples for your own sound/particles.
     execute if entity @s[tag=im.reversal_done] run particle minecraft:effect{color:6234567} ~ ~ ~ 0.3 1 0.3 1 100
     execute if entity @s[tag=im.reversal_done] at @s run particle minecraft:reverse_portal ~ ~1 ~ 0.3 0.6 0.3 0.05 30
-    execute if entity @s[tag=im.reversal_done] at @s run playsound minecraft:entity.enderman.teleport player @a ~ ~ ~ 1 1.5
+    execute if entity @s[tag=im.reversal_done] at @s run playsound minecraft:entity.enderman.teleport player @a[distance=..32] ~ ~ ~ 1 1.5
 
     # Failure (every spot blocked, or no attacker) — position is the blocker, who did not move.
     execute unless entity @s[tag=im.reversal_done] run playsound minecraft:entity.shulker.hurt player @s ~ ~ ~ 1 0.6

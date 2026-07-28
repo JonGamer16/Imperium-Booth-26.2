@@ -10,18 +10,21 @@
 # casts, Smokey's tracker may also bind that bobber — same class of edge as the Smokey notes.
 
 # 1. Who is holding the grappling rod (offhand fishing rod with the kit's custom_data).
-tag @a remove im.mgrapple_user
+tag @a[tag=im.mgrapple_user] remove im.mgrapple_user
 execute as @a[tag=im.kit_mummy] \
     if items entity @s weapon.offhand fishing_rod[custom_data~{imperium_kit:1b}] \
     run tag @s add im.mgrapple_user
 
-# 2. Link any freshly-cast bobber to its caster (+ boost its cast speed), then mark it seen so it's
-#    only linked once. Uses a Mummy-specific seen tag so Smokey's tracker stays independent.
-execute as @e[type=fishing_bobber,tag=!im.mgrapple_seen] at @s run function imperium:kits/mummy/mgrapple_link
-tag @e[type=fishing_bobber,tag=!im.mgrapple_seen] add im.mgrapple_seen
+# 2. Claim any freshly-cast bobber that spawned on one of OUR rod holders (+ boost its cast speed).
+#    The @p[tag=im.mgrapple_user,distance=..5] gate makes this ours-only: a foreign booth's bobber is
+#    never beside one of our rod holders, so mgrapple_link never runs on it and no tag of ours is
+#    written to it. mgrapple_link stamps im.mgrapple_bobber, so tag=!im.mgrapple_bobber is the
+#    once-only guard — it replaces the old im.mgrapple_seen marker, which got stamped onto every
+#    bobber in the world (foreign ones too).
+execute as @e[type=fishing_bobber,tag=!im.mgrapple_bobber] at @s if entity @p[tag=im.mgrapple_user,distance=..5] run function imperium:kits/mummy/mgrapple_link
 
 # 3. Per linked bobber: refresh the owner's "bobber live" flag + hooked target.
-tag @a remove im.mgrapple_live
+tag @a[tag=im.mgrapple_live] remove im.mgrapple_live
 execute as @e[type=fishing_bobber,tag=im.mgrapple_bobber] at @s run function imperium:kits/mummy/mgrapple_scan
 
 # 4. Bobber gone while armed (something was hooked): a real reel keeps the rod in the offhand (still

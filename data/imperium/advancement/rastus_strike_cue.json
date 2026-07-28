@@ -3,13 +3,20 @@
         "focus_hit": {
             "trigger": "player_hurt_entity",
             "conditions": {
-                "player": {
-                    "entity_tags": {
-                        "all_of": [
-                            "im.rastus_focused"
-                        ]
-                    }
-                }
+                "player": [
+                    {
+                        "condition": "minecraft:entity_properties",
+                        "entity": "this",
+                        "predicate": {
+                            "entity_tags": {
+                                "all_of": [
+                                    "im.rastus_focused"
+                                ]
+                            }
+                        }
+                    },
+                    { "condition": "minecraft:reference", "name": "imperium:ability_zone" }
+                ]
             }
         }
     },

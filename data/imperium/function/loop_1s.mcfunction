@@ -3,11 +3,13 @@
 # Kit-equip rate limit: booth stand clicks set im.equip_cd and refuse to equip while it's
 # present (see kits/*/booth/click + booth/random/click), so clearing it here allows at most
 # one full im_givekit pipeline per player per second.
-tag @a remove im.equip_cd
+tag @a[tag=im.equip_cd] remove im.equip_cd
 
-# Straight Flight: despawn no-gravity arrows that have exceeded flight time
-scoreboard players add @e[type=#minecraft:arrows] im_arrowAge 1
-kill @e[type=#minecraft:arrows,scores={im_arrowAge=10..}]
+# Straight Flight: despawn no-gravity arrows that have exceeded flight time. Booth-owned only
+# (summit.booth_entity.imperium, stamped on our kit arrows by imperium:internal/contain) so we never
+# age or cull another booth's — or a vanilla — arrow.
+scoreboard players add @e[type=#minecraft:arrows,tag=summit.booth_entity.imperium] im_arrowAge 1
+kill @e[type=#minecraft:arrows,tag=summit.booth_entity.imperium,scores={im_arrowAge=10..}]
 
 
 # gold rush: keep each fighter's im_gold current (for the live display / standings)

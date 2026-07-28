@@ -1,7 +1,12 @@
 {
     "criteria": {
         "shot": {
-            "trigger": "minecraft:shot_crossbow"
+            "trigger": "minecraft:shot_crossbow",
+            "conditions": {
+                "player": [
+                    { "condition": "minecraft:reference", "name": "imperium:ability_zone" }
+                ]
+            }
         }
     },
     "rewards": {

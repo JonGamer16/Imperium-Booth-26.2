@@ -6,5 +6,5 @@ execute positioned ^ ^ ^-1.0 unless block ~ ~ ~ #minecraft:replaceable run retur
 execute positioned ^ ^ ^-1.0 unless block ~ ~1 ~ #minecraft:replaceable run return fail
 
 execute positioned ^ ^ ^-1.0 \
-    run tp @n[tag=im.reversal_target] ~ ~ ~ facing entity @s feet
+    run tp @n[type=#imperium:human,tag=im.reversal_target] ~ ~ ~ facing entity @s feet
 execute positioned ^ ^ ^-1.0 run function imperium:enchantments/reversal_step3

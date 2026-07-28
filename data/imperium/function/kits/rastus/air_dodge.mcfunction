@@ -8,10 +8,10 @@
 #   Require a held WASD direction. Without one, revoke so the player can still earn (and dodge)
 #   this same airtime once they press a direction, instead of being locked out while earned.
 execute \
-    unless predicate player_input:forward \
-    unless predicate player_input:backward \
-    unless predicate player_input:left \
-    unless predicate player_input:right \
+    unless predicate imperium:player_input/forward \
+    unless predicate imperium:player_input/backward \
+    unless predicate imperium:player_input/left \
+    unless predicate imperium:player_input/right \
     run return run advancement revoke @s only imperium:rastus_air_dodge
 
 #   Require a stored dash charge (slot C; cd3_dodge banks one per 5 HP dealt). Out of

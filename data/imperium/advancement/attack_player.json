@@ -1,7 +1,12 @@
 {
   "criteria": {
     "attacked_entity": {
-      "trigger": "minecraft:player_hurt_entity"
+      "trigger": "minecraft:player_hurt_entity",
+      "conditions": {
+        "player": [
+          { "condition": "minecraft:reference", "name": "imperium:ability_zone" }
+        ]
+      }
     }
   },
   "rewards": {

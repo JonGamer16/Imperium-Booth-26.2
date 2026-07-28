@@ -3,6 +3,9 @@
     "leap": {
       "trigger": "minecraft:consume_item",
       "conditions": {
+        "player": [
+          { "condition": "minecraft:reference", "name": "imperium:ability_zone" }
+        ],
         "item": {
           "predicates": {
             "minecraft:custom_data": "{im_leap_feather:1b}"

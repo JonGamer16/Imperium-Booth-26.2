@@ -1,6 +1,6 @@
 # Future plans board
 execute at @s run summon text_display ~ ~ ~ \
-    {Tags:["im_walltext","im_credits"],\
+    {Tags:["summit.booth_entity.imperium", "im_walltext","im_credits"],\
     billboard:"fixed",\
     alignment:"center",\
     line_width:340,\
@@ -8,7 +8,7 @@ execute at @s run summon text_display ~ ~ ~ \
         {text:"Future Ideas and Projects",color:"gold"}]}
 
 execute at @s run summon text_display ~ ~ ~ \
-    {Tags:["im_walltext","im_credits"],\
+    {Tags:["summit.booth_entity.imperium", "im_walltext","im_credits"],\
     billboard:"fixed",\
     alignment:"center",\
     line_width:340,\
@@ -24,7 +24,7 @@ execute at @s run summon text_display ~ ~ ~ \
         {text:"So many ideas, so little attention span...",color:yellow,bold:false}]}
 
 execute at @s run summon text_display ~ ~ ~ \
-    {Tags:["im_walltext","im_credits"],\
+    {Tags:["summit.booth_entity.imperium", "im_walltext","im_credits"],\
     billboard:"fixed",\
     alignment:"center",\
     line_width:340,\

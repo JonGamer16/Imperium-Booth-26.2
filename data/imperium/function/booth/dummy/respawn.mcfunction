@@ -4,20 +4,22 @@
 # keeps it from wandering after players. summit.dynamic: it moves and takes damage, so it's summoned
 # via #entities/summon and must never ride the schematic.
 #
-# Spawns on the im.dummy_home marker NEAREST the canonical spot (-138.5 75 -221) — the ONE place
+# Spawns on the im.dummy_home marker NEAREST the canonical spot (-78.5 87 12.5) — the ONE place
 # that coord lives — so a stray extra marker never pulls it off-station. Kills any existing dummy
 # husk first, so this is idempotent: the manual "spawn" command, the #entities/summon hook, and the
 # interaction toggle all converge on a single husk. No marker within reach -> nothing spawns.
 kill @e[type=husk,tag=im.dummy]
 
-execute positioned -138.5 75.0 -221.0 as @n[type=marker,tag=im.dummy_home] run summon minecraft:husk ~ ~ ~ \
+execute positioned -78.5 87.0 12.5 as @n[type=marker,tag=im.dummy_home] at @s run summon minecraft:husk ~ ~ ~ \
     {   Tags:["im.dummy","im.dummy_new","summit.booth_entity.imperium","summit.dynamic"],\
         PersistenceRequired:1b,\
         CanPickUpLoot:0b,\
         CustomName:{text:"Training Dummy",color:"gold",italic:false},\
         CustomNameVisible:1b,\
         drop_chances:{mainhand:0.0f,head:0.0f,chest:0.0f,legs:0.0f,feet:0.0f},\
-        attributes:[{id:"minecraft:spawn_reinforcements",base:0.0},{id:"minecraft:follow_range",base:4.0}]\
+        DeathLootTable:"minecraft:empty",\
+        Health:200.0f,\
+        attributes:[{id:"minecraft:spawn_reinforcements",base:0.0},{id:"minecraft:follow_range",base:4.0},{id:"minecraft:max_health",base:200.0}]\
     }
 
 # Real Mummy sword + armor (same defs as kits/mummy/givekit) but with the imperium_kit custom_data
@@ -76,6 +78,12 @@ item replace entity @e[type=husk,tag=im.dummy_new,limit=1] weapon.mainhand with 
         custom_name={text:"Dark Claymore",color:dark_gray,italic:false}\
     ] 1
 
-effect give @e[type=husk,tag=im.dummy_new,limit=1] minecraft:regeneration infinite 9 true
+# No constant regen — it would drag down every damage-indicator reading (regen heals between the
+# hit and the next HP sample). Instead the husk gets a deep HP pool (max_health 200) and the
+# booth/dummy/dmg_tick loop heals it back to full during lulls (2s with no hits), which tops it up
+# between flurries and visitors without ever masking a hit. Seed the indicator's HP baseline
+# (Health x10 = 0.1-HP precision) and the no-hit counter so the first sampled tick reports no drop.
+scoreboard players set @e[type=husk,tag=im.dummy_new,limit=1] im_hpPrev 2000
+scoreboard players set @e[type=husk,tag=im.dummy_new,limit=1] im_dmgLull 0
 
 tag @e[type=husk,tag=im.dummy_new] remove im.dummy_new

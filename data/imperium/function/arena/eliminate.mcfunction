@@ -1,7 +1,7 @@
 # @s ran out of lives. Announce it, ship them back to the kit room, and close out their round
 # (end_fighter = post-game stats + drop im.fighting/no_regen + clear the kit). Called from
 # arena/on_death when im_lives hits 0.
-tellraw @a [{"text":"ELIMINATED - ","color":"red"},{"selector":"@s","color":"red"}]
+tellraw @a[tag=summit.battlegrounds.player] [{"text":"ELIMINATED - ","color":"red"},{"selector":"@s","color":"red"}]
 
 tp @s[gamemode=!creative] -78 87 -8 -90 0
 

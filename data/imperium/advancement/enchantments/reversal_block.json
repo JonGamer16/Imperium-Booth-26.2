@@ -15,6 +15,10 @@
                 "is_sneaking": true
               }
             }
+          },
+          {
+            "condition": "minecraft:reference",
+            "name": "imperium:ability_zone"
           }
         ]
       }

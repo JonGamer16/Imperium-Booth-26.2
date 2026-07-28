@@ -10,7 +10,7 @@ summon minecraft:armor_stand ~ ~ ~ \
     ShowArms:1b,\
     CustomNameVisible:0b,\
     CustomName:{text:"Levent",color:"light_purple",bold:true},\
-    Tags:["im.booth_stand_model","im.booth_levent","im.booth_new"],\
+    Tags:["summit.booth_entity.imperium", "im.booth_stand_model","im.booth_levent","im.booth_new"],\
     Rotation:[42f,0f],\
     Pose:{Body:[7f,2f,0f],Head:[8f,321f,0f],LeftLeg:[346f,325f,353f],RightLeg:[360f,14f,13f],LeftArm:[335f,354f,335f],RightArm:[329f,0f,132f]}\
 }
@@ -41,6 +41,6 @@ tag @e[type=armor_stand,tag=im.booth_new] remove im.booth_new
 
 summon minecraft:interaction ~ ~ ~ \
 {   width:1.0f,height:2.1f,response:1b,\
-    Tags:["summit.interactable","summit.static","im.booth_stand","im.booth_levent"],\
+    Tags:["summit.booth_entity.imperium", "summit.interactable","summit.static","im.booth_stand","im.booth_levent"],\
     data:{summit_interactable:{on_right_click:"execute on target run function imperium:kits/levent/booth/click"}}\
 }

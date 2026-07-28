@@ -7,4 +7,4 @@
 # arrows carry custom_data {imperium_kit:1b} is handled here — Meowdy today, Cliffshield next.
 # The im_cdMaxB gate skips every other kit so a stray crossbow shot can't disturb their slot B.
 advancement revoke @s only imperium:combat/shot_arrow
-execute if score @s im_cdMaxB matches 1.. store result score @s im_cdUsesB run clear @s arrow[custom_data~{imperium_kit:1b}] 0
+execute if score @s im_cdMaxB matches 1.. store result score @s im_cdUsesB if items entity @s container.* arrow[custom_data~{imperium_kit:1b}]

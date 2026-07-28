@@ -1,33 +1,12 @@
-# Constants (fake player "const", one objective per value)
-scoreboard objectives add 0 dummy
-scoreboard players set const 0 0
-scoreboard objectives add 1 dummy
-scoreboard players set const 1 1
-scoreboard objectives add 2 dummy
-scoreboard players set const 2 2
-scoreboard objectives add 3 dummy
-scoreboard players set const 3 3
-scoreboard objectives add 4 dummy
-scoreboard players set const 4 4
-scoreboard objectives add 5 dummy
-scoreboard players set const 5 5
-scoreboard objectives add 10 dummy
-scoreboard players set const 10 10
-scoreboard objectives add 20 dummy
-scoreboard players set const 20 20
-scoreboard objectives add 100 dummy
-scoreboard players set const 100 100
-scoreboard objectives add 200 dummy
-scoreboard players set const 200 200
-scoreboard objectives add 250 dummy
-scoreboard players set const 250 250
-scoreboard objectives add 500 dummy
-scoreboard players set const 500 500
-scoreboard objectives add 1000 dummy
-scoreboard players set const 1000 1000
-scoreboard objectives add 2000 dummy
-scoreboard players set const 2000 2000
-scoreboard objectives add 5000 dummy
-scoreboard players set const 5000 5000
-scoreboard objectives add 10000 dummy
-scoreboard players set const 10000 10000
+# Constants: one objective, fake players named "#<value>" (e.g. #100 holds 100).
+# Only needed for arithmetic (/=, *=, %=, min/max clamp) where a command can't take a
+# literal. For plain comparisons prefer `execute if score ... matches <range>` instead of
+# comparing against one of these. Add a new value here when an operation first needs it.
+scoreboard objectives add imperium.const dummy
+scoreboard players set #0 imperium.const 0
+scoreboard players set #1 imperium.const 1
+scoreboard players set #2 imperium.const 2
+scoreboard players set #3 imperium.const 3
+scoreboard players set #10 imperium.const 10
+scoreboard players set #100 imperium.const 100
+scoreboard players set #250 imperium.const 250

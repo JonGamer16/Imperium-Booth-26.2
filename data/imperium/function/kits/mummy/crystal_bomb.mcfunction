@@ -20,7 +20,7 @@ execute if entity @s[tag=im.barrier_up] run function imperium:kits/mummy/barrier
 # Place the bomb at the Mummy's feet: an Invulnerable end crystal so it can't be attacked into its
 # vanilla block-breaking blast (anti-grief), beam-to-bedrock hidden. bomb_init starts the fuse this
 # same tick; bomb_detonate /kills it when the fuse expires (command-kill doesn't trigger the blast).
-summon end_crystal ~ ~ ~ {Invulnerable:1b,ShowBottom:0b,Tags:["im.crystal_bomb"]}
+summon end_crystal ~ ~ ~ {Invulnerable:1b,ShowBottom:0b,Tags:["im.crystal_bomb","summit.booth_entity.imperium"]}
 
 # Pair this bomb to its placer via a shared id (im_bombId) so the blast spares the owner. Stamp the
 # next id on the placer (@s) and on the just-summoned crystal (the nearest not-yet-initialized bomb).

@@ -10,4 +10,4 @@ scoreboard players operation @s im.temp = @s im_webUsedStat
 scoreboard players operation @s im.temp -= @s im_webUsedPrev
 scoreboard players operation @s im_webUsedPrev = @s im_webUsedStat
 execute if score @s im.temp matches 1.. store result score @s im_cdUsesB \
-    run clear @s lingering_potion[custom_data~{imperium_kit:1b}] 0
+    if items entity @s container.* lingering_potion[custom_data~{imperium_kit:1b}]

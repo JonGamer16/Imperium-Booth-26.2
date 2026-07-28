@@ -10,7 +10,7 @@ summon minecraft:armor_stand ~ ~ ~ \
     ShowArms:1b,\
     CustomNameVisible:0b,\
     CustomName:{text:"Jeru Cliffshield",color:"yellow",bold:true},\
-    Tags:["im.booth_stand_model","im.booth_cliffshield","im.booth_new"],\
+    Tags:["summit.booth_entity.imperium", "im.booth_stand_model","im.booth_cliffshield","im.booth_new"],\
     Rotation:[-90,0],\
     Pose:{Body:[7f,14f,0f],Head:[5f,335f,0f],LeftLeg:[346f,325f,0f],RightLeg:[360f,14f,13f],LeftArm:[277f,23f,0f],RightArm:[337f,341f,50f]}\
 }
@@ -44,6 +44,6 @@ tag @e[type=armor_stand,tag=im.booth_new] remove im.booth_new
 # (needs response:1b), so on_right_click must live here — not on the text_display.
 summon minecraft:interaction ~ ~ ~ \
 {   width:1.0f,height:2.1f,response:1b,\
-    Tags:["summit.interactable","summit.static","im.booth_stand","im.booth_cliffshield"],\
+    Tags:["summit.booth_entity.imperium", "summit.interactable","summit.static","im.booth_stand","im.booth_cliffshield"],\
     data:{summit_interactable:{on_right_click:"execute on target run function imperium:kits/cliffshield/booth/click"}}\
 }

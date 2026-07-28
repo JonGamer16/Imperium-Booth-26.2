@@ -22,6 +22,6 @@ $scoreboard players operation #$(kit) im_cdStock$(slot) = #s im.temp
 scoreboard players set #f im.temp 100
 scoreboard players operation #f im.temp -= #s im.temp
 scoreboard players operation #f im.temp *= #b im.temp
-scoreboard players operation #f im.temp /= const 100
-scoreboard players operation #f im.temp > const 1
+scoreboard players operation #f im.temp /= #100 imperium.const
+scoreboard players operation #f im.temp > #1 imperium.const
 $scoreboard players operation #$(kit) im_cdFloor$(slot) = #f im.temp

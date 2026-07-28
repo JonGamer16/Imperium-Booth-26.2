@@ -98,13 +98,13 @@ execute unless items entity @s hotbar.1 * run \
             custom_data={"imperium_kit":1b}\
         ] 1
 
-#   [TOOL] Light Crossbow
+#   [TOOL] Heavy Crossbow
 execute unless items entity @s hotbar.2 * run \
     item replace entity @s hotbar.2 with \
         crossbow[\
             enchantments={"imperium:leverage":1},\
             !max_damage,\
-            custom_name={text:"Light Crossbow",color:"yellow",italic:false},\
+            custom_name={text:"Heavy Crossbow",color:"yellow",italic:false},\
             custom_data={"imperium_kit":1b},\
         ] 1
 

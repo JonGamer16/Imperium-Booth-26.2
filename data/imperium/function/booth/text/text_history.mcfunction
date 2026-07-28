@@ -1,5 +1,5 @@
 # Mid-floor history board
-summon minecraft:text_display ~ ~1 ~ {\
+summon minecraft:text_display ~ ~1 ~ {Tags:["summit.booth_entity.imperium"], \
     alignment: "center", \
     background: 1073741824, \
     default_background: 0b, \
@@ -15,7 +15,7 @@ summon minecraft:text_display ~ ~1 ~ {\
             translation: [0.0f, 0.0f, 0.0f]},\
 view_range:0.25f}
 
-summon minecraft:text_display ~ ~ ~ {\
+summon minecraft:text_display ~ ~ ~ {Tags:["summit.booth_entity.imperium"], \
 alignment: "left", \
 background: 0, \
 default_background: 0b, \

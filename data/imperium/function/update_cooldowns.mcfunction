@@ -17,9 +17,9 @@ scoreboard players operation @s im_abilityCdC -= @s im_abilityTaken
 # Keep charge counts non-negative. Cooldowns are deliberately NOT clamped to 0 here:
 # a spent slot may dip below 0, and that overshoot is the residual damage credit the
 # refill banks via `+= base`. Frozen slots are still bounded by their floor clamp below.
-scoreboard players operation @s im_cdUsesA > const 0
-scoreboard players operation @s im_cdUsesB > const 0
-scoreboard players operation @s im_cdUsesC > const 0
+scoreboard players operation @s im_cdUsesA > #0 imperium.const
+scoreboard players operation @s im_cdUsesB > #0 imperium.const
+scoreboard players operation @s im_cdUsesC > #0 imperium.const
 
 # Soft freeze: a FULL slot (uses >= max, max > 0) can only pre-drain to its stockpile
 # floor, banking residual damage. A non-full slot keeps bleeding so it can refill the

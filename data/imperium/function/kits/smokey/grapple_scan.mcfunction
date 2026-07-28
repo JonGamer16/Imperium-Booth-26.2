@@ -12,6 +12,10 @@ execute store result score #bz im_grappleZ run data get entity @s Pos[2] 10000
 # ~0.125 above the surface, so a shallower check (~-0.1) would still read air. Tune the depth here.
 scoreboard players set #anchor im_grappleId 0
 execute unless block ~ ~-0.3 ~ #imperium:im.raycast_pass run scoreboard players set #anchor im_grappleId 1
-execute if entity @e[distance=..1.5,type=!fishing_bobber,type=!#im.not_mob] run scoreboard players set #anchor im_grappleId 1
+# Hookable entity = one of OUR booth entities (e.g. the training dummy) OR any player. Other booths'
+# husks/mannequins are #imperium:human too, so gate the non-player case on our booth tag to keep a
+# neighbouring booth from anchoring our grapple.
+execute if entity @e[type=#imperium:human,distance=..1.5,tag=summit.booth_entity.imperium] run scoreboard players set #anchor im_grappleId 1
+execute if entity @a[distance=..1.5] run scoreboard players set #anchor im_grappleId 1
 
-execute as @a if score @s im_grappleId = #bid im_grappleId run function imperium:kits/smokey/grapple_owner
+execute as @a[tag=im.kit_smokey] if score @s im_grappleId = #bid im_grappleId run function imperium:kits/smokey/grapple_owner

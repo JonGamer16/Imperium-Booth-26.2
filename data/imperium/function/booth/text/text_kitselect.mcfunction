@@ -1,7 +1,7 @@
 # Kit room instructions. Stand where the display should appear, then run.
 execute at @s \
     run summon text_display ~ ~ ~ {\
-    Tags:["im_walltext","im_kitselect"],\
+    Tags:["summit.booth_entity.imperium", "im_walltext","im_kitselect"],\
     billboard:"center",\
     alignment:"center",\
     line_width:250,\

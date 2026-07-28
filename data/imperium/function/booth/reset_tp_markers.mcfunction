@@ -1,0 +1,2 @@
+function imperium:booth/tp_marker_kill
+function imperium:booth/tp_marker_summon

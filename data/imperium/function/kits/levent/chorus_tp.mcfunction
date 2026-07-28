@@ -23,4 +23,4 @@ execute at @s rotated ~ 0 positioned ^ ^ ^1 if block ~ ~ ~ #minecraft:replaceabl
 
 # Arrival flavor (mirrors Reversal's warp feedback).
 execute at @s run particle minecraft:reverse_portal ~ ~1 ~ 0.3 0.6 0.3 0.05 30
-execute at @s run playsound minecraft:entity.enderman.teleport player @a ~ ~ ~ 1 1.5
+execute at @s run playsound minecraft:entity.enderman.teleport player @a[distance=..32] ~ ~ ~ 1 1.5

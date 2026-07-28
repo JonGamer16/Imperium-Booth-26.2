@@ -23,7 +23,11 @@
           },
           {
             "condition": "minecraft:reference",
-            "name": "player_input:sneak"
+            "name": "imperium:input_sneak"
+          },
+          {
+            "condition": "minecraft:reference",
+            "name": "imperium:ability_zone"
           }
         ]
       }

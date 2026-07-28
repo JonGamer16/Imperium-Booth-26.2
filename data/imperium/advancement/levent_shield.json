@@ -8,13 +8,20 @@
                         "shield"
                     ]
                 },
-                "player": {
-                    "entity_tags": {
-                        "all_of": [
-                            "im.kit_levent"
-                        ]
-                    }
-                }
+                "player": [
+                    {
+                        "condition": "minecraft:entity_properties",
+                        "entity": "this",
+                        "predicate": {
+                            "entity_tags": {
+                                "all_of": [
+                                    "im.kit_levent"
+                                ]
+                            }
+                        }
+                    },
+                    { "condition": "minecraft:reference", "name": "imperium:ability_zone" }
+                ]
             }
         }
     },

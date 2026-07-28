@@ -6,4 +6,8 @@ execute unless entity @p[tag=im.grapple_user,distance=..5] run return 0
 scoreboard players add #next im_grappleId 1
 scoreboard players operation @s im_grappleId = #next im_grappleId
 tag @s add im.grapple_bobber
+# Ours-only (this ran only because our grapple Smokey is within 5 blocks): mark it booth-owned so the
+# containment sweep (imperium:internal/contain) can cull it if it clears a wall, and so no other
+# booth's tooling treats it as theirs.
+tag @s add summit.booth_entity.imperium
 execute as @p[tag=im.grapple_user,distance=..5] run scoreboard players operation @s im_grappleId = #next im_grappleId

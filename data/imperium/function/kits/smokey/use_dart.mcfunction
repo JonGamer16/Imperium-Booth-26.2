@@ -26,7 +26,7 @@ execute \
 # Duration just needs to survive until the next loop tick catches it.
 execute at @s anchored eyes \
     run summon minecraft:arrow ^ ^ ^0.3 \
-        {Tags:["im.dart_projectile"],\
+        {Tags:["im.dart_projectile","summit.booth_entity.imperium"],\
          item:{id:"minecraft:tipped_arrow",count:1,components:{"minecraft:potion_contents":{custom_effects:[{id:"minecraft:bad_omen",amplifier:0,duration:1600}]}}}}
 
 # Apply direction as Motion and set owner (prevents self-hit grace period)

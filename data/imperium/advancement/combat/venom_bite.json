@@ -3,9 +3,10 @@
         "bite": {
             "trigger": "minecraft:player_hurt_entity",
             "conditions": {
-                "player": {
-                    "entity_tags": { "all_of": ["im.kit_livvy"] }
-                },
+                "player": [
+                    { "condition": "minecraft:entity_properties", "entity": "this", "predicate": { "entity_tags": { "all_of": ["im.kit_livvy"] } } },
+                    { "condition": "minecraft:reference", "name": "imperium:ability_zone" }
+                ],
                 "entity": {
                     "entity_tags": { "all_of": ["im.venom"] }
                 },

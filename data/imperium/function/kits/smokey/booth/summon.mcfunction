@@ -11,7 +11,7 @@ summon minecraft:armor_stand ~ ~ ~ \
     ShowArms:1b,\
     CustomNameVisible:0b,\
     CustomName:{text:"Smokey Bat",color:"gold",bold:true},\
-    Tags:["im.booth_stand_model","im.booth_smokey","im.booth_new"],\
+    Tags:["summit.booth_entity.imperium", "im.booth_stand_model","im.booth_smokey","im.booth_new"],\
     Pose:{Body:[15f,0f,0f],Head:[69f,0f,0f],LeftLeg:[316f,0f,0f],RightLeg:[45f,0f,5f],LeftArm:[12f,0f,291f],RightArm:[15f,0f,72f]}\
 }
 
@@ -21,7 +21,7 @@ execute at @e[type=armor_stand,tag=im.booth_new,limit=1] \
     {   text:{text:"Smokey Bat",color:"gold",bold:true},\
         billboard:"fixed",\
         see_through:1b,\
-        Tags:["im.booth_stand_model","im.booth_smokey"]\
+        Tags:["summit.booth_entity.imperium", "im.booth_stand_model","im.booth_smokey"]\
     }
 
 loot replace entity @e[type=armor_stand,tag=im.booth_new,limit=1] \
@@ -41,6 +41,6 @@ tag @e[type=armor_stand,tag=im.booth_new] remove im.booth_new
 
 summon minecraft:interaction ~ ~ ~ \
 {   width:1.0f,height:2.1f,response:1b,\
-    Tags:["summit.interactable","summit.static","im.booth_stand","im.booth_smokey"],\
+    Tags:["summit.booth_entity.imperium", "summit.interactable","summit.static","im.booth_stand","im.booth_smokey"],\
     data:{summit_interactable:{on_right_click:"execute on target run function imperium:kits/smokey/booth/click"}}\
 }

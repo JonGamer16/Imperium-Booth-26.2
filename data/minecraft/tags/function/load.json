@@ -1,6 +1,5 @@
 {
     "values": [
-        "imperium:main",
-        "player_input:zz_internal/init"
+        "imperium:main"
     ]
 }

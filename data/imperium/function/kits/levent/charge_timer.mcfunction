@@ -5,10 +5,10 @@
     # the charge. Mirrors Rastus's Strike.
     scoreboard players add @s im_leventCharge 1
     execute \
-        as @s[tag=!im.levent_charged] \
+        if entity @s[tag=!im.levent_charged] \
         if score @s im_leventCharge >= #LeventCharge im.param \
         run function imperium:kits/levent/charge_on
     execute \
-        as @s[tag=im.levent_charged] \
+        if entity @s[tag=im.levent_charged] \
         unless score @s im_leventCharge >= #LeventCharge im.param \
         run function imperium:kits/levent/charge_off

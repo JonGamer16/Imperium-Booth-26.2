@@ -49,7 +49,7 @@
                   "id": "minecraft:bowl",
                   "count": 1,
                   "components": {
-                    "minecraft:custom_data": "{imperium_energy_used:1b}"
+                    "minecraft:custom_data": "{imperium_energy_used:1b,imperium_kit:1b}"
                   }
                 },
                 "minecraft:custom_name":{"text":"Energy Crystal [Consume to Heal & Charge]","color":"gray","italic":false},

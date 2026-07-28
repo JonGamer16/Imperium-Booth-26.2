@@ -9,7 +9,7 @@ advancement revoke @s only imperium:rastus_strike_cue
 
 execute \
     at @s \
-    run playsound entity.blaze.hurt player @a ~ ~ ~ 0.8 1.5
+    run playsound entity.blaze.hurt player @a[distance=..32] ~ ~ ~ 0.8 1.5
 execute \
     at @s \
-    run playsound block.amethyst_block.place player @a ~ ~ ~ 1 1
+    run playsound block.amethyst_block.place player @a[distance=..32] ~ ~ ~ 1 1

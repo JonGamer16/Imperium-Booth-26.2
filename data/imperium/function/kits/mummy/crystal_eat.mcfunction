@@ -4,4 +4,4 @@
 scoreboard players operation #crystals im.temp *= #MummyEnergyCrystal im.param
 scoreboard players operation @s im_energy += #crystals im.temp
 execute if score @s im_energy > #MummyEnergyMax im.param run scoreboard players operation @s im_energy = #MummyEnergyMax im.param
-playsound block.enchantment_table.use player @a ~ ~ ~ 1 0.7
+playsound block.enchantment_table.use player @a[distance=..32] ~ ~ ~ 1 0.7

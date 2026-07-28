@@ -8,40 +8,40 @@
 
 # --- Diagonals ---
 execute \
-    if predicate player_input:forward \
-    if predicate player_input:right \
+    if predicate imperium:player_input/forward \
+    if predicate imperium:player_input/right \
     rotated ~45 0 \
     run return run function player_motion:api/launch_looking
 execute \
-    if predicate player_input:forward \
-    if predicate player_input:left \
+    if predicate imperium:player_input/forward \
+    if predicate imperium:player_input/left \
     rotated ~-45 0 \
     run return run function player_motion:api/launch_looking
 execute \
-    if predicate player_input:backward \
-    if predicate player_input:right \
+    if predicate imperium:player_input/backward \
+    if predicate imperium:player_input/right \
     rotated ~135 0 \
     run return run function player_motion:api/launch_looking
 execute \
-    if predicate player_input:backward \
-    if predicate player_input:left \
+    if predicate imperium:player_input/backward \
+    if predicate imperium:player_input/left \
     rotated ~-135 0 \
     run return run function player_motion:api/launch_looking
 
 # --- Cardinals ---
 execute \
-    if predicate player_input:forward \
+    if predicate imperium:player_input/forward \
     rotated ~0 0 \
     run return run function player_motion:api/launch_looking
 execute \
-    if predicate player_input:backward \
+    if predicate imperium:player_input/backward \
     rotated ~180 0 \
     run return run function player_motion:api/launch_looking
 execute \
-    if predicate player_input:right \
+    if predicate imperium:player_input/right \
     rotated ~90 0 \
     run return run function player_motion:api/launch_looking
 execute \
-    if predicate player_input:left \
+    if predicate imperium:player_input/left \
     rotated ~-90 0 \
     run return run function player_motion:api/launch_looking

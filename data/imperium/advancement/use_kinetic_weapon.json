@@ -3,6 +3,9 @@
     "kinetic_hit": {
       "trigger": "minecraft:player_hurt_entity",
       "conditions": {
+        "player": [
+          { "condition": "minecraft:reference", "name": "imperium:ability_zone" }
+        ],
         "damage": {
           "type": {
             "tags": [

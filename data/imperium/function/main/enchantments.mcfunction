@@ -1,5 +1,5 @@
 # ENCHANTMENTS
-scoreboard objectives add tempDamage custom:damage_dealt
+scoreboard objectives add im_tempDamage custom:damage_dealt
 
 #   Backstab (rotation reads gone — arming is now a `rotated as <target>` behind-zone check, no NBT)
     scoreboard objectives add im_backstabflag dummy

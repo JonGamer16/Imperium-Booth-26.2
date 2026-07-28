@@ -1,7 +1,7 @@
 # Front entrance branding. Stand where the display should appear, then run.
 execute at @s run \
     summon text_display ~ ~ ~ \
-        {Tags:["im_walltext","im_title"],\
+        {Tags:["summit.booth_entity.imperium", "im_walltext","im_title"],\
         billboard:"fixed",\
         alignment:"center",\
         line_width:250,\

@@ -38,7 +38,7 @@
                   "id": "minecraft:bowl",
                   "count": 1,
                   "components": {
-                    "minecraft:custom_data": "{imperium_healing:1b}"
+                    "minecraft:custom_data": "{imperium_kit:1b}"
                   }
                 },
                 "minecraft:custom_name":{"text":"Rabbit Stew [Consume to Heal]","color":"gold","italic":false},

@@ -9,5 +9,5 @@
 kill @e[type=text_display,tag=im.gold_board]
 kill @e[type=text_display,tag=im.gold_board_text]
 
-summon marker ~ ~ ~ {Tags:["im.gold_board"]}
-summon text_display ~ ~2.4 ~ {Tags:["im.gold_board_text"],billboard:"center",alignment:"center",line_width:220,default_background:true,text:{text:"Gold Rush",color:"gold",bold:true},transformation:{left_rotation:[0f,0f,0f,1f],right_rotation:[0f,0f,0f,1f],translation:[0f,0f,0f],scale:[2f,2f,2f]}}
+summon marker ~ ~ ~ {Tags:["im.gold_board","summit.booth_entity.imperium"]}
+summon text_display ~ ~2.4 ~ {Tags:["im.gold_board_text","summit.booth_entity.imperium"],billboard:"center",alignment:"center",line_width:220,default_background:true,text:{text:"Gold Rush",color:"gold",bold:true},transformation:{left_rotation:[0f,0f,0f,1f],right_rotation:[0f,0f,0f,1f],translation:[0f,0f,0f],scale:[2f,2f,2f]}}

@@ -9,7 +9,7 @@ execute store result score #my im_grappleY run data get entity @s Pos[1] 10000
 execute store result score #mz im_grappleZ run data get entity @s Pos[2] 10000
 
 # Yank every entity hooked under this id (normally exactly one) toward me.
-execute as @e[tag=im.mgrapple_hooked] if score @s im_grappleId = #mid im_grappleId run function imperium:kits/mummy/mgrapple_yank
+execute as @e[type=#imperium:human,tag=im.mgrapple_hooked] if score @s im_grappleId = #mid im_grappleId run function imperium:kits/mummy/mgrapple_yank
 
 scoreboard players operation @s im_abilityCdA = #Mummy im_abilityCdA
 

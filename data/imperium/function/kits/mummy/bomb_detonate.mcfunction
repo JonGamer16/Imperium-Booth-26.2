@@ -14,7 +14,7 @@ function imperium:kits/mummy/bomb_damage_ring
 
 # Launch everything the blast hit straight up — the placer included (self-boost; they still take no
 # damage, only the pop).
-execute as @e[tag=im.bomb_hit] run function imperium:kits/mummy/bomb_launch
+execute as @e[type=#imperium:human,tag=im.bomb_hit] run function imperium:kits/mummy/bomb_launch
 
-tag @e[tag=im.bomb_hit] remove im.bomb_hit
+tag @e[type=#imperium:human,tag=im.bomb_hit] remove im.bomb_hit
 kill @s

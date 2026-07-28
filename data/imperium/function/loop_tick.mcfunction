@@ -38,8 +38,14 @@
     # so match those two types explicitly. A wildcard `*[custom_data~{...}]` forces the game to
     # encode the custom_data component of EVERY item in EVERY inventory each tick (a kit loadout is
     # ~9 custom_data items) — that was a large chunk of the per-tick serialization cost.
-    clear @a fishing_rod[custom_data~{imperium_clearme:1b}]
-    clear @a shield[custom_data~{imperium_clearme:1b}]
+    execute \
+        as @a[predicate=imperium:ability_zone] \
+        if items entity @s container.* fishing_rod \
+        run clear @s fishing_rod[custom_data~{imperium_clearme:1b}]
+    execute \
+        as @a[predicate=imperium:ability_zone] \
+        if items entity @s container.* shield \
+        run clear @s shield[custom_data~{imperium_clearme:1b}]
 
     # Smokey Mark timer — mark_apply + smoke clouds moved into smokey/loop_kit (kit-online gated);
     # the timer persists on victims after Smokey leaves, so it stays ungated here.
@@ -50,15 +56,19 @@
     # Venom (Livvy): the Venom Spray's Poison III is just the delivery signal; convert it to the
     # tracked im.venom tag and tick it as no-impact imperium:venom damage — keeps the smooth
     # no-impact poison without globally tagging vanilla magic damage.
-    execute if entity @a[tag=im.kit_livvy] as @a if predicate imperium:has_venom run function imperium:kits/livvy/venom_apply
+    execute if entity @a[tag=im.kit_livvy] as @a[predicate=imperium:ability_zone] if predicate imperium:has_venom run function imperium:kits/livvy/venom_apply
     function imperium:kits/livvy/venom_tick
 
     # Web Throw (Livvy): a thrown web potion lands as an area_effect_cloud (custom_color 14737632);
     # convert each fresh one into a cobweb block display (the real, blockless web). Then tick each
     # web's 3s life, hold any non-Livvy victim inside it, and despawn it when expired.
+    # in_bounds gate: only convert clouds inside our allowed area. This both contains the web (no web
+    # spawns outside the arena/booth) and, because a foreign booth's cloud sits in its own region
+    # outside our bounds, stops us converting another booth's same-color lingering cloud into our web.
     execute \
         as @e[type=area_effect_cloud,nbt={potion_contents:{custom_color:14737632}}] \
         at @s \
+        if predicate imperium:in_bounds \
         run function imperium:kits/livvy/web_init
 
     scoreboard players remove @e[type=block_display,tag=im.web,scores={im_webLife=1..}] im_webLife 1
@@ -68,7 +78,7 @@
     kill @e[type=block_display,tag=im.web,scores={im_webLife=..0}]
     # Release victims (mobs or players) who have left every web (heartbeat watchdog, mirrors
     # high_jump's cleanup). Must be @e so webbed mobs get freed too, not just players.
-    scoreboard players remove @e[type=!#im.not_mob,tag=im.webbed,scores={im_webbed=1..}] im_webbed 1
+    scoreboard players remove @e[type=#imperium:human,tag=im.webbed,scores={im_webbed=1..}] im_webbed 1
     
     execute as @e[type=#imperium:human,tag=im.webbed,scores={im_webbed=0}] run function imperium:kits/livvy/web_release
     # Keep Livvy's web charge count synced to her real remaining web potions (count-based stock).
@@ -82,6 +92,17 @@
     # Charge functions moved to enchantment/charge_attack.json and function/levent/charge_timer.mcfunction
     execute as @a[tag=im.kit_levent] at @s run function imperium:kits/levent/loop_kit
 
+
+# Training dummy damage indicator: sample each dummy husk's HP drop (= exact hit damage; the husk
+# carries no regen to muddy it) and float the number, then age/rise/expire the spawned labels.
+    execute as @e[type=husk,tag=im.dummy] at @s run function imperium:booth/dummy/dmg_tick
+    scoreboard players remove @e[type=text_display,tag=im.dmg_ind] im_indLife 1
+    execute as @e[type=text_display,tag=im.dmg_ind] at @s run tp @s ~ ~0.05 ~
+    kill @e[type=text_display,tag=im.dmg_ind,scores={im_indLife=..0}]
+
+# Entity containment: claim vanilla kit projectiles as booth-owned, then kill any owned mobile
+# ability entity (arrows, grapple bobbers) that has left the allowed area (booth + arena + corridor).
+function imperium:internal/contain
 
 # 5-tick loop (for local testing; booth uses ticking_functions at "5t")
     scoreboard players add #t5 im_5tTimer 1
