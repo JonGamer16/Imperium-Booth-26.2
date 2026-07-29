@@ -4,7 +4,6 @@
 execute unless entity @s[tag=im.fighting] run return 0
 # TODO(CONFIRM w/ staff): whether player_died fires before or after the vanilla respawn,
 # and the arena respawn point(s) — then uncomment/set the tp below.
-# tp @s 0.0 100.0 0.0
 
 # Re-equip their kit so a death can't strand them itemless (im_givekit runs clear_kit first,
 # so this is safe even if the server keeps inventories on death).

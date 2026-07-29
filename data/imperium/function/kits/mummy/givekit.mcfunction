@@ -71,12 +71,6 @@ execute unless items entity @s hotbar.0 * run \
         ] 1
 
 #   [SLOT 1] Grappling Hook
-#item replace entity @s hotbar.1 with \
-#    fishing_rod[\
-#        enchantments={"imperium:wip_reeling":1},\
-#        max_damage=10,\
-#        custom_data={"imperium_kit":1b},\
-#    ]
 function imperium:kits/mummy/cd1_rod
 
 #   [SLOT 2] [Empty]
@@ -85,19 +79,6 @@ function imperium:kits/mummy/cd1_rod
 
 #   [HEALING] Energy Crystal
 #       10 x 8 HP, Regeneration 5|2s,
-#give @s end_crystal[\
-#        !can_place_on,\
-#        custom_name="Energy Crystal",\
-#        max_stack_size=1,\
-#        food={nutrition:0,saturation:0,can_always_eat:true},\
-#        consumable={\
-#            consume_seconds:0,\
-#            on_consume_effects:[{type:"apply_effects",effects:[\
-#                {id:"instant_health",amplifier:1,duration:1s},\
-#                {id:"regeneration",amplifier:4,duration:2s}]}]},\
-#            use_remainder={"id":"bowl",count:1},\
-#        custom_data={"imperium_healing":1b}\
-#    ] 10
 loot give @s loot imperium:mummy/healing
 
 #   Ability Cooldowns

@@ -11,27 +11,27 @@ tellraw @s \
                             text:"Quin Meowdy - The Gunslinging Cowcat \n\n"},\
     {color:"gold",\
                             text:"  • [Melee] "},\
-    {color:"white",\
-                            text:"Shortsword"},\
     {color:"yellow",\
+                            text:"Shortsword"},\
+    {color:"gray",\
                             text:" — ⬆ Attack speed\n"},\
     {color:"gold",\
                             text:"  • [Melee] "},\
-    {color:"white",\
-                            text:"Cat Claw"},\
     {color:"yellow",\
+                            text:"Cat Claw"},\
+    {color:"gray",\
                             text:" — ⬆ Attack Speed | ⬇ Knockback\n"},\
     {color:"gold",\
                             text:"  • [Ranged] "},\
-    {color:"white",\
-                            text:"Quickdraw & Birdshot"},\
     {color:"yellow",\
+                            text:"Quickdraw & Birdshot"},\
+    {color:"gray",\
                             text:" — Twin crossbows for speed and coverage\n"},\
     {color:"gold",\
                             text:"  • [Consumable] "},\
-    {color:"white",\
-                            text:"Leap Feather"},\
     {color:"yellow",\
+                            text:"Leap Feather"},\
+    {color:"gray",\
                             text:" — Leap about 15 blocks and briefly gain Speed 2\n"},\
     {color:"gold",\
                 text:"  • [Passive] ",},\
@@ -39,9 +39,9 @@ tellraw @s \
                 text:" ⬆ Movement Speed | ⬆ Safe Fall Distance |  ⬆ Sneaking Speed\n",},\
     {color:"gold",\
                             text:"  • [Healing] "},\
-    {color:"white",\ 
+    {color:"yellow",\ 
                             text:"Salmon x16"},\
-    {color:"yellow",\
+    {color:"gray",\
                             text:" — Heals 8 HP\n"}\
 ]
 

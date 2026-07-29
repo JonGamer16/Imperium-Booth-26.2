@@ -19,31 +19,31 @@ tellraw @s \
     {color:"aqua",\
                                 text:"Dark Claymore"},\
     {color:"gray",\
-                                text:" — ⬆ Reach | ⬇ Attack Speed | Can perform mace smash attacks\n"},\
+                                text:" — ⬆ Reach | ⬇ Attack Speed | Can perform mace smash attacks (costs Energy)\n"},\
     {color:"gold",\
                                 text:"  • [Consumable] "},\
     {color:"aqua",\
                                 text:"Grappling Hook"},\
     {color:"gray",\
-                                text:" — Forcefully reels targets in, dealing damage; consumes Energy\n"},\
+                                text:" — Forcefully reels targets in; while hooked, Golem Toss launches you up with the target\n"},\
     {color:"gold",\
                                 text:"  • [Healing] "},\
     {color:"aqua",\
                                 text:"Energy Crystal"},\
     {color:"gray",\
-                                text:" — Consume to regenerate HP and Energy, or Crouch and place on the ground for damage, knockback, and Absorption to yourself\n"},\
+                                text:" — Consume to regenerate HP and Energy, or Crouch and place on the ground for damage, knockback, and restore less Energy\n"},\
     {color:"gold",\
                                 text:"  • [Special] "},\
     {color:"aqua",\
                                 text:"Golem Toss"},\
     {color:"gray",\
-                                text:" — Crouch to charge an attack that launches enemies upward; consumes Energy\n"},\
+                                text:" — Crouch to charge an attack that launches enemies upward (costs Energy)\n"},\
     {color:"gold",\
                                 text:"  • [Special] "},\
     {color:"aqua",\
                                 text:"Energy Barrier"},\
     {color:"gray",\
-                                text:" — Crouching also blocks incoming damage from all angles; consumes Energy\n"},\
+                                text:" — Crouching also blocks incoming damage from all angles (costs Energy)\n"},\
 ]
 
 playsound minecraft:block.enchantment_table.use neutral @s ~ ~ ~ 0.7 0.5

@@ -9,4 +9,7 @@ attribute @s minecraft:attack_speed modifier add imperium:focus 1 add_value
 attribute @s minecraft:attack_knockback modifier add imperium:focus 1 add_value
 
 # Armed feedback — this charge powers BOTH the Strike (next hit) and the Parry (shield raise).
-title @s actionbar {text:"⦿ Focus ready",color:"aqua"}
+# Audio only, deliberately: the actionbar belongs to the Air Dodge stock readout (rastus/dash_count),
+# and two writers would just overwrite each other. Fires once per charge (the im.rastus_focused tag
+# gates loop_kit's call), so it can't turn into a per-tick ding.
+playsound minecraft:entity.experience_orb.pickup player @s ~ ~ ~ 0.4 1.5

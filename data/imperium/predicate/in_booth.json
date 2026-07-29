@@ -1,0 +1,46 @@
+{
+    "condition": "minecraft:any_of",
+    "terms": [
+        {
+            "condition": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+                "entity_tags": {
+                    "any_of": [
+                        "summit.in_booth.imperium"
+                    ]
+                }
+            }
+        },
+        {
+            "condition": "minecraft:location_check",
+            "predicate": {
+                "position": {
+                    "x": {"min": -98.0, "max": -60.0},
+                    "y": {"min": 76.0, "max": 102.0},
+                    "z": {"min": -12.0, "max": 23.0}
+                }
+            }
+        },
+        {
+            "condition": "minecraft:location_check",
+            "predicate": {
+                "position": {
+                    "x": {"min": -86.0, "max": -63.0},
+                    "y": {"min": 92.0, "max": 111.0},
+                    "z": {"min": 5.0, "max": 20.0}
+                }
+            }
+        },
+        {
+            "condition": "minecraft:location_check",
+            "predicate": {
+                "position": {
+                    "x": {"min": -94.0, "max": -72.0},
+                    "y": {"min": 60.0, "max": 85.0},
+                    "z": {"min": 1.0, "max": 18.0}
+                }
+            }
+        }
+    ]
+}

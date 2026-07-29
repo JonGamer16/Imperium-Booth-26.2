@@ -10,7 +10,7 @@
             {
               "function": "minecraft:set_components",
               "components": {
-                "minecraft:max_damage": 30,
+                "minecraft:max_damage": 20,
                 "minecraft:blocks_attacks": {
                   "item_damage": {
                     "base": 0,

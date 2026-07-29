@@ -71,7 +71,7 @@
         #   #BombRange blocks (whole damage units, dealt in 1-block rings via execute-as + /damage @s).
         #   imperium:bomb type — no knockback (won't fight the launch); still reduced by the target's armor.
         scoreboard players set #BombMaxDamage im.param 16
-        scoreboard players set #BombRange im.param 8
+        scoreboard players set #BombRange im.param 5
         scoreboard players set #BombDropoff im.param 1
         #   Blast launch: upward impulse on everything the blast hits — INCLUDING the placer (a built-in
         #   self-boost; the placer still takes no damage). In 1/10000 b/t; ~10000 (1.0 b/t) ≈ 5 blocks up.

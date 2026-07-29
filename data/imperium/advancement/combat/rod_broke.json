@@ -1,0 +1,26 @@
+{
+    "criteria": {
+        "broke": {
+            "trigger": "minecraft:item_durability_changed",
+            "conditions": {
+                "player": [
+                    { "condition": "minecraft:reference", "name": "imperium:ability_zone" }
+                ],
+                "item": {
+                    "items": [
+                        "minecraft:fishing_rod"
+                    ],
+                    "predicates": {
+                        "minecraft:custom_data": "{imperium_kit:1b}"
+                    }
+                },
+                "durability": {
+                    "max": 0
+                }
+            }
+        }
+    },
+    "rewards": {
+        "function": "imperium:internal/rod_broke"
+    }
+}

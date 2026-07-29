@@ -1,3 +1,9 @@
+# Cache + clear the player's outside inventory before the kit lands (no-op if already cached).
+# Gated on a REAL kit id: im_givekit 0 is the "re-give last kit" sentinel, which recurses back
+# through here via arena/lastkit with a real id — caching on the bare sentinel would strip the
+# inventory of a player who has no last kit coming. Returned by imperium:util/inv_return.
+execute if score @s im_givekit matches 1.. run function imperium:util/inv_cache
+
 # Clear all kit tags before assigning the new one
 execute if score @s im_givekit matches 1.. run tag @s remove im.kit_cliffshield
 execute if score @s im_givekit matches 1.. run tag @s remove im.kit_meowdy

@@ -87,7 +87,7 @@ execute unless items entity @s hotbar.1 * run \
             !max_damage,\
             !piercing_weapon,\
             kinetic_weapon={\
-                damage_multiplier:0.6,\
+                damage_multiplier:0.8,\
                 delay_ticks:4,\
                 contact_cooldown_ticks:0,\
                 knockback_conditions:{max_duration_ticks:200},\

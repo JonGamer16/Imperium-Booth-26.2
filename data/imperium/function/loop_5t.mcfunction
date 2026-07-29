@@ -29,6 +29,9 @@
     
 # Battlegrounds teleport pad: any player within 2 blocks of an im.warp_from_kitroom marker
 # gets sent to the destination below (coords already set).
+# COORD LINK: imperium:warp_landing is a 10-block cube centred on this destination and is OR'd into
+# imperium:ability_zone, so abilities keep firing in the landing room as if it were the dojo. Move
+# this destination and that predicate has to move with it.
     execute as @e[type=marker,tag=im.warp_from_kitroom,limit=1] at @s as @a[distance=..2] run tp @s[gamemode=!creative] -119 71 99 -90 0
 
     execute as @e[type=marker,tag=im.warp_from_shulkerbox,limit=1] at @s as @a[distance=..2] run tp @s[gamemode=!creative] -68.5 87 -7.5 90 0

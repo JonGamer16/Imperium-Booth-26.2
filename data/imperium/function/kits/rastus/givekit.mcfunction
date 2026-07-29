@@ -78,12 +78,6 @@ execute unless items entity @s hotbar.0 * run \
         ] 1
 
 #   [SLOT 1] Buckler
-#item replace entity @s weapon.offhand with \
-#    shield[\
-#        !max_damage,\
-#        custom_name={text:"Buckler Shield",color:blue,italic:false},\
-#        custom_data={"imperium_kit":1b},\
-#    ]
 function imperium:kits/rastus/cd1_shield
 
 #   [SLOT 2] [Empty]
@@ -92,12 +86,6 @@ function imperium:kits/rastus/cd1_shield
 
 #   [HEALING] Splash Healing 2 Potion
 #       16 x 8 HP
-#give @s \
-#    potion[\
-#        potion_contents={custom_effects:[\
-#            {id:"instant_health",amplifier:1,duration:1}]},\
-#        custom_data={"imperium_healing":1b}\
-#    ] 16
 loot give @s loot imperium:rastus/healing
 
 #   Ability Cooldowns
@@ -110,5 +98,12 @@ scoreboard players operation @s im_abilityCdC = #Rastus im_abilityCdC
 #   without it the slot never freezes and cd3_dodge refills past the cap.
 scoreboard players operation @s im_cdMaxC = #Rastus im_cdMaxC
 scoreboard players operation @s im_cdUsesC = #Rastus im_cdMaxC
+#   ...and the freeze FLOOR, which clear_kit zeroed. update_cooldowns reads @s here too, so
+#   without this the full-stock clamp bottoms out at 0 instead of #Rastus im_cdFloorC (25 =
+#   base 50 at 50% stock): a topped-up slot pre-banks its WHOLE cooldown, so the first dash
+#   after a top-up came back on the very next hit instead of costing 2.5 HP of damage.
+#   (It also left slot C sitting at exactly 0 while full, re-dispatching cd3_dodge — an
+#   instant no-op return — on every single damage event.) Mirrors livvy/meowdy givekit.
+scoreboard players operation @s im_cdFloorC = #Rastus im_cdFloorC
 
 tag @s add im.kit_rastus

@@ -45,5 +45,15 @@ execute on attacker at @s rotated ~ 0 run function imperium:enchantments/reversa
 execute if entity @s[tag=im.reversal_done] run \
     item modify entity @s weapon.offhand imperium:consume_10_durability
 
+# ...then retire the shield once that spend empties it. consume_10_durability is a set_damage loot
+# function, which SETS a durability fraction clamped to [0,1] — a loot function has no break path,
+# so the 3rd reversal parks the shield at 0 durability instead of consuming it, and every reversal
+# after that is free until some unrelated blocked hit finally breaks it. Clearing it here makes the
+# stated cost real (3 reversals per shield) and hands the re-give back to kits/levent/cd2_shield on
+# the slot-B cooldown, matching how every other ability item in the pack is spent and restored.
+# Matched by uses-left rather than damage=30 so it stays correct if max_damage is retuned.
+execute if entity @s[tag=im.reversal_done] run \
+    clear @s shield[custom_data~{imperium_kit:1b},damage~{durability:{max:0}}]
+
 tag @s remove im.reversal_target
 tag @s remove im.reversal_done

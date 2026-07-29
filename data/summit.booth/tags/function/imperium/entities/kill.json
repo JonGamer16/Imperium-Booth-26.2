@@ -1,6 +1,7 @@
 {
     "values": [
         "imperium:booth/dummy/kill_husk",
-        "imperium:booth/tp_marker_kill"
+        "imperium:booth/tp_marker_kill",
+        "imperium:arena/board_kill"
     ]
 }

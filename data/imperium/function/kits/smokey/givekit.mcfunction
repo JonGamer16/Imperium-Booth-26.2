@@ -113,49 +113,16 @@ execute unless items entity @s hotbar.1 * run \
         ] 1
 
 #   [SLOT 1] Grappling Rod
-#item replace entity @s weapon.offhand with \
-#    fishing_rod[\
-#        max_damage=10,\
-#        enchantments={"imperium:wip_grappling":1},\
-#        custom_name={text:"Grappling Rod",color:gold,italic:false},\
-#        custom_data={"imperium_kit":1b},\
-#    ]
 function imperium:kits/smokey/cd1_rod
 
 #   [SLOT 2] Marking Dart
-#item replace entity @s hotbar.2 with \
-#    arrow[\
-#        consumable={consume_seconds:0.05,has_consume_particles:false,animation:"trident"},\
-#        enchantments={"imperium:single_use":1},\
-#        custom_name={text:"Marking Dart",color:gold,italic:false},\
-#        custom_data={"imperium_kit":1b},\
-#    ]
 function imperium:kits/smokey/cd2_arrow
 
 #   [SLOT 3] Smoke Bomb
-#item replace entity @s hotbar.3 with \
-#    lingering_potion[\
-#        potion_contents={\
-#            custom_effects:[\
-#                {id:"invisibility",amplifier:0,duration:20},\
-#                {id:"speed",amplifier:1,duration:20}]},\
-#        custom_name={text:"Smoke Bomb",color:gold,italic:false},\
-#        custom_data={"imperium_kit":1b},\
-#    ]
 function imperium:kits/smokey/cd3_potion
 
 #   [HEALING] Rabbit Stew
 #       10 x 12 HP
-#give @s \
-#    rabbit_stew[\
-#        food={nutrition:0,saturation:0,can_always_eat:true},\
-#        consumable={\
-#            consume_seconds:0,\
-#            on_consume_effects:[{type:"apply_effects",effects:[\
-#                {id:"instant_health",amplifier:0,duration:3}]}]},\
-#            use_remainder={"id":"bowl",count:1},\
-#        custom_data={"imperium_healing":1b}\
-#    ] 10
 loot give @s loot imperium:smokey/healing
 
 #   Ability Cooldowns

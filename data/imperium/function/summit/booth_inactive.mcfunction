@@ -6,3 +6,7 @@ execute unless data storage summit.battlegrounds:database session{booth_id:"impe
 # then closes out and strips every fighter still tracked.
 scoreboard players set #earlyEnd im.temp 0
 function imperium:arena/round_over
+
+# Take the standings billboard down with us — the arena is about to belong to the next booth in
+# the queue, and our board would otherwise hang over their session.
+function imperium:arena/board_kill

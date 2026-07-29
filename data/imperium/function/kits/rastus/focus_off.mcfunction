@@ -4,5 +4,5 @@ attribute @s minecraft:attack_damage modifier remove imperium:focus
 attribute @s minecraft:attack_speed modifier remove imperium:focus
 attribute @s minecraft:attack_knockback modifier remove imperium:focus
 
-# Unarmed feedback — this charge powers BOTH the Strike (next hit) and the Parry (shield raise).
-title @s actionbar {text:"⦿ Focus ready",color:"dark_gray"}
+# No unarmed cue: focus_on's ding marks the charge landing, and the actionbar is now the Air Dodge
+# stock readout (rastus/dash_count) — a "focus spent" write here would clobber the dash count.

@@ -9,5 +9,6 @@ execute if score @s im_cdUsesC >= @s im_cdMaxC run return 0
 scoreboard players add @s im_cdUsesC 1
 scoreboard players operation @s im_abilityCdC += #Rastus im_abilityCdC
 
-title @s actionbar [{"text":"⇢ Dash recharged (","color":"aqua"},{"score":{"name":"@s","objective":"im_cdUsesC"},"color":"aqua"},{"text":"/","color":"aqua"},{"score":{"name":"#Rastus","objective":"im_cdMaxC"},"color":"aqua"},{"text":")","color":"aqua"}]
+# Count just changed — repost the stock readout (shared with air_dodge's spend side).
+function imperium:kits/rastus/dash_count
 playsound minecraft:block.note_block.chime player @s ~ ~ ~ 0.6 1.8

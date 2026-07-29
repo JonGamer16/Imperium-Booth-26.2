@@ -27,25 +27,25 @@
     scoreboard players remove @e[type=end_crystal,tag=im.bomb_live] im_bombFuse 1
     execute as @e[type=end_crystal,tag=im.bomb_live,scores={im_bombFuse=..0}] at @s run function imperium:kits/mummy/bomb_detonate
 
-# Use-remainder placeholder cleanup
-    # The Recoil Rod and Reversal Shield carry a use_remainder that drops a same-type stand-in
-    # (custom_data imperium_clearme:1b) when the item breaks, so a breaking use is still detected
-    # for one moment (the rod still reads as a kit fishing_rod, the shield still has the enchant)
-    # and the ability fires on that final use. Strip the stand-ins afterward so a "broken" rod or
-    # shield can't be re-cast/re-blocked while it waits for its cooldown re-give.
-    # ORDER: must run AFTER grapple_track above, which relies on the rod stand-in to fire the launch.
-    # Only the Recoil Rod (fishing_rod) and Reversal Shield (shield) ever carry imperium_clearme,
-    # so match those two types explicitly. A wildcard `*[custom_data~{...}]` forces the game to
-    # encode the custom_data component of EVERY item in EVERY inventory each tick (a kit loadout is
-    # ~9 custom_data items) — that was a large chunk of the per-tick serialization cost.
-    execute \
-        as @a[predicate=imperium:ability_zone] \
-        if items entity @s container.* fishing_rod \
-        run clear @s fishing_rod[custom_data~{imperium_clearme:1b}]
-    execute \
-        as @a[predicate=imperium:ability_zone] \
-        if items entity @s container.* shield \
-        run clear @s shield[custom_data~{imperium_clearme:1b}]
+# Grapple rod break signal — consume
+    # im.rod_broke (set by imperium:internal/rod_broke off minecraft:item_durability_changed) is how
+    # both grapple trackers tell "the reel that broke the rod" apart from "the player swapped the rod
+    # out of the offhand": the rod is missing in both cases, but only a break sets the tag. Drop it
+    # here, once, now that both trackers have read it — otherwise a break with no grapple armed would
+    # leave it set and mis-read some later cancel as a break.
+    # ORDER: must run AFTER smokey/loop_kit (-> grapple_track) and mummy/mgrapple_track above.
+    tag @a[tag=im.rod_broke] remove im.rod_broke
+
+# Use-remainder placeholder cleanup — REMOVED (both stand-ins were dead code).
+    # The Recoil Rod and Reversal Shield each carried a use_remainder that was supposed to drop a
+    # same-type stand-in (custom_data imperium_clearme:1b) when the item broke, so the ability could
+    # still fire on that final use; this loop then swept the stand-ins. use_remainder never fires on
+    # a durability break — it only fires when a stack COUNT decreases after use (soup -> bowl) — so
+    # no stand-in was ever created and both sweeps were scanning for nothing every tick.
+    #   Rod:    replaced by the im.rod_broke signal above.
+    #   Shield: needed nothing. enchantments/reversal_block has no item condition and
+    #           enchantments/wip_reversal gates on the im.kit_levent tag rather than the shield, so
+    #           the breaking block already fires the reversal on its own.
 
     # Smokey Mark timer — mark_apply + smoke clouds moved into smokey/loop_kit (kit-online gated);
     # the timer persists on victims after Smokey leaves, so it stays ungated here.

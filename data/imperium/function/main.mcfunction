@@ -7,10 +7,6 @@ execute if score #Debug im_debug_mode matches 1 \
 ##########
 
 scoreboard objectives add im_givekit trigger
-# onKill/killDamage/killFlag mechanic retired — replaced by the im_combatId/kill_feed flow.
-# No live writers or readers; the only score-zeroers live in zz_archive (not loaded). Re-enable
-# this declaration if that flow is ever restored from the archive.
-# scoreboard objectives add im_onKill dummy
 scoreboard objectives add im_summonerID dummy
 
 # Shared scratch objective (set_cd macro, lifesteal_soup, etc.) — needed before the setup calls.
@@ -92,10 +88,11 @@ scoreboard players set #markClock im_markTimer 0
 scoreboard players set #venomClock im_venomTimer 0
 scoreboard players set #t5 im_5tTimer 0
 scoreboard players set #sec im_secTimer 0
+# Booth-rotation flag read by summit/player_enter (set only for the span of summit/booth_active).
+scoreboard players set #rotation im.temp 0
 
 # HUD displays
     # No global scoreboard displays allowed
-    # scoreboard objectives setdisplay below_name im.hp
 
 # Testing (kept inline for quick reference)
     scoreboard objectives add im_loops dummy

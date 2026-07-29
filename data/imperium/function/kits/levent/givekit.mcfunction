@@ -91,21 +91,9 @@ execute unless items entity @s hotbar.1 * run \
         ] 1
 
 #   [SLOT 1] Levitation Arrow
-#item replace entity @s hotbar.8 with \
-#    tipped_arrow[\
-#        potion_contents={custom_effects:[\
-#            {id:"levitation",amplifier:1,duration:50}]},\
-#        custom_data={"imperium_kit":1b}\
-#    ] 1
 function imperium:kits/levent/cd1_arrows
 
 #   [SLOT 2] Shield
-#item replace entity @s weapon.offhand with \
-#    shield[\
-#        max_damage=30,\
-#        custom_name={color:"white",italic:false,text:"Reversal Shield"},\
-#        custom_data={"imperium_kit":1b}\
-#    ]
 function imperium:kits/levent/cd2_shield
 
 #   [SLOT 3] [Empty]
@@ -113,18 +101,6 @@ function imperium:kits/levent/cd2_shield
 #   [HEALING] Chorus Fruit
 #       16x 8hp, then a block-safe 5-block forward blink (imperium:levent_chorus advancement
 #       -> kits/levent/chorus_tp). No longer the vanilla 16-block random teleport (out of bounds).
-#give @s \
-#    chorus_fruit[\
-#        max_stack_size=1,\
-#        food={nutrition:0,saturation:0,can_always_eat:true},\
-#        consumable={\
-#            consume_seconds:0,\
-#            on_consume_effects:[\
-#                {type:"apply_effects",effects:[\
-#                    {id:"instant_health",amplifier:1,duration:1}]},\
-#                {type:"teleport_randomly",diameter:16}]},\
-#        custom_data={imperium_healing:1b}\
-#    ] 16
 loot give @s loot imperium:levent/healing
 
 #   Ability Cooldowns

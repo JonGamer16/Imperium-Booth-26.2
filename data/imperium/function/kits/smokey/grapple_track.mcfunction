@@ -33,4 +33,10 @@ execute as @e[type=fishing_bobber,tag=im.grapple_bobber] at @s run function impe
 #    launches; a slot-change cancel removes the rod from the hand (no longer im.grapple_user) and
 #    just disarms. Clear armed either way so a stale flag can't fire on the next cast.
 execute as @a[tag=im.grapple_armed,tag=!im.grapple_live,tag=im.grapple_user] at @s run function imperium:kits/smokey/grapple_launch
+# 4b. Same reel, but it spent the rod's last durability point: the rod is gone from the offhand by
+#     the time we run, so the line above reads it as a cancel and the final grapple is lost.
+#     im.rod_broke (imperium:internal/rod_broke, advancement-driven) is set only by a durability
+#     break, never by a slot swap, so it separates the two cleanly. tag=!im.grapple_user keeps this
+#     mutually exclusive with the line above, so a break can never double-fire the launch.
+execute as @a[tag=im.grapple_armed,tag=!im.grapple_live,tag=!im.grapple_user,tag=im.rod_broke] at @s run function imperium:kits/smokey/grapple_launch
 tag @a[tag=im.grapple_armed,tag=!im.grapple_live] remove im.grapple_armed

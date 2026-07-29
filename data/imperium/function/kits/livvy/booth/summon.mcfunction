@@ -17,15 +17,6 @@ summon minecraft:armor_stand ~ ~ ~ \
     Pose:{Body:[5f,0f,0f],Head:[10f,0f,0f],LeftLeg:[345f,360f,345f],RightLeg:[13f,0f,16f],LeftArm:[288f,349f,335f],RightArm:[304f,12f,52f]}\
 }
 
-# execute at @e[type=armor_stand,tag=im.booth_new,limit=1] \
-#     rotated ~ ~ \
-#     run summon text_display ^ ^-0.5 ^0.7 \
-#     {   text:{text:"Livvy",color:"red",bold:true},\
-#         billboard:"fixed",\
-#         see_through:1b,\
-#         Tags:["im.booth_stand_model","im.booth_livvy"]\
-#     }
-
 loot replace entity @e[type=armor_stand,tag=im.booth_new,limit=1] \
     armor.head loot imperium:livvy/display/head
 loot replace entity @e[type=armor_stand,tag=im.booth_new,limit=1] \
@@ -71,8 +62,6 @@ loot replace entity @e[type=armor_stand,tag=im.booth_new,limit=1] \
     weapon.offhand loot imperium:livvy/web
 
 tag @e[type=armor_stand,tag=im.booth_new] remove im.booth_new
-
-
 
 summon minecraft:interaction ~ ~ ~ \
 {   width:1.0f,height:2.1f,response:1b,\

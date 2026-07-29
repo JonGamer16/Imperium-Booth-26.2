@@ -19,10 +19,6 @@ scoreboard players operation @s im_combatId = #idCounter im_combatId
 scoreboard players set @s im_lastAtkId 0
 scoreboard players set @s im_lastAtkTime 0
 
-# Seed the health sample so the first healed-delta isn't measured from 0.
-# execute store result score @s im_hpSample run data get entity @s Health 10
-# scoreboard players set @s im_hp 0
-
 # im.fighting = actively in the fight (abilities + death watcher gate). im.round = took part in this
 # round; it OUTLIVES elimination so the end-of-round leaderboard (arena/resolve_match) can still rank
 # players who ran out of lives. Cleared together in arena/round_over.
@@ -36,7 +32,8 @@ tag @s add im.round
 tag @s add summit.no_regen
 effect clear @s
 
-function summit.battlegrounds:api/set_structure { \
-    booth_id: "imperium", \
-    structure: "imperium_arena", \
-}
+# NO set_structure here. start_round runs per ENTERING PLAYER, so building the arena from this
+# function re-placed all 39x17x45 of it every time someone joined a session already in progress —
+# resetting the map under the fighters already in it, and kicking anyone the reload embedded in a
+# block through BG's player/teleport/random. The arena is built once per session by the registered
+# struct_function instead; see imperium:summit/set_structure.

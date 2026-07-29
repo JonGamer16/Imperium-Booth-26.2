@@ -71,7 +71,7 @@ execute unless items entity @s hotbar.0 * run \
             item_model="minecraft:ghast_tear",\
             attribute_modifiers=[\
                 {type:"attack_damage",amount:3,operation:"add_value",slot:"mainhand",id:"base_attack_damage"},\
-                {type:"attack_speed",amount:-2.4,operation:"add_value",slot:"mainhand",id:"base_attack_speed"}\
+                {type:"attack_speed",amount:-2,operation:"add_value",slot:"mainhand",id:"base_attack_speed"}\
             ],\
             enchantments={"imperium:crits":2,"imperium:wip_lifesteal":1},\
             custom_name={text:"Lifesteal Fang",color:"red",italic:false},\
@@ -79,11 +79,6 @@ execute unless items entity @s hotbar.0 * run \
         ] 1
 
 #   [SLOT 1] Leap Feather
-#item replace entity @s weapon.offhand with \
-#    feather[\
-#        enchantments={"imperium:leap":2},\
-#        custom_data={"imperium_kit":1b},\
-#    ] 1
 function imperium:kits/livvy/cd1_feather
 
 #   [SLOT 2] Throwable Web (multi-charge, count-based — mirrors Meowdy's arrows)
@@ -98,26 +93,10 @@ scoreboard players operation @s im_cdFloorB = #Livvy im_cdFloorB
 scoreboard players operation @s im_webUsedPrev = @s im_webUsedStat
 
 #   [SLOT 3] Acid Potion
-#item replace entity @s hotbar.2 with \
-#    splash_potion[\
-#        potion_contents={custom_effects:[\
-#            {id:"poison",amplifier:2,duration:40}]},\
-#        custom_data={"imperium_kit":1b},\
-#    ] 1
 function imperium:kits/livvy/cd3_potion
 
 #   [HEALING] Beetroot Soup
 #       20 x 8 HP
-#give @s beetroot_soup\
-#    [\
-#        food={nutrition:0,saturation:0,can_always_eat:true},\
-#        consumable={\
-#            consume_seconds:0,\
-#            on_consume_effects:[{type:"apply_effects",effects:[\
-#                {id:"instant_health",amplifier:0,duration:1}]}]},\
-#            use_remainder={"id":"bowl",count:1},\
-#        custom_data={"imperium_healing":1b}\
-#    ] 20
 loot give @s loot imperium:livvy/healing
 
 #   Ability Cooldowns

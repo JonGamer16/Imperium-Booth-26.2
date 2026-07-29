@@ -1,4 +1,15 @@
 # BG hook (#summit.battlegrounds:api/player_leave, runs as/at the leaving player).
+
+# Give back the inventory they had before the kit. ABOVE the session guard on purpose: the arena
+# rotates booths while players stay inside, so someone we kitted can easily leave under a different
+# booth's session — and that guard would otherwise strand their items in storage. im.inv_cached is
+# only on players WE cached, so this can't touch anyone else's cache or another booth's flow.
+# Deferred a tick on purpose too: BG's leave path runs `clear @s *` right after this hook returns,
+# and drops summit.battlegrounds.player just before it — so by the time inv_return_tick fires, the
+# clear is done and the arena skip no longer applies.
+execute if entity @s[tag=im.inv_cached] run function imperium:util/inv_return
+
+# Only act while imperium's session is the active one.
 execute unless data storage summit.battlegrounds:database session{booth_id:"imperium"} run return 0
 function imperium:summit/end_fighter
 

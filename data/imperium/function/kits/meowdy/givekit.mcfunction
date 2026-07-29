@@ -115,11 +115,6 @@ execute unless items entity @s hotbar.2 * run \
         ] 1
 
 #   [SLOT 1] Leap Feather
-#item replace entity @s weapon.offhand with \
-#    feather[\
-#        enchantments={"imperium:leap":2},\
-#        custom_data={"imperium_kit":1b},\
-#    ] 1
 function imperium:kits/meowdy/cd1_feather
 
 #   [SLOT 2] Arrows (multi-charge, count-based)
@@ -138,14 +133,6 @@ scoreboard players operation @s im_cdFloorB = #Meowdy im_cdFloorB
 
 #   [HEALING] Salmon
 #       16x 8hp
-#give @s cooked_salmon[\
-#    max_stack_size=1,\
-#    food={nutrition:0,saturation:0,can_always_eat:true},\
-#    consumable={\
-#        consume_seconds:0,\
-#        on_consume_effects:[{type:"apply_effects",effects:[\
-#            {id:"instant_health",amplifier:1,duration:1}]}]},\
-#    custom_data={"imperium_healing":1b}] 16
 loot give @s loot imperium:meowdy/healing
 
 #   Ability Cooldowns

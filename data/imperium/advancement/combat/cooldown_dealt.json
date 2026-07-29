@@ -5,7 +5,10 @@
             "conditions": {
                 "player": [
                     { "condition": "minecraft:reference", "name": "imperium:ability_zone" }
-                ]
+                ],
+                "entity": {
+                    "entity_type": "#imperium:human"
+                }
             }
         }
     },
