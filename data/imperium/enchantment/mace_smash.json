@@ -1,5 +1,5 @@
 {
-    "description": "Mace Smash",
+    "description": { "text": "Mace Smash", "color": "gold" },
     "supported_items": "#minecraft:enchantable/durability",
     "slots": ["mainhand"],
     "weight": 1,

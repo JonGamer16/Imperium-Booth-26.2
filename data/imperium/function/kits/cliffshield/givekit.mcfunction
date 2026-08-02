@@ -64,11 +64,11 @@ execute unless items entity @s hotbar.0 * run \
             },\
             attribute_modifiers=[\
                 {type:"attack_damage",amount:5,operation:"add_value",slot:"mainhand",id:"base_attack_damage"},\
-                {type:"attack_speed",amount:-2.6,operation:"add_value",slot:"mainhand",id:"base_attack_speed"},\
+                {type:"attack_speed",amount:-2.4,operation:"add_value",slot:"mainhand",id:"base_attack_speed"},\
                 {type:"knockback_resistance",amount:0.1,operation:"add_value",slot:"mainhand",id:"knockback_resistance"}\
             ],\
             !max_damage,\
-            item_model="minecraft:stone_sword",\
+            item_model="minecraft:iron_sword",\
             custom_name={text:"Steel Broadsword",color:"yellow",italic:false},\
             custom_data={"imperium_kit":1b}\
         ] 1
@@ -102,7 +102,7 @@ execute unless items entity @s hotbar.1 * run \
 execute unless items entity @s hotbar.2 * run \
     item replace entity @s hotbar.2 with \
         crossbow[\
-            enchantments={"imperium:leverage":1},\
+            enchantments={"imperium:crossbow_power":1},\
             !max_damage,\
             custom_name={text:"Heavy Crossbow",color:"yellow",italic:false},\
             custom_data={"imperium_kit":1b},\

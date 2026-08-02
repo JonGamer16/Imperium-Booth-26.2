@@ -65,8 +65,8 @@ execute unless items entity @s hotbar.0 * run \
                 {type:"attack_damage",amount:1.5,operation:"add_value",slot:"mainhand",id:"base_attack_damage"},\
                 {type:"attack_speed",amount:4,operation:"add_value",slot:"mainhand",id:"base_attack_speed"},\
                 {type:"attack_knockback",amount:-1.0,operation:"add_value",slot:"mainhand",id:"attack_knockback"},\
-                {type:"entity_interaction_range",amount:-0.5,operation:"add_value",slot:"mainhand",id:"entity_interaction_range"}],\
-            enchantments={"imperium:wip_focus_attack":1},\
+                {type:"entity_interaction_range",amount:-1,operation:"add_value",slot:"mainhand",id:"entity_interaction_range"}],\
+            enchantments={"imperium:focus_attack":1},\
             attack_range={hitbox_margin:0.5},\
             damage_type="imperium:light",\
             piercing_weapon={deals_knockback:true},\

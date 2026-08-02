@@ -1,5 +1,5 @@
 {
-  "description": "Focus Attack",
+  "description": { "text": "Focus Attack", "color": "gold" },
   "supported_items": "#minecraft:enchantable/weapon",
   "weight": 1,
   "max_level": 1,

@@ -14,7 +14,18 @@
 
 # Livvy
     # Lifesteal: damage score (1/10 HP) needed for 1 soup; excludes damage taken.
-    scoreboard players set #lsThreshold im_lifesteal 160
+    scoreboard players set #lsThreshold im_lifesteal 80
+    # Escalation: flat score ADDED to the requirement per soup already converted this life, so the
+    #   Nth soup costs #lsThreshold + #lsStep*(N-1). Resets on death/re-kit (livvy/givekit).
+    #   Why it exists: at a flat 160 the conversion is a permanent 50% of damage dealt, which makes
+    #   Livvy literally unkillable whenever an opponent's DPS on her is under half of hers on them —
+    #   a hard threshold, not a curve, which is what made her matchups swing all-or-nothing. A flat
+    #   adder makes cumulative healing grow with the SQUARE ROOT of damage dealt while incoming
+    #   damage grows linearly, so the immortality case disappears without touching the first soup
+    #   (still 160) — the ability stays exactly as visible in the first ~20s as it is now.
+    #   >> TUNING KNOB: 0 disables escalation entirely (flat #lsThreshold forever, pre-2026-08
+    #      behaviour). 40 = the Nth soup costs 16/20/24/28... HP dealt. Higher = harsher tail. <<
+    scoreboard players set #lsStep im_lifesteal 20
     # Venom Bite: flat lifesteal score added per melee hit Livvy lands on a venom-affected target
     #   (imperium:combat/venom_bite -> internal/venom_bite). Stacks on top of the hit's normal score.
     #   Reference: #lsThreshold is 160, so 40 ~= a quarter-soup of extra credit per venomed hit.
@@ -27,7 +38,7 @@
     scoreboard players set #VenomInterval im.param 7
 
     # Web Throw: how long a thrown web (cobweb block display) lingers before despawning. 20t = 1s.
-    scoreboard players set #WebDuration im.param 60
+    scoreboard players set #WebDuration im.param 80
 
 # Smokey — Smoke Bomb: lifetime (ticks) of the artificial smoke cloud (kits/smokey/smoke_init).
     scoreboard players set #SmokeDuration im.param 200
@@ -60,11 +71,11 @@
         #   Energy a Mummy spawns / re-kits with.
         scoreboard players set #MummyEnergyStart im.param 100
         #   Energy gained per Energy Crystal consumed.
-        scoreboard players set #MummyEnergyCrystal im.param 80
+        scoreboard players set #MummyEnergyCrystal im.param 50
     #   Crystal Bomb (kits/mummy/crystal_bomb): placing a crystal as a bomb (sneak-consume) refunds
     #   reduced resources vs eating it — this much energy instead of the full #MummyEnergyCrystal, and
     #   only the instant heal (the regen the consumable applies is stripped). See crystal_bomb.
-        scoreboard players set #MummyCrystalBombEnergy im.param 50
+        scoreboard players set #MummyCrystalBombEnergy im.param 60
         #   Crystal Bomb fuse: ticks from placement to detonation (20t = 1s).
         scoreboard players set #BombFuse im.param 20
         #   Crystal Bomb blast: damage = #BombMaxDamage at the center, falling #BombDropoff per block out to
@@ -78,7 +89,7 @@
         scoreboard players set #BombLaunch im.param 10000
     #   Per-ability costs. An ability calls kits/mummy/energy_spend {cost:<n>} and only fires when it
     #   reports success (enough banked). Wire each WIP enchant to read its cost here.
-        scoreboard players set #MummyGolemThrowCost im.param 30
+        scoreboard players set #MummyGolemThrowCost im.param 25
         scoreboard players set #MummySmashCost im.param 25
     #   Energy Barrier (kits/mummy/barrier_*): hold sneak to spend energy as absorption hearts; hits
     #   drain the hearts (and the meter), releasing sneak refunds the leftover.
@@ -90,7 +101,7 @@
         scoreboard players set #MummyBarrierMin im.param 10
 
     # Golem Throw (kits/mummy/golem_*): a charged heavy hit that flings the victim up and deals bonus
-    #   damage (the ×1.5 lives in the wip_golem_throw enchant — a literal there, not a score).
+    #   damage (the ×1.5 lives in the golem_throw enchant — a literal there, not a score).
         #   ChargeTime = wind-up ticks (while sneaking) before the hit arms (20t = 1s).
         scoreboard players set #GolemChargeTime im.param 30
         #   Window = ticks the armed hit stays usable; miss the window and the charge drops, re-winding for

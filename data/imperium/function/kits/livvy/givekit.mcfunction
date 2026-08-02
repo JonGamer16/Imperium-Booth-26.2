@@ -70,10 +70,10 @@ execute unless items entity @s hotbar.0 * run \
             !max_damage,\
             item_model="minecraft:ghast_tear",\
             attribute_modifiers=[\
-                {type:"attack_damage",amount:3,operation:"add_value",slot:"mainhand",id:"base_attack_damage"},\
+                {type:"attack_damage",amount:4,operation:"add_value",slot:"mainhand",id:"base_attack_damage"},\
                 {type:"attack_speed",amount:-2,operation:"add_value",slot:"mainhand",id:"base_attack_speed"}\
             ],\
-            enchantments={"imperium:crits":2,"imperium:wip_lifesteal":1},\
+            enchantments={"imperium:crits":2,"imperium:lifesteal":1},\
             custom_name={text:"Lifesteal Fang",color:"red",italic:false},\
             custom_data={"imperium_kit":1b}\
         ] 1
@@ -96,7 +96,7 @@ scoreboard players operation @s im_webUsedPrev = @s im_webUsedStat
 function imperium:kits/livvy/cd3_potion
 
 #   [HEALING] Beetroot Soup
-#       20 x 8 HP
+#       12 x 8 HP
 loot give @s loot imperium:livvy/healing
 
 #   Ability Cooldowns
@@ -107,5 +107,12 @@ scoreboard players operation @s im_abilityCdC = #Livvy im_abilityCdC
 #   Lifesteal: start banking from zero, sync prev so prior damage isn't counted
 scoreboard players set @s im_lifesteal 0
 scoreboard players operation @s im_lsPrev = @s im_lsDealt
+#   ...and reset the escalating soup cost. arena/respawn re-runs this whole givekit on every death,
+#   so this IS the reset-on-death hook — no separate death trigger needed. im_lsNeed is the cached
+#   cost of the next soup; at zero conversions that's just #lsThreshold, so seed it directly rather
+#   than doing the multiply. (Note this also resets on a kit SWAP, which is only reachable from the
+#   kit room between rounds — it would become a reset exploit if mid-round swapping is ever added.)
+scoreboard players set @s im_lsConversions 0
+scoreboard players operation @s im_lsNeed = #lsThreshold im_lifesteal
 
 tag @s add im.kit_livvy

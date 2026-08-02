@@ -67,7 +67,7 @@ execute unless items entity @s hotbar.0 * run \
                 {type:"attack_damage",amount:2,operation:"add_value",slot:"mainhand",id:"base_attack_damage"},\
                 {type:"attack_speed",amount:0,operation:"add_value",slot:"mainhand",id:"base_attack_speed"}\
             ],\
-            enchantments={"imperium:wip_marked":1,"imperium:crits":3,"imperium:backstab":1},\
+            enchantments={"imperium:marked":1,"imperium:crits":3,"imperium:backstab":1},\
             use_effects={speed_multiplier:1},\
             !max_damage,\
             item_model="minecraft:iron_sword",\
@@ -86,7 +86,7 @@ execute unless items entity @s hotbar.1 * run \
                 {type:"attack_speed",amount:-3,operation:"add_value",slot:"hand",id:"base_attack_speed"},\
                 {type:"attack_knockback",amount:1.5,operation:"add_value",slot:"hand",id:"hand"},\
             ],\
-            enchantments={"imperium:wip_marked":1,"imperium:offhand_attack":1},\
+            enchantments={"imperium:marked":1,"imperium:offhand_attack":1},\
             weapon={\
                 disable_blocking_for_seconds:4,\
                 item_damage_per_attack:0,\

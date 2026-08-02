@@ -1,9 +1,6 @@
 {
   "anvil_cost": 1,
-  "description": {
-    "text": "Crossbow Power",
-    "color":"gold"
-  },
+  "description": { "text": "Crossbow Power", "color": "gold" },
   "effects": {
     "minecraft:damage": [
       {

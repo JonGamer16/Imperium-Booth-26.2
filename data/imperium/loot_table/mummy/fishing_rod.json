@@ -12,7 +12,7 @@
               "components": {
                 "minecraft:max_damage": 10,
                 "minecraft:enchantments": {
-                  "imperium:wip_reeling": 1
+                  "imperium:reeling": 1
                 },
                 "minecraft:use_cooldown":{"seconds": 0.5},
                 "minecraft:custom_name": {"text": "Grapple Rod", "color": "gold", "italic": false},

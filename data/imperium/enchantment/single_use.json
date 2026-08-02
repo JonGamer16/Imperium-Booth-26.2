@@ -1,5 +1,5 @@
 {
-    "description": "Single Use",
+    "description": { "text": "Single Use", "color": "gold" },
     "supported_items": "#minecraft:enchantable/weapon",
     "slots": ["any"],
     "weight": 1,

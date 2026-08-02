@@ -1,5 +1,5 @@
 {
-    "description": "High Jump",
+    "description": { "text": "High Jump", "color": "gold" },
     "supported_items": "#minecraft:enchantable/armor",
     "slots": ["armor"],
     "weight": 1,

@@ -10,7 +10,7 @@ scoreboard players set #GlobalStock im.dmg 50
 #   Slot letters follow the cd*_* functions, not any stale labels.
 
 # Cliffshield: A Shield, B Arrows, C Rush Potion
-function imperium:abilities/set_cd {kit:"Cliffshield",slot:"A",base:0,stock:-1}
+function imperium:abilities/set_cd {kit:"Cliffshield",slot:"A",base:600,stock:-1}
 function imperium:abilities/set_cd {kit:"Cliffshield",slot:"B",base:250,stock:-1}
 function imperium:abilities/set_cd {kit:"Cliffshield",slot:"C",base:250,stock:-1}
 
@@ -21,13 +21,13 @@ function imperium:abilities/set_cd {kit:"Levent",slot:"B",base:300,stock:-1}
 # Livvy: A Leap, B Web, C Acid Potion
 function imperium:abilities/set_cd {kit:"Livvy",slot:"A",base:150,stock:-1}
 function imperium:abilities/set_cd {kit:"Livvy",slot:"B",base:150,stock:-1}
-function imperium:abilities/set_cd {kit:"Livvy",slot:"C",base:150,stock:-1}
+function imperium:abilities/set_cd {kit:"Livvy",slot:"C",base:400,stock:-1}
 
 # Meowdy: A Leap, B Arrows  (C empty)
 function imperium:abilities/set_cd {kit:"Meowdy",slot:"A",base:100,stock:-1}
-function imperium:abilities/set_cd {kit:"Meowdy",slot:"B",base:100,stock:90}
+function imperium:abilities/set_cd {kit:"Meowdy",slot:"B",base:150,stock:90}
 
-# Mummy: A Golem Throw, B Grapple Rod  (C empty)
+# Mummy: A Grapple Rod, B Golem Throw  (C empty)
 function imperium:abilities/set_cd {kit:"Mummy",slot:"A",base:100,stock:-1}
 function imperium:abilities/set_cd {kit:"Mummy",slot:"B",base:100,stock:-1}
 

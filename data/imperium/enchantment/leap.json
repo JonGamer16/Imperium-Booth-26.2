@@ -1,5 +1,5 @@
 {
-  "description": "Leap",
+  "description": { "text": "Leap", "color": "gold" },
   "supported_items": "#minecraft:enchantable/weapon",
   "weight": 1,
   "max_level": 1,

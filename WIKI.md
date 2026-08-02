@@ -76,7 +76,7 @@ summit-core keeps alongside the newer `api/launch_global_xyz` / `api/launch_loca
     │
     ├── imperium/                     ← THE DATAPACK
     │   ├── function/                 (detailed below)
-    │   ├── enchantment/              Custom enchant defs (active + wip_*)
+    │   ├── enchantment/              Custom enchant defs
     │   ├── advancement/              Event triggers → reward functions
     │   │     booth/select_<kit>      right-click stand → kits/<kit>/booth/click
     │   │     combat/cooldown_dealt|taken  damage events → update_cooldowns
@@ -340,7 +340,7 @@ Custom enchantments in `enchantment/*.json` fire logic two ways:
   functions run the matching `enchantments/*` logic.
 
 Multi-tick enchantments keep their bookkeeping in `loop_enchantments` (Livvy Lifesteal
-banking). `wip_*` enchantments are unfinished — see strip list.
+banking).
 
 ---
 
@@ -352,7 +352,7 @@ banking). `wip_*` enchantments are unfinished — see strip list.
 | **Kits** | `kits/<kit>/` | **Current** | Self-contained; tag-driven. See §5. |
 | **Booth** | `booth/`, `booth_definition.json`, `kits/<kit>/booth/` | **Current/WIP** | Advancement-driven kit givers; Summit wiring pending. |
 | **Arena** | `arena/{givekit,lastkit,kill,death}` | Mixed | givekit current core; kill/death disabled in loop (WIP), legacy resets to prune. |
-| **Enchantments** | `enchantment/`, `enchantments/`, `loop_enchantments`, related `advancement/` | Mixed | Active set + `wip_*`. |
+| **Enchantments** | `enchantment/`, `enchantments/`, `loop_enchantments`, related `advancement/` | **Current** | All enchants active; no `wip_` prefix. |
 | **Shared abilities** | `abilities/{leap,leap_refund,set_cd}` | Current | Leap shared by Livvy + Meowdy. |
 | **Predicates** | `predicate/` | Current | `on_ground`, `sneaking`, `at_spawn`, `has_venom`, `has_bad_omen`. |
 | **Legacy items/heals/raycaster/data_fetching** | — | **REMOVED** | Deleted; recover from tag `legacy-full`. |
@@ -442,12 +442,12 @@ kit's `loot_table/<kit>/*` (gear stats).
 - `function/test.mcfunction`
 - `booth/walltext.txt`, `doc.txt` (stubs; `doc.txt` now superseded by this wiki).
 
-**WIP (decide: finish or cut):**
-- `enchantment/wip_*` (barrier, charge_attack, focus_attack, golem_throw, grappling, high_jump,
-  lifesteal, marked, reeling, reversal, straight_flight) and `enchantments/wip_reversal`.
-  Some back unfinished kit abilities (Mummy Golem Throw/Barrier/Grapple, Levent Reversal) —
-  see `todo.txt`. (Unused enchantments air_dodge/hp_drain/rapid and the finished-but-cut set —
-  brittle, chinks, tipper, temper, power_smash, etc. — were moved to `zz_archive/`.)
+**Enchantments:** all shipped enchants are functional and unprefixed. The former `wip_*` set
+(barrier, charge_attack, focus_attack, golem_throw, grappling, high_jump, lifesteal, marked,
+reeling, reversal, straight_flight) dropped the prefix, and `leverage` was renamed
+`crossbow_power` to match its display name. (Unused enchantments air_dodge/hp_drain/rapid and
+the finished-but-cut set — brittle, chinks, tipper, temper, power_smash, etc. — remain in
+`zz_archive/`.)
 
 > ⚠️ General rule when deleting: grep the name first and remove call sites in the same change. The
 > "dead" lists above were verified this way (e.g. `arena/kill`'s legacy calls were stripped before

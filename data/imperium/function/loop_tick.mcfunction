@@ -44,7 +44,7 @@
     # no stand-in was ever created and both sweeps were scanning for nothing every tick.
     #   Rod:    replaced by the im.rod_broke signal above.
     #   Shield: needed nothing. enchantments/reversal_block has no item condition and
-    #           enchantments/wip_reversal gates on the im.kit_levent tag rather than the shield, so
+    #           enchantments/reversal gates on the im.kit_levent tag rather than the shield, so
     #           the breaking block already fires the reversal on its own.
 
     # Smokey Mark timer — mark_apply + smoke clouds moved into smokey/loop_kit (kit-online gated);
@@ -62,13 +62,34 @@
     # Web Throw (Livvy): a thrown web potion lands as an area_effect_cloud (custom_color 14737632);
     # convert each fresh one into a cobweb block display (the real, blockless web). Then tick each
     # web's 3s life, hold any non-Livvy victim inside it, and despawn it when expired.
+    #
     # in_bounds gate: only convert clouds inside our allowed area. This both contains the web (no web
     # spawns outside the arena/booth) and, because a foreign booth's cloud sits in its own region
     # outside our bounds, stops us converting another booth's same-color lingering cloud into our web.
+    #
+    # PERF — the gate MUST be a selector arg, ahead of `nbt=`, not a trailing `if predicate`.
+    # Selector arguments are evaluated in written order (optimization_guide 2.1.3), so the old
+    # `as @e[type=...,nbt={...}] at @s if predicate imperium:in_bounds` form deserialized the potion
+    # contents of EVERY cloud in the dimension, every tick, and only then asked where it was — on a
+    # server where ~70 booths are all spawning clouds that is the whole world's worth of NBT parsing
+    # to find our own. With in_bounds first, the NBT test only ever runs on clouds already inside our
+    # region, so a foreign cloud costs one cheap location check and is never read or written to.
+    # (`predicate=` as a selector arg evaluates at each matched entity's own position, which is what
+    # makes this equivalent to the old `at @s if predicate` — see the culls in imperium:internal/contain.)
+    #
+    # `tag=!im.smoke_bomb` is the once-only guard. Bounds-first alone still leaves ONE cloud being
+    # re-read every tick: our OWN Smoke Bomb cloud is in bounds and the wrong colour, so it failed
+    # this test ~20x/second for the bomb's entire duration. Excluding it costs nothing and is legal
+    # because that tag is on OUR entity — the reason we can't do the same for a foreign cloud is that
+    # marking it would mean writing to another booth's entity (see internal/contain).
+    # The web cloud itself needs no such tag: web_init kills it, so it is matched exactly once.
+    # ORDER: kits/smokey/loop_kit runs earlier in this file and stamps im.smoke_bomb on the cloud's
+    # first tick, so a smoke cloud is excluded here before it is ever read. (If Smokey logs off, his
+    # leftover cloud goes unstamped and does fall back to being re-read until it expires — bounded by
+    # #SmokeDuration and rare enough to leave alone.)
     execute \
-        as @e[type=area_effect_cloud,nbt={potion_contents:{custom_color:14737632}}] \
+        as @e[type=area_effect_cloud,tag=!im.smoke_bomb,predicate=imperium:in_bounds,nbt={potion_contents:{custom_color:14737632}}] \
         at @s \
-        if predicate imperium:in_bounds \
         run function imperium:kits/livvy/web_init
 
     scoreboard players remove @e[type=block_display,tag=im.web,scores={im_webLife=1..}] im_webLife 1
@@ -104,15 +125,13 @@
 # ability entity (arrows, grapple bobbers) that has left the allowed area (booth + arena + corridor).
 function imperium:internal/contain
 
-# 5-tick loop (for local testing; booth uses ticking_functions at "5t")
-    scoreboard players add #t5 im_5tTimer 1
-    execute if score #t5 im_5tTimer matches 5.. run function imperium:loop_5t
-    execute if score #t5 im_5tTimer matches 5.. run scoreboard players set #t5 im_5tTimer 0
-
-# 1-second loop (for local testing; booth uses ticking_functions at "1s")
-    scoreboard players add #sec im_secTimer 1
-    execute if score #sec im_secTimer matches 20.. run function imperium:loop_1s
-    execute if score #sec im_secTimer matches 20.. run scoreboard players set #sec im_secTimer 0
+# The 5t / 1s clocks that used to sit here are GONE. They were labelled "for local testing", but
+# this file ships in #minecraft:tick, so on a server they ran on top of booth_definition's own
+# "imperium:loop_5t": "5t" / "imperium:loop_1s": "1s" registrations — every timed mechanic in the
+# booth ran at roughly double speed. loop_5t / loop_1s now have exactly one driver in each context:
+#   in the booth      -> booth_definition.ticking_functions
+#   outside the booth -> imperium:battlegrounds_tick, via booth_definition.persistent_tick
+#   bare local world  -> imperium_shim:tick (zz-imperium-summit-shim, #emulate im.shim = 1)
 
 # gold rush death penalty: deathCount ticked up -> forfeit half gold (once, then re-arm)
     execute as @a[tag=im.fighting,scores={im_deaths=1..}] run function imperium:arena/on_death

@@ -85,6 +85,15 @@ scoreboard players set @s im_cdMaxC 0
     attribute @s minecraft:air_drag_modifier modifier remove imperium:web
     scoreboard players set @s im_webbed 0
 
+    # Venom — drop a DoT still running on this player. Tags and scores both survive death, and
+    # kits/livvy/venom_tick is ungated (it ticks any im.venom holder anywhere, by design, so venom
+    # outlives its caster), so without this a venomed player keeps taking damage through a kit swap,
+    # through a respawn, and even after being eliminated and sent back to the kit room.
+    # This is the one cleanup that covers all three exits: swap -> givekit, death -> arena/respawn ->
+    # givekit, elimination -> summit/end_fighter — every one of them routes through clear_kit.
+    tag @s remove im.venom
+    scoreboard players set @s im_venomTimer 0
+
 # Mummy
 
     # Grappling Rod — drop any in-flight grapple state so a kit swap mid-cast can't carry a stale

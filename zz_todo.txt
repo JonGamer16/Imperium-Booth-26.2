@@ -61,7 +61,7 @@ Kit Abilities:
     /   Charge Attack: like Rastus's charge attack
     /   Reversal Enchantment: sneak to teleport behind the attacker
             - plan: advancement detects blocking while sneaking -> execute function on attacker
-            - DONE (enchantments/wip_reversal + reversal_step1/2/3): advancement reversal_block
+            - DONE (enchantments/reversal + reversal_step1/2/3): advancement reversal_block
                 fires the reward as the blocker; it checks the offhand is the Reversal shield,
                 then on the attacker (their yaw, flat pitch) walks the spots behind them at
                 -0.5, -1.5, -2.5, each needing feet+head to be #minecraft:replaceable

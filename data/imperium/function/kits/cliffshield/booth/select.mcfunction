@@ -35,7 +35,7 @@ tellraw @s \
     {color:"yellow",\
                             text:"Tower Shield"},\
     {color:"gray",\
-                            text:" — Blocks 100% KB | 0.35sec Blocking Delay | 60° Blocking Angle\n"},\
+                            text:" — Blocks 100% KB | 0.35sec Blocking Delay | 45° Blocking Angle\n"},\
     {color:"gold",\
                             text:"  • [Consumable] "},\
     {color:"yellow",\

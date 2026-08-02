@@ -21,7 +21,7 @@
                     {
                       "base": 0,
                       "factor": 1,
-                      "horizontal_blocking_angle": 60
+                      "horizontal_blocking_angle": 45
                     }
                   ],
                   "bypassed_by": "#minecraft:bypasses_shield",

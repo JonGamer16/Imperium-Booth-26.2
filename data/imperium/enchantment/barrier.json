@@ -1,5 +1,5 @@
 {
-  "description": "Barrier",
+  "description": { "text": "Barrier", "color": "gold" },
   "supported_items": "#minecraft:enchantable/armor",
   "weight": 1,
   "max_level": 1,

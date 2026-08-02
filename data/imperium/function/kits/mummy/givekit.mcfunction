@@ -13,7 +13,7 @@ execute unless items entity @s armor.head * run \
                 {type:"attack_knockback",amount:1,operation:"add_value",slot:"head",id:"head"},\
                 {type:"knockback_resistance",amount:0.44,operation:"add_value",slot:"head",id:"head"},\
             ],\
-            enchantments={"imperium:wip_barrier":1,"protection":8},\
+            enchantments={"imperium:barrier":1,"protection":8},\
             !max_damage,\
             profile="Mummy",\
             item_model="minecraft:player_head",\
@@ -63,7 +63,7 @@ execute unless items entity @s hotbar.0 * run \
                 {type:"attack_damage",amount:6,operation:add_value,slot:mainhand,id:"base_attack_damage"},\
                 {type:"attack_speed",amount:-2.8,operation:add_value,slot:mainhand,id:"base_attack_speed"}\
             ],\
-            enchantments={"imperium:wip_golem_throw":1,"imperium:mace_smash":1},\
+            enchantments={"imperium:golem_throw":1,"imperium:mace_smash":1},\
             !max_damage,\
             item_model="minecraft:netherite_sword",\
             custom_name={text:"Dark Claymore",color:dark_gray,italic:false},\

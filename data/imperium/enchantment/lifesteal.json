@@ -1,5 +1,5 @@
 {
-    "description": "Life Steal",
+    "description": { "text": "Life Steal", "color": "gold" },
     "supported_items": "#minecraft:enchantable/weapon",
     "slots": ["mainhand"],
     "weight": 1,

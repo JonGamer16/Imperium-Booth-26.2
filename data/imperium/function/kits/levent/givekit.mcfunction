@@ -7,7 +7,7 @@ execute unless items entity @s armor.head * run \
     item replace entity @s armor.head with \
         netherite_helmet[\
             !max_damage,\
-            enchantments={"protection":12,"imperium:wip_high_jump":1},\
+            enchantments={"protection":12,"imperium:high_jump":1},\
             attribute_modifiers=[\
                 {type:"armor",amount:8,operation:"add_value",slot:"head",id:"head"},\
                 {type:"armor_toughness",amount:8,operation:"add_value",slot:"head",id:"head"},\
@@ -76,7 +76,7 @@ execute unless items entity @s hotbar.0 * run \
             ],\
             minimum_attack_charge=1,\
             damage_type="imperium:light",\
-            enchantments={"imperium:wip_charge_attack":1},\
+            enchantments={"imperium:charge_attack":1},\
             custom_data={"imperium_kit":1b},\
         ] 1
 
@@ -85,7 +85,7 @@ execute unless items entity @s hotbar.1 * run \
     item replace entity @s hotbar.1 with \
         bow[\
             !max_damage,\
-            enchantments={"imperium:wip_straight_flight":1},\
+            enchantments={"imperium:straight_flight":1},\
             custom_name={color:"white",italic:false,text:"Aero Shot"},\
             custom_data={"imperium_kit":1b},\
         ] 1

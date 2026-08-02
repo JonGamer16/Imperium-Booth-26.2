@@ -275,13 +275,14 @@ function start_upload(zip_name: string) {
 
 async function upload_chunks(upload_id: string, port: `${number}`, buffer: ArrayBuffer) {
     let offset = 0
+    let chunk = 0
 
     while (offset !== buffer.byteLength) {
         const new_offset = Math.min(offset + 2097374, buffer.byteLength)
         const form = new FormData()
         form.append('file', new Blob([buffer.slice(offset, new_offset)], { type: 'application/octet-stream' }))
 
-        await MCS_API(
+        const result = await MCS_API(
             'upload-piece',
             { offset: `${offset}` },
             {
@@ -291,12 +292,65 @@ async function upload_chunks(upload_id: string, port: `${number}`, buffer: Array
             }
         )
 
+        // The daemon answers a good chunk with the literal string 'OK'. Anything else is a
+        // rejection — previously we ignored it entirely, so a refused upload was indistinguishable
+        // from a successful one and the deploy reported success having sent nothing.
+        if (result !== 'OK') {
+            throw new Error(
+                `Upload: chunk ${chunk} (offset ${offset}/${buffer.byteLength}) rejected, ` +
+                `daemon said ${JSON.stringify(result)}`
+            )
+        }
+
         offset = new_offset
+        chunk++
     }
+
+    return chunk
+}
+
+// Refuse to ship a zip that obviously lost its contents. A datapack whose `data/` never made it in
+// is still a perfectly valid zip: it uploads, it verifies byte-for-byte, and it does nothing at all.
+// Byte-level verification cannot catch that — only counting entries can.
+function assert_zip_populated(zip: AdmZip, label: string, min_entries: number) {
+    const n = zip.getEntries().length
+    if (n < min_entries) {
+        throw new Error(
+            `Zip: ${label} has only ${n} entries (expected at least ${min_entries}). ` +
+            `Refusing to upload — this would deploy an empty datapack.`
+        )
+    }
+    console.log(`Zip: ${label} — ${n} entries`)
+}
+
+// adm-zip 0.6.0's addLocalFolderPromise only walks paths RELATIVE to process.cwd(). Handed an
+// absolute path it silently yields zero entries — no throw, no warning. So to zip a folder that
+// isn't under the cwd, chdir to its root and add relatively.
+async function zip_pack_dir(dir: string): Promise<AdmZip> {
+    const zip = new AdmZip()
+    const cwd = process.cwd()
+    process.chdir(path.resolve(dir))
+    try {
+        await zip.addLocalFolderPromise('data', { zipPath: 'data' })
+        zip.addLocalFile('pack.mcmeta')
+        if (fs.existsSync('pack.png')) zip.addLocalFile('pack.png')
+    } finally {
+        process.chdir(cwd)
+    }
+    return zip
 }
 
 async function upload_zip(buffer: ArrayBuffer, filename: string) {
+    if (buffer.byteLength === 0) throw new Error(`Upload: ${filename} is empty, refusing to send`)
+
     const upload_start = await start_upload(filename.replace('.zip', ''))
+
+    // Every one of these was previously dereferenced blind: an error body has no `data`, so a
+    // failure surfaced as a TypeError at best and a silent no-op at worst.
+    if (upload_start.status !== 200 || !upload_start.data?.addr || !upload_start.data?.password) {
+        throw new Error(`Upload: ${filename} — files/upload refused: ${JSON.stringify(upload_start)}`)
+    }
+
     const port = upload_start.data.addr.split(':')[1] as `${number}`
 
     const upload = await MCS_API(
@@ -313,27 +367,121 @@ async function upload_zip(buffer: ArrayBuffer, filename: string) {
         }
     )
 
-    await upload_chunks(upload.data.id, port, buffer)
+    if (upload.status !== 200 || !upload.data?.id) {
+        throw new Error(`Upload: ${filename} — upload-new refused: ${JSON.stringify(upload)}`)
+    }
+
+    const chunks = await upload_chunks(upload.data.id, port, buffer)
+
+    console.log(
+        `Upload: ${filename} sent OK — ${(buffer.byteLength / 1048576).toFixed(2)} MB in ${chunks} chunk(s)`
+    )
+
+    await verify_upload(filename, buffer.byteLength)
+}
+
+// Read the file back off the server and compare its size to what we sent. The daemon answering
+// 'OK' to every chunk only proves it accepted the bytes — it does NOT prove a file of that size
+// now exists at that path. Do not trust a deploy without this.
+async function verify_upload(filename: string, expected: number): Promise<void> {
+    let actual: number | null = null
+
+    try {
+        const dl = await MCS_API('files/download', { file_name: `${remote_datapacks_dir}/${filename}` })
+        if (dl.status === 200 && dl.data?.password && dl.data?.addr) {
+            const host = new URL(process.env.MCS_MANAGER_ENDPOINT ?? '').hostname
+            const port = dl.data.addr.split(':')[1]
+            const resp = await fetch(`http://${host}:${port}/download/${dl.data.password}/${filename}`)
+            if (resp.ok) actual = (await resp.arrayBuffer()).byteLength
+        }
+    } catch {
+        actual = null
+    }
+
+    if (actual === null) {
+        console.log(`Verify: ${filename} — could not read back, size UNCONFIRMED`)
+        return
+    }
+
+    if (actual !== expected) {
+        throw new Error(
+            `Verify: ${filename} is ${actual} bytes on the server but we sent ${expected}. ` +
+            `The upload did not land correctly.`
+        )
+    }
+
+    console.log(`Verify: ${filename} confirmed on server at ${actual} bytes`)
 }
 
 const SCL_ONLY = process.argv.includes('--scl-only')
 
-if (SCL_ONLY) console.log('SCL-only mode: skipping main pack, deps, and reload')
+// The shim supplies the pieces of the generated `summit.booth` namespace that the BUILD server
+// isn't producing — currently just the #summit.booth:persistent_tick function tag, without which
+// imperium:battlegrounds_tick never runs and fails silently (a missing function tag inside
+// #minecraft:tick logs nothing at all).
+//
+// NEVER send this to the real Summit server. There the namespace IS generated, and function tags
+// MERGE rather than override — #summit.booth:persistent_tick would end up listing
+// imperium:battlegrounds_tick twice and run it twice per tick. Pass --no-shim for a production
+// deploy, or drop the upload entirely once the build server generates the namespace properly.
+const SKIP_SHIM = process.argv.includes('--no-shim')
 
-if (!SCL_ONLY) {
-    // Main pack
+// Upload the shim on its own, skipping the main pack. Two files in one run is currently under
+// suspicion for the main pack failing to land, so these can be deployed as separate invocations:
+//     bun scripts/deploy.ts --no-shim      (main pack only)
+//     bun scripts/deploy.ts --shim-only    (shim only)
+const SHIM_ONLY = process.argv.includes('--shim-only')
+
+const SHIM_DIR = '../zz-imperium-summit-shim'
+
+if (SCL_ONLY) console.log('SCL-only mode: skipping main pack, deps, and reload')
+if (SHIM_ONLY) console.log('Shim-only mode: skipping main pack')
+
+if (!SCL_ONLY && !SHIM_ONLY) {
+    // Main pack. Explicit allowlist, not a filter: zipping '.' wholesale swept up node_modules,
+    // .git and .claude (the last of which carries a ~95 MB wiki dump) — 247 MB of upload to
+    // deliver 1.7 MB of datapack, chunked 2 MB at a time. An allowlist also means a new junk
+    // directory can't silently start shipping.
     const main_pack_zip = new AdmZip()
 
     console.log('Deploy: reading and zipping main pack...')
 
-    await main_pack_zip.addLocalFolderPromise('.', { zipPath: '/' })
+    await main_pack_zip.addLocalFolderPromise('data', { zipPath: 'data' })
+    await main_pack_zip.addLocalFolderPromise('booth_definition', { zipPath: 'booth_definition' })
+    main_pack_zip.addLocalFile('pack.mcmeta')
+    if (fs.existsSync('pack.png')) main_pack_zip.addLocalFile('pack.png')
+
+    assert_zip_populated(main_pack_zip, 'imperium_mundi.zip', 100)
+
     const main_pack = (await main_pack_zip.toBufferPromise()).buffer
 
-    console.log('Deploy: zip ready, uploading to server...')
+    console.log(`Deploy: zip ready (${(main_pack.byteLength / 1048576).toFixed(1)} MB), uploading to server...`)
 
     await upload_zip(main_pack, `imperium_mundi.zip`)
 
     console.log(`Deploy: main pack uploaded, checking for dependencies...`)
+}
+
+// Shim upload is its own top-level step, not nested under the main pack, so --shim-only can reach
+// it and so a main-pack failure can't silently skip it (or vice versa).
+if (!SCL_ONLY) {
+    if (SKIP_SHIM) {
+        console.log('Shim: --no-shim passed, skipping (correct for the real Summit server)')
+    } else if (!fs.existsSync(SHIM_DIR)) {
+        console.log(`Shim: ${SHIM_DIR} not found, skipping`)
+    } else {
+        console.log('Shim: zipping zz-imperium-summit-shim (TEST SERVER ONLY)...')
+
+        const shim_zip = await zip_pack_dir(SHIM_DIR)
+
+        assert_zip_populated(shim_zip, 'zz_imperium_summit_shim.zip', 5)
+
+        const shim_pack = (await shim_zip.toBufferPromise()).buffer
+
+        await upload_zip(shim_pack, `zz_imperium_summit_shim.zip`)
+
+        console.log('Shim: uploaded. Do NOT ship this to the real Summit server — see --no-shim.')
+    }
 }
 
 async function send_reload() {

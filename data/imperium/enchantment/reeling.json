@@ -1,5 +1,5 @@
 {
-  "description": "Reeling",
+  "description": { "text": "Reeling", "color": "gold" },
   "supported_items": "#minecraft:enchantable/weapon",
   "weight": 1,
   "max_level": 1,

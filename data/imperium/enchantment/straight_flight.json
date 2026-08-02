@@ -1,5 +1,5 @@
 {
-  "description": "Straight Flight",
+  "description": { "text": "Straight Flight", "color": "gold" },
   "supported_items": "#minecraft:enchantable/bow",
   "weight": 1,
   "max_level": 1,

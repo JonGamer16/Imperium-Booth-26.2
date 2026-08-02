@@ -1,5 +1,5 @@
 {
-    "description": "Marked",
+    "description": { "text": "Marked", "color": "gold" },
     "supported_items": "#minecraft:enchantable/melee_weapon",
     "weight": 1,
     "max_level": 1,
@@ -23,7 +23,7 @@
                         "condition": "minecraft:entity_properties",
                         "entity": "this",
                         "predicate": {
-                            "nbt": "{Tags:[\"im.marked\"]}"
+                            "minecraft:entity_tags": {"all_of": ["im.marked"]}
                         }
                     }
                 ]

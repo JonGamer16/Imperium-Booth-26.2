@@ -1,4 +1,4 @@
-# Golem Throw spent — runs as the ATTACKER after a charged hit lands (wip_golem_throw post_attack,
+# Golem Throw spent — runs as the ATTACKER after a charged hit lands (golem_throw post_attack,
 # affected=attacker, gated on im_golemReady). Ordered AFTER the victim-launch entry so clearing the
 # armed flag here can't cancel that entry. Pay the energy; the Energy Barrier is always up during a
 # throw (you charge while sneaking), so re-project it onto the absorption hearts — otherwise the hold

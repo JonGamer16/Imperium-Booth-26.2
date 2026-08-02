@@ -25,6 +25,6 @@
     }
   },
   "rewards": {
-    "function": "imperium:enchantments/wip_reversal"
+    "function": "imperium:enchantments/reversal"
   }
 }

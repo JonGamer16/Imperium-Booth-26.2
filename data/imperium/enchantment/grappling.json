@@ -1,5 +1,5 @@
 {
-  "description": "Grappling",
+  "description": { "text": "Grappling", "color": "gold" },
   "supported_items": "#minecraft:enchantable/fishing",
   "weight": 1,
   "max_level": 1,

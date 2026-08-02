@@ -1,4 +1,4 @@
-# Golem Throw launch — runs as the VICTIM (wip_golem_throw post_attack, affected=victim, gated on the
+# Golem Throw launch — runs as the VICTIM (golem_throw post_attack, affected=victim, gated on the
 # attacker being armed). Fling the victim straight up by #GolemLaunch (1/10000 b/t). Mirrors the
 # player/mob split from mgrapple_yank: players ignore raw Motion (use the summit-core motion lib,
 # which is player-only); every other entity — mannequins included — gets Motion NBT directly.

@@ -22,16 +22,15 @@
                     { "type": "#is_player_attack",
                       "base": 0,
                       "factor": 0.5,
-                      "horizontal_blocking_angle": 15},
+                      "horizontal_blocking_angle": 30},
                     { "type": "mob_attack",
                       "base": 0,
                       "factor": 0.5,
-                      "horizontal_blocking_angle": 15},
-                    {
-                      "type": "#is_projectile",
+                      "horizontal_blocking_angle": 30},
+                    { "type": "#is_projectile",
                       "base": 0,
                       "factor": 0.5,
-                      "horizontal_blocking_angle": 15}
+                      "horizontal_blocking_angle": 30}
                   ],
                   "block_delay_seconds": 0
                 },

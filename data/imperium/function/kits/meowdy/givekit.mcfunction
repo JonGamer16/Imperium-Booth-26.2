@@ -92,7 +92,7 @@ execute unless items entity @s hotbar.1 * run \
         netherite_sword[\
             item_model="minecraft:ghast_tear",\
             attribute_modifiers=[\
-                {type:"attack_damage",amount:3,operation:"add_value",slot:"mainhand",id:"base_attack_damage"},\
+                {type:"attack_damage",amount:4,operation:"add_value",slot:"mainhand",id:"base_attack_damage"},\
                 {type:"attack_speed",amount:6,operation:"add_value",slot:"mainhand",id:"base_attack_speed"},\
                 {type:"attack_knockback",amount:-0.5,operation:"add_value",slot:"mainhand",id:"mainhand"}\
             ],\

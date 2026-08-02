@@ -1,5 +1,5 @@
 {
-    "description": "Offhand Attack",
+    "description": { "text": "Offhand Attack", "color": "gold" },
     "supported_items": "#minecraft:enchantable/weapon",
     "slots": ["mainhand"],
     "weight": 1,

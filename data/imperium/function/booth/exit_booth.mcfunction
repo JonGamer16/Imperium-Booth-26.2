@@ -23,3 +23,14 @@ tag @s remove summit.no_regen
 # so it has to be evaluated at the PLAYER's position. The selector arg does that; a bare
 # `unless predicate` would read this hook's execution position instead.
 execute unless entity @s[predicate=imperium:warp_landing] run function imperium:util/inv_return
+
+# Training dummy: the booth may have just emptied, which is the one state where nothing is watching
+# the dummy (its tether lives in loop_5t, a booth ticking_function). Hand off to a scheduled sweep
+# instead of checking inline — see booth/dummy/empty_check for why the delay is load-bearing.
+# `replace` is what makes this safe for a group leaving together: a whole tour walking out queues
+# ONE check, not one per person, and the last exit's schedule is the one that survives.
+#
+# Deliberately NOT gated on the warp_landing skip above. That skip exists so the kit rides along to
+# the landing room; the dummy has nothing to do with the leaver's inventory, and someone taking the
+# kitroom pad has left the booth boxes just as completely as someone walking out the front.
+schedule function imperium:booth/dummy/empty_check 10t replace

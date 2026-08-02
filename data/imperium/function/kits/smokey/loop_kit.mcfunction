@@ -8,7 +8,14 @@ function imperium:kits/smokey/grapple_track
 # Smoke Bomb: configure freshly-thrown clouds, then grant invis + speed to Smokey players inside.
 # in_bounds gate: only claim/configure clouds inside our allowed area — keeps a smoke bomb from being
 # set up outside the arena/booth and stops us grabbing another booth's same-color cloud as ours.
-execute as @e[type=area_effect_cloud,tag=!im.smoke_bomb,nbt={potion_contents:{custom_color:1973790}}] at @s if predicate imperium:in_bounds run function imperium:kits/smokey/smoke_init
+#
+# PERF — in_bounds is a selector arg placed BEFORE `nbt=` on purpose. Selector arguments evaluate in
+# written order (optimization_guide 2.1.3), so the old trailing `if predicate imperium:in_bounds`
+# form ran the potion-contents NBT read on every cloud in the dimension first and checked position
+# second. `tag=!im.smoke_bomb` did not save us there: it only excludes clouds that PASSED, so every
+# foreign booth's cloud kept failing and kept being re-parsed for its whole life. Bounds-first means
+# a foreign cloud costs one location check and is never read from or written to.
+execute as @e[type=area_effect_cloud,tag=!im.smoke_bomb,predicate=imperium:in_bounds,nbt={potion_contents:{custom_color:1973790}}] at @s run function imperium:kits/smokey/smoke_init
 execute as @e[type=area_effect_cloud,tag=im.smoke_bomb] at @s run function imperium:kits/smokey/smoke_apply
 
 # Marking Dart: convert any player carrying the dart's Bad Omen signal to the tracked im.marked tag.

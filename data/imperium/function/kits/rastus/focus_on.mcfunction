@@ -7,6 +7,7 @@ tag @s add im.rastus_focused
 attribute @s minecraft:attack_damage modifier add imperium:focus 5 add_value
 attribute @s minecraft:attack_speed modifier add imperium:focus 1 add_value
 attribute @s minecraft:attack_knockback modifier add imperium:focus 1 add_value
+attribute @s minecraft:entity_interaction_range modifier add imperium:focus 0.5 add_value
 
 # Armed feedback — this charge powers BOTH the Strike (next hit) and the Parry (shield raise).
 # Audio only, deliberately: the actionbar belongs to the Air Dodge stock readout (rastus/dash_count),

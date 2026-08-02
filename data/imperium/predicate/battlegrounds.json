@@ -2,6 +2,11 @@
     "condition": "minecraft:entity_properties",
     "entity": "this",
     "predicate": {
-        "nbt": "{Tags:[\"im.fighting\",\"summit.battlegrounds.player\"]}"
+        "minecraft:entity_tags": {
+            "all_of": [
+                "im.fighting",
+                "summit.battlegrounds.player"
+            ]
+        }
     }
 }

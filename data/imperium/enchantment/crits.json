@@ -1,5 +1,5 @@
 {
-    "description": "Crits",
+    "description": { "text": "Crits", "color": "gold" },
     "supported_items": "#minecraft:enchantable/melee_weapon",
     "slots": ["mainhand"],
     "weight": 1,

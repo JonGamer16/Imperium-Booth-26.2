@@ -1,5 +1,5 @@
 {
-    "description": "Backstab",
+    "description": { "text": "Backstab", "color": "gold" },
     "supported_items": "#enchantable/weapon",
     "slots": ["mainhand"],
     "weight": 1,

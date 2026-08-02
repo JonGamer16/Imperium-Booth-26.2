@@ -14,24 +14,26 @@
 # --- PROXIMITY-ONLY TEST VERSION -------------------------------------------------
 # No auto-respawn and no booth-zone predicate: the dummy only cares about its home marker.
 # Spawn it by running imperium:booth/dummy/place (marker + husk at your feet). To remove it
-# for good, just kill its home marker — the "no marker within 12" rule below kills the husk.
+# for good, just kill its home marker — the "no marker within 13" rule below kills the husk.
 
-    # Tether: nearest home marker is 8-12 blocks away (drifted/knocked off) -> snap to it.
-    # (within 8 = home enough, leave it; beyond 12 = killed by the next line.)
-    execute as @e[type=husk,tag=im.dummy] at @s \
-        if entity @e[type=marker,tag=im.dummy_home,distance=..12] \
-        unless entity @e[type=marker,tag=im.dummy_home,distance=..8] \
+    # Both lines match the dummy by TAG ALONE, no `type=husk`. A dummy that reaches water converts
+    # husk -> zombie -> drowned, and a type-scoped selector stops matching it right when it has
+    # wandered furthest — so the escapee could neither be tethered back nor killed. See kill_husk.
+    # NOTE this loop only runs while a player is in the booth; the unsupervised case (booth empty)
+    # is covered by booth/dummy/empty_check, scheduled from booth/exit_booth.
+
+    # Tether: nearest home marker is 10-13 blocks away (drifted/knocked off) -> snap to it.
+    # (within 10 = home enough, leave it; beyond 13 = killed by the next line.)
+    execute as @e[tag=im.dummy] at @s \
+        if entity @e[type=marker,tag=im.dummy_home,distance=..13] \
+        unless entity @e[type=marker,tag=im.dummy_home,distance=..10] \
         run tp @s @n[type=marker,tag=im.dummy_home]
 
-    # Clean removal: no home marker within 12 blocks -> kill the husk (kill the marker = gone).
-    execute as @e[type=husk,tag=im.dummy] at @s unless entity @e[type=marker,tag=im.dummy_home,distance=..12] run kill @s
+    # Clean removal: no home marker within 13 blocks -> kill the dummy (kill the marker = gone).
+    # Must stay in step with the tether's outer bound above, or a dummy in the gap would neither
+    # snap back nor die.
+    execute as @e[tag=im.dummy] at @s unless entity @e[type=marker,tag=im.dummy_home,distance=..13] run kill @s
 
-    
-# Battlegrounds teleport pad: any player within 2 blocks of an im.warp_from_kitroom marker
-# gets sent to the destination below (coords already set).
-# COORD LINK: imperium:warp_landing is a 10-block cube centred on this destination and is OR'd into
-# imperium:ability_zone, so abilities keep firing in the landing room as if it were the dojo. Move
-# this destination and that predicate has to move with it.
-    execute as @e[type=marker,tag=im.warp_from_kitroom,limit=1] at @s as @a[distance=..2] run tp @s[gamemode=!creative] -119 71 99 -90 0
-
-    execute as @e[type=marker,tag=im.warp_from_shulkerbox,limit=1] at @s as @a[distance=..2] run tp @s[gamemode=!creative] -68.5 87 -7.5 90 0
+# The Battlegrounds teleport pads used to live here. They're advancement-driven now
+# (imperium:booth/warp_from_{kitroom,shulkerbox}) — this loop only ticks while a player is inside
+# the booth bounding boxes, and the kit-room return pad sits outside all of them.
