@@ -16,9 +16,9 @@
 # that coord lives — so a stray extra marker never pulls it off-station. Kills any existing dummy
 # husk first, so this is idempotent: the manual "spawn" command, the #entities/summon hook, and the
 # interaction toggle all converge on a single husk. No marker within reach -> nothing spawns.
-# Tag-only kill, no `type=husk` — a converted (drowned) predecessor must not survive a respawn and
-# leave two dummies fighting over one marker. See kill_husk.
-kill @e[tag=im.dummy]
+# `#minecraft:zombies`, not `type=husk` — a converted (drowned) predecessor must not survive a
+# respawn and leave two dummies fighting over one marker. See kill_husk.
+kill @e[type=#minecraft:zombies,tag=im.dummy]
 
 execute positioned -78.5 87.0 12.5 as @n[type=marker,tag=im.dummy_home] at @s run summon minecraft:husk ~ ~ ~ \
     {   Tags:["im.dummy","im.dummy_new","summit.booth_entity.imperium","summit.dynamic"],\

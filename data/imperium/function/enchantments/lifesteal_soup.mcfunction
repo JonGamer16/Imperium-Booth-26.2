@@ -2,6 +2,12 @@
 # Threshold lives in one place: #lsThreshold im_lifesteal (set in main/ability_parameters).
 # 'clear ... 1' returns the number removed; gate the soup + drain on a bowl being cleared. Target
 # only imperium_kit bowls (the use_remainder of eaten soups) so vanilla bowls aren't consumed.
+#
+# CALLERS MUST GATE THIS ON A HIT, not just on the bank. The `clear` below matches an item
+# component, which is expensive, and the "no bowl" clamp at the bottom leaves im_lifesteal exactly
+# at im_lsNeed — so a bank-only `>=` gate re-enters here every single tick for as long as a Livvy
+# sits at cap with no empty bowl. loop_enchantments adds im_lsFlag/im_lsDelta to the gate for this
+# reason; keep any new call site equally event-driven.
 execute store result score #lsCleared im.temp run clear @s bowl[custom_data~{imperium_kit:1b}] 1
 execute if score #lsCleared im.temp matches 1.. run loot give @s loot imperium:livvy/soup
 # Drain the cost of THIS soup — im_lsNeed as it stands right now, before the escalation below moves

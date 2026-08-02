@@ -4,9 +4,12 @@
 # (dismiss), the booth-empty sweep (dummy/empty_check), and the
 # #summit.booth:imperium/entities/kill teardown hook.
 #
-# Matched by TAG ALONE, no `type=husk`. A dummy that escapes into the cave river converts
-# husk -> zombie -> drowned, and a type-scoped selector stops matching it the moment it does —
-# which is exactly how one escapee became permanent. Nothing else in the pack carries the bare
-# `im.dummy` tag (the markers are `im.dummy_home`, a different string — tag matching is exact),
-# so dropping the type filter costs no precision.
-kill @e[tag=im.dummy]
+# Matched by `type=#minecraft:zombies` + the tag — NEVER a bare `type=husk`. A dummy that escapes
+# into the cave river converts husk -> zombie -> drowned, and an exact-type selector stops matching
+# it the moment it does — which is exactly how one escapee became permanent. The vanilla
+# #minecraft:zombies tag spans that whole chain (husk, zombie, drowned), so the selector still
+# can't miss a converted dummy while giving @e a positive type filter instead of a scan of every
+# entity in the world. The tag is what actually picks the dummy out: nothing else in the pack
+# carries bare `im.dummy` (the markers are `im.dummy_home`, a different string — tag matching is
+# exact). Every other `im.dummy` selector in the pack uses this same type filter.
+kill @e[type=#minecraft:zombies,tag=im.dummy]

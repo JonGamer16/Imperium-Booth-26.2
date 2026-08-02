@@ -14,20 +14,5 @@
         "base": 2,
         "per_level_above_first": 1
     },
-    "max_level": 2,
-    "effects": 
-    {
-        "minecraft:post_attack": 
-        [
-            {
-                "affected": "attacker",
-                "enchanted": "attacker",
-                "effect": 
-                {
-                    "type": "run_function",
-                    "function": "imperium:enchantments/single_use"
-                }
-            }
-        ]
-    }
+    "max_level": 2
 }

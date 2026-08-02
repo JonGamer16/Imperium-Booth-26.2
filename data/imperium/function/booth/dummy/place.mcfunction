@@ -4,6 +4,6 @@
 # point #entities/summon respawns the husk against it — so production dummies come up through that
 # hook, not this command.
 kill @e[type=marker,tag=im.dummy_home]
-kill @e[tag=im.dummy]
+kill @e[type=#minecraft:zombies,tag=im.dummy]
 summon minecraft:marker ~ ~ ~ {Tags:["im.dummy_home","summit.booth_entity.imperium","summit.static"]}
 function imperium:booth/dummy/respawn
