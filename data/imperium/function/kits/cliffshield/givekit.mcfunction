@@ -117,7 +117,7 @@ function imperium:kits/cliffshield/cd1_shield
 function imperium:kits/cliffshield/cd2_arrows
 
 #   [SLOT 3] Rook Rush
-#       Speed 5 | 1s
+#       Speed 15 | 1s
 function imperium:kits/cliffshield/cd3_potion
 
 #   [HEAL] Mushroom Stew

@@ -91,6 +91,14 @@ scoreboard players set #sec im_secTimer 0
 # Booth-rotation flag read by summit/player_enter (set only for the span of summit/booth_active).
 scoreboard players set #rotation im.temp 0
 
+# Kit-equip rate limit: release it for everyone on load. Every click that SETS im.equip_cd now
+# schedules its own release in the same breath (booth/equip_cd_clear), so the tag can no longer
+# outlive its window — but a schedule does not survive a reload or a restart, and players carrying
+# the tag from before that fix (when the release lived in loop_1s, a loop that never runs at the kit
+# stands) would otherwise stay locked out of kit selection forever. Nobody is legitimately mid-equip
+# on load, so this is safe to keep permanently.
+tag @a[tag=im.equip_cd] remove im.equip_cd
+
 # HUD displays
     # No global scoreboard displays allowed
 

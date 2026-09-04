@@ -67,12 +67,13 @@ scoreboard players set @s im_cdMaxC 0
     attribute @s minecraft:attack_damage modifier remove imperium:charge
     attribute @s minecraft:entity_interaction_range modifier remove imperium:charge
     attribute @s minecraft:attack_knockback modifier remove imperium:charge
-    attribute @s minecraft:gravity modifier remove im_high_jump
     scoreboard players set @s im_leventCharge 0
     advancement revoke @s only imperium:levent_shield
 
     # High Jump — strip the low-gravity modifier via the canonical off function (its remove is
-    # guaranteed to match the id high_jump_on added) and clear the equip heartbeat.
+    # guaranteed to match the id high_jump_on added, and it also sweeps the pre-rename
+    # `minecraft:im_high_jump`) and clear the equip heartbeat. The duplicate bare-id removal that
+    # used to sit up in the Charge Attack block is gone; this is the single owner of that cleanup.
     function imperium:enchantments/high_jump_off
     scoreboard players reset @s im_high_jump_eq
 

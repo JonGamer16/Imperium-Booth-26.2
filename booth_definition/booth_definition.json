@@ -26,12 +26,6 @@
     },
     "on_player_enter": "imperium:booth/enter_booth",
     "on_player_exit": "imperium:booth/exit_booth",
-    "ticking_functions": {
-        "imperium:loop_tick": "1t",
-        "imperium:loop_enchantments": "1t",
-        "imperium:loop_5t": "5t",
-        "imperium:loop_1s": "1s"
-    },
     "persistent_tick": "imperium:battlegrounds_tick",
     "sticker_book": {
         "background_color": "#1a48c3",

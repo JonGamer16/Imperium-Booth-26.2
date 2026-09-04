@@ -128,10 +128,16 @@ function imperium:internal/contain
 # The 5t / 1s clocks that used to sit here are GONE. They were labelled "for local testing", but
 # this file ships in #minecraft:tick, so on a server they ran on top of booth_definition's own
 # "imperium:loop_5t": "5t" / "imperium:loop_1s": "1s" registrations — every timed mechanic in the
-# booth ran at roughly double speed. loop_5t / loop_1s now have exactly one driver in each context:
-#   in the booth      -> booth_definition.ticking_functions
-#   outside the booth -> imperium:battlegrounds_tick, via booth_definition.persistent_tick
-#   bare local world  -> imperium_shim:tick (zz-imperium-summit-shim, #emulate im.shim = 1)
+# booth ran at roughly double speed.
+#
+# There is now exactly ONE driver for all four loops, everywhere:
+#   imperium:battlegrounds_tick, via booth_definition.persistent_tick
+# booth_definition.ticking_functions is gone. It only fired while a player was inside the booth
+# bounding boxes, so it could never reach the arena, and having it alive forced battlegrounds_tick
+# to disable itself whenever the booth was occupied — which stalled every arena fight. See the
+# header of imperium:battlegrounds_tick.
+# In a bare local world imperium_shim:tick (#emulate im.shim = 1) covers the ticks battlegrounds_tick
+# sits out; the two gates are exact complements and must stay in sync.
 
 # gold rush death penalty: deathCount ticked up -> forfeit half gold (once, then re-arm)
     execute as @a[tag=im.fighting,scores={im_deaths=1..}] run function imperium:arena/on_death
