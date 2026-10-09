@@ -10,7 +10,7 @@ summon minecraft:armor_stand ~ ~ ~ \
     ShowArms:1b,\
     CustomNameVisible:0b,\
     CustomName:{text:"Quin Meowdy",color:"gold",bold:true},\
-    Tags:["summit.booth_entity.imperium", "im.booth_stand_model","im.booth_meowdy","im.booth_new"],\
+    Tags:["im.owned", "im.booth_stand_model","im.booth_meowdy","im.booth_new"],\
     Pose:{Body:[0f,10f,7f],LeftLeg:[0f,0f,12f],RightLeg:[0f,0f,40f],LeftArm:[277f,20f,9f],RightArm:[284f,343f,360f]}\
 }
 
@@ -31,6 +31,5 @@ tag @e[type=armor_stand,tag=im.booth_new] remove im.booth_new
 
 summon minecraft:interaction ~ ~ ~ \
 {   width:1.0f,height:2.1f,response:1b,\
-    Tags:["summit.booth_entity.imperium", "summit.interactable","summit.static","im.booth_stand","im.booth_meowdy"],\
-    data:{summit_interactable:{on_right_click:"execute on target run function imperium:kits/meowdy/booth/click"}}\
+    Tags:["im.owned","im.booth_stand","im.booth_meowdy"]\
 }

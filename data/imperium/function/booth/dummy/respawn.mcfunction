@@ -1,5 +1,5 @@
 # Ensure exactly ONE training dummy: a mummy-armored husk guests can spar with (booth players carry
-# summit.no_regen, so its hits land and healing items get real practice). Regeneration 10 (hidden)
+# im.no_regen, so its hits land and healing items get real practice). Regeneration 10 (hidden)
 # tops it up between visitors; the 5t loop tethers it to its im.dummy_home marker. follow_range 4
 # keeps it from wandering after players. CustomNameVisible:0b makes "Training Dummy" a hover-only
 # mob name (look at it to read it) instead of a plate floating over the booth through walls;
@@ -21,7 +21,7 @@
 kill @e[type=#minecraft:zombies,tag=im.dummy]
 
 execute positioned -78.5 87.0 12.5 as @n[type=marker,tag=im.dummy_home] at @s run summon minecraft:husk ~ ~ ~ \
-    {   Tags:["im.dummy","im.dummy_new","summit.booth_entity.imperium","summit.dynamic"],\
+    {   Tags:["im.dummy","im.dummy_new","im.owned"],\
         PersistenceRequired:1b,\
         CanPickUpLoot:0b,\
         CustomName:{text:"Training Dummy",color:"gold",italic:false},\

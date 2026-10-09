@@ -5,5 +5,5 @@
 # hook, not this command.
 kill @e[type=marker,tag=im.dummy_home]
 kill @e[type=#minecraft:zombies,tag=im.dummy]
-summon minecraft:marker ~ ~ ~ {Tags:["im.dummy_home","summit.booth_entity.imperium","summit.static"]}
+summon minecraft:marker ~ ~ ~ {Tags:["im.dummy_home","im.owned"]}
 function imperium:booth/dummy/respawn

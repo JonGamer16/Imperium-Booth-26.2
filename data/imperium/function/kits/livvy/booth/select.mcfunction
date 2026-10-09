@@ -2,7 +2,6 @@
 # the kit's booth/click handler). Equips the kit via the arena pipeline, then describes it.
 scoreboard players set @s im_givekit 3
 function imperium:arena/givekit
-function imperium:kits/livvy/booth/assign
 
 tellraw @s \
 [   "",\

@@ -2,9 +2,9 @@
 #
 # WHY A SCHEDULE AND NOT A LOOP: this used to be one line in imperium:loop_1s, and that made kit
 # SELECTION depend on the booth tick loop running. It doesn't run in the one place it had to:
-# standing at the kit stands with no battlegrounds session live, imperium:battlegrounds_tick returns
-# at its gate and the booth has no other 1s driver (the pack's #minecraft:tick is empty, and
-# summit.booth is generated server-side). So im.equip_cd was set by the player's FIRST stand click
+# standing at the kit stands carrying no kit, where imperium:tick returns at its idle gate unless
+# someone is inside the booth boxes — and the return pad / kit room sit outside them. So im.equip_cd
+# was set by the player's FIRST stand click
 # and never released — every kit they picked afterwards was refused with "Kit swap recharging...",
 # leaving them stuck on their first pick and walking into the arena with the wrong kit.
 #

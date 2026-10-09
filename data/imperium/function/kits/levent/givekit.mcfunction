@@ -109,3 +109,6 @@ scoreboard players operation @s im_abilityCdB = #Levent im_abilityCdB
 scoreboard players operation @s im_abilityCdC = #Levent im_abilityCdC
 
 tag @s add im.kit_levent
+# Single "has a kit" marker: gates imperium:ability_zone and the idle check in imperium:tick.
+# Added HERE, beside the kit tag, not in arena/givekit — arena/respawn calls this file directly.
+tag @s add im.kitted

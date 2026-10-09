@@ -10,7 +10,7 @@ tag @s add im.mgrapple_bobber
 # Ours-only (this ran only because our grapple Mummy is within 5 blocks): mark it booth-owned so the
 # containment sweep (imperium:internal/contain) can cull it if it clears a wall, and so no other
 # booth's tooling treats it as theirs.
-tag @s add summit.booth_entity.imperium
+tag @s add im.owned
 execute as @p[tag=im.mgrapple_user,distance=..5] run scoreboard players operation @s im_grappleId = #next im_grappleId
 
 # Faster cast: scale the bobber's launch Motion by #MummyCastSpeed (integer multiplier). Read each

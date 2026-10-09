@@ -12,7 +12,7 @@ summon minecraft:armor_stand ~ ~ ~ \
     ShowArms:1b,\
     CustomNameVisible:0b,\
     CustomName:{text:"Livvy",color:"red",bold:true},\
-    Tags:["summit.booth_entity.imperium", "im.booth_stand_model","im.booth_livvy","im.booth_new"],\
+    Tags:["im.owned", "im.booth_stand_model","im.booth_livvy","im.booth_new"],\
     Rotation:[-90,0],\
     Pose:{Body:[5f,0f,0f],Head:[10f,0f,0f],LeftLeg:[345f,360f,345f],RightLeg:[13f,0f,16f],LeftArm:[288f,349f,335f],RightArm:[304f,12f,52f]}\
 }
@@ -39,7 +39,7 @@ summon minecraft:armor_stand ~ ~-0.25 ~ \
     Invulnerable:1b,\
     NoBasePlate:1b,\
     ShowArms:1b,\
-    Tags:["summit.booth_entity.imperium", "im.booth_stand_model","im.booth_livvy","im.booth_new"],\
+    Tags:["im.owned", "im.booth_stand_model","im.booth_livvy","im.booth_new"],\
     Rotation:[-90,0],\
     Pose:{Body:[0f,2f,0f],Head:[180f,0f,0f],LeftLeg:[180f,0f,0f],RightLeg:[175f,0f,0f],LeftArm:[273f,68f,209f],RightArm:[260f,290f,170f]}\
 }
@@ -54,7 +54,7 @@ summon minecraft:armor_stand ~ ~-0.5 ~ \
     Invulnerable:1b,\
     NoBasePlate:1b,\
     ShowArms:1b,\
-    Tags:["summit.booth_entity.imperium", "im.booth_stand_model","im.booth_livvy","im.booth_new"],\
+    Tags:["im.owned", "im.booth_stand_model","im.booth_livvy","im.booth_new"],\
     Rotation:[-90,0],\
     Pose:{Body:[0f,2f,0f],Head:[180f,0f,0f],LeftLeg:[180f,0f,0f],RightLeg:[175f,0f,0f],LeftArm:[265f,7f,250f],RightArm:[296f,7f,340f]}\
 }
@@ -65,6 +65,5 @@ tag @e[type=armor_stand,tag=im.booth_new] remove im.booth_new
 
 summon minecraft:interaction ~ ~ ~ \
 {   width:1.0f,height:2.1f,response:1b,\
-    Tags:["summit.booth_entity.imperium", "summit.interactable","summit.static","im.booth_stand","im.booth_livvy"],\
-    data:{summit_interactable:{on_right_click:"execute on target run function imperium:kits/livvy/booth/click"}}\
+    Tags:["im.owned","im.booth_stand","im.booth_livvy"]\
 }

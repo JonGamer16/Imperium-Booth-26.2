@@ -141,3 +141,6 @@ scoreboard players operation @s im_abilityCdB = #Meowdy im_abilityCdB
 scoreboard players operation @s im_abilityCdC = #Meowdy im_abilityCdC
 
 tag @s add im.kit_meowdy
+# Single "has a kit" marker: gates imperium:ability_zone and the idle check in imperium:tick.
+# Added HERE, beside the kit tag, not in arena/givekit — arena/respawn calls this file directly.
+tag @s add im.kitted

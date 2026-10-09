@@ -1,6 +1,6 @@
 # Debug message toggle: set to 1 to activate load success feedback and other test messages gated by it
 scoreboard objectives add im_debug_mode dummy
-scoreboard players set #Debug im_debug_mode 0
+scoreboard players set #Debug im_debug_mode 1
 execute if score #Debug im_debug_mode matches 1 \
     run function imperium:util/debug
 
@@ -99,6 +99,30 @@ scoreboard players set #rotation im.temp 0
 # on load, so this is safe to keep permanently.
 tag @a[tag=im.equip_cd] remove im.equip_cd
 
+# im.kitted backfill. This tag is the single "has a kit" marker read by imperium:ability_zone and by
+# the idle gate in imperium:tick, and it was introduced after the seven im.kit_* tags. A player
+# already wearing a kit across the update has im.kit_<name> but no im.kitted, which would leave them
+# outside the ability gate — abilities silently dead — until they walked back to a stand and
+# re-equipped. Deriving it from the kit tags on load costs seven tag tests once and self-heals that.
+# Kits set im.kitted themselves from here on (see kits/*/givekit), so this only ever matters once.
+tag @a[tag=im.kit_cliffshield] add im.kitted
+tag @a[tag=im.kit_levent] add im.kitted
+tag @a[tag=im.kit_livvy] add im.kitted
+tag @a[tag=im.kit_meowdy] add im.kitted
+tag @a[tag=im.kit_mummy] add im.kitted
+tag @a[tag=im.kit_rastus] add im.kitted
+tag @a[tag=im.kit_smokey] add im.kitted
+
+# Natural regeneration OFF, world-wide. Every imperium healing item is nutrition:0 / saturation:0
+# by design, so all healing is meant to come from the kit; with vanilla regen on, a full hunger bar
+# heals through that entirely and the whole healing balance stops meaning anything. This replaces
+# Summit's summit.no_regen + summit.regen:zz/tick pairing, which had no standalone equivalent.
+# WORLD-WIDE and deliberate — see the regen block in imperium:loop_1s before reusing this pack in a
+# survival world.
+# NOTE 26.2 gamerule names are snake_case: this is natural_health_regeneration, NOT the legacy
+# camelCase naturalRegeneration — that name does not exist in 26.2 and the command just fails.
+gamerule natural_health_regeneration false
+
 # HUD displays
     # No global scoreboard displays allowed
 
@@ -106,6 +130,3 @@ tag @a[tag=im.equip_cd] remove im.equip_cd
     scoreboard objectives add im_loops dummy
     scoreboard objectives add im_lastKit dummy
 
-# Baobab Battlegrounds registration. In the local world this logs one "unknown function"
-# error and does nothing — expected (the API only exists on the Summit server).
-function imperium:summit/register_booth

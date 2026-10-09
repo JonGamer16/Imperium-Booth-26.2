@@ -90,3 +90,6 @@ scoreboard players operation @s im_abilityCdC = #Mummy im_abilityCdC
 scoreboard players operation @s im_energy = #MummyEnergyStart im.param
 
 tag @s add im.kit_mummy
+# Single "has a kit" marker: gates imperium:ability_zone and the idle check in imperium:tick.
+# Added HERE, beside the kit tag, not in arena/givekit — arena/respawn calls this file directly.
+tag @s add im.kitted

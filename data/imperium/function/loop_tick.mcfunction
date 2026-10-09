@@ -63,32 +63,22 @@
     # convert each fresh one into a cobweb block display (the real, blockless web). Then tick each
     # web's 3s life, hold any non-Livvy victim inside it, and despawn it when expired.
     #
-    # in_bounds gate: only convert clouds inside our allowed area. This both contains the web (no web
-    # spawns outside the arena/booth) and, because a foreign booth's cloud sits in its own region
-    # outside our bounds, stops us converting another booth's same-color lingering cloud into our web.
+    # The in_bounds gate that used to lead this selector is GONE. It rejected ~70 other booths'
+    # same-type clouds on the Summit server before paying for the NBT read, and it contained the web
+    # to the build. Standalone there are no foreign booths, and the ability gate is now "is holding a
+    # kit" rather than "is inside the build" — a bounds test would only mean Livvy's web silently
+    # failed to form anywhere outside the pagoda.
     #
-    # PERF — the gate MUST be a selector arg, ahead of `nbt=`, not a trailing `if predicate`.
-    # Selector arguments are evaluated in written order (optimization_guide 2.1.3), so the old
-    # `as @e[type=...,nbt={...}] at @s if predicate imperium:in_bounds` form deserialized the potion
-    # contents of EVERY cloud in the dimension, every tick, and only then asked where it was — on a
-    # server where ~70 booths are all spawning clouds that is the whole world's worth of NBT parsing
-    # to find our own. With in_bounds first, the NBT test only ever runs on clouds already inside our
-    # region, so a foreign cloud costs one cheap location check and is never read or written to.
-    # (`predicate=` as a selector arg evaluates at each matched entity's own position, which is what
-    # makes this equivalent to the old `at @s if predicate` — see the culls in imperium:internal/contain.)
-    #
-    # `tag=!im.smoke_bomb` is the once-only guard. Bounds-first alone still leaves ONE cloud being
-    # re-read every tick: our OWN Smoke Bomb cloud is in bounds and the wrong colour, so it failed
-    # this test ~20x/second for the bomb's entire duration. Excluding it costs nothing and is legal
-    # because that tag is on OUR entity — the reason we can't do the same for a foreign cloud is that
-    # marking it would mean writing to another booth's entity (see internal/contain).
-    # The web cloud itself needs no such tag: web_init kills it, so it is matched exactly once.
+    # `tag=!im.smoke_bomb` stays, and is now the whole guard. Our OWN Smoke Bomb cloud is the wrong
+    # colour, so without it that one cloud fails this test ~20x/second for its entire duration;
+    # excluding it costs nothing. The web cloud itself needs no such tag — web_init kills it, so it
+    # is matched exactly once.
     # ORDER: kits/smokey/loop_kit runs earlier in this file and stamps im.smoke_bomb on the cloud's
     # first tick, so a smoke cloud is excluded here before it is ever read. (If Smokey logs off, his
     # leftover cloud goes unstamped and does fall back to being re-read until it expires — bounded by
     # #SmokeDuration and rare enough to leave alone.)
     execute \
-        as @e[type=area_effect_cloud,tag=!im.smoke_bomb,predicate=imperium:in_bounds,nbt={potion_contents:{custom_color:14737632}}] \
+        as @e[type=area_effect_cloud,tag=!im.smoke_bomb,nbt={potion_contents:{custom_color:14737632}}] \
         at @s \
         run function imperium:kits/livvy/web_init
 
@@ -125,19 +115,13 @@
 # ability entity (arrows, grapple bobbers) that has left the allowed area (booth + arena + corridor).
 function imperium:internal/contain
 
-# The 5t / 1s clocks that used to sit here are GONE. They were labelled "for local testing", but
-# this file ships in #minecraft:tick, so on a server they ran on top of booth_definition's own
-# "imperium:loop_5t": "5t" / "imperium:loop_1s": "1s" registrations — every timed mechanic in the
-# booth ran at roughly double speed.
+# The 5t / 1s clocks that used to sit here are GONE, and must not come back. Every timed mechanic
+# in the pack reads them, so a second set of clocks anywhere means everything runs at double speed.
 #
-# There is now exactly ONE driver for all four loops, everywhere:
-#   imperium:battlegrounds_tick, via booth_definition.persistent_tick
-# booth_definition.ticking_functions is gone. It only fired while a player was inside the booth
-# bounding boxes, so it could never reach the arena, and having it alive forced battlegrounds_tick
-# to disable itself whenever the booth was occupied — which stalled every arena fight. See the
-# header of imperium:battlegrounds_tick.
-# In a bare local world imperium_shim:tick (#emulate im.shim = 1) covers the ticks battlegrounds_tick
-# sits out; the two gates are exact complements and must stay in sync.
+# There is exactly ONE driver for all four loops:
+#   imperium:tick, registered directly in #minecraft:tick.
+# No session, no booth runtime, no generated function tag, and no complement gate to keep in sync —
+# all of which this pack has been burned by before. See the header of imperium:tick for that history.
 
 # gold rush death penalty: deathCount ticked up -> forfeit half gold (once, then re-arm)
     execute as @a[tag=im.fighting,scores={im_deaths=1..}] run function imperium:arena/on_death

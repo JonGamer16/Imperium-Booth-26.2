@@ -116,3 +116,6 @@ scoreboard players set @s im_lsConversions 0
 scoreboard players operation @s im_lsNeed = #lsThreshold im_lifesteal
 
 tag @s add im.kit_livvy
+# Single "has a kit" marker: gates imperium:ability_zone and the idle check in imperium:tick.
+# Added HERE, beside the kit tag, not in arena/givekit — arena/respawn calls this file directly.
+tag @s add im.kitted

@@ -3,14 +3,13 @@
         "click": {
             "trigger": "minecraft:player_interacted_with_entity",
             "conditions": {
-                "player": [
-                    { "condition": "minecraft:reference", "name": "imperium:ability_zone" }
-                ],
                 "entity": {
                     "entity_type": "minecraft:interaction",
                     "entity_tags": {
-                        "all_of": ["im.booth_meowdy"]
-                    }                
+                        "all_of": [
+                            "im.booth_meowdy"
+                        ]
+                    }
                 }
             }
         }

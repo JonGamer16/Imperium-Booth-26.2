@@ -24,6 +24,8 @@ scoreboard players set @s im_cdMaxC 0
     tag @s remove im.kit_mummy
     tag @s remove im.kit_rastus
     tag @s remove im.kit_smokey
+    # ...and the single "has a kit" marker the ability gate + imperium:tick idle check read.
+    tag @s remove im.kitted
 
 # Smokey
 
@@ -102,6 +104,13 @@ scoreboard players set @s im_cdMaxC 0
     tag @s remove im.mgrapple_user
     tag @s remove im.mgrapple_live
     tag @s remove im.mgrapple_armed
+    # KNOWN LEAK (noted 2026-09-04, deliberately not fixed here): im.mgrapple_hooked is missing
+    # from this list. It is added by kits/mummy/mgrapple_hook and removed ONLY by
+    # kits/mummy/mgrapple_yank, so any hook whose yank never completes — rod broken mid-pull, the
+    # Mummy logging off, the VICTIM swapping kits — leaves it set on the victim permanently. It
+    # reads as "currently hooked" to kits/mummy/golem_launch and mgrapple_scan. Note that unlike
+    # the tags above it lives on the VICTIM, not the Mummy, so clearing it here only helps a
+    # victim who happens to swap kits; a full fix wants a heartbeat/watchdog like im.webbed uses.
 
     # Energy meter — empty the pool so a swap can't carry banked energy onto the next kit (the new
     # kit's im_givekit re-seeds it for its own wired slots; Mummy's resets it to #MummyEnergyStart).

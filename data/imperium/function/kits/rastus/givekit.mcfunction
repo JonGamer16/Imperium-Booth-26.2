@@ -107,3 +107,6 @@ scoreboard players operation @s im_cdUsesC = #Rastus im_cdMaxC
 scoreboard players operation @s im_cdFloorC = #Rastus im_cdFloorC
 
 tag @s add im.kit_rastus
+# Single "has a kit" marker: gates imperium:ability_zone and the idle check in imperium:tick.
+# Added HERE, beside the kit tag, not in arena/givekit — arena/respawn calls this file directly.
+tag @s add im.kitted

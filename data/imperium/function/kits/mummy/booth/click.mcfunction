@@ -1,3 +1,11 @@
+# RE-ARM FIRST. This function is the reward of imperium:booth/select_mummy, and an advancement stays
+# granted once earned — so without this revoke the stand fires exactly ONCE per player and is
+# then dead forever. It used to be double-wired (Summit's Interactions API called it too, via
+# the summit.interactable tag on the interaction), which hid the problem; that API is gone and
+# the advancement is now the only path in. Must be the FIRST line — the guards below `return`
+# early, and a return before the revoke would leave the stand permanently dormant.
+advancement revoke @s only imperium:booth/select_mummy
+
 # Booth kit-stand click — runs AS the exact clicker, so no UUID matching is needed.
 #
 # NO battlegrounds assign here. imperium:kits/mummy/booth/select owns the

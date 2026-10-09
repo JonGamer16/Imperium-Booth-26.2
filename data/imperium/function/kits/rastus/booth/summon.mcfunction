@@ -10,7 +10,7 @@ summon minecraft:armor_stand ~ ~ ~ \
     ShowArms:1b,\
     CustomNameVisible:0b,\
     CustomName:{text:"Rastus",color:"blue",bold:true},\
-    Tags:["summit.booth_entity.imperium", "im.booth_stand_model","im.booth_rastus","im.booth_new"],\
+    Tags:["im.owned", "im.booth_stand_model","im.booth_rastus","im.booth_new"],\
     Rotation:[225f,0f],\
     Pose:{Head:[9f,40f,0f],LeftLeg:[360f,358f,353f],RightLeg:[350f,43f,0f],LeftArm:[30f,0f,350f],RightArm:[312f,25f,338f]},\
 }
@@ -30,6 +30,5 @@ tag @e[type=armor_stand,tag=im.booth_new] remove im.booth_new
 
 summon minecraft:interaction ~ ~ ~ \
 {   width:1.0f,height:2.1f,response:1b,\
-    Tags:["summit.booth_entity.imperium", "summit.interactable","summit.static","im.booth_stand","im.booth_rastus"],\
-    data:{summit_interactable:{on_right_click:"execute on target run function imperium:kits/rastus/booth/click"}}\
+    Tags:["im.owned","im.booth_stand","im.booth_rastus"]\
 }

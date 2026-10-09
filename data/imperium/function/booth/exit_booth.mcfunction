@@ -1,36 +1,30 @@
-# Booth exit — hand the player back to Summit's default shield (BSL re-applies
-# Resistance V + Saturation once the tag is gone; BG entry re-tags via start_round).
-tag @s remove summit.no_regen
+# Booth exit hook. Driven by the falling edge in imperium:tick (was booth_definition.on_player_exit,
+# delivered by the Summit booth runtime). Runs once, as the leaving player.
 
-# Walking out with a kit on: take it back and return the inventory they arrived with.
-# This hook ALSO fires when entering the battlegrounds (BG's enter/success calls
-# #summit.booth:exit), which is exactly why inv_return defers a tick and skips arena players —
-# there, the kit stays and the cache is held until they actually leave the arena.
+# Open the latch imperium:tick compares against, so a re-entry fires enter_booth again.
+tag @s remove im.in_safe_zone
+
+# Off the island = in the fight. Self-guards on already-fighting and on carrying no kit, so a
+# player who wanders out empty-handed is simply not a participant.
+function imperium:ffa/join
+
+# THE KIT NOW RIDES ALONG, deliberately. This hook used to call imperium:util/inv_return, which
+# defers a tick and lands in util/inv_restore -> util/clear_kit: walking out of the pagoda stripped
+# your kit and handed back the inventory Summit had cached. Both halves of that are gone standalone.
 #
-# ...unless they left via the kitroom warp pad. That pad drops them at -119 71 99, outside every
-# booth bounding box, so Summit fires this hook and the kit would be stripped the moment they land —
-# the sticker book coming back over the hotbar.0 weapon. The landing room is meant to read as part of
-# the dojo (imperium:warp_landing is OR'd into ability_zone for the same reason), so skip the request
-# entirely there and let the kit ride until a real exit path asks for it.
+#   1. There is no inventory cache any more. It was summit.inventory_management:save/load, a shard-
+#      synced server API with no vanilla equivalent (vanilla cannot write a player's Inventory via
+#      /data at all), and it was dropped rather than reimplemented.
+#   2. Stripping the kit here would contradict the ability gate. imperium:ability_zone is now
+#      "is holding a kit" (im.kitted) rather than "is inside the booth", precisely so kits can be
+#      taken out and used anywhere — so confiscating the kit at the door would make that impossible.
 #
-# Deliberately gated HERE and not in inv_return_tick: this is the only trigger that needs the skip.
-# The other two callers must keep working inside the same cube — summit/player_leave (a fighter
-# walking out of the arena, whose exit corridor overlaps this zone, and whose items BG has ALREADY
-# cleared) and summit/reset_player (/hub, /unstuck, rejoin). Gating the shared tick function would
-# strand both of them with an empty inventory and a cache parked in storage.
-#
-# `unless entity @s[predicate=...]` rather than `unless predicate`: warp_landing is a location_check,
-# so it has to be evaluated at the PLAYER's position. The selector arg does that; a bare
-# `unless predicate` would read this hook's execution position instead.
-execute unless entity @s[predicate=imperium:warp_landing] run function imperium:util/inv_return
+# The Clear Kit stand (imperium:booth/clear/select -> util/clear_kit) is now the only thing that
+# takes a kit off you, and it is deliberate rather than positional.
 
 # Training dummy: the booth may have just emptied, which is the one state where nothing is watching
-# the dummy (its tether lives in loop_5t, a booth ticking_function). Hand off to a scheduled sweep
-# instead of checking inline — see booth/dummy/empty_check for why the delay is load-bearing.
-# `replace` is what makes this safe for a group leaving together: a whole tour walking out queues
-# ONE check, not one per person, and the last exit's schedule is the one that survives.
-#
-# Deliberately NOT gated on the warp_landing skip above. That skip exists so the kit rides along to
-# the landing room; the dummy has nothing to do with the leaver's inventory, and someone taking the
-# kitroom pad has left the booth boxes just as completely as someone walking out the front.
+# the dummy (its tether lives in loop_5t, which idles once nobody is inside the boxes). Hand off to a
+# scheduled sweep instead of checking inline — see booth/dummy/empty_check for why the delay matters.
+# `replace` is what makes this safe for a group leaving together: a whole tour walking out queues ONE
+# check, not one per person, and the last exit's schedule is the one that survives.
 schedule function imperium:booth/dummy/empty_check 10t replace

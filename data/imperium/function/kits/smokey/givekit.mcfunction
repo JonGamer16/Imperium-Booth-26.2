@@ -131,4 +131,7 @@ scoreboard players operation @s im_abilityCdB = #Smokey im_abilityCdB
 scoreboard players operation @s im_abilityCdC = #Smokey im_abilityCdC
 
 tag @s add im.kit_smokey
+# Single "has a kit" marker: gates imperium:ability_zone and the idle check in imperium:tick.
+# Added HERE, beside the kit tag, not in arena/givekit — arena/respawn calls this file directly.
+tag @s add im.kitted
 scoreboard players set @s im_offhandCd 20
