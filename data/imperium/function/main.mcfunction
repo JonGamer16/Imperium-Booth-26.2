@@ -63,6 +63,13 @@ scoreboard objectives add im.temp dummy
     scoreboard objectives add im_aimId dummy
     # Centralized ability tuning constants (see main/ability_parameters)
     scoreboard objectives add im.param dummy
+# Player launch module (imperium:motion/*). $x/$y/$z/$strength are the inputs, # names are scratch
+# and per-bit flags. #max/#min are the 18-bit range the motion_impulse enchantment can encode.
+    scoreboard objectives add im.motion dummy
+    scoreboard players set #max im.motion 131071
+    scoreboard players set #min im.motion -131072
+    scoreboard players set #1000 im.motion 1000
+    scoreboard players set #-1 im.motion -1
 
 # Grouped setup (see data/imperium/function/main/). Order matters:
 #   constants must exist before init_cooldowns (the ability_cooldowns set_cd calls read them).

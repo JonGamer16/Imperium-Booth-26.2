@@ -102,7 +102,7 @@ execute unless items entity @s hotbar.1 * run \
 execute unless items entity @s hotbar.2 * run \
     item replace entity @s hotbar.2 with \
         crossbow[\
-            enchantments={"imperium:crossbow_power":1},\
+            enchantments={"imperium:crossbow_power":1,"imperium:crossbow_punch":1},\
             !max_damage,\
             custom_name={text:"Heavy Crossbow",color:"yellow",italic:false},\
             custom_data={"imperium_kit":1b},\

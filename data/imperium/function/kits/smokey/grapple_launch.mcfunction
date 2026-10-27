@@ -9,17 +9,17 @@ execute if score @s im_grappleX matches -15000..15000 if score @s im_grappleZ ma
 # Velocity (1/10000 blocks/tick): x,z = offset / GrappleLateral; y = offset / GrappleVertPull. This
 # distance-proportional pull is capped at +/- GrappleMax per axis (-1 = unlimited); the static
 # GrappleVertical pop is added AFTER the cap so it always lands.
-scoreboard players operation $x player_motion.api.launch = @s im_grappleX
-scoreboard players operation $x player_motion.api.launch /= #GrappleLateral im.param
-scoreboard players operation $y player_motion.api.launch = @s im_grappleY
-scoreboard players operation $y player_motion.api.launch /= #GrappleVertPull im.param
-scoreboard players operation $z player_motion.api.launch = @s im_grappleZ
-scoreboard players operation $z player_motion.api.launch /= #GrappleLateral im.param
+scoreboard players operation $x im.motion = @s im_grappleX
+scoreboard players operation $x im.motion /= #GrappleLateral im.param
+scoreboard players operation $y im.motion = @s im_grappleY
+scoreboard players operation $y im.motion /= #GrappleVertPull im.param
+scoreboard players operation $z im.motion = @s im_grappleZ
+scoreboard players operation $z im.motion /= #GrappleLateral im.param
 
 execute unless score #GrappleMax im.param matches -1 run function imperium:kits/smokey/grapple_clamp
 
-scoreboard players operation $y player_motion.api.launch += #GrappleVertical im.param
-function player_motion:api/launch_xyz
+scoreboard players operation $y im.motion += #GrappleVertical im.param
+function imperium:motion/launch_xyz
 
 scoreboard players operation @s im_abilityCdA = #Smokey im_abilityCdA
 

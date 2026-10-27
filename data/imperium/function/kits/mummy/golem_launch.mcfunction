@@ -1,15 +1,15 @@
 # Golem Throw launch — runs as the VICTIM (golem_throw post_attack, affected=victim, gated on the
 # attacker being armed). Fling the victim straight up by #GolemLaunch (1/10000 b/t). Mirrors the
-# player/mob split from mgrapple_yank: players ignore raw Motion (use the summit-core motion lib,
+# player/mob split from mgrapple_yank: players ignore raw Motion (use imperium:motion,
 # which is player-only); every other entity — mannequins included — gets Motion NBT directly.
-scoreboard players set $x player_motion.api.launch 0
-scoreboard players operation $y player_motion.api.launch = #GolemLaunch im.param
-scoreboard players set $z player_motion.api.launch 0
+scoreboard players set $x im.motion 0
+scoreboard players operation $y im.motion = #GolemLaunch im.param
+scoreboard players set $z im.motion 0
 
-execute if entity @s[type=player] run function player_motion:api/launch_xyz
+execute if entity @s[type=player] run function imperium:motion/launch_xyz
 
 execute unless entity @s[type=player] run data merge entity @s {OnGround:0b}
-execute unless entity @s[type=player] store result entity @s Motion[1] double 0.0001 run scoreboard players get $y player_motion.api.launch
+execute unless entity @s[type=player] store result entity @s Motion[1] double 0.0001 run scoreboard players get $y im.motion
 
 playsound minecraft:entity.iron_golem.repair player @a[distance=..32] ~ ~ ~ 1 0.7
 

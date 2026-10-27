@@ -28,7 +28,7 @@ tellraw @s \
     {color:"yellow",\
                             text:"Heavy Crossbow"},\
     {color:"gray",\
-                            text:" — ⬆ Arrow Damage\n"},\
+                            text:" — ⬆ Arrow Damage; ⬆ Arrow KB\n"},\
     {color:"gold",\
                             text:"  • [Consumable] "},\
     {color:"yellow",\

@@ -4,9 +4,9 @@
 scoreboard players set #negmax im.param 0
 scoreboard players operation #negmax im.param -= #GrappleMax im.param
 
-scoreboard players operation $x player_motion.api.launch < #GrappleMax im.param
-scoreboard players operation $x player_motion.api.launch > #negmax im.param
-scoreboard players operation $y player_motion.api.launch < #GrappleMax im.param
-scoreboard players operation $y player_motion.api.launch > #negmax im.param
-scoreboard players operation $z player_motion.api.launch < #GrappleMax im.param
-scoreboard players operation $z player_motion.api.launch > #negmax im.param
+scoreboard players operation $x im.motion < #GrappleMax im.param
+scoreboard players operation $x im.motion > #negmax im.param
+scoreboard players operation $y im.motion < #GrappleMax im.param
+scoreboard players operation $y im.motion > #negmax im.param
+scoreboard players operation $z im.motion < #GrappleMax im.param
+scoreboard players operation $z im.motion > #negmax im.param

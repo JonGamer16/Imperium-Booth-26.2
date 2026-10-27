@@ -108,7 +108,9 @@ execute unless items entity @s hotbar.2 * run \
         crossbow[\
             !max_damage,\
             enchantments={\
-                "multishot":1\
+                "multishot":1,\
+                "imperium:volley":1,\
+                "imperium:crossbow_punch":1\
             },\
             custom_name={text:"Birdshot",color:gold,italic:false},\
             custom_data={"imperium_kit":1b}\

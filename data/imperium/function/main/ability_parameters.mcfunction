@@ -5,9 +5,8 @@
 # Shared abilities
     # Leap Feather (abilities/leap, Livvy + Meowdy): vertical dampening of the look-driven launch.
     #   Kept fraction of look-Y = numerator / #LeapDampDiv. Grounded keeps more (no jump lift);
-    #   airborne keeps less (the jump already supplied lift). Formerly borrowed #constant.* from
-    #   the vendored player_motion lib; the summit-core lib doesn't define #constant.3, so these
-    #   now live here.
+    #   airborne keeps less (the jump already supplied lift). Applied to $y im.motion between
+    #   imperium:motion/get_looking and launch_xyz.
     scoreboard players set #LeapDampGround im.param 3
     scoreboard players set #LeapDampAir im.param 2
     scoreboard players set #LeapDampDiv im.param 10

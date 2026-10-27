@@ -36,9 +36,9 @@ execute \
     unless predicate imperium:player_input/right \
     run return run advancement revoke @s only imperium:rastus_air_dodge
 
-#   Launch strength — lateral hop distance, in 0.0001 b/t units (matches player_motion).
+#   Launch strength — lateral hop distance, in 0.0001 b/t units (matches imperium:motion).
 scoreboard players operation \
-    $strength player_motion.api.launch = #DodgePower im.param
+    $strength im.motion = #DodgePower im.param
 
 #   Horizontal launch in the held direction.
 function imperium:kits/rastus/dodge_launch

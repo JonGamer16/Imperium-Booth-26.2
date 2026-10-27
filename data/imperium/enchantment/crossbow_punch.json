@@ -1,0 +1,39 @@
+{
+  "anvil_cost": 2,
+  "description": { "text": "Crossbow Punch", "color": "gold" },
+  "effects": {
+    "minecraft:knockback": [
+      {
+        "effect": {
+          "type": "minecraft:add",
+          "value": {
+            "type": "minecraft:linear",
+            "base": 1.0,
+            "per_level_above_first": 1.0
+          }
+        },
+        "requirements": {
+          "condition": "entity_properties",
+          "entity": "direct_attacker",
+          "predicate": {
+            "entity_type": "#minecraft:arrows"
+          }
+        }
+      }
+    ]
+  },
+  "max_cost": {
+    "base": 37,
+    "per_level_above_first": 20
+  },
+  "max_level": 2,
+  "min_cost": {
+    "base": 12,
+    "per_level_above_first": 20
+  },
+  "slots": [
+    "mainhand"
+  ],
+  "supported_items": ["minecraft:bow", "minecraft:crossbow"],
+  "weight": 2
+}

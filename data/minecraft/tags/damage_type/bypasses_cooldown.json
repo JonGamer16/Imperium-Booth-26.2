@@ -2,6 +2,7 @@
     "values":
     [
         "imperium:light",
-        "imperium:venom"
+        "imperium:venom",
+        "imperium:volley_reset"
     ]
 }

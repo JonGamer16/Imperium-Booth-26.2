@@ -1,6 +1,7 @@
 {
   "values": [
     "imperium:venom",
-    "imperium:bomb"
+    "imperium:bomb",
+    "imperium:volley_reset"
   ]
 }

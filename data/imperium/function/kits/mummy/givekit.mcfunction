@@ -61,7 +61,8 @@ execute unless items entity @s hotbar.0 * run \
         mace[\
             attribute_modifiers=[\
                 {type:"attack_damage",amount:6,operation:add_value,slot:mainhand,id:"base_attack_damage"},\
-                {type:"attack_speed",amount:-2.8,operation:add_value,slot:mainhand,id:"base_attack_speed"}\
+                {type:"attack_speed",amount:-2.8,operation:add_value,slot:mainhand,id:"base_attack_speed"},\
+                {type:"entity_interaction_range",amount:0.3,operation:add_value,slot:mainhand,id:"mainhand"},\
             ],\
             enchantments={"imperium:golem_throw":1,"imperium:mace_smash":1},\
             !max_damage,\
