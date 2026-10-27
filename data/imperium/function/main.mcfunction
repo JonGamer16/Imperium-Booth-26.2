@@ -113,15 +113,6 @@ tag @a[tag=im.kit_mummy] add im.kitted
 tag @a[tag=im.kit_rastus] add im.kitted
 tag @a[tag=im.kit_smokey] add im.kitted
 
-# Natural regeneration OFF, world-wide. Every imperium healing item is nutrition:0 / saturation:0
-# by design, so all healing is meant to come from the kit; with vanilla regen on, a full hunger bar
-# heals through that entirely and the whole healing balance stops meaning anything. This replaces
-# Summit's summit.no_regen + summit.regen:zz/tick pairing, which had no standalone equivalent.
-# WORLD-WIDE and deliberate — see the regen block in imperium:loop_1s before reusing this pack in a
-# survival world.
-# NOTE 26.2 gamerule names are snake_case: this is natural_health_regeneration, NOT the legacy
-# camelCase naturalRegeneration — that name does not exist in 26.2 and the command just fails.
-gamerule natural_health_regeneration false
 
 # HUD displays
     # No global scoreboard displays allowed

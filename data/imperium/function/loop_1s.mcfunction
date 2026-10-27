@@ -26,7 +26,7 @@ execute as @e[type=#minecraft:zombies,tag=im.dummy] at @s unless entity @e[type=
 # or it quietly heals through the whole design. Summit did this with summit.no_regen plus its own
 # regen tick (summit.regen:zz/tick) that also held a tagged player's food at 8. Neither exists here.
 #
-# Standalone the switch is the naturalRegeneration gamerule, set once in imperium:main. It is
+# Standalone the switch is the natural_health_regeneration gamerule, set once in imperium:main. It is
 # WORLD-WIDE, which is correct for a dedicated kit-PVP world and wrong for anything else — if you
 # drop this pack into a survival world, that line in main is the one to reconsider.
 #
