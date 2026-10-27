@@ -27,8 +27,8 @@ execute as @e[type=#minecraft:zombies,tag=im.dummy] at @s unless entity @e[type=
 # regen tick (summit.regen:zz/tick) that also held a tagged player's food at 8. Neither exists here.
 #
 # Standalone the switch is the natural_health_regeneration gamerule, set once in imperium:main. It is
-# WORLD-WIDE, which is correct for a dedicated kit-PVP world and wrong for anything else — if you
-# drop this pack into a survival world, that line in main is the one to reconsider.
+# WORLD-WIDE, which is correct for a dedicated kit-PVP world and wrong for anything else. That's why
+# it belongs to the kit PvP pack only (SPLIT_PLAN.md); one game mode per world.
 #
 # im.no_regen survives as the marker for "this player is on artificial healing", so anything that
 # wants to hand back regen (a lobby, a spectator mode) has a tag to test rather than a gamerule to

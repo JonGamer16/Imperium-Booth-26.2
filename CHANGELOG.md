@@ -81,6 +81,12 @@ every kit and fixed what came up. Everything below has been tested in-game unles
 
 Both toggles keep their value across `/reload`. Turn them off before a real session.
 
+### World settings
+
+- **`main` now runs `gamerule natural_health_regeneration false`.** The `loop_1s` regen comment always
+  said this line existed, but it was missing, so natural regen was on during fights. Kit PvP only:
+  after the split it stays in the kit PvP pack's load. *(untested)*
+
 ### Housekeeping
 
 - The Smithed Summit constraints are retired. The pack is a standalone game now, so the

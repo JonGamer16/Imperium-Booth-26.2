@@ -6,6 +6,11 @@ execute if score #Debug im_debug_mode matches 1 \
 
 ##########
 
+# Regen policy (see loop_1s): kit healing is the only healing, so vanilla regen must be off.
+# WORLD-WIDE. Kit-PvP-only by design: after the split this lives in the kit PvP pack's load, never
+# in core or survival. The comment in loop_1s always said it was set here; the line itself was missing.
+gamerule natural_health_regeneration false
+
 scoreboard objectives add im_givekit trigger
 scoreboard objectives add im_summonerID dummy
 

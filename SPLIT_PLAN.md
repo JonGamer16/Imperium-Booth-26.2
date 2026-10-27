@@ -1,6 +1,6 @@
 # Three-pack split — plan
 
-Status: **planning** (2026-10-27). Nothing has been moved yet. This file is the inventory and the
+Status: **decisions made, nothing moved yet** (2026-10-27). This file is the inventory and the
 coupling map to work from. Recent changes are in [CHANGELOG.md](CHANGELOG.md).
 
 ## Goal
@@ -10,69 +10,67 @@ and items, without breaking the kit-PvP game. Split the one pack into three:
 
 | Pack | Working name | Contents | Needs |
 |---|---|---|---|
-| **Core** | `imperium` | Enchantments, motion module, cooldown engine, shared triggers, constants | — |
-| **Kit PvP** | `imperium_kitpvp` | The 7 kits, booth, arena / FFA, gold, training dummy, kit select | Core |
-| **Survival** | `imperium_smp` | Recipes, loot-table injections, survival-side ability gating, new craftables | Core |
+| **Core** | `imperium` | Hand-picked enchantments and items that work without kits, the motion library, shared objectives and constants | — |
+| **Kit PvP** | `imperium_kitpvp` | The 7 kits, the cooldown engine, ability gating, gamerules, booth, arena / FFA, gold, dummy, kit-exclusive enchantments | Core |
+| **Survival** | `imperium_smp` | Recipes, loot injections, new craftables, and its own balancing (e.g. a shared mana bar) | Core |
 
-Core must load and run cleanly **on its own**, so a survival world can run core + survival with no
-booth code at all.
+Core must load and run cleanly **on its own**, and must never change world-wide settings. That way
+it can sit next to other packs in someone's survival world.
 
-## Decisions to make first
+## Decisions (made 2026-10-27)
 
-1. **Namespace.** *Recommended: keep `imperium:` in all three packs, with disjoint paths.* Data
-   packs merge a namespace across packs, so moving a file to another pack changes **no IDs** and
-   rewrites no references. The split is just file moves plus the hooks below. The alternative,
-   renaming to `imperium_kitpvp:` etc., touches hundreds of references for no functional gain. It
-   can still happen later, one pack at a time.
-2. **Where the cooldown engine lives.** *Recommended: core.* The slot engine
-   (`update_cooldowns`, `set_cd`, the `cooldown_*` triggers, `rearm_triggers`) knows nothing about
-   specific kits. Only `kit_dispatch` does, and that becomes a hook. Survival can then reuse the
-   same charge-by-damage model for craftable ability items.
-3. **How abilities are gated in survival.** Today `imperium:ability_zone` means "has `im.kitted`".
-   Survival players never get a kit tag, so every gated advancement (the cooldown engine, kinetic
-   charge, venom, reversal, ...) is dead for them. The options:
-   - (a) gate on the **held item** (e.g. `custom_data` or the enchantment itself),
-   - (b) make survival grant its own tag,
-   - (c) make `ability_zone` an `any_of` that each pack adds a term to. Predicates don't merge
-     across packs, so (c) means core owns the file and lists every term.
-
-   This decision shapes the whole survival pack.
+1. **Namespace: keep `imperium:` in all three packs**, with disjoint file paths. Data packs merge a
+   namespace across packs, so moving a file between packs changes **no IDs** and rewrites no
+   references. A pack can still be renamed later on its own if needed.
+2. **The cooldown engine and ability gating are kit-PvP only.** That covers `update_cooldowns`,
+   `set_cd`, `kit_dispatch`, the `combat/cooldown_*` triggers, `imperium:ability_zone` and
+   `im.kitted`. Survival items get a different balancing system: a shared, chargeable mana bar that
+   everything spends from, or something else. That's designed later, in the survival pack.
+3. **Gamerules and other world-wide settings live in kit PvP.** Core and survival must not set any.
+   Kit PvP turns natural regen off: `gamerule natural_health_regeneration false` in `main`, added
+   2026-10-27. The `loop_1s` comment always said it was set there, but the line was missing.
+4. **Enchantments and items are hand-picked.** Kit-tied ones stay exclusive to kit PvP. Self-contained
+   ones go to core, so survival can use them. Anything that would need a near-full rewrite to work
+   without a kit stays in kit PvP until it's rebuilt for survival.
+5. **One game mode per world.** A world runs kit PvP *or* survival, never both. So sharing `im.temp`
+   (created by core) is fine, and survival items **may** keep the `imperium_kit` custom_data marker:
+   kit PvP's `clear_kit` / `internal/contain` never meet them in the same world. If that ever
+   changes, give survival its own loot-table entries with a separate marker such as
+   `{imperium_smp:1b}`.
 
 ## Inventory — where each piece goes
 
-### Core (`imperium`)
+### Core (`imperium`): small, self-contained
 
 | Path | Notes |
 |---|---|
-| `function/motion/*` | Launch module (replaced summit-dp-core `player_motion`). |
-| `function/update_cooldowns`, `abilities/set_cd` | Slot engine. |
-| `function/internal/cooldown_*`, `rod_broke`, `arrow_recount`, `record_attacker`, `damage_light` | Shared triggers. `record_attacker` feeds the kill feed, so check where it belongs. |
-| `function/util/rearm_triggers`, `util/debug`, `util/delete_objectives` | `rearm_triggers` must list only **core** advancements, and each pack needs its own (see hooks). |
-| `function/main/constants`, the core parts of `main/enchantments`, `main/init_stats` | |
-| `function/test/*` (except the probes) | Debug toggles. |
-| `function/tick`, `loop_tick`, `loop_5t`, `loop_1s`, `loop_enchantments` | Keep the **driver** in core, and move every kit/booth line out behind hooks. |
-| `function/enchantments/{backstab*, high_jump*, straight_flight, volley_*}` | Self-contained. |
-| `enchantment/{backstab, crits, crossbow_power, crossbow_punch, high_jump, mace_smash, marked, motion_impulse, single_use, straight_flight, volley}` | Self-contained effects. |
-| `damage_type/{light, volley_reset}`, `tags/damage_type/*`, `tags/enchantment/*` | |
-| `predicate/{ability_zone, on_ground, floating, sneaking, input_sneak, player_input/*, motion/*}` | |
-| `minecraft/tags/function/{tick, load}.json` | Function tags merge, so each pack can add its own entries. |
+| `function/motion/*` | Launch library. Kit PvP calls into it, which is the allowed direction. |
+| `enchantment/{backstab, crits, crossbow_power, crossbow_punch, high_jump, mace_smash, marked, motion_impulse, single_use, straight_flight, volley}` | Self-contained effects. None reference kits, the engine or `ability_zone` (checked 2026-10-27). |
+| `function/enchantments/{backstab, backstab_behind, high_jump, high_jump_on, high_jump_off, straight_flight, volley_hit, volley_land, volley_spawn}` | Called only by those enchantments' own effects. Kit PvP also calls `high_jump_off`, which is fine. |
+| `damage_type/volley_reset`, `minecraft/tags/damage_type/*`, `minecraft/tags/enchantment/*` | Tags merge across packs. |
+| `function/main/constants` | `imperium.const`. Idempotent, so any pack's load can call it. |
+| *(new)* `function/core/load` | Creates only what core uses: `im.temp`, `im.motion`, the backstab objectives, `imperium.const`. Registered in `#minecraft:load`. |
+| *(new)* `function/core/second` | Ages and kills Straight Flight arrows **by their own `im.straight_flight` tag** (see the coupling notes). Registered in `#minecraft:tick` with its own 20-tick counter. |
+| `predicate/{on_ground, floating, sneaking, input_sneak, player_input/*, motion/*}` | Only if a core file uses them. Otherwise they stay in kit PvP. |
 
-### Kit PvP (`imperium_kitpvp`)
+`marked` reads the `im.marked` tag, which only the Smokey dart applies. In core it does nothing until
+something in survival applies the tag. That's harmless, but keep it in mind.
+
+### Kit PvP (`imperium_kitpvp`): almost everything else
 
 | Path | Notes |
 |---|---|
-| `function/kits/*` (140 files) | All 7 kits, including `kits/*/booth/*`. |
-| `function/kit_dispatch` | Becomes a hook target (see below). |
-| `function/booth/*`, `arena/*`, `ffa/*` | Booth, kit stands, dummy, gold, respawn, kill feed. |
-| `function/util/{clear_kit, giveheals, giveloot, copy_gear, reset_player}` | |
-| `function/main/{ability_cooldowns, ability_parameters, game_triggers, init_cooldowns}` | Per-kit tuning. |
-| `function/abilities/{leap, leap_refund}` | Gated on `im.kit_livvy` / `im.kit_meowdy` and `im_cdUsesA`. |
-| `function/enchantments/{reversal*, offhand_*, lifesteal*, aim_*}` | Kit-gated (Levent, Smokey, Livvy, Rastus/Levent tracker). |
-| `enchantment/{reversal, offhand_attack, lifesteal, focus_attack, charge_attack, golem_throw, barrier, grappling, reeling, leap}` | Either call kit functions or are tooltip markers for kit trackers. |
-| `advancement/booth/*`, `levent_*`, `rastus_*`, `use_*`, `raise_shield`, `attack_player`, `combat/venom_bite`, `combat/hurt_by_player` | |
-| `loot_table/<kit>/*`, `item_modifier/*`, `dialog/kitselect`, `structure/imperium_arena`, `sync_setting/kit` | |
-| `damage_type/{bomb, venom}`, `predicate/{safe_zone, at_spawn, has_bad_omen, has_venom, booth/*}` | |
-| `minecraft/tags/entity_type/*` | Dummy and fencer helpers. |
+| `function/kits/*` (140 files), `kit_dispatch` | All 7 kits. |
+| `function/update_cooldowns`, `abilities/*`, `internal/*` | The cooldown engine, leap, and every shared trigger. |
+| `function/tick`, `loop_tick`, `loop_5t`, `loop_1s`, `loop_enchantments` | The driver and loops. They're nearly all kit, booth or arena work. Only Straight Flight's aging moves to core. |
+| `function/booth/*`, `arena/*`, `ffa/*`, `util/*`, `test/*` | Booth, gold, respawn, kill feed, kit utilities, debug toggles. |
+| `function/main.mcfunction`, `main/{ability_cooldowns, ability_parameters, enchantments, game_triggers, init_cooldowns, init_stats}` | Kit PvP's load. It should call `imperium:main/constants` and rely on core's load for the rest. |
+| `function/enchantments/{reversal*, offhand_*, lifesteal*, aim_*}` | Kit-gated. |
+| `enchantment/{reversal, offhand_attack, lifesteal, focus_attack, charge_attack, golem_throw, barrier, grappling, reeling, leap}` | These call kit functions, or are tooltip markers for kit trackers. |
+| All of `advancement/*` | Every current advancement is kit, booth or engine. Core needs none. |
+| `predicate/{ability_zone, safe_zone, at_spawn, has_bad_omen, has_venom, booth/*}` | |
+| `loot_table/<kit>/*`, `item_modifier/*`, `dialog/*`, `structure/*`, `sync_setting/*`, `damage_type/{light, bomb, venom}` | `light` is the Rastus rapier's i-frame bypass. Move it to core if a survival item wants it. |
+| `minecraft/tags/entity_type/*`, `minecraft/tags/function/{tick, load}` | Function tags merge, so core adds its own entries. |
 
 ### Survival (`imperium_smp`)
 
@@ -80,57 +78,48 @@ booth code at all.
 |---|---|
 | `recipe/*` | The 3 existing recipes (diamond dagger / glaive / rapier) predate 26.2 and need fixing. The glaive's `item_name` is a JSON string. |
 | `loot_table/smp_weapons/` | Already exists, but empty (created 2026-10-27). |
-| *(new)* | Craftable weapons and items, loot injections, survival ability gating (decision 3). |
+| *(new)* | Mana bar or other balancing, craftables, loot injections, survival versions of any kit abilities worth porting. |
 
-## Coupling to cut (core → kit PvP)
+## Coupling to cut
 
-Core must never call into kit PvP, or core alone would log `Unknown function` errors. Each call
-below becomes a **function tag hook**: core owns an empty `#imperium:hooks/<name>` and calls it;
-kit PvP adds its functions to the tag.
+With the engine and gating in kit PvP, almost every dependency already runs **kit PvP → core**,
+which is allowed. Only these need work:
 
-| Where | Today it calls | Hook |
-|---|---|---|
-| `update_cooldowns` → `kit_dispatch` | `kits/<kit>/abilities` ×7 | `#imperium:hooks/cooldown_ready` |
-| `loop_tick` | `kits/{smokey,mummy,livvy,rastus,levent}/*`, `booth/dummy/dmg_tick`, `arena/on_death` | `#imperium:hooks/tick` |
-| `loop_1s` | `arena/{calc_gold, gold_kill_bonus, respawn}`, the `im.no_regen` saturation | `#imperium:hooks/second` |
-| `tick` | `booth/{enter,exit}_booth` (and the idle gate reads `imperium:safe_zone`) | `#imperium:hooks/tick`, with the gate reworked |
-| `loop_enchantments` | Livvy lifesteal lines (`im.kit_livvy`) | move the lines to kit PvP |
-| `internal/reset_drought` | `kits/rastus/combo_hit` | `#imperium:hooks/hit_landed` |
-| `internal/cooldown_dealt_apply` | `arena/gold_dmg_bonus` | `#imperium:hooks/hit_human` |
-| `internal/venom_bite` | `im.kit_livvy` gate | move the file to kit PvP |
-| `main` | kit sections, the dummy, the `im.equip_cd` / `im.kitted` backfill | each pack runs its own load function |
-| `util/rearm_triggers` | lists kit PvP advancements | split: one per pack, both run on load |
+| Issue | Fix |
+|---|---|
+| Straight Flight arrows are only aged and despawned via kit PvP: `internal/contain` claims `imperium_kit` arrows as `im.owned`, and `loop_1s` ages `im.owned`. In core alone (or survival), a Straight Flight arrow would hang in the air forever. | Core's `core/second` ages `@e[type=#minecraft:arrows,tag=im.straight_flight]` itself. Kit PvP's `im.owned` aging stays as it is for its other arrows. An arrow aged by both still dies at 10 s; check the counts don't double. |
+| `main.mcfunction` creates every objective for every system. | Split it: `core/load` creates core's objectives, kit PvP's `main` creates the rest. |
+| `im.temp` is shared scratch space (used by both volley and the kits). | Created by `core/load`. Kit PvP keeps using it (decision 5). |
+| `util/rearm_triggers` lists every advancement. | All advancements are kit PvP, so it stays there as it is. |
 
 **Watch out:**
-- A function tag that lists a function which doesn't exist fails to load as a whole. Keep each
-  pack's tag entries pointing only at that pack's own files. Where an entry may legitimately be
-  missing, write it as `{"id": "imperium:...", "required": false}`.
-- **Load order:** core's load must create the shared objectives before the other packs' loads use
-  them. Load tags across packs run in pack order, so either list core first, or have each pack's
-  load call `function imperium:main/constants` (it's idempotent).
+- A function tag that lists a function which doesn't exist fails to load as a whole. Each pack's
+  tag entries must point only at that pack's own files. Where an entry may legitimately be missing,
+  write it as `{"id": "imperium:...", "required": false}`.
+- **Load order:** packs' `#minecraft:load` entries run in pack order. Kit PvP's load must not read a
+  core objective before core's load creates it. Simplest fix: kit PvP's `main` calls
+  `function imperium:core/load` first; it's idempotent.
 
-## Survival blockers (beyond the split)
+## Open questions
 
-- **Ability gate.** See decision 3.
-- **Health regen.** The comment at `loop_1s.mcfunction:29` says the `natural_health_regeneration`
-  gamerule is "set once in imperium:main", but no `gamerule` command exists anywhere in the pack.
-  Check whether booth fights are meant to have regen off. For survival this is good news: nothing
-  world-wide gets switched.
-- **`clear_kit`** clears every `custom_data {imperium_kit:1b}` item. Survival craftables must
-  **not** carry that marker, or switching kits would delete them.
-- **`internal/contain`** claims and ages out arrows and potions marked `imperium_kit`. Survival
-  arrows with Straight Flight need their own claim, or they'll hang in the air forever.
-- **Stale Summit comments** in `internal/contain`, `grapple_track`, `mgrapple_track`, `loop_kit`,
-  and the `im.fighting → summit.no_regen` leftover in `loop_1s`.
+- **Which kit abilities to port to survival.** Candidates that are mostly self-contained: Smokey's
+  grapple (`grappling`), Livvy's web, Mummy's crystal bomb, the leap feather. Each needs its kit-tag
+  gates and slot-engine refills replaced by the survival balancing system.
+- **Stale Summit comments** in `internal/contain`, `grapple_track`, `mgrapple_track` and
+  `smokey/loop_kit`, plus the `im.fighting → summit.no_regen` leftover in `loop_1s`. Clean up
+  while moving files.
 
 ## Suggested order
 
 1. **Commit the current state** (26.3 port + debug pass) as a baseline. Move the
    `test/probe_*` files out first.
-2. **Add the hooks inside the single pack.** Same files, same folder, just route the calls through
-   function tags. Test it: behaviour should be identical.
-3. **Move files into three pack folders**, following the inventory above. No ID changes, if
-   decision 1 is "keep `imperium:`".
-4. **Test each combination:** core alone (clean log, nothing happens), core + kit PvP (identical to
-   today), core + survival, all three.
-5. **Start the survival content:** recipes, the gating from decision 3, the craftables.
+2. **Add `core/load` and `core/second` inside the single pack**, with Straight Flight aging by its
+   own tag. Test: behaviour should be identical.
+3. **Move files into three pack folders**, following the inventory above. No ID changes.
+4. **Test each combination:**
+   - core alone: clean log, the core enchantments work on hand-enchanted items, no gamerule
+     changes,
+   - core + kit PvP: identical to today,
+   - core + survival,
+   - all three.
+5. **Start the survival content:** recipes, item markers, the mana bar, the craftables.
