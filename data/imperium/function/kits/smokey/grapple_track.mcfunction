@@ -38,5 +38,6 @@ execute as @a[tag=im.grapple_armed,tag=!im.grapple_live,tag=im.grapple_user] at 
 #     im.rod_broke (imperium:internal/rod_broke, advancement-driven) is set only by a durability
 #     break, never by a slot swap, so it separates the two cleanly. tag=!im.grapple_user keeps this
 #     mutually exclusive with the line above, so a break can never double-fire the launch.
+execute if score #CdTrace im_debug_mode matches 1 as @a[tag=im.grapple_armed,tag=!im.grapple_live,tag=!im.grapple_user] run tellraw @s [{text:"[trace] grapple: bobber gone, rod gone, rod_broke=",color:"gold"},{text:"",extra:[{selector:"@s[tag=im.rod_broke]"}]}]
 execute as @a[tag=im.grapple_armed,tag=!im.grapple_live,tag=!im.grapple_user,tag=im.rod_broke] at @s run function imperium:kits/smokey/grapple_launch
 tag @a[tag=im.grapple_armed,tag=!im.grapple_live] remove im.grapple_armed

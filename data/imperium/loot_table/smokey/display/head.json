@@ -6,16 +6,16 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:netherite_helmet",
-          "functions": [
+          "modifier": [
             {
-              "function": "minecraft:set_components",
+              "type": "minecraft:set_components",
               "components": {
                 "minecraft:item_model": "minecraft:chainmail_helmet",
                 "minecraft:equippable": {
                   "asset_id": "minecraft:chainmail",
                   "slot": "head"
                 },
-                "minecraft:trim":{
+                "minecraft:trim": {
                   "material": "netherite",
                   "pattern": "eye"
                 },

@@ -6,9 +6,9 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:feather",
-          "functions": [
+          "modifier": [
             {
-              "function": "minecraft:set_components",
+              "type": "minecraft:set_components",
               "components": {
                 "minecraft:consumable": {
                   "consume_seconds": 0,
@@ -19,7 +19,11 @@
                 "minecraft:enchantments": {
                   "imperium:leap": 2
                 },
-                "minecraft:custom_name": {"text": "Leap", "color": "red", "italic": false},
+                "minecraft:custom_name": {
+                  "text": "Leap",
+                  "color": "red",
+                  "italic": false
+                },
                 "minecraft:custom_data": "{imperium_kit:1b,im_leap_feather:1b}"
               }
             }

@@ -3,33 +3,33 @@
     "sneak_airborne": {
       "trigger": "minecraft:tick",
       "conditions": {
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "flags": {
-                "is_on_ground": false
+        "player": {
+          "type": "minecraft:all_of",
+          "terms": [
+            {
+              "type": "minecraft:entity_properties",
+              "entity": "this",
+              "predicate": {
+                "flags": {
+                  "is_on_ground": false
+                }
               }
-            }
-          },
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "entity_tags": 
-              {"any_of": ["im.kit_rastus"]}
-            }
-          },
-          {
-            "condition": "minecraft:reference",
-            "name": "imperium:input_sneak"
-          },
-          {
-            "condition": "minecraft:reference",
-            "name": "imperium:ability_zone"
-          }
-        ]
+            },
+            {
+              "type": "minecraft:entity_properties",
+              "entity": "this",
+              "predicate": {
+                "entity_tags": {
+                  "any_of": [
+                    "im.kit_rastus"
+                  ]
+                }
+              }
+            },
+            "imperium:input_sneak",
+            "imperium:ability_zone"
+          ]
+        }
       }
     }
   },

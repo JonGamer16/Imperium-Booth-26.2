@@ -6,13 +6,13 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:rabbit_stew",
-          "functions": [
+          "modifier": [
             {
-              "function": "minecraft:set_count",
+              "type": "minecraft:set_count",
               "count": 1
             },
             {
-              "function": "minecraft:set_components",
+              "type": "minecraft:set_components",
               "components": {
                 "minecraft:food": {
                   "nutrition": 0,
@@ -41,7 +41,11 @@
                     "minecraft:custom_data": "{imperium_kit:1b}"
                   }
                 },
-                "minecraft:custom_name":{"text":"Rabbit Stew [Consume to Heal]","color":"gold","italic":false},
+                "minecraft:custom_name": {
+                  "text": "Rabbit Stew [Consume to Heal]",
+                  "color": "gold",
+                  "italic": false
+                },
                 "minecraft:custom_data": "{imperium_healing:1b}"
               }
             }

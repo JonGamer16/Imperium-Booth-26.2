@@ -1,10 +1,12 @@
 {
-    "condition": "minecraft:entity_properties",
+    "type": "minecraft:entity_properties",
     "entity": "this",
     "predicate": {
         "effects": {
             "minecraft:poison": {
-                "amplifier": { "min": 2 }
+                "amplifier": {
+                    "min": 2
+                }
             }
         }
     }

@@ -1,6 +1,9 @@
 {
   "anvil_cost": 1,
-  "description": { "text": "Crossbow Power", "color": "gold" },
+  "description": {
+    "text": "Crossbow Power",
+    "color": "gold"
+  },
   "effects": {
     "minecraft:damage": [
       {
@@ -13,7 +16,7 @@
           }
         },
         "requirements": {
-          "condition": "entity_properties",
+          "type": "entity_properties",
           "entity": "direct_attacker",
           "predicate": {
             "entity_type": "#minecraft:arrows"
@@ -34,6 +37,9 @@
   "slots": [
     "mainhand"
   ],
-  "supported_items": ["minecraft:bow", "minecraft:crossbow"],
+  "supported_items": [
+    "minecraft:bow",
+    "minecraft:crossbow"
+  ],
   "weight": 10
 }

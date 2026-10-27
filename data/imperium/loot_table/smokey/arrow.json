@@ -6,9 +6,9 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:arrow",
-          "functions": [
+          "modifier": [
             {
-              "function": "minecraft:set_components",
+              "type": "minecraft:set_components",
               "components": {
                 "minecraft:consumable": {
                   "consume_seconds": 0.05,
@@ -19,7 +19,11 @@
                 "minecraft:enchantments": {
                   "imperium:single_use": 1
                 },
-                "minecraft:custom_name": {"text": "Marking Dart", "color": "gold", "italic": false},
+                "minecraft:custom_name": {
+                  "text": "Marking Dart",
+                  "color": "gold",
+                  "italic": false
+                },
                 "minecraft:custom_data": "{imperium_kit:1b,im_marking_dart:1b}"
               }
             }

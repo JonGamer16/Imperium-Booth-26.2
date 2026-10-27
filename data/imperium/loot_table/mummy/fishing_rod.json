@@ -6,16 +6,22 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:fishing_rod",
-          "functions": [
+          "modifier": [
             {
-              "function": "minecraft:set_components",
+              "type": "minecraft:set_components",
               "components": {
                 "minecraft:max_damage": 10,
                 "minecraft:enchantments": {
                   "imperium:reeling": 1
                 },
-                "minecraft:use_cooldown":{"seconds": 0.5},
-                "minecraft:custom_name": {"text": "Grapple Rod", "color": "gold", "italic": false},
+                "minecraft:use_cooldown": {
+                  "seconds": 0.5
+                },
+                "minecraft:custom_name": {
+                  "text": "Grapple Rod",
+                  "color": "gold",
+                  "italic": false
+                },
                 "minecraft:custom_data": "{imperium_kit:1b}"
               }
             }

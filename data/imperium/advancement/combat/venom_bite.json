@@ -3,17 +3,41 @@
         "bite": {
             "trigger": "minecraft:player_hurt_entity",
             "conditions": {
-                "player": [
-                    { "condition": "minecraft:entity_properties", "entity": "this", "predicate": { "entity_tags": { "all_of": ["im.kit_livvy"] } } },
-                    { "condition": "minecraft:reference", "name": "imperium:ability_zone" }
-                ],
+                "player": {
+                    "type": "minecraft:all_of",
+                    "terms": [
+                        {
+                            "type": "minecraft:entity_properties",
+                            "entity": "this",
+                            "predicate": {
+                                "entity_tags": {
+                                    "all_of": [
+                                        "im.kit_livvy"
+                                    ]
+                                }
+                            }
+                        },
+                        "imperium:ability_zone"
+                    ]
+                },
                 "entity": {
-                    "entity_tags": { "all_of": ["im.venom"] }
+                    "type": "minecraft:entity_properties",
+                    "entity": "this",
+                    "predicate": {
+                        "entity_tags": {
+                            "all_of": [
+                                "im.venom"
+                            ]
+                        }
+                    }
                 },
                 "damage": {
                     "type": {
                         "tags": [
-                            { "id": "minecraft:no_impact", "expected": false }
+                            {
+                                "id": "#minecraft:no_impact",
+                                "expected": false
+                            }
                         ]
                     }
                 }

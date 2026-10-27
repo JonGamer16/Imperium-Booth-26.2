@@ -16,3 +16,4 @@
 # Cleared at the bottom of imperium:loop_tick, one tick later, once both trackers have read it.
 advancement revoke @s only imperium:combat/rod_broke
 tag @s add im.rod_broke
+execute if score #CdTrace im_debug_mode matches 1 run tellraw @s {text:"[trace] rod_broke fired",color:"gold"}

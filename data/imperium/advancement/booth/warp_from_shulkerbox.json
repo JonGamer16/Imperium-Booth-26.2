@@ -3,18 +3,25 @@
         "on_pad": {
             "trigger": "minecraft:tick",
             "conditions": {
-                "player": [
-                    {
-                        "condition": "minecraft:location_check",
-                        "predicate": {
-                            "position": {
-                                "x": {"min": -124.5, "max": -120.5},
-                                "y": {"min": 69.0, "max": 73.0},
-                                "z": {"min": 97.5, "max": 101.5}
+                "player": {
+                    "type": "minecraft:location_check",
+                    "predicate": {
+                        "position": {
+                            "x": {
+                                "min": -124.5,
+                                "max": -120.5
+                            },
+                            "y": {
+                                "min": 69.0,
+                                "max": 73.0
+                            },
+                            "z": {
+                                "min": 97.5,
+                                "max": 101.5
                             }
                         }
                     }
-                ]
+                }
             }
         }
     },

@@ -1,20 +1,21 @@
-# Ability cooldown engine — dealt-damage trigger (advancement-driven; replaces the per-tick
-# `@a run update_cooldowns` in imperium:loop). Fires from imperium:combat/cooldown_dealt on
-# minecraft:player_hurt_entity, as the attacking player. Cooldowns only ever change via
-# im_abilityDealt / im_abilityTaken, so running the engine only on damage events is exact and
-# costs nothing on quiet ticks. Re-arm, then run the engine if the player is in the arena.
+# Ability cooldown engine — dealt-damage trigger (advancement-driven). Fires from
+# imperium:combat/cooldown_dealt on minecraft:player_hurt_entity against ANY target, as the
+# attacking player. Re-arm, then defer the engine one tick (internal/cooldown_flush).
+#
+# Why defer: player_hurt_entity fires from inside the victim's hurt handling, before the attack
+# awards the damage_dealt stat, so im_abilityDealt doesn't hold this hit yet. Running the engine
+# here charged each hit with the PREVIOUS hit's damage. One tick later the stat is settled.
+#
+# Weighting: hits on #imperium:human (players, mannequins, the training-dummy husk) charge 1:1;
+# anything else (mobs, golems) charges 1/3. combat/cooldown_dealt_human tags the human hits; the
+# flush divides the tick's dealt damage by 3 when no human was hit. A sweep that hits a human AND
+# a mob in one tick counts entirely as human — the stat can't split one tick's damage by target.
+#
+# Formerly human-only, which was the "have to take damage first" bug: the damage_dealt stat counts
+# every target, so mob damage piled up in im_abilityDealt with nothing consuming it until a
+# cooldown_taken run spent it all at once.
 advancement revoke @s only imperium:combat/cooldown_dealt
+execute if score #CdTrace im_debug_mode matches 1 run tellraw @s {text:"[cd] trigger: dealt",color:"gold"}
 
-# Charge the engine anywhere abilities are live — arena AND booth. The victim being a valid target
-# is enforced up in the advancement (entity type #imperium:human: players, mannequins, and the
-# training-dummy husk), so hitting a kit stand or a stray mob still charges nothing.
-# The old `if entity @s[tag=im.fighting]` guard here is what kept the booth dummy from ever
-# recharging an ability: im.fighting is added by arena/start_round, so it is absent in the booth.
-# It was redundant on the arena path anyway — the imperium:battlegrounds branch of ability_zone
-# already requires BOTH im.fighting and summit.battlegrounds.player, so dropping it changes
-# nothing in a real match and only opens up the booth.
-function imperium:update_cooldowns
-
-# Gold scoring stays arena-only: ability_zone also passes in the booth, and without this guard
-# whacking the training dummy would print "[Damage Bonus] +N Gold" and bank match score.
-execute if entity @s[tag=im.fighting] run function imperium:arena/gold_dmg_bonus
+tag @s add im.cd_dealt_pending
+schedule function imperium:internal/cooldown_flush 1t replace

@@ -1,0 +1,19 @@
+{
+    "criteria": {
+        "hit": {
+            "trigger": "minecraft:player_hurt_entity",
+            "conditions": {
+                "entity": {
+                    "type": "minecraft:entity_properties",
+                    "entity": "this",
+                    "predicate": {
+                        "minecraft:entity_type": "minecraft:husk"
+                    }
+                }
+            }
+        }
+    },
+    "rewards": {
+        "function": "imperium:test/probe_husk_ns"
+    }
+}

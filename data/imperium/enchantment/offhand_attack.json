@@ -1,39 +1,37 @@
 {
-    "description": { "text": "Offhand Attack", "color": "gold" },
+    "description": {
+        "text": "Offhand Attack",
+        "color": "gold"
+    },
     "supported_items": "#minecraft:enchantable/weapon",
-    "slots": ["mainhand"],
+    "slots": [
+        "mainhand"
+    ],
     "weight": 1,
     "anvil_cost": 2,
-    "min_cost":
-    {
+    "min_cost": {
         "base": 2,
         "per_level_above_first": 1
     },
-    "max_cost":
-    {
+    "max_cost": {
         "base": 2,
         "per_level_above_first": 1
     },
     "max_level": 1,
-    "effects":
-    {
-        "minecraft:post_attack":
-        [
+    "effects": {
+        "minecraft:post_attack": [
             {
                 "affected": "victim",
                 "enchanted": "attacker",
-                "effect":
-                {
+                "effect": {
                     "type": "minecraft:run_function",
                     "function": "imperium:enchantments/offhand_attack"
                 },
-                "requirements": 
-                {
-                    "condition": "entity_scores",
+                "requirements": {
+                    "type": "entity_scores",
                     "entity": "attacker",
-                    "scores": 
-                    {
-                        "im_offhandCd":{
+                    "scores": {
+                        "im_offhandCd": {
                             "max": 0
                         }
                     }
@@ -42,8 +40,7 @@
             {
                 "affected": "attacker",
                 "enchanted": "attacker",
-                "effect": 
-                {
+                "effect": {
                     "type": "minecraft:run_function",
                     "function": "imperium:enchantments/offhand_cd"
                 }

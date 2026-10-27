@@ -31,12 +31,12 @@
           }
         },
         "requirements": {
-          "condition": "minecraft:inverted",
+          "type": "minecraft:inverted",
           "term": {
-            "condition": "minecraft:any_of",
+            "type": "minecraft:any_of",
             "terms": [
               {
-                "condition": "minecraft:entity_properties",
+                "type": "minecraft:entity_properties",
                 "entity": "this",
                 "predicate": {
                   "equipment": {
@@ -54,7 +54,7 @@
                 }
               },
               {
-                "condition": "minecraft:entity_properties",
+                "type": "minecraft:entity_properties",
                 "entity": "this",
                 "predicate": {
                   "equipment": {
@@ -87,12 +87,12 @@
           }
         },
         "requirements": {
-          "condition": "minecraft:inverted",
+          "type": "minecraft:inverted",
           "term": {
-            "condition": "minecraft:any_of",
+            "type": "minecraft:any_of",
             "terms": [
               {
-                "condition": "minecraft:entity_properties",
+                "type": "minecraft:entity_properties",
                 "entity": "this",
                 "predicate": {
                   "equipment": {
@@ -110,7 +110,7 @@
                 }
               },
               {
-                "condition": "minecraft:entity_properties",
+                "type": "minecraft:entity_properties",
                 "entity": "this",
                 "predicate": {
                   "equipment": {
@@ -157,7 +157,7 @@
           "function": "imperium:enchantments/volley_hit"
         },
         "requirements": {
-          "condition": "minecraft:entity_properties",
+          "type": "minecraft:entity_properties",
           "entity": "direct_attacker",
           "predicate": {
             "entity_type": "#minecraft:arrows"

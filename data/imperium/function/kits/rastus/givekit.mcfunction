@@ -58,6 +58,7 @@ execute unless items entity @s armor.feet * run \
 
 #   [MELEE] Lightning Rapier
 #       2 | 7, +1.0 Knockback
+#       ** Contains spear components to detect a missed focus attack, and a hitbox margin to compensate for the hit delay
 execute unless items entity @s hotbar.0 * run \
     item replace entity @s hotbar.0 with \
         netherite_sword[\

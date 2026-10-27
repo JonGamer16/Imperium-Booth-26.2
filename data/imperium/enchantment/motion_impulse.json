@@ -25,7 +25,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -34,7 +34,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -53,7 +53,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -62,7 +62,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -81,7 +81,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -90,7 +90,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -109,7 +109,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -118,7 +118,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -137,7 +137,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -146,7 +146,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -165,7 +165,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -174,7 +174,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -193,7 +193,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -202,7 +202,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -221,7 +221,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -230,7 +230,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -249,7 +249,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -258,7 +258,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -277,7 +277,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -286,7 +286,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -305,7 +305,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -314,7 +314,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -333,7 +333,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -342,7 +342,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -361,7 +361,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -370,7 +370,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -389,7 +389,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -398,7 +398,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -417,7 +417,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -426,7 +426,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -445,7 +445,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -454,7 +454,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -473,7 +473,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -482,7 +482,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -501,7 +501,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -510,7 +510,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -529,7 +529,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -538,7 +538,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -557,7 +557,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -566,7 +566,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -585,7 +585,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -594,7 +594,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -613,7 +613,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -622,7 +622,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -641,7 +641,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -650,7 +650,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -669,7 +669,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -678,7 +678,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -697,7 +697,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -706,7 +706,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -725,7 +725,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -734,7 +734,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -753,7 +753,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -762,7 +762,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -781,7 +781,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -790,7 +790,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -809,7 +809,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -818,7 +818,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -837,7 +837,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -846,7 +846,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -865,7 +865,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -874,7 +874,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -893,7 +893,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -902,7 +902,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -921,7 +921,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -930,7 +930,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -949,7 +949,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -958,7 +958,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -977,7 +977,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -986,7 +986,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -1005,7 +1005,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -1014,7 +1014,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -1033,7 +1033,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -1042,7 +1042,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -1061,7 +1061,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -1070,7 +1070,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -1089,7 +1089,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -1098,7 +1098,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -1117,7 +1117,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -1126,7 +1126,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -1145,7 +1145,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -1154,7 +1154,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -1173,7 +1173,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -1182,7 +1182,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -1201,7 +1201,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -1210,7 +1210,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -1229,7 +1229,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -1238,7 +1238,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -1257,7 +1257,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -1266,7 +1266,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -1285,7 +1285,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -1294,7 +1294,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -1313,7 +1313,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -1322,7 +1322,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -1341,7 +1341,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -1350,7 +1350,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -1369,7 +1369,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -1378,7 +1378,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -1397,7 +1397,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -1406,7 +1406,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -1425,7 +1425,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -1434,7 +1434,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -1453,7 +1453,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -1462,7 +1462,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -1481,7 +1481,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -1490,7 +1490,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",
@@ -1509,7 +1509,7 @@
             },
             {
                 "requirements": {
-                    "condition": "minecraft:value_check",
+                    "type": "minecraft:int_value_check",
                     "value": {
                         "type": "minecraft:score",
                         "target": {
@@ -1518,7 +1518,7 @@
                         },
                         "score": "im.motion"
                     },
-                    "range": 1
+                    "test": { "min": 1, "max": 1 }
                 },
                 "effect": {
                     "type": "minecraft:apply_impulse",

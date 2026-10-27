@@ -1,10 +1,23 @@
 # Imperium Mundi — Project Wiki
 
-> Vanilla-replica Kit PvP datapack (Ver 26.2, pack_format 101) for the Smithed Summit / Baobab
-> Battlegrounds booth. This wiki maps **where every file sits, what calls what, and when**, plus
-> flags legacy code to strip and per-tick hotspots to watch.
+> Vanilla Kit PvP datapack for **Minecraft Java 26.3** (data pack format 121). It started as the
+> Imperium Mundi booth for the Smithed Summit / Baobab Battlegrounds, and is now a **standalone
+> game**. The Summit integration is gone. This wiki maps **where every file sits, what calls what,
+> and when**, plus flags legacy code to strip and per-tick hotspots to watch.
 >
-> Built by reading the tree as of `main` @ `295ebac`. When you change the call graph, update the
+> **Partly stale (as of 2026-10-27).** The original was built by reading `main` @ `295ebac`
+> (2026-07-30). Since then, §3.5 (the cooldown engine) has been rewritten to match the current
+> code. Everything else still describes the Summit-era layout:
+> - The `booth_definition` / `ticking_functions` driver. The single driver is now
+>   `imperium:tick` in `#minecraft:tick`.
+> - The summit-dp-core `player_motion` dependency. Motion is now the in-pack `imperium:motion/*`.
+> - The `leave_spawn` gate.
+> - The legacy combat systems.
+>
+> Use [CHANGELOG.md](CHANGELOG.md) for recent changes and [SPLIT_PLAN.md](SPLIT_PLAN.md) for the
+> current file inventory. Re-verify the rest against the code before relying on it.
+>
+> When you change the call graph, update the
 > [Runtime flow](#3-runtime-flow--what-calls-what-when) and [Strip-down candidates](#7-strip-down-candidates-legacy--dead-code) sections.
 
 ---
@@ -279,14 +292,27 @@ kits/<kit>/booth/select
 ### 3.5 Ability cooldown engine (the heart of the current system)
 
 This **replaces** the legacy `itemreload`/`item_distributor_300` refill. **Advancement-driven** —
-runs only on a damage event (the only thing that moves a cooldown), as the player involved:
+runs only on a damage event (the only thing that moves a cooldown), as the player involved.
+Rewritten 2026-10-27; see [CHANGELOG.md](CHANGELOG.md).
 
 ```
-minecraft:player_hurt_entity  → imperium:combat/cooldown_dealt → internal/cooldown_dealt ┐
-minecraft:entity_hurt_player  → imperium:combat/cooldown_taken → internal/cooldown_taken ┤
-   (each reward: revoke self to re-arm; if leave_spawn=true → update_cooldowns)          │
+DEALT (any target), gated on imperium:ability_zone (= has im.kitted, or #ZoneBypass on):
+minecraft:player_hurt_entity ─┬→ combat/cooldown_dealt       → internal/cooldown_dealt
+                              │     revoke; tag im.cd_dealt_pending; schedule cooldown_flush 1t
+                              └→ combat/cooldown_dealt_human → internal/cooldown_dealt_human
+                                    (victim in #imperium:human) revoke; tag im.cd_hit_human
+next tick: internal/cooldown_flush → as @a[tag=im.cd_dealt_pending] → cooldown_dealt_apply
+             no im.cd_hit_human → im_abilityDealt /= 3   (non-human mobs charge 1/3)
+             update_cooldowns; human hit + im.fighting → arena/gold_dmg_bonus; clear both tags
+   (1t defer: the trigger may fire before vanilla adds this hit to the damage_dealt stat)
+
+TAKEN:
+minecraft:entity_hurt_player → combat/cooldown_taken → internal/cooldown_taken
+             revoke; if im.cd_dealt_pending → return (the flush runs the engine) ; else update_cooldowns
+                                                                                          │
                                                                                           ▼
 update_cooldowns   (reads im_cdUsesB; no longer recounts it here)
+├── create im_abilityDealt / im_abilityTaken at 0 if missing (an unset source fails the -= below)
 ├── BLEED: im_abilityCd{A,B,C} -= im_abilityDealt (custom:damage_dealt)
 │                              -= im_abilityTaken (custom:damage_taken)
 ├── clamp charges (im_cdUses*) >= 0
@@ -309,11 +335,14 @@ events — `internal/arrow_recount` (on `minecraft:shot_crossbow`, gated `im_cdM
 (`cd2_arrows` recounts after giving an arrow), and `givekit` (seeds `uses = max`). Reusable for any
 crossbow kit whose arrows carry `custom_data {imperium_kit:1b}` — Meowdy today, Cliffshield next.
 
-> **Gate caveat:** the rewards run `update_cooldowns` only `if leave_spawn=true`. `leave_spawn`
-> uses an `impossible` trigger (grant-only), and its grant lines are currently **commented out** in
-> `loop`. So until you re-enable that grant (or wire it to booth/battlegrounds entry), the engine
-> won't fire — same as the old per-tick line it replaced. To test locally, uncomment the
-> `leave_spawn` grant in `loop`, or temporarily drop the gate in the two reward functions.
+> **Stuck triggers:** every reward revokes its own advancement. If a reward function ever fails to
+> load, its advancement stays granted and the trigger goes silent. `util/rearm_triggers` revokes
+> all of them by name on load and on every kit equip, so add new advancements there.
+> (The old `leave_spawn` gate is gone; `leave_spawn.json` is an unused `impossible` placeholder.)
+>
+> **Debugging:** `/function imperium:test/toggle_cd_trace` prints each engine run: the trigger,
+> the hit weighting and the inputs. `/function imperium:test/toggle_zone` bypasses the
+> `ability_zone` gate.
 
 ### 3.6 Combat: damage, kill, death
 

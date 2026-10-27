@@ -72,7 +72,8 @@ execute unless items entity @s hotbar.0 * run \
             !max_damage,\
             item_model="minecraft:iron_sword",\
             custom_name={text:"Steel Dagger",color:gold,italic:false},\
-            swing_animation={type:"stab",duration:10},\
+            attack_animation={type:"stab",duration:10},\
+            interact_animation={type:"stab",duration:10},\
             custom_data={"imperium_kit":1b},\
         ] 1
 
@@ -108,7 +109,8 @@ execute unless items entity @s hotbar.1 * run \
             !max_damage,\
             item_model="minecraft:stone_axe",\
             custom_name={text:"Sweeping Hatchet",color:gold,italic:false},\
-            swing_animation={type:"whack",duration:6},\
+            attack_animation={type:"whack",duration:6},\
+            interact_animation={type:"whack",duration:6},\
             custom_data={"imperium_kit":1b},\
         ] 1
 

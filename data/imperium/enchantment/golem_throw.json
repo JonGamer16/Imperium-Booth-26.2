@@ -1,20 +1,36 @@
 {
-  "description": { "text": "Golem Throw", "color": "gold" },
+  "description": {
+    "text": "Golem Throw",
+    "color": "gold"
+  },
   "supported_items": "#minecraft:enchantable/weapon",
   "weight": 1,
   "max_level": 1,
-  "min_cost": { "base": 1, "per_level_above_first": 0 },
-  "max_cost": { "base": 1, "per_level_above_first": 0 },
+  "min_cost": {
+    "base": 1,
+    "per_level_above_first": 0
+  },
+  "max_cost": {
+    "base": 1,
+    "per_level_above_first": 0
+  },
   "anvil_cost": 1,
-  "slots": ["mainhand"],
+  "slots": [
+    "mainhand"
+  ],
   "effects": {
     "minecraft:damage": [
       {
-        "effect": { "type": "minecraft:multiply", "factor": 1.5 },
+        "effect": {
+          "type": "minecraft:multiply",
+          "factor": 1.5
+        },
         "requirements": {
-          "condition": "minecraft:entity_scores",
+          "type": "minecraft:entity_scores",
           "entity": "attacker",
-          "scores": { "im_golemReady": 1 }
+          "scores": {
+            "im_golemReady": { "min": 1, "max": 1 }
+          }
         }
       }
     ],
@@ -22,21 +38,31 @@
       {
         "enchanted": "attacker",
         "affected": "victim",
-        "effect": { "type": "minecraft:run_function", "function": "imperium:kits/mummy/golem_launch" },
+        "effect": {
+          "type": "minecraft:run_function",
+          "function": "imperium:kits/mummy/golem_launch"
+        },
         "requirements": {
-          "condition": "minecraft:entity_scores",
+          "type": "minecraft:entity_scores",
           "entity": "attacker",
-          "scores": { "im_golemReady": 1 }
+          "scores": {
+            "im_golemReady": { "min": 1, "max": 1 }
+          }
         }
       },
       {
         "enchanted": "attacker",
         "affected": "attacker",
-        "effect": { "type": "minecraft:run_function", "function": "imperium:kits/mummy/golem_after" },
+        "effect": {
+          "type": "minecraft:run_function",
+          "function": "imperium:kits/mummy/golem_after"
+        },
         "requirements": {
-          "condition": "minecraft:entity_scores",
+          "type": "minecraft:entity_scores",
           "entity": "attacker",
-          "scores": { "im_golemReady": 1 }
+          "scores": {
+            "im_golemReady": { "min": 1, "max": 1 }
+          }
         }
       }
     ]

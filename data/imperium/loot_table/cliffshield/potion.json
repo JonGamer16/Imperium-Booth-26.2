@@ -6,9 +6,9 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:potion",
-          "functions": [
+          "modifier": [
             {
-              "function": "minecraft:set_components",
+              "type": "minecraft:set_components",
               "components": {
                 "minecraft:potion_contents": {
                   "custom_effects": [
@@ -19,10 +19,17 @@
                     }
                   ]
                 },
-                "consumable":{"consume_seconds":0.8,"sound":"entity.generic.drink"},
-                "custom_name": {"text":"Rook Rush","color":"yellow","italic":false},
+                "consumable": {
+                  "consume_seconds": 0.8,
+                  "sound": "entity.generic.drink"
+                },
+                "custom_name": {
+                  "text": "Rook Rush",
+                  "color": "yellow",
+                  "italic": false
+                },
                 "minecraft:custom_data": "{imperium_kit:1b}",
-                "!minecraft:use_remainder":{}
+                "!minecraft:use_remainder": {}
               }
             }
           ]

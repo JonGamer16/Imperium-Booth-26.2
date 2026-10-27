@@ -3,9 +3,7 @@
         "hit": {
             "trigger": "minecraft:entity_hurt_player",
             "conditions": {
-                "player": [
-                    { "condition": "minecraft:reference", "name": "imperium:ability_zone" }
-                ]
+                "player": "imperium:ability_zone"
             }
         }
     },

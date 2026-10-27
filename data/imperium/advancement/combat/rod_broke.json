@@ -3,9 +3,7 @@
         "broke": {
             "trigger": "minecraft:item_durability_changed",
             "conditions": {
-                "player": [
-                    { "condition": "minecraft:reference", "name": "imperium:ability_zone" }
-                ],
+                "player": "imperium:ability_zone",
                 "item": {
                     "items": [
                         "minecraft:fishing_rod"

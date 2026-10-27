@@ -6,6 +6,15 @@
 # so it only runs on a tick where the player dealt or took damage — the only events that move a
 # cooldown. The "each tick" comments below are historical; read them as "per damage event".
 
+# Stat objectives (custom:damage_dealt/_taken) have NO score until the stat first changes, and an
+# operation with an unset source fails. So a player who had never taken damage had no
+# im_abilityTaken, every `-= @s im_abilityTaken` below failed, and cooldowns froze until their
+# first hurt. The reset at the bottom can't cover that: it only runs after these lines.
+# `add 0` creates the score at 0 if missing and is a no-op otherwise.
+scoreboard players add @s im_abilityDealt 0
+scoreboard players add @s im_abilityTaken 0
+execute if score #CdTrace im_debug_mode matches 1 run function imperium:test/cd_trace
+
 # Bleed every cooldown by net damage each tick.
 scoreboard players operation @s im_abilityCdA -= @s im_abilityDealt
 scoreboard players operation @s im_abilityCdA -= @s im_abilityTaken

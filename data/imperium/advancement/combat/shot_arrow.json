@@ -3,9 +3,7 @@
         "shot": {
             "trigger": "minecraft:shot_crossbow",
             "conditions": {
-                "player": [
-                    { "condition": "minecraft:reference", "name": "imperium:ability_zone" }
-                ]
+                "player": "imperium:ability_zone"
             }
         }
     },

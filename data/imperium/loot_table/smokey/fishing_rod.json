@@ -6,15 +6,19 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:fishing_rod",
-          "functions": [
+          "modifier": [
             {
-              "function": "minecraft:set_components",
+              "type": "minecraft:set_components",
               "components": {
                 "minecraft:max_damage": 10,
                 "minecraft:enchantments": {
                   "imperium:grappling": 1
                 },
-                "minecraft:custom_name": {"text": "Recoil Rod", "color": "gold", "italic": false},
+                "minecraft:custom_name": {
+                  "text": "Recoil Rod",
+                  "color": "gold",
+                  "italic": false
+                },
                 "minecraft:custom_data": "{imperium_kit:1b}"
               }
             }

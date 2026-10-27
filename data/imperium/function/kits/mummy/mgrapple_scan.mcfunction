@@ -3,12 +3,14 @@
 scoreboard players operation #bid im_grappleId = @s im_grappleId
 
 scoreboard players set #hooked im_grappleId 0
-# Fresh contact: a hookable mob/player whose HITBOX the bobber is inside right now -> tag it as this
-# hook. We test hitbox intersection (a 1x1x1 cube centered on the bobber via the ~-0.5 offset + dx/
-# dy/dz volume) rather than distance to the entity's feet — a tall mob is hooked at body height, so
-# a feet-distance check misses it (and a grounded bobber near a mob would false-positive). #im.not_mob
-# filters out items, displays, etc. — the same set Smokey's anchor check uses.
-execute positioned ~-0.5 ~-0.5 ~-0.5 as @e[type=#imperium:human,dx=0,dy=0,dz=0,tag=!im.mgrapple_user,sort=nearest,limit=1] run function imperium:kits/mummy/mgrapple_hook
+# Fresh contact: a hookable mob/player the bobber is actually hooked INTO right now -> tag it as
+# this hook. A hooked bobber is snapped to its entity's center X/Z each tick, so mgrapple_hook_test
+# matches on that (see there) instead of the old 1x1x1 hitbox-intersection cube, which also caught
+# anyone the bobber was merely lying next to. distance=..3 is just a cheap pre-filter.
+execute store result score #bx im.temp run data get entity @s Pos[0] 10000
+execute store result score #by im.temp run data get entity @s Pos[1] 10000
+execute store result score #bz im.temp run data get entity @s Pos[2] 10000
+execute as @e[type=#imperium:human,distance=..3,tag=!im.mgrapple_user,sort=nearest] run function imperium:kits/mummy/mgrapple_hook_test
 # Sticky hook: once hooked, vanilla stops moving the bobber to the entity, so the distance check
 # above only catches the first couple ticks. Keep the hook alive off the persistent tag instead —
 # any entity still carrying this bobber's id counts as hooked for as long as the bobber exists.

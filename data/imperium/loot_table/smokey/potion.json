@@ -6,9 +6,9 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:lingering_potion",
-          "functions": [
+          "modifier": [
             {
-              "function": "minecraft:set_components",
+              "type": "minecraft:set_components",
               "components": {
                 "minecraft:potion_contents": {
                   "custom_effects": [
@@ -20,7 +20,11 @@
                   ],
                   "custom_color": 1973790
                 },
-                "minecraft:custom_name": {"text": "Smoke Bomb", "color": "gold", "italic": false},
+                "minecraft:custom_name": {
+                  "text": "Smoke Bomb",
+                  "color": "gold",
+                  "italic": false
+                },
                 "minecraft:custom_data": "{imperium_kit:1b}"
               }
             }

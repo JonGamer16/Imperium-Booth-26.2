@@ -1,11 +1,30 @@
 {
-    "condition": "minecraft:entity_properties",
-    "entity": "this",
-    "predicate": {
-        "minecraft:entity_tags": {
-            "any_of": [
-                "im.kitted"
-            ]
+    "type": "minecraft:any_of",
+    "terms": [
+        {
+            "type": "minecraft:entity_properties",
+            "entity": "this",
+            "predicate": {
+                "minecraft:entity_tags": {
+                    "any_of": [
+                        "im.kitted"
+                    ]
+                }
+            }
+        },
+        {
+            "type": "minecraft:int_value_check",
+            "value": {
+                "type": "minecraft:score",
+                "target": {
+                    "type": "minecraft:fixed",
+                    "name": "#ZoneBypass"
+                },
+                "score": "im.dmg"
+            },
+            "test": {
+                "min": 1
+            }
         }
-    }
+    ]
 }

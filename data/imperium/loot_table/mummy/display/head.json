@@ -6,9 +6,9 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:player_head",
-          "functions": [
+          "modifier": [
             {
-              "function": "minecraft:set_components",
+              "type": "minecraft:set_components",
               "components": {
                 "minecraft:profile": "Mummy",
                 "minecraft:item_model": "minecraft:player_head",

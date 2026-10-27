@@ -5,6 +5,9 @@
 # each kits/*/givekit opens with imperium:util/clear_kit, which strips kit + healing items by
 # custom_data, and the kit's own `item replace` calls overwrite the rest of the loadout.
 
+# Re-arm event triggers, in case one went stuck while this player was offline at load.
+function imperium:util/rearm_triggers
+
 # Clear all kit tags before assigning the new one
 execute if score @s im_givekit matches 1.. run tag @s remove im.kit_cliffshield
 execute if score @s im_givekit matches 1.. run tag @s remove im.kit_meowdy

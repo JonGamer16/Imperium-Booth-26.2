@@ -1,0 +1,20 @@
+{
+    "criteria": {
+        "dealt_human": {
+            "trigger": "minecraft:player_hurt_entity",
+            "conditions": {
+                "player": "imperium:ability_zone",
+                "entity": {
+                    "type": "minecraft:entity_properties",
+                    "entity": "this",
+                    "predicate": {
+                        "entity_type": "#imperium:human"
+                    }
+                }
+            }
+        }
+    },
+    "rewards": {
+        "function": "imperium:internal/cooldown_dealt_human"
+    }
+}

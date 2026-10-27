@@ -6,21 +6,21 @@
         "damage": {
           "blocked": true
         },
-        "player": [
-          {
-            "condition": "minecraft:entity_properties",
-            "entity": "this",
-            "predicate": {
-              "flags": {
-                "is_sneaking": true
+        "player": {
+          "type": "minecraft:all_of",
+          "terms": [
+            {
+              "type": "minecraft:entity_properties",
+              "entity": "this",
+              "predicate": {
+                "flags": {
+                  "is_sneaking": true
+                }
               }
-            }
-          },
-          {
-            "condition": "minecraft:reference",
-            "name": "imperium:ability_zone"
-          }
-        ]
+            },
+            "imperium:ability_zone"
+          ]
+        }
       }
     }
   },

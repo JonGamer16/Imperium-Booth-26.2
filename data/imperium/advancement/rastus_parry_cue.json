@@ -3,20 +3,23 @@
         "parry_hit": {
             "trigger": "entity_hurt_player",
             "conditions": {
-                "player": [
-                    {
-                        "condition": "minecraft:entity_properties",
-                        "entity": "this",
-                        "predicate": {
-                            "entity_tags": {
-                                "all_of": [
-                                    "im.rastus_parrying"
-                                ]
+                "player": {
+                    "type": "minecraft:all_of",
+                    "terms": [
+                        {
+                            "type": "minecraft:entity_properties",
+                            "entity": "this",
+                            "predicate": {
+                                "entity_tags": {
+                                    "all_of": [
+                                        "im.rastus_parrying"
+                                    ]
+                                }
                             }
-                        }
-                    },
-                    { "condition": "minecraft:reference", "name": "imperium:ability_zone" }
-                ]
+                        },
+                        "imperium:ability_zone"
+                    ]
+                }
             }
         }
     },

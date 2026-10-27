@@ -56,6 +56,12 @@ scoreboard players set @s im_cdMaxC 0
     attribute @s minecraft:attack_damage modifier remove imperium:focus
     attribute @s minecraft:attack_speed modifier remove imperium:focus
     attribute @s minecraft:attack_knockback modifier remove imperium:focus
+    # Combo tax: lift the out-of-dashes slowdown and drop any open hit window.
+    tag @s remove im.rastus_slowed
+    tag @s remove im.combo_tick
+    attribute @s minecraft:attack_speed modifier remove imperium:combo_slow
+    scoreboard players set @s im_comboHits 0
+    scoreboard players set @s im_comboTimer 0
     # AV-cue state: clear the parry-window marker and re-arm both cue advancements for a clean kit.
     tag @s remove im.rastus_parrying
     advancement revoke @s only imperium:rastus_strike_cue

@@ -29,6 +29,9 @@ scoreboard objectives add im.temp dummy
     scoreboard objectives add im_parryWindow dummy
     # Melee Drought Counter: ticks up while you haven't attacked
     scoreboard objectives add im_melee_drought dummy
+    # Combo tax: hits landed in the current window, and ticks since the window's first hit.
+    scoreboard objectives add im_comboHits dummy
+    scoreboard objectives add im_comboTimer dummy
 # Levent
     # Charge Attack
     scoreboard objectives add im_leventCharge dummy
@@ -105,6 +108,9 @@ scoreboard players set #rotation im.temp 0
 # stands) would otherwise stay locked out of kit selection forever. Nobody is legitimately mid-equip
 # on load, so this is safe to keep permanently.
 tag @a[tag=im.equip_cd] remove im.equip_cd
+
+# Re-arm stuck event triggers (see util/rearm_triggers). Players offline now get it on kit equip.
+execute as @a run function imperium:util/rearm_triggers
 
 # im.kitted backfill. This tag is the single "has a kit" marker read by imperium:ability_zone and by
 # the idle gate in imperium:tick, and it was introduced after the seven im.kit_* tags. A player

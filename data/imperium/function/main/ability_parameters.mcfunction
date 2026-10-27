@@ -124,6 +124,12 @@
         scoreboard players set #StrikeCharge im.param 12
         scoreboard players set #ParryWindow im.param 3
 
+    # Combo tax (kits/rastus/combo_hit): landing #ComboHits attacks within #ComboWindow ticks of the
+    # first one spends 1 dash charge. With no dashes left, the rapier slows to ~2 attacks/s
+    # (kits/rastus/combo_slow_on; the -75% amount is inline there).
+        scoreboard players set #ComboHits im.param 3
+        scoreboard players set #ComboWindow im.param 20
+
 # Levent
     # Charge Attack: idle ticks of not attacking OR raising the shield before the next hit gets
     # the boost (bonus damage, reach, knockback). 20 ticks = 1s; the slow Light Rod wants a touch

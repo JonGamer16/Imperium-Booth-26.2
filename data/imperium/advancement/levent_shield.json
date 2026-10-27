@@ -8,25 +8,27 @@
                         "shield"
                     ]
                 },
-                "player": [
-                    {
-                        "condition": "minecraft:entity_properties",
-                        "entity": "this",
-                        "predicate": {
-                            "entity_tags": {
-                                "all_of": [
-                                    "im.kit_levent"
-                                ]
+                "player": {
+                    "type": "minecraft:all_of",
+                    "terms": [
+                        {
+                            "type": "minecraft:entity_properties",
+                            "entity": "this",
+                            "predicate": {
+                                "entity_tags": {
+                                    "all_of": [
+                                        "im.kit_levent"
+                                    ]
+                                }
                             }
-                        }
-                    },
-                    { "condition": "minecraft:reference", "name": "imperium:ability_zone" }
-                ]
+                        },
+                        "imperium:ability_zone"
+                    ]
+                }
             }
         }
     },
-    "rewards":
-    {
+    "rewards": {
         "function": "imperium:kits/levent/charge_block"
     }
 }

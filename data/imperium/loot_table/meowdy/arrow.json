@@ -6,15 +6,19 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:arrow",
-          "functions": [
+          "modifier": [
             {
-              "function": "minecraft:set_count",
+              "type": "minecraft:set_count",
               "count": 1
             },
             {
-              "function": "minecraft:set_components",
+              "type": "minecraft:set_components",
               "components": {
-                "custom_name":{"text":"Arrow","color":"gold","italic":false},
+                "custom_name": {
+                  "text": "Arrow",
+                  "color": "gold",
+                  "italic": false
+                },
                 "minecraft:custom_data": "{imperium_kit:1b}"
               }
             }

@@ -6,9 +6,9 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:mace",
-          "functions": [
+          "modifier": [
             {
-              "function": "minecraft:set_components",
+              "type": "minecraft:set_components",
               "components": {
                 "minecraft:item_model": "minecraft:netherite_sword",
                 "minecraft:custom_name": {

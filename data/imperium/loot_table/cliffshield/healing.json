@@ -6,13 +6,13 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:mushroom_stew",
-          "functions": [
+          "modifier": [
             {
-              "function": "minecraft:set_count",
+              "type": "minecraft:set_count",
               "count": 1
             },
             {
-              "function": "minecraft:set_components",
+              "type": "minecraft:set_components",
               "components": {
                 "minecraft:food": {
                   "nutrition": 0,
@@ -41,7 +41,11 @@
                     "minecraft:custom_data": "{imperium_kit:1b}"
                   }
                 },
-                "custom_name":{"text":"Mushroom Stew [Consume to Heal]","color":"yellow","italic":false},
+                "custom_name": {
+                  "text": "Mushroom Stew [Consume to Heal]",
+                  "color": "yellow",
+                  "italic": false
+                },
                 "minecraft:custom_data": "{imperium_healing:1b}"
               }
             }
