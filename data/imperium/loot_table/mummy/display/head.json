@@ -10,7 +10,7 @@
             {
               "type": "minecraft:set_components",
               "components": {
-                "minecraft:profile": "Mummy",
+                "minecraft:profile": { "texture": "imperium:entity/mummy" },
                 "minecraft:item_model": "minecraft:player_head",
                 "minecraft:custom_name": {
                   "text": "Mummy Head",

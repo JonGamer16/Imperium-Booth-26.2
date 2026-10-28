@@ -45,7 +45,7 @@ item replace entity @e[type=husk,tag=im.dummy_new,limit=1] armor.head with \
         ],\
         enchantments={"imperium:barrier":1,"protection":8},\
         !max_damage,\
-        profile="Mummy",\
+        profile={texture:"imperium:entity/mummy"},\
         item_model="minecraft:player_head",\
         custom_name={text:"Mummy Head",color:blue,italic:false}\
     ] 1

@@ -3,6 +3,32 @@
 Newest first. Dates are when the change was made in the test world. The matching commit, once
 there is one, carries the same date in its title.
 
+## 2026-10-28 — Split step 2 (core load/tick) + Mummy head skin
+
+### Split step 2 *(untested)*
+
+- New `core/load`, `core/tick`, `core/second`, registered in `#minecraft:load` / `#minecraft:tick`.
+  `main` calls `core/load` first. Core's objectives (`im.temp`, `im.motion`, backstab, high jump,
+  `im_arrowAge`) moved out of `main`, `main/enchantments` and `main/game_triggers`.
+- High Jump's unequip watchdog moved from `kits/levent/loop_kit` to `core/tick`, so it works without
+  a kit. It must run once per tick only.
+- Straight Flight arrows are aged by `core/second` via their own `im.straight_flight` tag; kit
+  `loop_1s` skips them so they still last 10 s.
+
+### Mummy head
+
+- `profile="Mummy"` looked up a live Mojang account, which timed out and showed the default skin.
+  All three heads (`kits/mummy/givekit`, `booth/dummy/respawn`, `loot_table/mummy/display/head`)
+  now use `profile={texture:"imperium:entity/mummy"}`, from the world resource pack in
+  `<world>/resources/` (not in this repo). Tested with the pack enabled client-side.
+- The world's `resources.zip` is not applied in 26.3 singleplayer; enable the pack from
+  `.minecraft/resourcepacks/` instead. Without it, the head shows the default skin.
+
+### Known issues
+
+- Booth Discord/GitHub icons: the `imperium:icons` font points at `textures/item/discord.png` and
+  `github.png`, which aren't in the resource pack. Left alone for now.
+
 ## 2026-10-27 — 26.3 port + debug pass
 
 Ported to Minecraft Java **26.3** (data pack format 121) for the pack collab, then played through

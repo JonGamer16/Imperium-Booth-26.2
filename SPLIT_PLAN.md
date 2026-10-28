@@ -1,6 +1,6 @@
 # Three-pack split — plan
 
-Status: **decisions made, nothing moved yet** (2026-10-27). This file is the inventory and the
+Status: **step 2 done (core/load, core/tick, core/second inside the single pack), awaiting in-game test** (2026-10-27). This file is the inventory and the
 coupling map to work from. Recent changes are in [CHANGELOG.md](CHANGELOG.md).
 
 ## Goal
@@ -47,11 +47,10 @@ it can sit next to other packs in someone's survival world.
 | `function/motion/*` | Launch library. Kit PvP calls into it, which is the allowed direction. |
 | `enchantment/{backstab, crits, crossbow_power, crossbow_punch, high_jump, mace_smash, marked, motion_impulse, single_use, straight_flight, volley}` | Self-contained effects. None reference kits, the engine or `ability_zone` (checked 2026-10-27). |
 | `function/enchantments/{backstab, backstab_behind, high_jump, high_jump_on, high_jump_off, straight_flight, volley_hit, volley_land, volley_spawn}` | Called only by those enchantments' own effects. Kit PvP also calls `high_jump_off`, which is fine. |
-| `damage_type/volley_reset`, `minecraft/tags/damage_type/*`, `minecraft/tags/enchantment/*` | Tags merge across packs. |
+| `damage_type/volley_reset`, `minecraft/tags/damage_type/*`, `minecraft/tags/enchantment/*` | Tags merge across packs, but each pack's copy may list only its own IDs (see the kit PvP `damage_type` row). |
 | `function/main/constants` | `imperium.const`. Idempotent, so any pack's load can call it. |
-| *(new)* `function/core/load` | Creates only what core uses: `im.temp`, `im.motion`, the backstab objectives, `imperium.const`. Registered in `#minecraft:load`. |
-| *(new)* `function/core/second` | Ages and kills Straight Flight arrows **by their own `im.straight_flight` tag** (see the coupling notes). Registered in `#minecraft:tick` with its own 20-tick counter. |
-| `predicate/{on_ground, floating, sneaking, input_sneak, player_input/*, motion/*}` | Only if a core file uses them. Otherwise they stay in kit PvP. |
+| `function/core/{load, tick, second}` | **Done.** `load` creates `im.temp`, `im.motion`, backstab + high-jump objectives, `im_arrowAge`, `imperium.const`. `tick` runs the High Jump unequip watchdog (moved out of `kits/levent/loop_kit`) and its own `#core1s` clock; `second` ages Straight Flight arrows by tag. |
+| `predicate/floating`, `tags/entity_type/human` | Used by High Jump and Backstab. No other predicate is used by a core file (checked 2026-10-27). |
 
 `marked` reads the `im.marked` tag, which only the Smokey dart applies. In core it does nothing until
 something in survival applies the tag. That's harmless, but keep it in mind.
@@ -70,7 +69,8 @@ something in survival applies the tag. That's harmless, but keep it in mind.
 | All of `advancement/*` | Every current advancement is kit, booth or engine. Core needs none. |
 | `predicate/{ability_zone, safe_zone, at_spawn, has_bad_omen, has_venom, booth/*}` | |
 | `loot_table/<kit>/*`, `item_modifier/*`, `dialog/*`, `structure/*`, `sync_setting/*`, `damage_type/{light, bomb, venom}` | `light` is the Rastus rapier's i-frame bypass. Move it to core if a survival item wants it. |
-| `minecraft/tags/entity_type/*`, `minecraft/tags/function/{tick, load}` | Function tags merge, so core adds its own entries. |
+| `minecraft/tags/entity_type/*`, `minecraft/tags/function/{tick, load}` | Function tags merge, so core adds its own entries (`core/load`, `core/tick`). |
+| `minecraft/tags/damage_type/*` | **Split per pack.** `bypasses_cooldown` lists `light`, `venom` (kit) and `volley_reset` (core). Core's copy must list only `volley_reset`, or the tag fails to load when core runs alone. |
 
 ### Survival (`imperium_smp`)
 
@@ -87,6 +87,7 @@ which is allowed. Only these need work:
 
 | Issue | Fix |
 |---|---|
+| ~~High Jump's unequip watchdog lived in `kits/levent/loop_kit`~~ | Done: moved to `core/tick`. Must run exactly once per tick, or it flickers gravity. |
 | Straight Flight arrows are only aged and despawned via kit PvP: `internal/contain` claims `imperium_kit` arrows as `im.owned`, and `loop_1s` ages `im.owned`. In core alone (or survival), a Straight Flight arrow would hang in the air forever. | Core's `core/second` ages `@e[type=#minecraft:arrows,tag=im.straight_flight]` itself. Kit PvP's `im.owned` aging stays as it is for its other arrows. An arrow aged by both still dies at 10 s; check the counts don't double. |
 | `main.mcfunction` creates every objective for every system. | Split it: `core/load` creates core's objectives, kit PvP's `main` creates the rest. |
 | `im.temp` is shared scratch space (used by both volley and the kits). | Created by `core/load`. Kit PvP keeps using it (decision 5). |

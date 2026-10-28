@@ -6,11 +6,11 @@
 # refusing every kit they picked after it. Each click now schedules its own release —
 # see imperium:booth/equip_cd_clear. Do not add a second owner for that tag here.
 
-# Straight Flight: despawn no-gravity arrows that have exceeded flight time. Booth-owned only
-# (im.owned, stamped on our kit arrows by imperium:internal/contain) so we never
-# age or cull another booth's — or a vanilla — arrow.
-scoreboard players add @e[type=#minecraft:arrows,tag=im.owned] im_arrowAge 1
-kill @e[type=#minecraft:arrows,tag=im.owned,scores={im_arrowAge=10..}]
+# Kit arrows: despawn after 10 s. Only ours (im.owned, stamped by imperium:internal/contain), so we
+# never cull a vanilla arrow. Straight Flight arrows are aged by imperium:core/second instead;
+# skipping them here keeps them from aging twice as fast.
+scoreboard players add @e[type=#minecraft:arrows,tag=im.owned,tag=!im.straight_flight] im_arrowAge 1
+kill @e[type=#minecraft:arrows,tag=im.owned,tag=!im.straight_flight,scores={im_arrowAge=10..}]
 
 # Training dummy, clean removal: no home marker within 13 blocks -> kill it (kill the marker =
 # dummy gone). Was in loop_5t next to the tether; janitor work like this doesn't need 4 scans a

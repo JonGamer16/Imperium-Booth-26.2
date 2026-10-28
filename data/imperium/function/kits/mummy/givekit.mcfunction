@@ -15,7 +15,7 @@ execute unless items entity @s armor.head * run \
             ],\
             enchantments={"imperium:barrier":1,"protection":8},\
             !max_damage,\
-            profile="Mummy",\
+            profile={texture:"imperium:entity/mummy"},\
             item_model="minecraft:player_head",\
             custom_name={text:"Mummy Head",color:blue,italic:false},\
             custom_data={"imperium_kit":1b}\

@@ -1,3 +1,7 @@
+# Core first: creates im.temp, im.motion, the core enchantments' objectives and imperium.const.
+# Idempotent; called here too so this load never depends on pack order (see SPLIT_PLAN.md).
+function imperium:core/load
+
 # Debug message toggle: set to 1 to activate load success feedback and other test messages gated by it
 scoreboard objectives add im_debug_mode dummy
 scoreboard players set #Debug im_debug_mode 1
@@ -13,10 +17,6 @@ gamerule natural_health_regeneration false
 
 scoreboard objectives add im_givekit trigger
 scoreboard objectives add im_summonerID dummy
-
-# Shared scratch objective (set_cd macro, lifesteal_soup, etc.) — needed before the setup calls.
-# Distinct fake-player names give as many independent scratch slots as needed on this one objective.
-scoreboard objectives add im.temp dummy
 
 # Smokey
     # Grappling Rod: #next id counter + per-entity link (bobber<->caster), and the per-player
@@ -71,20 +71,13 @@ scoreboard objectives add im.temp dummy
     scoreboard objectives add im_aimId dummy
     # Centralized ability tuning constants (see main/ability_parameters)
     scoreboard objectives add im.param dummy
-# Player launch module (imperium:motion/*). $x/$y/$z/$strength are the inputs, # names are scratch
-# and per-bit flags. #max/#min are the 18-bit range the motion_impulse enchantment can encode.
-    scoreboard objectives add im.motion dummy
-    scoreboard players set #max im.motion 131071
-    scoreboard players set #min im.motion -131072
-    scoreboard players set #1000 im.motion 1000
-    scoreboard players set #-1 im.motion -1
 
 # Grouped setup (see data/imperium/function/main/). Order matters:
-#   constants must exist before init_cooldowns (the ability_cooldowns set_cd calls read them).
+#   constants must exist before init_cooldowns (the ability_cooldowns set_cd calls read them);
+#   core/load above creates them.
 
 function imperium:main/enchantments
 function imperium:main/game_triggers
-function imperium:main/constants
 function imperium:main/init_cooldowns
 function imperium:main/init_stats
 
